@@ -6,17 +6,18 @@ _适配了iOS9_<br />
 _增加了点击tabbar刷新当前页面的功能_<br />
 
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
+
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
 
-![image](http://a3.qpic.cn/psb?/V14QknOK3ve1Ih/RMfBkW5sJ5NKC*52uv4x9Na1Lc6f*sAkweVqr.Y2I*4!/b/dGsAAAAAAAAA&bo=dwGbAgAAAAADB80!&rf=viewer_4)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/2.png)
+###首页以及顶部新闻详情，高仿网易
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/main.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/detail.png)
 ###使用瀑布流实现图片，可以选择分类
-![image](http://a1.qpic.cn/psb?/V14QknOK3ve1Ih/Q5SCwIJI*cZvSK*mF*2b84Qn3GRwSV*bBYON1OikRxQ!/b/dHQBAAAAAAAA&bo=dwGbAgAAAAADAMo!&rf=viewer_4)
-
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photo.png)
 ###增加了天气预报的功能，可以实现定位到当前城市。动画效果也没有放过。
-![image](http://a3.qpic.cn/psb?/V14QknOK3ve1Ih/.zU04edCo8PQShby0bCo6A4FE3rLzdWBCIsmR12CIjU!/b/dHMBAAAAAAAA&bo=gAJyBAAAAAADANE!&rf=viewer_4)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/weather.png)
 
 ###视频
-![image](http://a3.qpic.cn/psb?/V14QknOK3ve1Ih/RBgbIh2LF1dEau377shdYKQPwtfDdzH3LTGLWFSlj9s!/b/dG4AAAAAAAAA&bo=dwGbAgAAAAADAMo!&rf=viewer_4)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 
