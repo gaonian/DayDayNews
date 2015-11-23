@@ -3,7 +3,7 @@
 
 
 _适配了iOS9_<br />
-_增加了点击tabbar刷新当前页面的功能_<br />
+_增加了点击tabbar刷新当前页面的功能_<br />_<br />
 
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
