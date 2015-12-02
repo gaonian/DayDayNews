@@ -212,9 +212,10 @@
     }
 }
 
-- (void)dealloc
+
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:self.title object:nil];
+     [[NSNotificationCenter defaultCenter]removeObserver:self name:self.title object:nil];
 }
 
 @end

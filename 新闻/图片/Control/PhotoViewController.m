@@ -278,11 +278,9 @@ static NSString *const ID = @"photo";
     if (self.menu) {
         [self.menu dismissWithAnimation:NO];
     }
-}
-
-- (void)dealloc
-{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:self.title object:nil];
 }
+
+
 
 @end

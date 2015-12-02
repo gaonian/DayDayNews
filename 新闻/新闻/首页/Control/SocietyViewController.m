@@ -243,31 +243,9 @@
 }
 
 
-- (void)dealloc
+-(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"新闻" object:nil];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end
