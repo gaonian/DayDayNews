@@ -20,5 +20,5 @@ _增加了点击tabbar刷新当前页面的功能_<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 
-###等待完善我的界面
+###我的界面新增qq登陆，获取到头像并进行裁剪
 
