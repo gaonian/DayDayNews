@@ -84,6 +84,11 @@
         [self.contentView addSubview:ptimeLabel];
         self.ptimeLabel = ptimeLabel;
         
+        UIView *lineV = [[UIView alloc]init];
+        lineV.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
+        [self.contentView addSubview:lineV];
+        self.lineV = lineV;
+
         self.backgroundColor = [UIColor whiteColor];
         
         
@@ -131,6 +136,8 @@
     self.ptimeLabel.text = videodata.ptime;
     self.ptimeLabel.frame = _videodataframe.ptimeF;
     
+    self.lineV.frame = _videodataframe.lineVF;
+    
     
 }
 
@@ -148,20 +155,6 @@
     return showtimeNew;
 }
 
-#pragma mark 重画tableview的线
 
-- (void)drawRect:(CGRect)rect
-
-{
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-    CGContextFillRect(context, rect);
-    
-    //下分割线
-    CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
-    CGContextStrokeRect(context, CGRectMake(5, rect.size.height, rect.size.width - 10, 1));
-    
-}
 
 @end

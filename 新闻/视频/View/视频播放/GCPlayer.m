@@ -60,14 +60,14 @@ SingleTonM(Player)
     return _videoProgress;
 }
  //当前进度条
-//-(UISlider *)videoSlider
-//{
-//    if (_videoSlider==nil) {
-//        _videoSlider = [[UISlider alloc]initWithFrame:CGRectMake(55, 15, self.playView.frame.size.width-60, 10)];
-//    }
-//    
-//    return _videoSlider;
-//}
+-(UISlider *)videoSlider
+{
+    if (_videoSlider==nil) {
+        _videoSlider = [[UISlider alloc]initWithFrame:CGRectMake(55, 15, self.playView.frame.size.width-60, 10)];
+    }
+    
+    return _videoSlider;
+}
 
  //当前时间/总时间
 -(UILabel *)timeLabel
@@ -330,7 +330,7 @@ SingleTonM(Player)
 
 //自定义UISlider外观
 - (void)customVideoSlider:(CMTime)duration {
-    
+
     if (self.videoSlider.maximumValue > self.videoSlider.minimumValue) {
         self.videoSlider.maximumValue = CMTimeGetSeconds(duration);
         UIGraphicsBeginImageContextWithOptions((CGSize){ 1, 1 }, NO, 0.0f);

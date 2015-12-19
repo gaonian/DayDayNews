@@ -122,6 +122,7 @@
 		19D000161BB417D0009EA71C /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D0000C1BB417D0009EA71C /* SDCollectionViewCell.m */; };
 		19D000171BB417D0009EA71C /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D0000E1BB417D0009EA71C /* SDCycleScrollView.m */; };
 		19D000181BB417D0009EA71C /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D000101BB417D0009EA71C /* UIView+SDExtension.m */; };
+		19D830DF1C2594F4005C4114 /* HYCircleLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D830DE1C2594F4005C4114 /* HYCircleLoadingView.m */; };
 		19E2159A1BD8BC7F000BA38C /* OtherNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E215991BD8BC7F000BA38C /* OtherNewsViewController.m */; };
 		19F53FFC1BB5050C00460EA3 /* NSDate+gyh.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F53FF91BB5050C00460EA3 /* NSDate+gyh.m */; };
 		19F53FFD1BB5050C00460EA3 /* UIBarButtonItem+gyh.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F53FFB1BB5050C00460EA3 /* UIBarButtonItem+gyh.m */; };
@@ -226,8 +227,8 @@
 		196892601BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		196892611BC8BDCA009D4A99 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		196892621BC8BDCA009D4A99 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		198339AE1C02E33D00B8B8AD /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
-		198339AF1C02E33D00B8B8AD /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		198339AE1C02E33D00B8B8AD /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TencentOpenApi_IOS_Bundle.bundle; path = ../TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		198339AF1C02E33D00B8B8AD /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = ../TencentOpenAPI.framework; sourceTree = "<group>"; };
 		198339B21C02E38600B8B8AD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		198339B41C02E39400B8B8AD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		198339B61C02E39E00B8B8AD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -372,6 +373,8 @@
 		19D0000E1BB417D0009EA71C /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		19D0000F1BB417D0009EA71C /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		19D000101BB417D0009EA71C /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		19D830DD1C2594F4005C4114 /* HYCircleLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYCircleLoadingView.h; sourceTree = "<group>"; };
+		19D830DE1C2594F4005C4114 /* HYCircleLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYCircleLoadingView.m; sourceTree = "<group>"; };
 		19E215981BD8BC7F000BA38C /* OtherNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherNewsViewController.h; sourceTree = "<group>"; };
 		19E215991BD8BC7F000BA38C /* OtherNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherNewsViewController.m; sourceTree = "<group>"; };
 		19F53FF81BB5050C00460EA3 /* NSDate+gyh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+gyh.h"; sourceTree = "<group>"; };
@@ -551,7 +554,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1945F0811BAFDD0200A38747 = {
+		1925F3491C250A85003EE4FB /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
 				198339C01C02E3CF00B8B8AD /* libz.tbd */,
@@ -565,6 +568,13 @@
 				19970A7F1BCF9D9C00F4CC0C /* CoreLocation.framework */,
 				198339AE1C02E33D00B8B8AD /* TencentOpenApi_IOS_Bundle.bundle */,
 				198339AF1C02E33D00B8B8AD /* TencentOpenAPI.framework */,
+			);
+			name = FrameWork;
+			sourceTree = "<group>";
+		};
+		1945F0811BAFDD0200A38747 = {
+			isa = PBXGroup;
+			children = (
 				1945F08C1BAFDD0200A38747 /* 新闻 */,
 				1945F0A61BAFDD0200A38747 /* 新闻Tests */,
 				1945F0B11BAFDD0200A38747 /* 新闻UITests */,
@@ -602,6 +612,7 @@
 		1945F08D1BAFDD0200A38747 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1925F3491C250A85003EE4FB /* FrameWork */,
 				1945F08E1BAFDD0200A38747 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -811,6 +822,7 @@
 		19C33DEC1BB109A20059238A /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
+				19D830DC1C2594F4005C4114 /* LoadingView */,
 				19C33DED1BB109A20059238A /* Control */,
 				19C33DF01BB109A20059238A /* Model */,
 				19C33DF11BB109A20059238A /* View */,
@@ -1079,6 +1091,15 @@
 			path = SDCycleScrollView;
 			sourceTree = "<group>";
 		};
+		19D830DC1C2594F4005C4114 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				19D830DD1C2594F4005C4114 /* HYCircleLoadingView.h */,
+				19D830DE1C2594F4005C4114 /* HYCircleLoadingView.m */,
+			);
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
 		19F53FF71BB5050C00460EA3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -1230,6 +1251,7 @@
 				190450E41BCCAC7C00C47A50 /* WeatherViewController.m in Sources */,
 				19C33E961BB10B4C0059238A /* MJMethod.m in Sources */,
 				19C33E3B1BB109A20059238A /* AFURLSessionManager.m in Sources */,
+				19D830DF1C2594F4005C4114 /* HYCircleLoadingView.m in Sources */,
 				190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */,
 				19C33E911BB10B4C0059238A /* MJArgument.m in Sources */,
 				19D000151BB417D0009EA71C /* TAPageControl.m in Sources */,

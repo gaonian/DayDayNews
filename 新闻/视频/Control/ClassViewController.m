@@ -5,6 +5,8 @@
 //  Created by gyh on 15/9/29.
 //  Copyright © 2015年 apple. All rights reserved.
 //
+#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 
 #import "ClassViewController.h"
 #import "AFNetworking.h"
@@ -16,12 +18,23 @@
 #import "GCPlayer.h"
 #import "DetailViewController.h"
 
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+#import "HYCircleLoadingView.h"
+
 @interface ClassViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *videoArray;
 @property (nonatomic , weak) UITableView *tableview;
 @property (nonatomic , assign)int count;
 
-@property (nonatomic , strong) GCPlayer *player;
+@property (nonatomic, strong) MPMoviePlayerController *mpc;
+@property (nonatomic, strong) MPMoviePlayerController *hpmpc;
+@property (nonatomic , strong) UIView *cbfxView;
+@property (nonatomic , strong) UIView *controlView;
+@property (nonatomic , assign) int currtRow;
+
+@property (strong, nonatomic) HYCircleLoadingView *loadingView;
 @end
 
 @implementation ClassViewController
@@ -40,6 +53,13 @@
     self.view.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
     [self initUI];
     [self setupRefreshView];
+    
+    //监听屏幕改变
+    UIDevice *device = [UIDevice currentDevice]; //Get the device object
+    [device beginGeneratingDeviceOrientationNotifications]; //Tell it to start monitoring the accelerometer for orientation
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; //Get the notification centre for the app
+    [nc addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];
+
 }
 
 -(void)initUI
@@ -129,9 +149,86 @@
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
     NSLog(@"%@",videodata.mp4_url);
-    DetailViewController *detail = [[DetailViewController alloc]init];
-    detail.mp4url = videodata.mp4_url;
-    [self.navigationController pushViewController:detail animated:YES];
+
+        
+    if (self.mpc) {
+        [self.mpc.view removeFromSuperview];
+    }
+    self.currtRow = (int)indexPath.row;
+    // 创建播放器对象
+    self.mpc = [[MPMoviePlayerController alloc] init];
+    self.mpc.contentURL = [NSURL URLWithString:videodata.mp4_url];
+    // 添加播放器界面到控制器的view上面
+    self.mpc.view.frame = CGRectMake(0, videoframe.cellH*indexPath.row+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
+    //设置加载指示器
+    [self setupLoadingView];
+   
+    [self.tableview addSubview:self.mpc.view];
+    
+    
+//    UIView *controlView = [[UIView alloc] init];
+//    controlView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+//    [mpc.view addSubview:controlView];
+//    self.controlView = controlView;
+//    
+////    [self setupStrolView];
+//    UIButton *l1 = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 50, 30)];
+//    l1.backgroundColor = [UIColor blackColor];
+//    [self.controlView addSubview:l1];
+//    UIButton *l2 = [[UIButton alloc]initWithFrame:CGRectMake(self.controlView.frame.size.width-10-50, 10, 50, 30)];
+//    l2.backgroundColor = [UIColor blackColor];
+//    [l2 addTarget:self action:@selector(l2click) forControlEvents:UIControlEventTouchUpInside];
+//    [self.controlView addSubview:l2];
+//
+    
+    
+    // 隐藏自动自带的控制面板
+    self.mpc.controlStyle = MPMovieControlStyleNone;
+    
+    // 监听播放器
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDidFinish) name:MPMoviePlayerPlaybackDidFinishNotification object:self.mpc];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieStateDidChange) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.mpc];
+    
+    [self.mpc play];
+    
+}
+
+#pragma mark - 设置加载指示器
+- (void)setupLoadingView
+{
+    HYCircleLoadingView *loadingView = [[HYCircleLoadingView alloc]initWithFrame:CGRectMake(self.mpc.view.frame.size.width/2-20, self.mpc.view.frame.size.height/2-20, 40, 40)];
+    loadingView.loadingType = 1;
+    [self.mpc.view addSubview:loadingView];
+    self.loadingView = loadingView;
+    [self loadingViewIsShowing:YES];
+}
+
+- (void)loadingViewIsShowing:(BOOL)isShowing
+{
+    _loadingView.hidden = !isShowing;
+    if(isShowing){
+        [_loadingView startAnimation];
+    }
+    else{
+        [_loadingView stopAnimation];
+    }
+}
+
+#pragma mark - 设置控制面板
+- (void)setupStrolView
+{
+    UIButton *l1 = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 50, 30)];
+    l1.backgroundColor = [UIColor whiteColor];
+    [self.controlView addSubview:l1];
+    UIButton *l2 = [[UIButton alloc]initWithFrame:CGRectMake(self.controlView.frame.size.width-10-50, 10, 50, 30)];
+    l2.backgroundColor = [UIColor whiteColor];
+    [l2 addTarget:self action:@selector(l2click) forControlEvents:UIControlEventTouchUpInside];
+    [self.controlView addSubview:l2];
+}
+
+- (void)l2click
+{
+    NSLog(@"l2Click");
 }
 
 
@@ -142,5 +239,141 @@
 }
 
 
+
+#pragma mark - 监听播放完毕
+- (void)movieDidFinish
+{
+    NSLog(@"----播放完毕");
+
+//    if (self.mpc) {
+//        [self.mpc.view removeFromSuperview];
+//        self.mpc = nil;
+//    }
+    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.mpc.view.frame.size.height)];
+    vc.backgroundColor = [UIColor yellowColor];
+    [self.mpc.view addSubview:vc];
+
+}
+#pragma mark - 监听播放状态
+- (void)movieStateDidChange
+{
+    NSLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
+    if (self.mpc.playbackState == 1) {
+        [self loadingViewIsShowing:NO];
+    }
+    
+}
+
+
+#pragma mark - 屏幕改变
+- (void)orientationChanged:(NSNotification *)note  {
+    
+    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+    switch (o) {
+        case UIDeviceOrientationPortrait:            // 屏幕变正
+            NSLog(@"屏幕变正");
+            [self up];
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            break;
+        case UIDeviceOrientationLandscapeLeft:       //屏幕左转
+            NSLog(@"屏幕变左");
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
+            [self left];
+            
+            break;
+        case UIDeviceOrientationLandscapeRight:   //屏幕右转
+            NSLog(@"屏幕变右");
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
+            
+            
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)up
+{
+    if(self.mpc){
+    
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+                
+            VideoDataFrame *videoframe = self.videoArray[self.currtRow];
+             self.mpc.view.transform = CGAffineTransformIdentity;
+            self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
+//            self.controlView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+            [self.tableview addSubview:self.mpc.view];
+            
+               
+        } completion:^(BOOL finished) {
+    
+        }];
+    }
+    
+}
+
+- (void)left
+{
+//    NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
+//    
+//    self.hpmpc = self.mpc;
+//    if (self.hpmpc) {
+//        
+//         [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+//            
+//            CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(M_PI / 2);
+//            self.hpmpc.view.transform = landscapeTransform;
+//            self.hpmpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//            self.controlView.frame = CGRectMake(0, SCREEN_WIDTH-50, SCREEN_HEIGHT, 50);
+//            [self setupStrolView];
+//            UIWindow * window = [[UIApplication sharedApplication].delegate window];
+//            [window addSubview:self.hpmpc.view];
+//
+//        } completion:^(BOOL finished) {
+//
+//        }];
+//
+//    }
+    
+        if (self.mpc) {
+    
+             [[UIApplication sharedApplication] setStatusBarHidden:YES];
+            [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+    
+                self.mpc.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
+                
+                self.mpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//                self.controlView.frame = CGRectMake(0, 0, SCREEN_HEIGHT, 50);
+//                [self setupStrolView];
+
+                UIWindow * window = [[UIApplication sharedApplication].delegate window];
+                [window addSubview:self.mpc.view];
+    
+            } completion:^(BOOL finished) {
+    
+            }];
+    
+        }
+
+   
+}
+
+
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (self.mpc) {
+        NSLog(@"销毁了");
+        [self.mpc stop];
+        [self.mpc.view removeFromSuperview];
+        self.mpc = nil;
+    }
+}
 
 @end

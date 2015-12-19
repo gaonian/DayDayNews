@@ -50,6 +50,8 @@
  */
 @property (nonatomic , assign) CGRect ptimeF;
 
+@property (nonatomic , assign) CGRect lineVF;
+
 @property (nonatomic , assign) CGFloat cellH;
 
 

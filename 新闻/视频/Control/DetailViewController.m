@@ -26,6 +26,7 @@
 
 -(void)initBackButton
 {
+
     self.player = [[GCPlayer alloc]initWithFrame:self.view.bounds];
     [self.player getPlayItem:_mp4url];
     [self.view addSubview:self.player];
@@ -45,6 +46,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
 }
 
 -(void)backClick
@@ -53,7 +55,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    [self.player.playerr pause];    
+    [self.player.playerr pause];
     [self.player removeFromSuperview];
 }
 

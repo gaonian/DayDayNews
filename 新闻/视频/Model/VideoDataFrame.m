@@ -80,7 +80,14 @@
     CGFloat ptimeY = lengthY;
     _ptimeF = CGRectMake(ptimeX, ptimeY, ptimeW, ptimeH);
     
-    _cellH = CGRectGetMaxY(_ptimeF) + 10;
+    //灰块
+    CGFloat lineW = SCREEN_WIDTH;
+    CGFloat lineH = 10;
+    CGFloat lineX = 0;
+    CGFloat lineY = CGRectGetMaxY(_ptimeF)+10;
+    _lineVF = CGRectMake(lineX, lineY, lineW, lineH);
+    
+    _cellH = CGRectGetMaxY(_lineVF);
 }
 
 @end

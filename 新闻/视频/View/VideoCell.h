@@ -22,6 +22,8 @@
 @property (nonatomic , weak) UIImageView *playImage;
 @property (nonatomic , weak) UILabel *playcountLabel;
 @property (nonatomic , weak) UILabel *ptimeLabel;
+@property (nonatomic , weak) UIView *lineV;
+
 
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
