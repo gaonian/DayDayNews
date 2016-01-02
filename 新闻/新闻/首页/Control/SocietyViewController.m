@@ -101,7 +101,7 @@
     //   http://c.m.163.com/nc/article/headline/T1348647853363/0-1.html
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    [mgr GET:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-1.html" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [mgr GET:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 
         NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
         // 创建frame模型对象

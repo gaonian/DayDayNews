@@ -34,6 +34,8 @@
 @property (nonatomic , strong) UIView *controlView;
 @property (nonatomic , assign) int currtRow;
 
+@property (nonatomic , assign) BOOL smallmpc;
+
 @property (strong, nonatomic) HYCircleLoadingView *loadingView;
 @end
 
@@ -296,72 +298,79 @@
 - (void)up
 {
     if(self.mpc){
-    
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    
-        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+        
+        if (self.smallmpc) {
+            NSLog(@"000");
+        }else{
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+            [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
                 
-            VideoDataFrame *videoframe = self.videoArray[self.currtRow];
-             self.mpc.view.transform = CGAffineTransformIdentity;
-            self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
-//            self.controlView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
-            [self.tableview addSubview:self.mpc.view];
-            
-               
-        } completion:^(BOOL finished) {
+                VideoDataFrame *videoframe = self.videoArray[self.currtRow];
+                self.mpc.view.transform = CGAffineTransformIdentity;
+                self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
+                [self.tableview addSubview:self.mpc.view];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
     
-        }];
     }
     
 }
 
 - (void)left
 {
-//    NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
-//    
-//    self.hpmpc = self.mpc;
-//    if (self.hpmpc) {
-//        
-//         [[UIApplication sharedApplication] setStatusBarHidden:YES];
-//        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-//            
-//            CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(M_PI / 2);
-//            self.hpmpc.view.transform = landscapeTransform;
-//            self.hpmpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//            self.controlView.frame = CGRectMake(0, SCREEN_WIDTH-50, SCREEN_HEIGHT, 50);
-//            [self setupStrolView];
-//            UIWindow * window = [[UIApplication sharedApplication].delegate window];
-//            [window addSubview:self.hpmpc.view];
-//
-//        } completion:^(BOOL finished) {
-//
-//        }];
-//
-//    }
-    
         if (self.mpc) {
-    
-             [[UIApplication sharedApplication] setStatusBarHidden:YES];
-            [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-    
-                self.mpc.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
-                
-                self.mpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//                self.controlView.frame = CGRectMake(0, 0, SCREEN_HEIGHT, 50);
-//                [self setupStrolView];
-
-                UIWindow * window = [[UIApplication sharedApplication].delegate window];
-                [window addSubview:self.mpc.view];
-    
-            } completion:^(BOOL finished) {
-    
-            }];
-    
+            
+            if (self.smallmpc) {
+                NSLog(@"小于");
+            }else{
+                [[UIApplication sharedApplication] setStatusBarHidden:YES];
+                [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+                    
+                    self.mpc.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
+                    
+                    self.mpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    //                self.controlView.frame = CGRectMake(0, 0, SCREEN_HEIGHT, 50);
+                    //                [self setupStrolView];
+                    
+                    UIWindow * window = [[UIApplication sharedApplication].delegate window];
+                    [window addSubview:self.mpc.view];
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
         }
 
    
 }
+#pragma mark - 判断滚动事件，如何超出播放界面，停止播放
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.mpc) {
 
+        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.mpc.view.frame)) {
+//            [self.mpc stop];
+//            [self.mpc.view removeFromSuperview];
+//            self.mpc = nil;
+            [self setupSmallmpc];
+        }else{
+            NSLog(@"hahah");
+//            self.smallmpc = NO;
+//            VideoDataFrame *videoframe = self.videoArray[self.currtRow];
+//            self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
+//            [self.tableview addSubview:self.mpc.view];
+        }
+    }
+}
+
+- (void)setupSmallmpc
+{
+    self.smallmpc = YES;
+    self.mpc.view.frame = CGRectMake(SCREEN_WIDTH-20-200, SCREEN_HEIGHT - 120, 200, 200*0.56);
+    [self.view addSubview:self.mpc.view];
+}
 
 
 
@@ -374,6 +383,7 @@
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;
     }
+    self.tableview.delegate = nil;
 }
 
 @end
