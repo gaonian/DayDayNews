@@ -80,6 +80,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:@"新闻" object:nil];
 }
 
+
+
 -(void)mynotification
 {
     [self.tableview.header beginRefreshing];
