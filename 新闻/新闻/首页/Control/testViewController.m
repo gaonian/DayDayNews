@@ -20,16 +20,13 @@
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem ItemWithIcon:@"dislike" highIcon:nil target:self action:@selector(like)];
     
-    
     [self initWebView];
-    
 }
 
 -(void)like
 {
     
 }
-
 
 
 -(void)initWebView

@@ -125,7 +125,6 @@
     [btn addTarget:self action:@selector(weatherClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
-
 }
 
 -(void)weatherClick

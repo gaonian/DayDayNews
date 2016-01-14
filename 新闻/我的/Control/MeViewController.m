@@ -31,7 +31,6 @@
         float tmpSize = [[SDImageCache sharedImageCache]getSize];
         NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",tmpSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",tmpSize * 1024];
         _clearCacheName = clearCacheName;
-        
     }
     return _clearCacheName;
 }
@@ -40,25 +39,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 50)];
-    [btn setTitle:self.clearCacheName forState:UIControlStateNormal];
-    btn.backgroundColor = [UIColor redColor];
-    [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+//    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 50)];
+//    [btn setTitle:self.clearCacheName forState:UIControlStateNormal];
+//    btn.backgroundColor = [UIColor redColor];
+//    [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
+//    
+//    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(200, 300, 100, 50)];
+//    [btn1 setTitle:@"登录" forState:UIControlStateNormal];
+//    btn1.backgroundColor = [UIColor redColor];
+//    [btn1 addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn1];
+//    
+//    
+//    UIImageView *iV = [[UIImageView alloc]initWithFrame:CGRectMake(100, 400, 100, 100)];
+//    [self.view addSubview:iV];
+//    self.iV = iV;
+
+    [self setupUI];
+}
+
+- (void)setupUI
+{
     
-    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(200, 300, 100, 50)];
-    [btn1 setTitle:@"登录" forState:UIControlStateNormal];
-    btn1.backgroundColor = [UIColor redColor];
-    [btn1 addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn1];
-    
-    
-    UIImageView *iV = [[UIImageView alloc]initWithFrame:CGRectMake(100, 400, 100, 100)];
-    [self.view addSubview:iV];
-    self.iV = iV;
-    
-    
-    [self inittencent];
 }
 
 - (void)click

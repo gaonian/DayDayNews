@@ -26,6 +26,7 @@
 @property (nonatomic , strong) NSMutableArray *weatherArray;
 @property (nonatomic , strong) WeatherData *wd;
 
+@property (nonatomic , weak) UIImageView *imageV;
 @property (nonatomic , weak) UILabel * cityLabel;
 @property (nonatomic , weak) UILabel * dateLabel;
 @property (nonatomic , weak) UIImageView * todayImg;
@@ -33,6 +34,9 @@
 @property (nonatomic , weak) UILabel *climateLabel;
 @property (nonatomic , weak) UILabel *windLabel;
 @property (nonatomic , weak) UILabel *pmLabel;
+
+@property (nonatomic , weak) UIView *bottomV;
+
 
 /**
  *  定位管理者
@@ -55,28 +59,13 @@
     return _weatherArray;
 }
 
-- (CLLocationManager *)mgr
-{
-    if (!_mgr) {
-        _mgr = [[CLLocationManager alloc] init];
-    }
-    return _mgr;
-}
-
--(CLGeocoder *)geocoder
-{
-    if (!_geocoder) {
-        self.geocoder = [[CLGeocoder alloc]init];
-    }
-    return _geocoder;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [MBProgressHUD showMessage:@"正在加载...."];
+   
+    [MBProgressHUD showMessage:@"正在加载"];
     [self setupLocation];
-    
 }
 
 -(void)setupLocation
@@ -98,12 +87,6 @@
 
 }
 
-/**
- *  授权状态发生改变时调用
- *
- *  @param manager 触发事件的对象
- *  @param status  当前授权的状态
- */
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     if (status == kCLAuthorizationStatusNotDetermined) {
@@ -123,12 +106,7 @@
 }
 
 #pragma mark - CLLocationManagerDelegate
-/**
- *  获取到位置信息之后就会调用(调用频率非常高)
- *
- *  @param manager   触发事件的对象
- *  @param locations 获取到的位置
- */
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     // 如果只需要获取一次, 可以获取到位置之后就停止
@@ -168,7 +146,6 @@
                     NSString *citystr = [pm.locality substringToIndex:loc];
                     
                     self.city = self.province = citystr;
-                    
                 }else{
                     NSRange range = [pm.name rangeOfString:@"市"];
                     int loc = (int)range.location;
@@ -186,13 +163,17 @@
                 }
                 
             }else{
-                NSLog(@"－－－%@",pm.locality);
-                 NSRange range = [pm.locality rangeOfString:@"市"];
-                int loc = (int)range.location;
-                NSString *citystr = [pm.locality substringToIndex:loc];
                 
-                self.city = self.province = citystr;
-                
+                if ([pm.locality rangeOfString:@"市"].location != NSNotFound) {
+                    NSLog(@"－－－%@",pm.locality);
+                    NSRange range = [pm.locality rangeOfString:@"市"];
+                    int loc = (int)range.location;
+                    NSString *citystr = [pm.locality substringToIndex:loc];
+                    self.city = self.province = citystr;
+
+                }else{
+                    self.city = self.province = @"北京";
+                }
             }
            
             [self requestNet];
@@ -200,6 +181,7 @@
     }];
 
 }
+
 
 #pragma mark  请求网络
 -(void)requestNet
@@ -218,14 +200,14 @@
             for (WeatherData *weather in dataArray) {
                 [tempArray addObject:weather];
             }
-            [self.weatherArray addObjectsFromArray:tempArray];
-            
+            self.weatherArray = tempArray;
+        
             //pm2d5
             WeatherData *wd = [WeatherData objectWithKeyValues:responseObject[@"pm2d5"]];
             self.wd = wd;
-            [self initAll];
-       
         
+        [self initAll];
+       
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
     }];
@@ -238,13 +220,15 @@
     [self bottomView];     //加载底部数据
 }
 
+
 #pragma mark  顶部UI
 -(void)setupUI
 {
     //背景
     UIImageView *imageV = [[UIImageView alloc]initWithFrame:self.view.frame];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:self.wd.nbg2] placeholderImage:[UIImage imageNamed:@"MoRen"]];
+    imageV.image = [UIImage imageNamed:@"MoRen"];
     [self.view addSubview:imageV];
+    self.imageV = imageV;
     
     //返回按钮
     UIButton *backbtn = [[UIButton alloc]init];
@@ -254,9 +238,9 @@
     [self.view addSubview:backbtn];
     
     //城市名
-    CGSize textMaxSize = CGSizeMake(SCREEN_WIDTH, MAXFLOAT);
-    CGSize textRealSize = [self.city sizeWithFont:[UIFont systemFontOfSize:17] maxSize:textMaxSize];
-    CGFloat cityLabelW = textRealSize.width;
+//    CGSize textMaxSize = CGSizeMake(SCREEN_WIDTH, MAXFLOAT);
+//    CGSize textRealSize = [self.city sizeWithFont:[UIFont systemFontOfSize:17] maxSize:textMaxSize];
+    CGFloat cityLabelW = 50;
     CGFloat cityLabelH = 20;
     CGFloat cityLabelX = (SCREEN_WIDTH - cityLabelW)/2;
     CGFloat cityLabelY = 30;
@@ -318,6 +302,7 @@
 -(void)setupData
 {
     /**  加载数据  */
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.wd.nbg2] placeholderImage:[UIImage imageNamed:@"MoRen"]];
     //城市
     self.cityLabel.text = self.city;
     //日期
@@ -388,6 +373,7 @@
         UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(vcX, vcY, vcW, vcH)];
         vc.backgroundColor = [UIColor colorWithRed:1/255.0f green:1/255.0f blue:1/255.0f alpha:0.2];
         [self.view addSubview:vc];
+        self.bottomV = vc;
         
         //星期
         UILabel *weekLabel = [[UILabel alloc]init];
@@ -402,6 +388,7 @@
         UILabel *cliwindLabel = [[UILabel alloc]init];
         cliwindLabel.numberOfLines = 0;
         [self setupWithLabel:cliwindLabel frame:CGRectMake(0, CGRectGetMaxY(temLabel.frame), vcW, 50) FontSize:12 view:vc textAlignment:NSTextAlignmentCenter];
+        
         
         /**  加载数据  */
         WeatherData *weatherdata = self.weatherArray[i];
@@ -429,7 +416,6 @@
         //风，天气
         cliwindLabel.text = [weatherdata.climate stringByAppendingFormat:@"\n%@",weatherdata.wind];
     }
-
 }
 
 
@@ -461,7 +447,6 @@
     self.weatherArray = nil;
     self.province = provice;
     self.city = city;
-    NSLog(@"点击了  %@  %@",self.province,self.city);
     [MBProgressHUD showMessage:@"正在加载..."];
     [self requestNet];
 }
@@ -487,6 +472,22 @@
 //    [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
+}
+
+- (CLLocationManager *)mgr
+{
+    if (!_mgr) {
+        _mgr = [[CLLocationManager alloc] init];
+    }
+    return _mgr;
+}
+
+-(CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        self.geocoder = [[CLGeocoder alloc]init];
+    }
+    return _geocoder;
 }
 
 
