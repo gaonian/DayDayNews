@@ -19,6 +19,8 @@
 #import "MBProgressHUD+MJ.h"
 #import "NSString+Extension.h"
 
+#import "INTULocationManager.h"
+
 @interface WeatherViewController ()<CLLocationManagerDelegate,LocaViewControllerDelegate>
 @property (nonatomic , copy) NSString *province;
 @property (nonatomic , copy) NSString *city;
@@ -38,10 +40,6 @@
 @property (nonatomic , weak) UIView *bottomV;
 
 
-/**
- *  定位管理者
- */
-@property (nonatomic ,strong) CLLocationManager *mgr;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 
 @property (nonatomic , assign) int  lati;
@@ -68,56 +66,20 @@
     [self setupLocation];
 }
 
--(void)setupLocation
+- (void)setupLocation
 {
-    // 成为CoreLocation管理者的代理监听获取到的位置
-    self.mgr.delegate = self;
-    // 判断是否是iOS8
-    if([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0)
-    {
-        NSLog(@"是iOS8");
-        // 主动要求用户对我们的程序授权, 授权状态改变就会通知代理
-        [self.mgr requestAlwaysAuthorization]; // 请求前台和后台定位权限
-    }else
-    {
-        NSLog(@"是iOS7");
-        // 开始监听(开始获取位置)
-        [self.mgr startUpdatingLocation];
-    }
-
-}
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    if (status == kCLAuthorizationStatusNotDetermined) {
-        NSLog(@"等待用户授权");
-    }else if (status == kCLAuthorizationStatusAuthorizedAlways ||
-              status == kCLAuthorizationStatusAuthorizedWhenInUse)
-        
-    {
-        NSLog(@"授权成功");
-        // 开始定位
-        [self.mgr startUpdatingLocation];
-        
-    }else
-    {
-        NSLog(@"授权失败");
-    }
-}
-
-#pragma mark - CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    // 如果只需要获取一次, 可以获取到位置之后就停止
-    [self.mgr stopUpdatingLocation];
-    
-    CLLocation *location = [locations lastObject];
-    self.lati = (int)location.coordinate.latitude;
-    self.longi = (int)location.coordinate.longitude;
-    NSLog(@"%d  %d",self.lati , self.longi);
-    
-    [self setupCity];
+    INTULocationManager *mgr = [INTULocationManager sharedInstance];
+    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+        NSLog(@"----%ld",(long)status);
+        if (status == 0) {
+            self.lati = (int)currentLocation.coordinate.latitude;
+            self.longi = (int)currentLocation.coordinate.longitude;
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"定位失败，请尽量使用真机"];
+        }
+        [self setupCity];
+    }];
 }
 
 -(void)setupCity
@@ -192,6 +154,8 @@
     [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         [MBProgressHUD hideHUD];
+        [self.navigationController setNavigationBarHidden:YES];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         
             self.dt = responseObject[@"dt"];
             NSString *str = [NSString stringWithFormat:@"%@|%@",self.province,self.city];
@@ -459,12 +423,13 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//}
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -474,13 +439,6 @@
 
 }
 
-- (CLLocationManager *)mgr
-{
-    if (!_mgr) {
-        _mgr = [[CLLocationManager alloc] init];
-    }
-    return _mgr;
-}
 
 -(CLGeocoder *)geocoder
 {

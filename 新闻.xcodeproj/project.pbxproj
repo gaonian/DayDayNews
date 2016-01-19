@@ -77,6 +77,8 @@
 		19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19970A701BCF95B800F4CC0C /* LocaHeaderView.m */; };
 		19970A731BCF95CD00F4CC0C /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19970A721BCF95CD00F4CC0C /* city.plist */; };
 		19970A801BCF9D9C00F4CC0C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19970A7F1BCF9D9C00F4CC0C /* CoreLocation.framework */; };
+		19A67CCA1C4E361A008DC05E /* INTULocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A67CC61C4E361A008DC05E /* INTULocationManager.m */; };
+		19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A67CC81C4E361A008DC05E /* INTULocationRequest.m */; };
 		19B063FF1BBA2E1E00483A5D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B063FB1BBA2E1E00483A5D /* MBProgressHUD+MJ.m */; };
 		19B064001BBA2E1E00483A5D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19B063FC1BBA2E1E00483A5D /* MBProgressHUD.bundle */; };
 		19B064011BBA2E1E00483A5D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B063FE1BBA2E1E00483A5D /* MBProgressHUD.m */; };
@@ -282,6 +284,12 @@
 		19970A701BCF95B800F4CC0C /* LocaHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaHeaderView.m; sourceTree = "<group>"; };
 		19970A721BCF95CD00F4CC0C /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		19970A7F1BCF9D9C00F4CC0C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		19A67CC41C4E361A008DC05E /* INTULocationManager+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INTULocationManager+Internal.h"; sourceTree = "<group>"; };
+		19A67CC51C4E361A008DC05E /* INTULocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationManager.h; sourceTree = "<group>"; };
+		19A67CC61C4E361A008DC05E /* INTULocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTULocationManager.m; sourceTree = "<group>"; };
+		19A67CC71C4E361A008DC05E /* INTULocationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationRequest.h; sourceTree = "<group>"; };
+		19A67CC81C4E361A008DC05E /* INTULocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTULocationRequest.m; sourceTree = "<group>"; };
+		19A67CC91C4E361A008DC05E /* INTULocationRequestDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationRequestDefines.h; sourceTree = "<group>"; };
 		19B063FA1BBA2E1E00483A5D /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		19B063FB1BBA2E1E00483A5D /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		19B063FC1BBA2E1E00483A5D /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -788,6 +796,19 @@
 			path = DOPNavbarMenu;
 			sourceTree = "<group>";
 		};
+		19A67CC31C4E361A008DC05E /* INTULocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				19A67CC41C4E361A008DC05E /* INTULocationManager+Internal.h */,
+				19A67CC51C4E361A008DC05E /* INTULocationManager.h */,
+				19A67CC61C4E361A008DC05E /* INTULocationManager.m */,
+				19A67CC71C4E361A008DC05E /* INTULocationRequest.h */,
+				19A67CC81C4E361A008DC05E /* INTULocationRequest.m */,
+				19A67CC91C4E361A008DC05E /* INTULocationRequestDefines.h */,
+			);
+			path = INTULocationManager;
+			sourceTree = "<group>";
+		};
 		19B063F91BBA2E1E00483A5D /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,6 +973,7 @@
 		19C33E0A1BB109A20059238A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				19A67CC31C4E361A008DC05E /* INTULocationManager */,
 				198BD1BC1BBB842A00B21A07 /* SDWebImage */,
 				19B063F91BBA2E1E00483A5D /* MBProgressHUD */,
 				19D0FFFF1BB417D0009EA71C /* SDCycleScrollView */,
@@ -1252,6 +1274,7 @@
 				190450E41BCCAC7C00C47A50 /* WeatherViewController.m in Sources */,
 				19C33E961BB10B4C0059238A /* MJMethod.m in Sources */,
 				19C33E3B1BB109A20059238A /* AFURLSessionManager.m in Sources */,
+				19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */,
 				19D830DF1C2594F4005C4114 /* HYCircleLoadingView.m in Sources */,
 				190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */,
 				19C33E911BB10B4C0059238A /* MJArgument.m in Sources */,
@@ -1261,6 +1284,7 @@
 				198BD1E31BBB842A00B21A07 /* SDWebImageDownloader.m in Sources */,
 				19C33E9A1BB10B4C0059238A /* NSObject+MJKeyValue.m in Sources */,
 				196892701BC8BDCA009D4A99 /* MJRefreshStateHeader.m in Sources */,
+				19A67CCA1C4E361A008DC05E /* INTULocationManager.m in Sources */,
 				19C33E3C1BB109A20059238A /* AppDelegate.m in Sources */,
 				198BD1E41BBB842A00B21A07 /* SDWebImageDownloaderOperation.m in Sources */,
 				1968926C1BC8BDCA009D4A99 /* MJRefreshBackNormalFooter.m in Sources */,
