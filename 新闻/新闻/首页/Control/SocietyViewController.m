@@ -236,7 +236,7 @@
     //  http://c.3g.163.com/photo/api/set/0096/77789.json
     TopData *data = self.topArray[index];
     NSString *url = [data.url substringFromIndex:9];
-    url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0096/%@.json",url];
+    url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0001/%@.json",url];
 
     TopViewController *topVC = [[TopViewController alloc]init];
     topVC.url = url;

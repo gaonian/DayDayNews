@@ -69,14 +69,16 @@
 - (void)setupLocation
 {
     INTULocationManager *mgr = [INTULocationManager sharedInstance];
-    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
         NSLog(@"----%ld",(long)status);
-        if (status == 0) {
+
             self.lati = (int)currentLocation.coordinate.latitude;
             self.longi = (int)currentLocation.coordinate.longitude;
-        }else{
+
+        if(status == 1){
             [MBProgressHUD hideHUD];
-            [MBProgressHUD showError:@"定位失败，请尽量使用真机"];
+            [MBProgressHUD showError:@"请求超时"];
+            return;
         }
         [self setupCity];
     }];
