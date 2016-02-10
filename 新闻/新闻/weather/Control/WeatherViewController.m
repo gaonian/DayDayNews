@@ -63,7 +63,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
    
     [MBProgressHUD showMessage:@"正在加载"];
-    [self setupLocation];
+    
+    NSString *pro = [[NSUserDefaults standardUserDefaults]objectForKey:@"省份"];
+    NSString *city = [[NSUserDefaults standardUserDefaults]objectForKey:@"城市"];
+    
+    if (pro && city) {
+        [self requestNet:pro city:city];
+    }else{
+        [self setupLocation];
+    }
 }
 
 - (void)setupLocation
@@ -140,7 +148,10 @@
                 }
             }
            
-            [self requestNet];
+            [self requestNet:self.province city:self.city];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:self.province forKey:@"省份"];
+            [[NSUserDefaults standardUserDefaults]setObject:self.city forKey:@"城市"];
         }
     }];
 
@@ -148,9 +159,10 @@
 
 
 #pragma mark  请求网络
--(void)requestNet
+-(void)requestNet:(NSString *)pro city:(NSString *)city
 {
-    NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",self.province,self.city];
+    
+    NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",pro,city];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -160,7 +172,7 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         
             self.dt = responseObject[@"dt"];
-            NSString *str = [NSString stringWithFormat:@"%@|%@",self.province,self.city];
+            NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
             NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
             NSMutableArray *tempArray = [NSMutableArray array];
             for (WeatherData *weather in dataArray) {
@@ -267,10 +279,12 @@
 #pragma mark 设置数据
 -(void)setupData
 {
+    NSString *city = [[NSUserDefaults standardUserDefaults]objectForKey:@"城市"];
+    
     /**  加载数据  */
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.wd.nbg2] placeholderImage:[UIImage imageNamed:@"MoRen"]];
     //城市
-    self.cityLabel.text = self.city;
+    self.cityLabel.text = city;
     //日期
     WeatherData *weatherdata = self.weatherArray[0];
     NSString *dtstr = [self.dt substringFromIndex:5];
@@ -387,8 +401,10 @@
 
 -(void)locClick
 {
+    NSString *city = [[NSUserDefaults standardUserDefaults]objectForKey:@"城市"];
+    
     LocaViewController *locaV = [[LocaViewController alloc]init];
-    locaV.currentTitle = self.city;
+    locaV.currentTitle = city;
     locaV.delegate = self;
     locaV.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:locaV];
@@ -411,10 +427,13 @@
 -(void)locaviewwithview:(LocaViewController *)locaviewcontrol provice:(NSString *)provice city:(NSString *)city
 {
     self.weatherArray = nil;
-    self.province = provice;
-    self.city = city;
+//    self.province = provice;
+//    self.city = city;
     [MBProgressHUD showMessage:@"正在加载..."];
-    [self requestNet];
+    [self requestNet:provice city:city];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:provice forKey:@"省份"];
+    [[NSUserDefaults standardUserDefaults]setObject:city forKey:@"城市"];
 }
 
 
