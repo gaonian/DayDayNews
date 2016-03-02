@@ -52,6 +52,7 @@
 		198339BD1C02E3BD00B8B8AD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339BC1C02E3BD00B8B8AD /* CoreTelephony.framework */; };
 		198339BF1C02E3C700B8B8AD /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339BE1C02E3C700B8B8AD /* libstdc++.tbd */; };
 		198339C11C02E3CF00B8B8AD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339C01C02E3CF00B8B8AD /* libz.tbd */; };
+		198A413B1C859F0E00A2FFE9 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 198A413A1C859F0E00A2FFE9 /* UIView+Frame.m */; };
 		198AF7A81C841C0300D941F4 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 198AF7A71C841C0300D941F4 /* SettingGroup.m */; };
 		198AF7B11C841C9400D941F4 /* SettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 198AF7AA1C841C9400D941F4 /* SettingArrowItem.m */; };
 		198AF7B21C841C9400D941F4 /* SettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 198AF7AC1C841C9400D941F4 /* SettingItem.m */; };
@@ -259,6 +260,8 @@
 		198339BC1C02E3BD00B8B8AD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		198339BE1C02E3C700B8B8AD /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		198339C01C02E3CF00B8B8AD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		198A41391C859F0E00A2FFE9 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		198A413A1C859F0E00A2FFE9 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		198AF7A41C83EEAC00D941F4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		198AF7A61C841C0300D941F4 /* SettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGroup.h; sourceTree = "<group>"; };
 		198AF7A71C841C0300D941F4 /* SettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingGroup.m; sourceTree = "<group>"; };
@@ -1286,6 +1289,8 @@
 		19F53FF71BB5050C00460EA3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				198A41391C859F0E00A2FFE9 /* UIView+Frame.h */,
+				198A413A1C859F0E00A2FFE9 /* UIView+Frame.m */,
 				19F53FF81BB5050C00460EA3 /* NSDate+gyh.h */,
 				19F53FF91BB5050C00460EA3 /* NSDate+gyh.m */,
 				19F53FFA1BB5050C00460EA3 /* UIBarButtonItem+gyh.h */,
@@ -1525,6 +1530,7 @@
 				196892721BC8BDCA009D4A99 /* MJRefreshConst.m in Sources */,
 				198AF7B11C841C9400D941F4 /* SettingArrowItem.m in Sources */,
 				190450D61BCCAC0A00C47A50 /* TopData.m in Sources */,
+				198A413B1C859F0E00A2FFE9 /* UIView+Frame.m in Sources */,
 				198BD2081BBB85BD00B21A07 /* SDWebImageManager+MJ.m in Sources */,
 				198BD2121BBBB34600B21A07 /* PhotoShowViewController.m in Sources */,
 				198BD1E51BBB842A00B21A07 /* SDWebImageManager.m in Sources */,
