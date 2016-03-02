@@ -37,6 +37,7 @@ _<br />_<br />
 
 ###我的界面新增qq登陆，获取到头像并进行裁剪
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/setting.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)
 
 
 
