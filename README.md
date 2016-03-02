@@ -8,6 +8,7 @@ _ 2016-1-14 处理天气预报加载时间长，没页面显示的问题。<br /
 _ 2016-1-19 更换了corelocation定位，系统定位繁琐速度慢。更换为INTULocationManager第三方定位，block调用简单有效<br />
 _ 2016-1-20 更改了首页顶部滚动条详情不显示的问题。<br />
 _ 2016-2-10 优化天气预报城市缓存问题
+_ 2016-3-2  完善”我的“界面，实现第三方登录以及注销功能
 
 
 ###修改了视频显示方式
@@ -35,6 +36,7 @@ _<br />_<br />
 
 
 ###我的界面新增qq登陆，获取到头像并进行裁剪
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/setting.png)
 
 
 
