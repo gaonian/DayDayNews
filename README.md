@@ -26,11 +26,11 @@ _<br />_<br />
 
 ###首页以及顶部新闻详情，高仿网易
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsfresh.png)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/detail.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsdata.png)
 ###使用瀑布流实现图片，可以选择分类
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photo.png)
 ###增加了天气预报的功能，可以实现定位到当前城市。动画效果也没有放过。
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsdata.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/detail.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/weather.PNG)
 
 ###视频
