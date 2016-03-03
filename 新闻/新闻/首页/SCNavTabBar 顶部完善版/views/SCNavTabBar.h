@@ -21,6 +21,7 @@
 @property (nonatomic, strong)   NSArray     *itemTitles;
 @property (nonatomic, strong)   UIColor     *lineColor;
 
+@property (nonatomic , strong)  NSMutableArray  *items;
 
 - (id)initWithFrame:(CGRect)frame;
 

@@ -59,8 +59,8 @@
     //返回按钮
     UIButton *backbtn = [[UIButton alloc]init];
     backbtn.hidden = NO;
-    backbtn.frame = CGRectMake(5, 25, 30, 30);
-    [backbtn setBackgroundImage:[UIImage imageNamed:@"navigationbar_back_white"] forState:UIControlStateNormal];
+    backbtn.frame = CGRectMake(5, 25, 40, 40);
+    [backbtn setBackgroundImage:[UIImage imageNamed:@"weather_back"] forState:UIControlStateNormal];
     [backbtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backbtn];
     self.backbtn = backbtn;

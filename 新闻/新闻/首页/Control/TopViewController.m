@@ -72,8 +72,8 @@
     
     //返回按钮
     UIButton *backbtn = [[UIButton alloc]init];
-    backbtn.frame = CGRectMake(5, 25, 30, 30);
-    [backbtn setBackgroundImage:[UIImage imageNamed:@"navigationbar_back_white"] forState:UIControlStateNormal];
+    backbtn.frame = CGRectMake(5, 25, 40, 40);
+    [backbtn setBackgroundImage:[UIImage imageNamed:@"weather_back"] forState:UIControlStateNormal];
     [backbtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backbtn];
     
@@ -95,7 +95,7 @@
     //数量
     UILabel *countLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame)+5, titleLabel.frame.origin.y, 50, 15)];
     countLabel.textColor = [UIColor whiteColor];
-    countLabel.text = @"16/50";
+//    countLabel.text = @"00/00";
     [self.view addSubview:countLabel];
     self.countLabel = countLabel;
     

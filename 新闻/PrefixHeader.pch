@@ -17,5 +17,10 @@
 
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD+MJ.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
+#import "UIView+Frame.h"
+#import "NSString+Extension.h"
+#import "GYHHeadeRefreshController.h"
 
 #endif /* PrefixHeader_pch */

@@ -20,13 +20,17 @@
 #import "TabbarButton.h"
 
 
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate>
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic , strong) NSString *clearCacheName;
 
 @property (nonatomic , strong) NSMutableArray *arrays;
 
 @property (nonatomic , strong) UIView *fenxiangview;
+
+@property (nonatomic , weak) UIView *headerview;
+@property (nonatomic , weak) UITableView *tableview;
+
 @end
 
 @implementation MeViewController
@@ -54,32 +58,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 50)];
-//    [btn setTitle:self.clearCacheName forState:UIControlStateNormal];
-//    btn.backgroundColor = [UIColor redColor];
-//    [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
-//    
-//    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(200, 300, 100, 50)];
-//    [btn1 setTitle:@"登录" forState:UIControlStateNormal];
-//    btn1.backgroundColor = [UIColor redColor];
-//    [btn1 addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn1];
-//    
-//    
-//    UIImageView *iV = [[UIImageView alloc]initWithFrame:CGRectMake(100, 400, 100, 100)];
-//    [self.view addSubview:iV];
-//    self.iV = iV;
-
-    
     SettingHeaderView *headerview = [[SettingHeaderView alloc]init];
     headerview.delegate = self;
+    self.headerview = headerview;
 
     UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     tableview.delegate = self;
     tableview.dataSource = self;
     [self.view addSubview:tableview];
     tableview.tableHeaderView = headerview;
+    self.tableview = tableview;
 
     [self setupGroup0];
     [self setupGroup1];
@@ -230,8 +218,17 @@
 }
 
 
-
-
+#pragma mark - 计算偏移量控制状态栏的颜色
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat y = scrollView.contentOffset.y;
+    CGFloat hey = CGRectGetMaxY(self.headerview.frame);
+    if (y <= -30 || y >= hey-40) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }else{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+}
 
 
 
@@ -273,12 +270,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tableview.delegate = self;
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    self.tableview.delegate = nil;
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }

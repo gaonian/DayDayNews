@@ -72,7 +72,7 @@ NSString * const ID = @"cycleCell";
     _autoScroll = YES;
     _infiniteLoop = YES;
     _showPageControl = YES;
-    _pageControlDotSize = CGSizeMake(10, 10);
+    _pageControlDotSize = CGSizeMake(7, 7);
     _pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     
     self.backgroundColor = [UIColor lightGrayColor];

@@ -34,7 +34,7 @@
         
         UIImageView *imageV = [[UIImageView alloc]init];
         imageV.frame = CGRectMake(self.frame.size.width/2-40, self.frame.size.height/2-40, 80, 80);
-        imageV.backgroundColor = [UIColor colorWithRed:246/255.0f green:246/255.0f blue:246/255.0f alpha:1];
+        imageV.image = [UIImage imageNamed:@"comment_profile_default"];
         [self addSubview:imageV];
         [imageV.layer setCornerRadius:40];
         imageV.clipsToBounds = YES;
@@ -159,7 +159,7 @@
         [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
         [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
         
-        self.photoimageV.image = nil;
+        self.photoimageV.image = [UIImage imageNamed:@"comment_profile_default"];
         self.nameL.text = @"立即登录";
         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"LOGINIMAGE"];
         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"LOGINNAME"];

@@ -14,10 +14,11 @@
 {
     UIScrollView    *_navgationTabBar;
     UIView          *_line;                 // underscore show which item selected
-    NSMutableArray  *_items;                // SCNavTabBar pressed item
+               // SCNavTabBar pressed item
     NSArray         *_itemsWidth;           // an array of items' width
 
 }
+@property (nonatomic , weak) UIButton *btn;
 
 @end
 
@@ -31,6 +32,8 @@
       
         [self initConfig];
        // self.backgroundColor = [UIColor clearColor];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pianyiClick:) name:@"偏移" object:nil];
     }
     return self;
 }
@@ -90,18 +93,25 @@
         //字体颜色
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
-
-        [button addTarget:self action:@selector(itemPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(itemPressed:type:) forControlEvents:UIControlEventTouchUpInside];
         [_navgationTabBar addSubview:button];
         [_items addObject:button];
         buttonX += button.frame.size.width;
-
+        self.btn = button;
     }
     
     [self showLineWithButtonWidth:[widths[0] floatValue]];
     return buttonX;
 }
 
+
+- (void)pianyiClick:(NSNotification *)noti
+{
+    NSLog(@"%@",noti.object);
+    int index = [noti.object intValue];
+    UIButton *btn = _items[index];
+//    [self itemPressed:btn type:1];
+}
 
 #pragma mark  下划线
 - (void)showLineWithButtonWidth:(CGFloat)width
@@ -111,13 +121,25 @@
     _line.backgroundColor = [UIColor redColor];
     [_navgationTabBar addSubview:_line];
     
+    UIButton *btn = _items[0];
+    [self itemPressed:btn type:0];
+//    btn.selected = YES;
+//    [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    
 }
 
 
-- (void)itemPressed:(UIButton *)button
+- (void)itemPressed:(UIButton *)button type:(int)type
 {
-    NSInteger index = [_items indexOfObject:button];
-    [_delegate itemDidSelectedWithIndex:index withCurrentIndex:_currentItemIndex];
+    button.selected = YES;
+    self.btn.selected = NO;
+    self.btn = button;
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    
+//    if (type == 0) {
+        NSInteger index = [_items indexOfObject:button];
+        [_delegate itemDidSelectedWithIndex:index withCurrentIndex:_currentItemIndex];
+//    }
 }
 
 
@@ -166,14 +188,16 @@
     }
     else
     {
-        
         [_navgationTabBar setContentOffset:CGPointMake(0, 0) animated:YES];
     }
        //下划线的偏移量
     [UIView animateWithDuration:0.1f animations:^{
         _line.frame = CGRectMake(button.frame.origin.x + 15, _line.frame.origin.y, [_itemsWidth[currentItemIndex] floatValue], _line.frame.size.height);
     }];
-
+//    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//
+//    UIButton *btn1 = _items[currentItemIndex-1];
+//    [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 

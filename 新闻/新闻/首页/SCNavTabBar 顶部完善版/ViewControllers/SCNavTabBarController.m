@@ -160,11 +160,11 @@
     }else{
        
         [_mainView setContentOffset:CGPointMake(index * SCREEN_WIDTH, 0) animated:YES];
-        
     }
     
+//    NSString *str = [NSString stringWithFormat:@"%d",index];
+//    [[NSNotificationCenter defaultCenter]postNotificationName:@"偏移" object:str];
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {

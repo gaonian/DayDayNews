@@ -101,5 +101,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HelveticaNeue-BoldOutline.otf</string>
+	</array>
 </dict>
 </plist>

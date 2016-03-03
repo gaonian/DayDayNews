@@ -24,6 +24,14 @@
 #import "MBProgressHUD+MJ.h"
 #import "TabbarView.h"
 
+#import "DataModel.h"
+#import "NewsCell.h"
+#import "ImagesCell.h"
+#import "BigImageCell.h"
+#import "TopCell.h"
+
+#import "DetailWebViewController.h"
+
 @interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,TabbarViewDelegate>
 @property (nonatomic , strong) NSMutableArray *totalArray;
 @property (nonatomic , strong) SDCycleScrollView *cycleScrollView;
@@ -131,9 +139,10 @@
         // 网络加载 --- 创建不带标题的图片轮播器
         SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
         cycleScrollView.delegate = self;
+//        cycleScrollView.dotColor = [UIColor  ];
         cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
         cycleScrollView.titlesGroup = self.titleArray;
-        cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+        cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
         cycleScrollView.autoScrollTimeInterval = 6.0;
         self.tableview.tableHeaderView = cycleScrollView;
 }
@@ -143,8 +152,14 @@
 -(void)setupRefreshView
 {
     //1.下拉刷新
-    self.tableview.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    [self.tableview.header beginRefreshing];
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    // 隐藏状态
+    header.stateLabel.hidden = YES;
+    self.tableview.header = header;
+    [header beginRefreshing];
+    
     //2.上拉刷新
     self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 
@@ -152,40 +167,40 @@
 #pragma mark  下拉
 -(void)loadNewData
 {
-    self.page = 1;
-    [self requestNet];
+    self.page = 0;
+    [self requestNet:1];
+    [self.tableview.header endRefreshing];
 }
 
 #pragma mark  上拉
 -(void)loadMoreData
 {
-    [self requestNet];
+    [self requestNet:2];
     [self.tableview.footer endRefreshing];
 }
 
 #pragma mark 网络请求
--(void)requestNet
+-(void)requestNet:(int)type
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    dic[@"page"] = [NSString stringWithFormat:@"%d",self.page];
-    [mgr GET:@"http://api.huceo.com/social/other/?key=c32da470996b3fdd742fabe9a2948adb&num=20" parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSString *urlstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/headline/T1348647853363/%d-20.html",self.page];
+    [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+
+        NSArray *temArray = responseObject[@"T1348647853363"];
         
-        NSArray *dataarray = [NewData objectArrayWithKeyValuesArray:responseObject[@"newslist"]];
-        // 创建frame模型对象
-        NSMutableArray *statusFrameArray = [NSMutableArray array];
-        for (NewData *data in dataarray) {
-            NewDataFrame *dataFrame = [[NewDataFrame alloc] init];
-            // 传递微博模型数据
-            dataFrame.NewData = data;
-            [statusFrameArray addObject:dataFrame];
+        NSArray *arrayM = [DataModel objectArrayWithKeyValuesArray:temArray];
+        NSMutableArray *statusArray = [NSMutableArray array];
+        for (DataModel *data in arrayM) {
+            [statusArray addObject:data];
         }
-        [self.totalArray addObjectsFromArray:statusFrameArray];
-        self.page++;
-        // 刷新表格
-        [self.tableview reloadData];
         
-        [self.tableview.header endRefreshing];
+        if (type == 1) {
+            self.totalArray = statusArray;
+        }else{
+            [self.totalArray addObjectsFromArray:statusArray];
+        }
+        [self.tableview reloadData];
+        self.page += 20;
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
@@ -193,39 +208,92 @@
 }
 
 
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"%d",self.totalArray.count);
     return self.totalArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewTableViewCell *cell = [NewTableViewCell cellWithTableView:tableView];
+    DataModel *newsModel = self.totalArray[indexPath.row];
     
-    cell.dataFrame = self.totalArray[indexPath.row];
+    NSString *ID = [NewsCell idForRow:newsModel];
     
-    return cell;
+    if ([ID isEqualToString:@"NewsCell"]) {
+        NewsCell *cell = [NewsCell cellWithTableView:tableView];
+        cell.dataModel = newsModel;
+        return cell;
+    }else if ([ID isEqualToString:@"ImagesCell"]){
+        ImagesCell *cell = [ImagesCell cellWithTableView:tableView];
+        cell.dataModel = newsModel;
+        return cell;
+    }else if ([ID isEqualToString:@"TopImageCell"]){
+        
+        TopCell *cell = [TopCell cellWithTableView:tableView];
+        return cell;
+        
+    }else if([ID isEqualToString:@"TopTxtCell"]){
+        
+        TopCell *cell = [TopCell cellWithTableView:tableView];
+        return cell;
+        
+    }else{
+        BigImageCell *cell = [BigImageCell cellWithTableView:tableView];
+        cell.dataModel = newsModel;
+        return cell;
+    }
     
-
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewDataFrame *dataframe = self.totalArray[indexPath.row];
+    DataModel *newsModel = self.totalArray[indexPath.row];
     
-    return dataframe.cellH;
+    CGFloat rowHeight = [NewsCell heightForRow:newsModel];
+
+    return rowHeight;
 }
+
+
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewDataFrame *dataframe = self.totalArray[indexPath.row];
-    NewData *data = dataframe.NewData;
-    NSLog(@"%@",data.url);
-    testViewController *detail = [[testViewController alloc]init];
-    detail.url = data.url;
-    [self.navigationController pushViewController:detail animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DataModel *data = self.totalArray[indexPath.row];
+    NSLog(@"%@",data.title);
+    
+    NSString *ID = [NewsCell idForRow:data];
+    
+    if ([ID isEqualToString:@"NewsCell"]) {
+        
+        DetailWebViewController *detailVC = [[DetailWebViewController alloc]init];
+        detailVC.dataModel = self.totalArray[indexPath.row];
+        detailVC.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:detailVC animated:YES];
+        
+    }else if ([ID isEqualToString:@"ImagesCell"]){
+        
+        NSString *url = [data.photosetID substringFromIndex:9];
+        url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0001/%@.json",url];
+        NSLog(@"%@",data.photosetID);
+        TopViewController *topVC = [[TopViewController alloc]init];
+        topVC.url = url;
+        [self.navigationController pushViewController:topVC animated:YES];
+        
+    }else if ([ID isEqualToString:@"TopImageCell"]){
+        NSLog(@"");
+    }else{
+        
+        DetailWebViewController *detailVC = [[DetailWebViewController alloc]init];
+        detailVC.dataModel = self.totalArray[indexPath.row];
+        detailVC.view.backgroundColor = [UIColor whiteColor];
+        [self.navigationController pushViewController:detailVC animated:YES];
+
+    }
 
 }
 
@@ -237,17 +305,11 @@
     TopData *data = self.topArray[index];
     NSString *url = [data.url substringFromIndex:9];
     url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0001/%@.json",url];
-
+    NSLog(@"%@",data.url);
     TopViewController *topVC = [[TopViewController alloc]init];
     topVC.url = url;
     [self.navigationController pushViewController:topVC animated:YES];
     
-}
-
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"新闻" object:nil];
 }
 
 @end

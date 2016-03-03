@@ -122,8 +122,13 @@ static NSString *const ID = @"photo";
 -(void)setupRefreshView
 {
     //1.下拉刷新
-    self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    [self.collectionView.header beginRefreshing];
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    // 隐藏状态
+    header.stateLabel.hidden = YES;
+    self.collectionView.header = header;
+    [header beginRefreshing];
     //2.上拉刷新
     self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
@@ -278,7 +283,6 @@ static NSString *const ID = @"photo";
     if (self.menu) {
         [self.menu dismissWithAnimation:NO];
     }
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:self.title object:nil];
 }
 
 

@@ -5,8 +5,6 @@
 //  Created by gyh on 15/9/21.
 //  Copyright © 2015年 apple. All rights reserved.
 //
-#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 
 #import "VideoViewController.h"
 #import "testViewController.h"
@@ -123,10 +121,14 @@
 //集成刷新控件
 -(void)setupRefreshView
 {
-    
     //1.下拉刷新
-    self.tableview.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    [self.tableview.header beginRefreshing];
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    // 隐藏状态
+    header.stateLabel.hidden = YES;
+    self.tableview.header = header;
+    [header beginRefreshing];
     //2.上拉刷新
     self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
    
@@ -411,14 +413,12 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.mpc) {
         NSLog(@"销毁了");
         [self.mpc stop];
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;
     }
-
 }
 
 @end
