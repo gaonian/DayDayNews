@@ -13,9 +13,9 @@
 - 2016-3-3 修改了首页社会的显示数据，抓取网易的数据，并进行解析。 把下拉刷新改成动画效果，更美观<br>
 - 2016-3-7 修改了首页imagesCell有时数据不显示的问题<br>
 
-###修改了视频显示方式
-_点击当前cell播放视频在当前cell上，监听屏幕转动，当屏幕转动的时候，视频自动横屏全屏播放，当屏幕为正的时候，播放在当前cell上<br />
-_增加了活动指示器，采取搜狐视频活动指示器
+##修改了视频显示方式
+- 点击当前cell播放视频在当前cell上，监听屏幕转动，当屏幕转动的时候，视频自动横屏全屏播放，当屏幕为正的时候，播放在当前cell上<br />
+- 增加了活动指示器，采取搜狐视频活动指示器
 
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/加载.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/播放.png)
@@ -25,23 +25,25 @@ _<br />_<br />
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
 
-###首页以及顶部新闻详情，高仿网易
+##首页以及顶部新闻详情，高仿网易
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsfresh.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsdata.png)
-###使用瀑布流实现图片，可以选择分类
+##使用瀑布流实现图片，可以选择分类
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photo.png)
-###增加了天气预报的功能，可以实现定位到当前城市。动画效果也没有放过。
+##增加了天气预报的功能，可以实现定位到当前城市。动画效果也没有放过。
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/detail.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/weather.PNG)
 
-###视频
+##视频
+- 自定义视频界面（后续修改）
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 
-###我的界面新增qq登陆，获取到头像并进行裁剪
+##我的界面实现第三方登陆以及注销，界面优化。下方数据暂时为假数据，即将修改
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/setting.png)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)<br>
 
+- 关于设置界面，我想实现一个帮助的即时通讯功能，现在还在考虑是用环信还是xmpp开发。。
 
 
 
