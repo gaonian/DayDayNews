@@ -24,7 +24,7 @@
         
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, 0.6*SCREEN_WIDTH);
         self.backgroundColor = [UIColor colorWithRed:186/255.0f green:71/255.0f blue:58/255.0f alpha:1];
-        
+             
         UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-60, 30, 50, 20)];
         [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
         logoutBtn.titleLabel.font = [UIFont systemFontOfSize:14];

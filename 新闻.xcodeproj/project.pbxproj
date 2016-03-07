@@ -44,6 +44,7 @@
 		196892731BC8BDCA009D4A99 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1968925E1BC8BDCA009D4A99 /* UIScrollView+MJExtension.m */; };
 		196892741BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 196892601BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m */; };
 		196892751BC8BDCA009D4A99 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 196892621BC8BDCA009D4A99 /* UIView+MJExtension.m */; };
+		197309911C8DA018009D4ACC /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197309901C8DA018009D4ACC /* HelpViewController.m */; };
 		19747D391C87F65600C4CBBD /* DetailWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19747D381C87F65600C4CBBD /* DetailWebViewController.m */; };
 		19747D3C1C87FBE500C4CBBD /* DetailWebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19747D3B1C87FBE500C4CBBD /* DetailWebModel.m */; };
 		19747D3F1C87FC3900C4CBBD /* DetailImageWebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19747D3E1C87FC3900C4CBBD /* DetailImageWebModel.m */; };
@@ -262,6 +263,8 @@
 		196892601BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		196892611BC8BDCA009D4A99 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		196892621BC8BDCA009D4A99 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		1973098F1C8DA018009D4ACC /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		197309901C8DA018009D4ACC /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		19747D371C87F65600C4CBBD /* DetailWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebViewController.h; sourceTree = "<group>"; };
 		19747D381C87F65600C4CBBD /* DetailWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWebViewController.m; sourceTree = "<group>"; };
 		19747D3A1C87FBE500C4CBBD /* DetailWebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebModel.h; sourceTree = "<group>"; };
@@ -1140,6 +1143,8 @@
 			children = (
 				19C33DFA1BB109A20059238A /* MeViewController.h */,
 				19C33DFB1BB109A20059238A /* MeViewController.m */,
+				1973098F1C8DA018009D4ACC /* HelpViewController.h */,
+				197309901C8DA018009D4ACC /* HelpViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -1551,6 +1556,7 @@
 				196892661BC8BDCA009D4A99 /* MJRefreshFooter.m in Sources */,
 				19C33E2C1BB109A20059238A /* VideoViewController.m in Sources */,
 				198AF7BA1C8421AB00D941F4 /* SettingHeaderView.m in Sources */,
+				197309911C8DA018009D4ACC /* HelpViewController.m in Sources */,
 				19D000141BB417D0009EA71C /* TADotView.m in Sources */,
 				19747D3F1C87FC3900C4CBBD /* DetailImageWebModel.m in Sources */,
 				198AF7A81C841C0300D941F4 /* SettingGroup.m in Sources */,

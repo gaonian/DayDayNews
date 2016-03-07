@@ -71,17 +71,19 @@
 
     [self setupGroup0];
     [self setupGroup1];
+    [self setupGroup2];
 }
 
 -(void)setupGroup0
 {
+    SettingItem *shoucang = [SettingArrowItem itemWithItem:@"MorePush" title:@"收藏" VcClass:nil];
     SettingItem *MorePush = [SettingArrowItem itemWithItem:@"MorePush" title:@"推送和提醒" VcClass:nil];
     SettingItem *handShake = [SettingSwitchItem itemWithItem:@"handShake" title:@"摇一摇机选"];
     SettingItem *soundEffect = [SettingSwitchItem itemWithItem:@"sound_Effect" title:@"声音效果"];
     
     SettingGroup *group0 = [[SettingGroup alloc]init];
     
-    group0.items = @[MorePush,handShake,soundEffect];
+    group0.items = @[shoucang,MorePush,handShake,soundEffect];
     [self.arrays addObject:group0];
 }
 
@@ -95,12 +97,21 @@
     
     SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助" VcClass:nil];
     SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享" VcClass:nil];
-    SettingItem *MoreMessage = [SettingArrowItem itemWithItem:@"MoreMessage" title:@"查看消息" VcClass:nil];
-    SettingItem *MoreNetease = [SettingArrowItem itemWithItem:@"MoreNetease" title:@"产品推荐" VcClass:nil];
+    
+    SettingGroup *group1 = [[SettingGroup alloc]init];
+    group1.items = @[MoreUpdate,MoreHelp,MoreShare];
+    [self.arrays addObject:group1];
+}
+
+-(void)setupGroup2
+{
+    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" VcClass:nil];
+    SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:nil];
+    SettingItem *pingfen = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"给我打分" VcClass:nil];
     SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
     
     SettingGroup *group1 = [[SettingGroup alloc]init];
-    group1.items = @[MoreUpdate,MoreHelp,MoreShare,MoreMessage,MoreNetease,MoreAbout];
+    group1.items = @[MoreHelp,MoreShare,pingfen,MoreAbout];
     [self.arrays addObject:group1];
 }
 

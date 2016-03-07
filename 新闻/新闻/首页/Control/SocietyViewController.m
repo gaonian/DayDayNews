@@ -277,11 +277,14 @@
         
     }else if ([ID isEqualToString:@"ImagesCell"]){
         
-        NSString *url = [data.photosetID substringFromIndex:9];
-        url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0001/%@.json",url];
-        NSLog(@"%@",data.photosetID);
+        NSString *url1 = [data.photosetID substringFromIndex:4];
+        url1 = [url1 substringToIndex:4];
+        NSString *url2 = [data.photosetID substringFromIndex:9];
+        NSLog(@"%@,%@",url1,url2);
+        
+        url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
         TopViewController *topVC = [[TopViewController alloc]init];
-        topVC.url = url;
+        topVC.url = url2;
         [self.navigationController pushViewController:topVC animated:YES];
         
     }else if ([ID isEqualToString:@"TopImageCell"]){
@@ -303,11 +306,15 @@
 {
     //  http://c.3g.163.com/photo/api/set/0096/77789.json
     TopData *data = self.topArray[index];
-    NSString *url = [data.url substringFromIndex:9];
-    url = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/0001/%@.json",url];
-    NSLog(@"%@",data.url);
+    
+    NSString *url1 = [data.url substringFromIndex:4];
+    url1 = [url1 substringToIndex:4];
+    NSString *url2 = [data.url substringFromIndex:9];
+    NSLog(@"%@,%@",url1,url2);
+    
+    url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
     TopViewController *topVC = [[TopViewController alloc]init];
-    topVC.url = url;
+    topVC.url = url2;
     [self.navigationController pushViewController:topVC animated:YES];
     
 }
