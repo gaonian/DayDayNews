@@ -43,7 +43,9 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/setting.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)<br>
 
+##小结
 - 关于设置界面，我想实现一个帮助的即时通讯功能，现在还在考虑是用环信还是xmpp开发。。
+- 这两天看了环信的sdk和xmpp的，之前接触过xmpp，所以现在接触环信总有点蒙，文档写的太简单了。
 
 
 
