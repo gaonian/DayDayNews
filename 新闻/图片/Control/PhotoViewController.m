@@ -90,6 +90,9 @@ static NSString *const ID = @"photo";
     
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:self.title object:nil];
     
+    //监听夜间模式的改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
+    
 }
 
 -(void)mynotification
@@ -283,6 +286,15 @@ static NSString *const ID = @"photo";
     if (self.menu) {
         [self.menu dismissWithAnimation:NO];
     }
+}
+
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    self.collectionView.backgroundColor = [defaultManager themeColor];
+    [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    [self.collectionView reloadData];
 }
 
 

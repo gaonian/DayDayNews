@@ -11,6 +11,7 @@
 
 @interface TabbarView()
 @property(nonatomic,weak)TabbarButton *selectedButton;
+@property (nonatomic , weak) TabbarButton *tabarbutton;
 
 @end
 
@@ -18,11 +19,14 @@
 
 static int i = 0;
 
+
 -(void)addTabBarButtonWithItem:(UITabBarItem *)item
 {
+    
     //创建按钮
     TabbarButton *button = [[TabbarButton alloc]init];
     [self addSubview:button];
+    self.tabarbutton = button;
     
     //设置
     button.item = item;
@@ -76,7 +80,6 @@ static int i = 0;
         button.tag = index;
     }
 }
-
 
 
 @end

@@ -11,10 +11,6 @@
 @implementation SettingItem
 
 
-
-
-
-
 +(instancetype)itemWithItem:(NSString *)icon title:(NSString *)title
 {
     SettingItem *item = [[self alloc]init];

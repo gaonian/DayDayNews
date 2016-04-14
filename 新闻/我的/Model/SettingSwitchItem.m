@@ -10,4 +10,5 @@
 
 @implementation SettingSwitchItem
 
+
 @end

@@ -56,6 +56,14 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:self.myswitch.isOn forKey:self.item.title];
     [defaults synchronize];
+    
+    if (self.myswitch.isOn) {
+        ThemeManager *defaultManager = [ThemeManager sharedInstance];
+        [defaultManager changeThemeWithName:@"高贵紫"];
+    }else{
+        ThemeManager *defaultManager = [ThemeManager sharedInstance];
+        [defaultManager changeThemeWithName:@"系统默认"];
+    }
 }
 
 

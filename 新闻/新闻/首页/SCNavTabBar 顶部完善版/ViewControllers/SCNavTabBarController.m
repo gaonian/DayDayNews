@@ -38,6 +38,9 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
+    //监听夜间模式的改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
+    
     [self initControl];
     [self initConfig];
     [self viewConfig];
@@ -100,7 +103,8 @@
 {
     
     _navTabBar = [[SCNavTabBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 64)];
-    _navTabBar.backgroundColor = [UIColor colorWithRed:246/255.0f green:246/255.0f blue:247/255.0f alpha:1];
+//    _navTabBar.backgroundColor = [UIColor colorWithRed:246/255.0f green:246/255.0f blue:247/255.0f alpha:1];
+    _navTabBar.backgroundColor = [[ThemeManager sharedInstance] themeColor];
     _navTabBar.delegate = self;
     _navTabBar.lineColor = _navTabBarLineColor;
     _navTabBar.itemTitles = _titles;
@@ -165,6 +169,16 @@
 //    NSString *str = [NSString stringWithFormat:@"%d",index];
 //    [[NSNotificationCenter defaultCenter]postNotificationName:@"偏移" object:str];
 }
+
+
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    _navTabBar.backgroundColor = [defaultManager themeColor];
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

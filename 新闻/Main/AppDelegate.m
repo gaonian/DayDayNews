@@ -23,6 +23,7 @@
 //新浪微博
 #import "WeiboSDK.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -40,10 +41,12 @@
     
     
     [self setupShareSDK];
+    
 
     return YES;
 }
 
+#pragma mark - 设置第三方登陆信息
 - (void)setupShareSDK
 {
     [ShareSDK registerApp:@"ce834ae164c4" activePlatforms:@[@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ)]
@@ -85,5 +88,8 @@
                  }];
 
 }
+
+
+
 
 @end

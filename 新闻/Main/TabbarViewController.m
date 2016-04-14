@@ -28,7 +28,7 @@
     
     [self initControl];
     
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -51,12 +51,25 @@
     tabbar.delegate = self;
     [self.tabBar addSubview:tabbar];
     self.tabbar = tabbar;
+    
+    [self handleThemeChanged];
 }
 
 -(void)tabbar:(TabbarView *)tabbar didselectedButtonFrom:(int)from to:(int)to
 {
     self.selectedIndex = to;
 }
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+       [self.tabbar setBackgroundColor:defaultManager.themeColor];
+    }else{
+        self.tabbar.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 
 -(void)initControl
 {

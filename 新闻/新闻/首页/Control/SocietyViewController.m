@@ -84,6 +84,9 @@
     [self initTopNet];
     
     [self setupRefreshView];
+    
+    //监听夜间模式的改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:@"新闻" object:nil];
 }
@@ -103,7 +106,10 @@
     [self.view addSubview:tableview];
     self.tableview = tableview;
     
+    ThemeManager *manager = [ThemeManager sharedInstance];
+    self.tableview.backgroundColor = [manager themeColor];
 }
+
 
 -(void)initTopNet
 {
@@ -217,34 +223,64 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    
     DataModel *newsModel = self.totalArray[indexPath.row];
     
     NSString *ID = [NewsCell idForRow:newsModel];
     
     if ([ID isEqualToString:@"NewsCell"]) {
+        
         NewsCell *cell = [NewsCell cellWithTableView:tableView];
+        if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+            cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+            cell.lblTitle.textColor = [UIColor whiteColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.lblTitle.textColor = [UIColor blackColor];
+        }
         cell.dataModel = newsModel;
         return cell;
+        
     }else if ([ID isEqualToString:@"ImagesCell"]){
         ImagesCell *cell = [ImagesCell cellWithTableView:tableView];
+        if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+            cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         cell.dataModel = newsModel;
         return cell;
     }else if ([ID isEqualToString:@"TopImageCell"]){
         
         TopCell *cell = [TopCell cellWithTableView:tableView];
+        if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+            cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         return cell;
         
     }else if([ID isEqualToString:@"TopTxtCell"]){
         
         TopCell *cell = [TopCell cellWithTableView:tableView];
+        if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+            cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         return cell;
         
     }else{
         BigImageCell *cell = [BigImageCell cellWithTableView:tableView];
+        if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+            cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         cell.dataModel = newsModel;
         return cell;
     }
-    
 }
 
 
@@ -317,6 +353,15 @@
     topVC.url = url2;
     [self.navigationController pushViewController:topVC animated:YES];
     
+}
+
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    self.tableview.backgroundColor = [defaultManager themeColor];
+    [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    [self.tableview reloadData];
 }
 
 @end

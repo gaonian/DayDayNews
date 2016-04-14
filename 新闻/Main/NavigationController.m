@@ -18,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-       [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:246.0/255.0f green:246.0/255.0f blue:247.0/255.0f alpha:1]];
+//       [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:246.0/255.0f green:246.0/255.0f blue:247.0/255.0f alpha:1]];
+    [[UINavigationBar appearance]setBarTintColor:[[ThemeManager sharedInstance] themeColor]];
 }
 
 #pragma mark  拦截push，一旦进入下个视图，隐藏tabbar，自定义返回按钮

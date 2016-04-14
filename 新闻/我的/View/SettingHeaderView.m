@@ -99,7 +99,7 @@
         
                      [[NSUserDefaults standardUserDefaults] setObject:user.rawData[@"figureurl_qq_2"] forKey:@"LOGINIMAGE"];
                      [[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:@"LOGINNAME"];
-        
+                                          
                  }else{
                      [MBProgressHUD showError:@"登录失败"];
                  }
@@ -129,8 +129,8 @@
                  }
                  
              }];
-
     }
+    
 }
 
 

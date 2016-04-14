@@ -27,8 +27,8 @@
         self.titleLabel.font = [UIFont systemFontOfSize:11];
         [self setTitleColor: tabbarButtonTitleColor forState:UIControlStateNormal];
         [self setTitleColor:tabbarButtonTitleSelectedColor forState:UIControlStateSelected];
-        
     }
+    
     return self;
 }
 

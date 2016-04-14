@@ -37,14 +37,6 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx2aaa2d1871fa3bb4</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>QQ41DD38F3</string>
 			</array>
 		</dict>
@@ -91,6 +83,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>请点击”允许“获取天气数据</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HelveticaNeue-BoldOutline.otf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -101,9 +97,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>HelveticaNeue-BoldOutline.otf</string>
-	</array>
 </dict>
 </plist>

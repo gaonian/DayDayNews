@@ -12,34 +12,6 @@
 #import "NSString+Extension.h"
 
 @interface NewsCell()
-
-
-/**
- *  图片
- */
-@property (weak, nonatomic) UIImageView *imgIcon;
-/**
- *  标题
- */
-@property (weak, nonatomic) UILabel *lblTitle;
-/**
- *  回复数
- */
-@property (weak, nonatomic) UILabel *lblReply;
-/**
- *  描述
- */
-@property (weak, nonatomic) UILabel *lblSubtitle;
-/**
- *  第二张图片（如果有的话）
- */
-@property (weak, nonatomic) UIImageView *imgOther1;
-/**
- *  第三张图片（如果有的话）
- */
-@property (weak, nonatomic) UIImageView *imgOther2;
-
-
 @end
 
 @implementation NewsCell

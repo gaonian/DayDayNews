@@ -23,4 +23,7 @@
 #import "NSString+Extension.h"
 #import "GYHHeadeRefreshController.h"
 
+
+#import "ThemeManager.h"
+
 #endif /* PrefixHeader_pch */

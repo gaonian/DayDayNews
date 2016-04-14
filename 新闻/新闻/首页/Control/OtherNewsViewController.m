@@ -52,6 +52,9 @@
     [self setupRefreshView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:@"新闻" object:nil];
+    
+    //监听夜间模式的改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
 }
 
 -(void)mynotification
@@ -62,6 +65,7 @@
 -(void)initTableView
 {
     UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49 - 64)];
+    tableview.backgroundColor = [[ThemeManager sharedInstance] themeColor];
     tableview.delegate = self;
     tableview.dataSource = self;
     [self.view addSubview:tableview];
@@ -134,7 +138,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewTableViewCell *cell = [NewTableViewCell cellWithTableView:tableView];
-    
+        ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+        cell.backgroundColor = defaultManager.themeColor;
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     cell.dataFrame = self.totalArray[indexPath.row];
     
     return cell;
@@ -169,6 +178,12 @@
 }
 
 
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    self.tableview.backgroundColor = [defaultManager themeColor];
+    [self.tableview reloadData];
+}
 
 
 @end

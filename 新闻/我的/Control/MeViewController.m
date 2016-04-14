@@ -19,6 +19,8 @@
 
 #import "TabbarButton.h"
 
+#import "ShareViewController.h"
+
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate>
 
@@ -58,6 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
+
+
     SettingHeaderView *headerview = [[SettingHeaderView alloc]init];
     headerview.delegate = self;
     self.headerview = headerview;
@@ -68,50 +73,41 @@
     [self.view addSubview:tableview];
     tableview.tableHeaderView = headerview;
     self.tableview = tableview;
-
+    
+    self.tableview.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+    
     [self setupGroup0];
-    [self setupGroup1];
     [self setupGroup2];
 }
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    self.tableview.backgroundColor = [defaultManager themeColor];
+    [self.tableview reloadData];
+}
+
 
 -(void)setupGroup0
 {
     SettingItem *shoucang = [SettingArrowItem itemWithItem:@"MorePush" title:@"收藏" VcClass:nil];
-    SettingItem *MorePush = [SettingArrowItem itemWithItem:@"MorePush" title:@"推送和提醒" VcClass:nil];
-    SettingItem *handShake = [SettingSwitchItem itemWithItem:@"handShake" title:@"摇一摇机选"];
-    SettingItem *soundEffect = [SettingSwitchItem itemWithItem:@"sound_Effect" title:@"声音效果"];
-    
+    SettingItem *handShake = [SettingSwitchItem itemWithItem:@"handShake" title:@"夜间模式"];
+
     SettingGroup *group0 = [[SettingGroup alloc]init];
     
-    group0.items = @[shoucang,MorePush,handShake,soundEffect];
+    group0.items = @[shoucang,handShake];
     [self.arrays addObject:group0];
-}
-
--(void)setupGroup1
-{
-    SettingItem *MoreUpdate = [SettingArrowItem itemWithItem:@"MoreUpdate" title:@"检查新版本"];
-    
-    MoreUpdate.option = ^{
-        
-    };
-    
-    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助" VcClass:nil];
-    SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享" VcClass:nil];
-    
-    SettingGroup *group1 = [[SettingGroup alloc]init];
-    group1.items = @[MoreUpdate,MoreHelp,MoreShare];
-    [self.arrays addObject:group1];
 }
 
 -(void)setupGroup2
 {
     SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" VcClass:nil];
-    SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:nil];
-    SettingItem *pingfen = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"给我打分" VcClass:nil];
+    SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:[ShareViewController class]];
+    SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存"];
     SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
     
     SettingGroup *group1 = [[SettingGroup alloc]init];
-    group1.items = @[MoreHelp,MoreShare,pingfen,MoreAbout];
+    group1.items = @[MoreHelp,MoreShare,handShake,MoreAbout];
     [self.arrays addObject:group1];
 }
 
@@ -133,6 +129,14 @@
 {
     //创建cell
     SettingCell *cell = [SettingCell cellWithTableView:tableView];
+    if ([[[ThemeManager sharedInstance] themeName] isEqualToString:@"系统默认"]) {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+
+    }else{
+        cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
     
     SettingGroup *group = self.arrays[indexPath.section];
     cell.item = group.items[indexPath.row];

@@ -33,6 +33,9 @@
 @property (nonatomic , strong) MPMoviePlayerController *mpc;
 @property (nonatomic , assign) int currtRow;
 @property (nonatomic , strong) HYCircleLoadingView *loadingView;
+
+@property (nonatomic , assign) BOOL smallmpc;
+
 @end
 
 @implementation VideoViewController
@@ -47,6 +50,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //监听夜间模式的改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
     
     self.view.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
     
@@ -115,7 +121,6 @@
         lineView.frame = CGRectMake(lineX, lineY, lineW, lineH);
         [view addSubview:lineView];
     }
-    
 }
 
 //集成刷新控件
@@ -180,20 +185,27 @@
     }];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.videoArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *cell = [VideoCell cellWithTableView:tableView];
+    if ([[[ThemeManager sharedInstance] themeName] isEqualToString:@"高贵紫"]) {
+        cell.backgroundColor = [[ThemeManager sharedInstance] themeColor];
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     cell.videodataframe = self.videoArray[indexPath.row];
     return cell;
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
@@ -410,6 +422,37 @@
 }
 
 
+#pragma mark - 判断滚动事件，如何超出播放界面，停止播放
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.mpc) {
+        
+        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.mpc.view.frame)) {
+            
+                [self.mpc stop];
+                [self.mpc.view removeFromSuperview];
+                self.mpc = nil;
+            
+//            [self setupSmallmpc];
+            
+        }else{
+//            NSLog(@"hahah");
+//                        self.smallmpc = NO;
+//                        VideoDataFrame *videoframe = self.videoArray[self.currtRow];
+//                        self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
+//                        [self.tableview addSubview:self.mpc.view];
+        }
+    }
+}
+
+- (void)setupSmallmpc
+{
+    self.smallmpc = YES;
+    self.mpc.view.frame = CGRectMake(SCREEN_WIDTH-20-200, SCREEN_HEIGHT - 120, 200, 200*0.56);
+    [self.view addSubview:self.mpc.view];
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     if (self.mpc) {
@@ -418,6 +461,15 @@
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;
     }
+}
+
+
+-(void)handleThemeChanged
+{
+    ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    self.tableview.backgroundColor = [defaultManager themeColor];
+    [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
+    [self.tableview reloadData];
 }
 
 @end
