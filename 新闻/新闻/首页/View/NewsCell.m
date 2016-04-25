@@ -23,9 +23,7 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (cell == nil) {
         cell = [[NewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        
     }
-    
     return cell;
 }
 

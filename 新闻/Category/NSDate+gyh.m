@@ -71,14 +71,21 @@
 
 - (NSDateComponents *)deltaWithNow
 {
-    
-    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     int unit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     return [calendar components:unit fromDate:self toDate:[NSDate date] options:0];
 }
 
-
+/**
+ *  返回当前时间
+ */
++ (NSString *)currentTime
+{
+    NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
+    fmt.dateFormat = @"MM-dd HH:mm";
+    NSString *str = [fmt stringFromDate:[NSDate date]];
+    return str;
+}
 
 
 @end

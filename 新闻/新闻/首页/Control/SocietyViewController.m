@@ -31,6 +31,8 @@
 #import "TopCell.h"
 
 #import "DetailWebViewController.h"
+#import "DataBase.h"    //数据库
+#import "NSDate+gyh.h"
 
 @interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,TabbarViewDelegate>
 @property (nonatomic , strong) NSMutableArray *totalArray;
@@ -78,7 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initTableView];
     //请求滚动数据
     [self initTopNet];
@@ -217,9 +219,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%d",self.totalArray.count);
     return self.totalArray.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -305,6 +307,8 @@
     NSString *ID = [NewsCell idForRow:data];
     
     if ([ID isEqualToString:@"NewsCell"]) {
+        
+        [DataBase addNews:data.title docid:data.docid time:[NSDate currentTime]];
         
         DetailWebViewController *detailVC = [[DetailWebViewController alloc]init];
         detailVC.dataModel = self.totalArray[indexPath.row];

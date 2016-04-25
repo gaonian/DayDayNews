@@ -30,5 +30,9 @@
 
 -(NSDate *)dateWithYMD;
 
+/**
+ *  获取收藏的时间
+ */
++ (NSString *)currentTime;
 
 @end

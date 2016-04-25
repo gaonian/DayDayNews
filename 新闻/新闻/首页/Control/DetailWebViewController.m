@@ -14,6 +14,7 @@
 @interface DetailWebViewController ()<UIWebViewDelegate>
 @property (nonatomic , strong) DetailWebModel *detailModel;
 @property (nonatomic , weak) UIWebView *webView;
+@property (nonatomic , copy) NSString *url;
 @end
 
 @implementation DetailWebViewController
@@ -22,9 +23,7 @@
     [super viewDidLoad];
     
     [self setupUI];
-    
     [self setupData];
-    
 }
 
 - (void)setupUI
@@ -37,6 +36,17 @@
     UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, 63, SCREEN_WIDTH, 1)];
     lineV.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:lineV];
+    
+    //收藏
+    UIButton *shoucangB = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-44-10, 20, 44, 44)];
+    [shoucangB setBackgroundColor:[UIColor redColor]];
+    [shoucangB addTarget:self action:@selector(shoucang:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shoucangB];
+    
+    //分享
+    UIButton *fenxiangB = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-20-88, 20, 44, 44)];
+    [fenxiangB setBackgroundColor:[UIColor blueColor]];
+    [self.view addSubview:fenxiangB];
     
     UIWebView *webView = [[UIWebView alloc]initWithFrame:self.view.frame];
     webView.backgroundColor = [UIColor whiteColor];
@@ -51,6 +61,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/%@/full.html",self.dataModel.docid];
     NSLog(@"%@",url);
+    self.url = url;
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
@@ -150,6 +161,15 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+
+#pragma mark - 收藏
+- (void)shoucang:(UIButton *)btn
+{
+    NSLog(@"%@",self.url);
+    
+}
+
 
 
 - (void)backBtnClick

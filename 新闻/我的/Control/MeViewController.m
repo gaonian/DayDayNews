@@ -19,7 +19,8 @@
 
 #import "TabbarButton.h"
 
-#import "ShareViewController.h"
+#import "ShareViewController.h"     //分享
+#import "CollectViewController.h"   //收藏
 
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate>
@@ -90,7 +91,7 @@
 
 -(void)setupGroup0
 {
-    SettingItem *shoucang = [SettingArrowItem itemWithItem:@"MorePush" title:@"收藏" VcClass:nil];
+    SettingItem *shoucang = [SettingArrowItem itemWithItem:@"MorePush" title:@"收藏" VcClass:[CollectViewController class]];
     SettingItem *handShake = [SettingSwitchItem itemWithItem:@"handShake" title:@"夜间模式"];
 
     SettingGroup *group0 = [[SettingGroup alloc]init];

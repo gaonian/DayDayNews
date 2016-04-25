@@ -83,7 +83,7 @@ static NSString *const ID = @"photo";
 
     self.pn = 0;
     self.tag1 = @"美女";
-    self.tag2 = @"小清新";
+    self.tag2 = @"性感";
     
     [self initCollection];
     [self setupRefreshView];
@@ -296,7 +296,6 @@ static NSString *const ID = @"photo";
     [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [self.collectionView reloadData];
 }
-
 
 
 @end
