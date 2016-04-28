@@ -44,8 +44,12 @@ _<br />_<br />
 
 
 ##我的界面实现第三方登陆以及注销，界面优化。下方数据暂时为假数据，即将修改
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/setting.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/me.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)<br>
+
+##夜间模式和收藏功能图片
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/yejian.png)
 
 ##小结
 - 关于设置界面，我想实现一个帮助的即时通讯功能，现在还在考虑是用环信还是xmpp开发。。
