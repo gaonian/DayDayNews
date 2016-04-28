@@ -9,6 +9,8 @@
 #import "DetailWebViewController.h"
 #import "DetailWebModel.h"
 #import "DetailImageWebModel.h"
+#import "DataBase.h"
+#import "NSDate+gyh.h"
 
 
 @interface DetailWebViewController ()<UIWebViewDelegate>
@@ -39,9 +41,18 @@
     
     //收藏
     UIButton *shoucangB = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-44-10, 20, 44, 44)];
-    [shoucangB setBackgroundColor:[UIColor redColor]];
+    shoucangB.titleLabel.font = [UIFont systemFontOfSize:13];
     [shoucangB addTarget:self action:@selector(shoucang:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:shoucangB];
+    
+    if ([[DataBase queryWithCollect:self.dataModel.docid] isEqualToString:@"1"]) {
+        shoucangB.selected = YES;
+        [shoucangB setTitle:@"已收藏" forState:UIControlStateNormal];
+        [shoucangB setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    }else{
+        [shoucangB setTitle:@"收藏" forState:UIControlStateNormal];
+        [shoucangB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
     
     //分享
     UIButton *fenxiangB = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-20-88, 20, 44, 44)];
@@ -166,8 +177,16 @@
 #pragma mark - 收藏
 - (void)shoucang:(UIButton *)btn
 {
-    NSLog(@"%@",self.url);
-    
+    btn.selected = !btn.selected;
+    if(btn.selected){
+        [btn setTitle:@"已收藏" forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        [DataBase addNews:self.dataModel.title docid:self.dataModel.docid time:[NSDate currentTime]];
+    }else{
+        [btn setTitle:@"收藏" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DataBase deletetable:self.dataModel.docid];
+    }
 }
 
 

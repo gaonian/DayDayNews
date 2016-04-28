@@ -32,4 +32,9 @@
  *  删表
  */
 + (void)deletetable;
+
+/**
+ *  查询是否数据库已收藏
+ */
++ (NSString *)queryWithCollect:(NSString *)docid;
 @end

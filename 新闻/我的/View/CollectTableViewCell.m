@@ -43,6 +43,7 @@
     return self;
 }
 
+
 - (void)setCollectModel:(CollectModel *)collectModel
 {
     _collectModel = collectModel;

@@ -30,12 +30,17 @@
     return _totalArr;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.totalArr = [DataBase display];
+    NSLog(@"%@",_totalArr);
+    [tableview reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.totalArr = [DataBase display];
-    NSLog(@"%@",_totalArr);
     
     tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     tableview.delegate = self;
@@ -67,6 +72,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+
+//进入编辑模式，按下出现的编辑按钮后
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DataModel *dataModel = self.totalArr[indexPath.row];
+    [DataBase deletetable:dataModel.docid];
+    
+    self.totalArr = [DataBase display];
+    [tableview reloadData];
+    [tableview setEditing:NO animated:YES];
+}
+
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
 }
 
 

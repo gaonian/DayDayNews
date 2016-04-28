@@ -308,8 +308,6 @@
     
     if ([ID isEqualToString:@"NewsCell"]) {
         
-        [DataBase addNews:data.title docid:data.docid time:[NSDate currentTime]];
-        
         DetailWebViewController *detailVC = [[DetailWebViewController alloc]init];
         detailVC.dataModel = self.totalArray[indexPath.row];
         detailVC.view.backgroundColor = [UIColor whiteColor];

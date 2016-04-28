@@ -68,6 +68,21 @@ static FMDatabaseQueue *_queue;
 }
 
 
++ (NSString *)queryWithCollect:(NSString *)docid
+{
+    __block NSString *str = @"0";
+    [_queue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"select * from t_news where docid = ?;",docid];
+        while (rs.next) {
+            NSString *docid = [rs stringForColumn:@"docid"];
+            NSLog(@"%@",docid);
+            str = @"1";
+        }
+    }];
+    return str;
+}
+
+
 #pragma mark -  删除表
 + (void)deletetable
 {
@@ -80,7 +95,7 @@ static FMDatabaseQueue *_queue;
 + (void)deletetable:(NSString *)docid
 {
     [_queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"delete from t_news where docid = %@",docid];
+        [db executeUpdate:@"delete from t_news where docid = ?;",docid];
     }];
 }
 

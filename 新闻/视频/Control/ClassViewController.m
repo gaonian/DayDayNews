@@ -360,7 +360,6 @@
 //            self.mpc = nil;
             [self setupSmallmpc];
         }else{
-            NSLog(@"hahah");
 //            self.smallmpc = NO;
 //            VideoDataFrame *videoframe = self.videoArray[self.currtRow];
 //            self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
