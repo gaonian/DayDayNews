@@ -44,7 +44,7 @@ _<br />_<br />
 
 
 ##我的界面实现第三方登陆以及注销，界面优化。下方数据暂时为假数据，即将修改
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)<br>
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/me.png)
 
 
