@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chat View Controller-->
+        <scene sceneID="ogx-g7-kDW">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewControl" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NVU-fO-KRd" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kMl-xW-slv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kwh-gl-5KT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uBz-3r-1cv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nr0-td-GF3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="NVU-fO-KRd" id="sE0-Ry-wj3"/>
+                                    <outlet property="delegate" destination="NVU-fO-KRd" id="otq-HT-9KP"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3F-ZG-9tl">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JP-CY-4AJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="uoz-Hq-Snw"/>
+                                        </constraints>
+                                        <state key="normal" image="chat_bottom_voice_nor">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sound" destination="NVU-fO-KRd" eventType="touchUpInside" id="9ZT-dx-eEM"/>
+                                            <action selector="soundvoice" destination="NVU-fO-KRd" eventType="touchUpInside" id="OV6-9V-5Ja"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kDU-F0-EUI">
+                                        <rect key="frame" x="52" y="8" width="206" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="icH-fc-d8e"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="no" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJT-IG-eC6">
+                                        <rect key="frame" x="266" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="hfq-AX-Jrc"/>
+                                        </constraints>
+                                        <state key="normal" image="chat_bottom_up_nor">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addView" destination="NVU-fO-KRd" eventType="touchUpInside" id="pe9-5n-qZK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="6JP-CY-4AJ" firstAttribute="leading" secondItem="t3F-ZG-9tl" secondAttribute="leading" id="7F2-vg-rHh"/>
+                                    <constraint firstAttribute="trailing" secondItem="kDU-F0-EUI" secondAttribute="trailing" constant="62" id="HEA-mC-YR4"/>
+                                    <constraint firstAttribute="bottom" secondItem="6JP-CY-4AJ" secondAttribute="bottom" id="JlV-X8-cBg"/>
+                                    <constraint firstAttribute="height" constant="44" id="LwZ-8W-H0B"/>
+                                    <constraint firstAttribute="bottom" secondItem="LJT-IG-eC6" secondAttribute="bottom" id="SSV-wg-H15"/>
+                                    <constraint firstAttribute="bottom" secondItem="kDU-F0-EUI" secondAttribute="bottom" constant="6" id="UH7-jp-ZAE"/>
+                                    <constraint firstItem="LJT-IG-eC6" firstAttribute="leading" secondItem="kDU-F0-EUI" secondAttribute="trailing" constant="8" id="bBk-Kw-EMK"/>
+                                    <constraint firstItem="kDU-F0-EUI" firstAttribute="top" secondItem="t3F-ZG-9tl" secondAttribute="top" constant="8" id="hkw-WX-PFa"/>
+                                    <constraint firstItem="LJT-IG-eC6" firstAttribute="top" secondItem="t3F-ZG-9tl" secondAttribute="top" id="kfV-Vl-sB9"/>
+                                    <constraint firstItem="kDU-F0-EUI" firstAttribute="leading" secondItem="t3F-ZG-9tl" secondAttribute="leading" constant="52" id="lcE-gB-ZBy"/>
+                                    <constraint firstAttribute="trailing" secondItem="LJT-IG-eC6" secondAttribute="trailing" constant="10" id="pOb-Sh-vSI"/>
+                                    <constraint firstItem="6JP-CY-4AJ" firstAttribute="top" secondItem="t3F-ZG-9tl" secondAttribute="top" id="s6q-wV-BRx"/>
+                                    <constraint firstItem="kDU-F0-EUI" firstAttribute="leading" secondItem="6JP-CY-4AJ" secondAttribute="trailing" constant="8" id="zf2-co-5SI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="t3F-ZG-9tl" firstAttribute="top" secondItem="nr0-td-GF3" secondAttribute="bottom" id="8hr-Vg-sjl"/>
+                            <constraint firstItem="t3F-ZG-9tl" firstAttribute="bottom" secondItem="uBz-3r-1cv" secondAttribute="bottomMargin" id="GVb-Y8-krG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nr0-td-GF3" secondAttribute="trailing" constant="-16" id="Wlo-bm-s1o"/>
+                            <constraint firstItem="nr0-td-GF3" firstAttribute="leading" secondItem="uBz-3r-1cv" secondAttribute="leadingMargin" constant="-16" id="i60-Al-Hsg"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="nr0-td-GF3" secondAttribute="bottom" constant="44" id="lXh-7B-jkR"/>
+                            <constraint firstItem="t3F-ZG-9tl" firstAttribute="leading" secondItem="uBz-3r-1cv" secondAttribute="leadingMargin" constant="-16" id="mq8-kW-yI7"/>
+                            <constraint firstItem="nr0-td-GF3" firstAttribute="top" secondItem="uBz-3r-1cv" secondAttribute="topMargin" id="peO-qL-uX3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="t3F-ZG-9tl" secondAttribute="trailing" constant="-16" id="tsA-bF-YYz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kEA-Q6-LMJ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="btn" destination="LJT-IG-eC6" id="v01-it-5xn"/>
+                        <outlet property="inputView" destination="kDU-F0-EUI" id="SMc-h4-QC7"/>
+                        <outlet property="sound" destination="6JP-CY-4AJ" id="Q7N-IY-QD7"/>
+                        <outlet property="tableview" destination="nr0-td-GF3" id="Ler-s1-yfX"/>
+                        <outlet property="toolView" destination="t3F-ZG-9tl" id="p5s-bo-UQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cjX-DM-hiZ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-745" y="-608"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chat_bottom_up_nor" width="34" height="34"/>
+        <image name="chat_bottom_voice_nor" width="34" height="34"/>
+    </resources>
+</document>

@@ -23,6 +23,8 @@
 //新浪微博
 #import "WeiboSDK.h"
 
+#import "EMSDK.h"
+
 
 @interface AppDelegate ()
 
@@ -39,6 +41,11 @@
     self.window.rootViewController = main;
     [self.window makeKeyAndVisible];
     
+    //环信
+    EMOptions *options = [EMOptions optionsWithAppkey:@"gaoyuhang#daydaynews"];
+    options.apnsCertName = @"gaoyuhangDevelop";
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+
     
     [self setupShareSDK];
     

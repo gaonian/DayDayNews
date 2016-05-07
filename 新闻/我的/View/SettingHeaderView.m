@@ -8,6 +8,7 @@
 
 #import "SettingHeaderView.h"
 #import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
+#import "EMSDK.h"
 
 
 @interface SettingHeaderView()<UIAlertViewDelegate>
@@ -90,7 +91,7 @@
                  if (state == SSDKResponseStateSuccess)
                  {
                      NSLog(@"%@",user.rawData[@"figureurl_qq_2"]);
-                     NSLog(@"%@",user);
+                     NSLog(@"uid -- %@",user.uid);
                      NSLog(@"token=%@",user.credential.token);
                      NSLog(@"nickname=%@",user.nickname);
         
@@ -99,6 +100,39 @@
         
                      [[NSUserDefaults standardUserDefaults] setObject:user.rawData[@"figureurl_qq_2"] forKey:@"LOGINIMAGE"];
                      [[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:@"LOGINNAME"];
+                     [[NSUserDefaults standardUserDefaults] setObject:user.uid forKey:@"UID"];
+                     
+                     EMError *error = [[EMClient sharedClient] registerWithUsername:user.uid password:@"123"];
+                     if (error==nil) {
+                         NSLog(@"注册成功");
+//                         [MBProgressHUD showSuccess:@"注册成功"];
+                         
+                         EMError *error = [[EMClient sharedClient] loginWithUsername:user.uid password:@"123"];
+                         if (error==nil) {
+                             NSLog(@"登录成功");
+//                             [MBProgressHUD showSuccess:@"登录成功"];
+                             [[EMClient sharedClient].options setIsAutoLogin:YES];
+                             
+                         }else{
+                             NSLog(@"登录失败,%@",error.errorDescription);
+                         }
+                         
+                     }else{
+                         NSLog(@"注册失败,%@",error.errorDescription);
+                         if (error.code == EMErrorUserAlreadyExist){
+                             
+                             EMError *error = [[EMClient sharedClient] loginWithUsername:user.uid password:@"123"];
+                             if (error==nil) {
+                                 NSLog(@"登录成功");
+                                 //                             [MBProgressHUD showSuccess:@"登录成功"];
+                                 [[EMClient sharedClient].options setIsAutoLogin:YES];
+                                 
+                             }else{
+                                 NSLog(@"登录失败,%@",error.errorDescription);
+                             }
+                         }
+                     }
+
                                           
                  }else{
                      [MBProgressHUD showError:@"登录失败"];
@@ -115,6 +149,7 @@
              {
                  if (state == SSDKResponseStateSuccess)
                  {
+                     NSLog(@"uid --- %@",user.uid);
                      NSLog(@"%@",user.icon);
                      NSLog(@"nickname=%@",user.nickname);
         
@@ -123,6 +158,7 @@
 
                      [[NSUserDefaults standardUserDefaults] setObject:user.icon forKey:@"LOGINIMAGE"];
                      [[NSUserDefaults standardUserDefaults] setObject:user.nickname forKey:@"LOGINNAME"];
+                     [[NSUserDefaults standardUserDefaults] setObject:user.uid forKey:@"UID"];
         
                  }else{
                      [MBProgressHUD showError:@"登录失败"];
@@ -155,6 +191,11 @@
 {
     if (buttonIndex == 1) {
         
+        EMError *error = [[EMClient sharedClient] logout:YES];
+        if (!error) {
+            [MBProgressHUD showSuccess:@"注销成功"];
+        }
+        
         [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
         [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
         [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
@@ -163,6 +204,7 @@
         self.nameL.text = @"立即登录";
         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"LOGINIMAGE"];
         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"LOGINNAME"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"UID"];
     }
 }
 

@@ -21,6 +21,7 @@
 
 #import "ShareViewController.h"     //分享
 #import "CollectViewController.h"   //收藏
+#import "ChatViewController.h"      //帮助与反馈
 
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate>
@@ -102,7 +103,7 @@
 
 -(void)setupGroup2
 {
-    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" VcClass:nil];
+    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" VcClass:[ChatViewController class]];
     SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:[ShareViewController class]];
     SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存"];
     SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
@@ -158,9 +159,20 @@
         SettingArrowItem *arrowItem = (SettingArrowItem *)item;
         if (arrowItem.VcClass == nil) return;
         
-        UIViewController *vc = [[arrowItem.VcClass alloc]init];
-        vc.title = arrowItem.title;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (arrowItem.VcClass == [ChatViewController class]) {
+            
+            ChatViewController *chatVC = [[ChatViewController alloc]init];
+            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            chatVC = [story instantiateViewControllerWithIdentifier:@"ChatViewControl"];
+            chatVC.fromname = @"gaoyuhang";
+            [self.navigationController pushViewController:chatVC animated:YES];
+
+        }else{
+            UIViewController *vc = [[arrowItem.VcClass alloc]init];
+            vc.view.backgroundColor = [UIColor whiteColor];
+            vc.title = arrowItem.title;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
