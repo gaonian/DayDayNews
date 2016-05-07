@@ -148,9 +148,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //1.取消选中这行
+    //取消选中这行
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //2.模型数据
+    //模型数据
     SettingGroup *group = self.arrays[indexPath.section];
     SettingItem *item = group.items[indexPath.row];
     
