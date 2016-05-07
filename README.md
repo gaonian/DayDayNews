@@ -53,6 +53,8 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/yejian.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
 
+##帮助与反馈界面《环信即时通讯》
+
 ##小结
 - 关于设置界面，我想实现一个帮助的即时通讯功能，现在还在考虑是用环信还是xmpp开发。。
 - 在帮助与反馈的地方做一个即时通讯吧，让用户和开发者实时进行交互
