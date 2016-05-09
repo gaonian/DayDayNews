@@ -10,9 +10,18 @@
 
 @implementation SettingArrowItem
 
-+(instancetype)itemWithItem:(NSString *)icon title:(NSString *)title VcClass:(Class)VcClass
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title VcClass:(Class)VcClass
 {
     SettingArrowItem *item = [self itemWithItem:icon title:title];
+    
+    item.VcClass = VcClass;
+    
+    return item;
+}
+
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title subtitle:(NSString *)subtitle VcClass:(Class)VcClass
+{
+    SettingArrowItem *item = [self itemWithItem:icon title:title subtitle:subtitle];
     
     item.VcClass = VcClass;
     

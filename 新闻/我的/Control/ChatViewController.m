@@ -139,6 +139,17 @@
     [self.messageArr addObjectsFromArray:aMessages];
     [self.tableview reloadData];
     [self scrollToTableBottom];
+    
+    EMMessage *message = aMessages[0];
+    EMTextMessageBody *textBody = (EMTextMessageBody *)message.body;
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        //发送一个本地通知
+        UILocalNotification *localnoti = [[UILocalNotification alloc]init];
+        localnoti.alertBody = textBody.text;
+        localnoti.fireDate = [NSDate date];
+        localnoti.soundName = @"default";
+        [[UIApplication sharedApplication]scheduleLocalNotification:localnoti];
+    }
 }
 
 
@@ -368,7 +379,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[EMClient sharedClient].contactManager removeDelegate:self];
+//    [[EMClient sharedClient].contactManager removeDelegate:self];
 }
 
 @end

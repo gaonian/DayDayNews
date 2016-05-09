@@ -11,14 +11,21 @@
 @implementation SettingItem
 
 
-+(instancetype)itemWithItem:(NSString *)icon title:(NSString *)title
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title
 {
     SettingItem *item = [[self alloc]init];
     item.icon = icon;
     item.title = title;
     
-    
     return item;
-    
+}
+
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title subtitle:(NSString *)subtitle
+{
+    SettingItem *item = [[self alloc]init];
+    item.icon = icon;
+    item.title = title;
+    item.subtitle = subtitle;
+    return item;
 }
 @end

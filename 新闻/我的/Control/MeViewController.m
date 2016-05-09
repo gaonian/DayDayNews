@@ -23,8 +23,10 @@
 #import "CollectViewController.h"   //收藏
 #import "ChatViewController.h"      //帮助与反馈
 
+#import "EMSDK.h"
 
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate>
+
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate,EMChatManagerDelegate>
 
 @property (nonatomic , strong) NSString *clearCacheName;
 
@@ -34,6 +36,8 @@
 
 @property (nonatomic , weak) UIView *headerview;
 @property (nonatomic , weak) UITableView *tableview;
+@property (nonatomic , copy) NSString * chatCount;     //未读消息数目
+@property (nonatomic , strong) NSArray *conversations;
 
 @end
 
@@ -45,6 +49,14 @@
         _arrays = [NSMutableArray array];
     }
     return _arrays;
+}
+
+- (NSArray *)conversations
+{
+    if (!_conversations) {
+        _conversations = [NSArray array];
+    }
+    return _conversations;
 }
 
 -(NSString *)clearCacheName
@@ -63,7 +75,10 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(ChatCountChanged:) name:@"ChatCount" object:nil];
+    
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    
 
     SettingHeaderView *headerview = [[SettingHeaderView alloc]init];
     headerview.delegate = self;
@@ -78,14 +93,49 @@
     
     self.tableview.backgroundColor = [[ThemeManager sharedInstance] themeColor];
     
+    [self loadConversations];
+    
     [self setupGroup0];
     [self setupGroup2];
 }
 
--(void)handleThemeChanged
+
+-(void)loadConversations{
+    //获取历史会话记录
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    if (conversations.count == 0) {
+        conversations =  [[EMClient sharedClient].chatManager loadAllConversationsFromDB];
+    }
+    self.conversations = conversations;
+    //显示总的未读数
+    [self showTabBarBadge];
+}
+
+- (void)showTabBarBadge{
+    NSInteger totalUnreadCount = 0;
+    for (EMConversation *conversation in self.conversations) {
+        totalUnreadCount += [conversation unreadMessagesCount];
+    }
+    NSLog(@"未读消息总数:%ld",(long)totalUnreadCount);
+    self.chatCount = [NSString stringWithFormat:@"%ld",(long)totalUnreadCount];
+}
+
+- (void)handleThemeChanged
 {
     ThemeManager *defaultManager = [ThemeManager sharedInstance];
     self.tableview.backgroundColor = [defaultManager themeColor];
+    [self.tableview reloadData];
+}
+
+
+#pragma mark - 接收到聊天消息数改变
+- (void)ChatCountChanged:(NSNotification *)noti
+{
+    NSLog(@"%@",noti.object);
+    self.chatCount = noti.object;
+    self.arrays = nil;
+    [self setupGroup0];
+    [self setupGroup2];
     [self.tableview reloadData];
 }
 
@@ -103,7 +153,7 @@
 
 -(void)setupGroup2
 {
-    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" VcClass:[ChatViewController class]];
+    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" subtitle:self.chatCount VcClass:[ChatViewController class]];
     SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:[ShareViewController class]];
     SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存"];
     SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];

@@ -26,11 +26,21 @@
 #import "EMSDK.h"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<EMChatManagerDelegate>
+
+@property (nonatomic , strong) NSArray *conversations;
 
 @end
 
 @implementation AppDelegate
+
+- (NSArray *)conversations
+{
+    if (!_conversations) {
+        _conversations = [NSArray array];
+    }
+    return _conversations;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -45,13 +55,70 @@
     EMOptions *options = [EMOptions optionsWithAppkey:@"gaoyuhang#daydaynews"];
     options.apnsCertName = @"gaoyuhangDevelop";
     [[EMClient sharedClient] initializeSDKWithOptions:options];
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 
-    
     [self setupShareSDK];
     
-
+    //注册一个本地通知
+    [self registLocalNoti:application];
+    
+    //获取未读的消息数
+    [self loadConversations];
+    
     return YES;
 }
+
+
+#pragma mark - 接收到消息
+- (void)didReceiveMessages:(NSArray *)aMessages
+{
+    NSLog(@"接收到消息了-----%@",aMessages);
+    
+    [self loadConversations];
+    
+    EMMessage *message = aMessages[0];
+    EMTextMessageBody *textBody = (EMTextMessageBody *)message.body;
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        //发送一个本地通知
+        UILocalNotification *localnoti = [[UILocalNotification alloc]init];
+        localnoti.alertBody = [NSString stringWithFormat:@"gaoyuhang:%@",textBody.text];
+        localnoti.fireDate = [NSDate date];
+        localnoti.soundName = @"default";
+        [[UIApplication sharedApplication]scheduleLocalNotification:localnoti];
+    }
+}
+
+#pragma mark - 注册一个本地通知
+- (void)registLocalNoti:(UIApplication *)application
+{
+    //注册应用接收通知
+    if ([[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+}
+
+-(void)loadConversations{
+    //获取历史会话记录
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    if (conversations.count == 0) {
+        conversations =  [[EMClient sharedClient].chatManager loadAllConversationsFromDB];
+    }
+    self.conversations = conversations;
+    //显示总的未读数
+    [self showTabBarBadge];
+}
+
+- (void)showTabBarBadge{
+    NSInteger totalUnreadCount = 0;
+    for (EMConversation *conversation in self.conversations) {
+        totalUnreadCount += [conversation unreadMessagesCount];
+    }
+    NSLog(@"未读消息总数:%ld",(long)totalUnreadCount);
+    //发送未读消息数给setting界面，展示未读数
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"ChatCount" object:[NSString stringWithFormat:@"%ld",(long)totalUnreadCount]];
+}
+
 
 #pragma mark - 设置第三方登陆信息
 - (void)setupShareSDK
@@ -95,8 +162,5 @@
                  }];
 
 }
-
-
-
 
 @end

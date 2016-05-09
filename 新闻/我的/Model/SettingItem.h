@@ -20,6 +20,8 @@ typedef void(^SettingItemOption)();
 
 @property(nonatomic,copy)SettingItemOption option;
 
-+(instancetype)itemWithItem:(NSString *)icon title:(NSString *)title;
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title;
+
++ (instancetype)itemWithItem:(NSString *)icon title:(NSString *)title subtitle:(NSString *)subtitle;
 
 @end

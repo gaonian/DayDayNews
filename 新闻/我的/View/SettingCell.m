@@ -43,7 +43,7 @@
     if (_mylabel == nil) {
         _mylabel = [[UILabel alloc]init];
         _mylabel.bounds = CGRectMake(0, 0, 50, 20);
-        _mylabel.backgroundColor = [UIColor blueColor];
+//        _mylabel.backgroundColor = [UIColor blueColor];
     }
     return _mylabel;
     
@@ -124,7 +124,7 @@
         
     }else if([self.item isKindOfClass:[SettingLabelItem class]])//标签
     {
-        self.accessoryView = self.mylabel;
+        self.accessoryView = self.myarrow;
         self.selectionStyle = UITableViewCellSelectionStyleDefault;
         
     }else
@@ -142,6 +142,7 @@
     
     self.textLabel.text = self.item.title;
     self.detailTextLabel.text = self.item.subtitle;
+    self.detailTextLabel.textColor = [UIColor redColor];
 }
 
 
