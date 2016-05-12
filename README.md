@@ -54,7 +54,6 @@ _<br />_<br />
 
 ##夜间模式和收藏功能图片
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/yejian.png)
-![新闻收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
 ![图片收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photocollect.png)
 
 ##帮助与反馈界面《环信即时通讯》
