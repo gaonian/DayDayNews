@@ -2,7 +2,7 @@
 仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销
 
 ##导航
-1. [首页以及顶部新闻详情，高仿网易](https://github.com/gaoyuhang/DayDayNews#首页以及顶部新闻详情，高仿网易) 
+1. [首页以及顶部新闻详情](https://github.com/gaoyuhang/DayDayNews#首页以及顶部新闻详情高仿网易) 
 
 ##Update Log
 - 适配了iOS9<br />
