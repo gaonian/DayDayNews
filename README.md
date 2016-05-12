@@ -54,7 +54,8 @@ _<br />_<br />
 
 ##夜间模式和收藏功能图片
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/yejian.png)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
+![新闻收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
+![图片收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photocollect.png)
 
 ##帮助与反馈界面《环信即时通讯》
 设计的思路是在用户第三方登录成功的时候，利用uid去注册环信账户，注册成功就登录，如果是第二次登录，现在做的还是首先是注册，判断是否是因为账号存在而失败，如果是就进行登录，登录成功之后，在帮助与反馈界面才能进行即时通讯。 <br>
