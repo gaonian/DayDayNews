@@ -15,5 +15,4 @@
 @property (nonatomic , weak) UILabel *titleL;
 @property (nonatomic , weak) UILabel *timeL;
 
-
 @end

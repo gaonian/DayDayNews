@@ -83,7 +83,7 @@ static NSString *const ID = @"photo";
 
     self.pn = 0;
     self.tag1 = @"美女";
-    self.tag2 = @"性感";
+    self.tag2 = @"小清新";
     
     [self initCollection];
     [self setupRefreshView];
@@ -157,6 +157,7 @@ static NSString *const ID = @"photo";
     
     NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"%@",urlstr);
     [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
         
             NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
@@ -242,6 +243,7 @@ static NSString *const ID = @"photo";
     PhotoShowViewController *photoShow = [[PhotoShowViewController alloc]init];
     photoShow.currentIndex = (int)indexPath.row;
     photoShow.mutaArray = self.photoArray;
+    NSLog(@"%@",self.photoArray);
     [self.navigationController pushViewController:photoShow animated:YES];
 }
 

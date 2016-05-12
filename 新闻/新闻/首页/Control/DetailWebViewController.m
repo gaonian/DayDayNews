@@ -11,6 +11,7 @@
 #import "DetailImageWebModel.h"
 #import "DataBase.h"
 #import "NSDate+gyh.h"
+#import <ShareSDK/ShareSDK.h>
 
 
 @interface DetailWebViewController ()<UIWebViewDelegate>
@@ -56,7 +57,10 @@
     
     //分享
     UIButton *fenxiangB = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-20-88, 20, 44, 44)];
-    [fenxiangB setBackgroundColor:[UIColor blueColor]];
+    [fenxiangB setTitle:@"分享" forState:UIControlStateNormal];
+    [fenxiangB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    fenxiangB.titleLabel.font = [UIFont systemFontOfSize:13];
+    [fenxiangB addTarget:self action:@selector(fenxiang) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:fenxiangB];
     
     UIWebView *webView = [[UIWebView alloc]initWithFrame:self.view.frame];
@@ -189,6 +193,45 @@
     }
 }
 
+
+- (void)fenxiang
+{
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKEnableUseClientShare];
+    [shareParams SSDKSetupShareParamsByText:self.detailModel.title
+                                     images:nil
+                                        url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
+                                      title:@"Day Day News"
+                                       type:SSDKContentTypeAuto];
+    
+    [ShareSDK share:SSDKPlatformTypeSinaWeibo parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+        switch (state) {
+            case SSDKResponseStateSuccess:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            }
+                break;
+            case SSDKResponseStateFail:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
+}
 
 
 - (void)backBtnClick

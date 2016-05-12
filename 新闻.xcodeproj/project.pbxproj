@@ -150,6 +150,8 @@
 		19B064011BBA2E1E00483A5D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B063FE1BBA2E1E00483A5D /* MBProgressHUD.m */; };
 		19B0644A1BBA801800483A5D /* GCPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B064471BBA801800483A5D /* GCPlayer.m */; };
 		19B0644D1BBA803B00483A5D /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0644C1BBA803B00483A5D /* HeaderView.m */; };
+		19BE4F0E1CE4E4B0005E515D /* PhotoCollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BE4F0D1CE4E4B0005E515D /* PhotoCollectModel.m */; };
+		19BE4F111CE4E64C005E515D /* PhotoCollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BE4F101CE4E64C005E515D /* PhotoCollectTableViewCell.m */; };
 		19C33E2C1BB109A20059238A /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C33DEF1BB109A20059238A /* VideoViewController.m */; };
 		19C33E2D1BB109A20059238A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C33DF51BB109A20059238A /* PhotoViewController.m */; };
 		19C33E2E1BB109A20059238A /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C33DFB1BB109A20059238A /* MeViewController.m */; };
@@ -527,6 +529,10 @@
 		19B064481BBA801800483A5D /* SingleTon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTon.h; sourceTree = "<group>"; };
 		19B0644B1BBA803B00483A5D /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		19B0644C1BBA803B00483A5D /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		19BE4F0C1CE4E4B0005E515D /* PhotoCollectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectModel.h; sourceTree = "<group>"; };
+		19BE4F0D1CE4E4B0005E515D /* PhotoCollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectModel.m; sourceTree = "<group>"; };
+		19BE4F0F1CE4E64C005E515D /* PhotoCollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectTableViewCell.h; sourceTree = "<group>"; };
+		19BE4F101CE4E64C005E515D /* PhotoCollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectTableViewCell.m; sourceTree = "<group>"; };
 		19C33DEE1BB109A20059238A /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		19C33DEF1BB109A20059238A /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		19C33DF41BB109A20059238A /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
@@ -1450,6 +1456,8 @@
 				19918FC31CDDE13100A89620 /* HyperlinksButton.m */,
 				19234A481CCE63CA00123348 /* CollectModel.h */,
 				19234A491CCE63CA00123348 /* CollectModel.m */,
+				19BE4F0C1CE4E4B0005E515D /* PhotoCollectModel.h */,
+				19BE4F0D1CE4E4B0005E515D /* PhotoCollectModel.m */,
 				198AF7A91C841C9400D941F4 /* SettingArrowItem.h */,
 				198AF7AA1C841C9400D941F4 /* SettingArrowItem.m */,
 				198AF7AB1C841C9400D941F4 /* SettingItem.h */,
@@ -1474,6 +1482,8 @@
 				198AF7B91C8421AB00D941F4 /* SettingHeaderView.m */,
 				19234A451CCE62A300123348 /* CollectTableViewCell.h */,
 				19234A461CCE62A300123348 /* CollectTableViewCell.m */,
+				19BE4F0F1CE4E64C005E515D /* PhotoCollectTableViewCell.h */,
+				19BE4F101CE4E64C005E515D /* PhotoCollectTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1883,9 +1893,11 @@
 				19B0644A1BBA801800483A5D /* GCPlayer.m in Sources */,
 				19C33E981BB10B4C0059238A /* MJTypeEncoding.m in Sources */,
 				196585D91CCBB9B000A9B5C5 /* FMDatabase.m in Sources */,
+				19BE4F0E1CE4E4B0005E515D /* PhotoCollectModel.m in Sources */,
 				19918FDB1CDDEF7500A89620 /* LVRecordView.m in Sources */,
 				19ED1DA71C8729D700AD6E0A /* BigImageCell.m in Sources */,
 				19C33E931BB10B4C0059238A /* MJFoundation.m in Sources */,
+				19BE4F111CE4E64C005E515D /* PhotoCollectTableViewCell.m in Sources */,
 				19C33E341BB109A20059238A /* AFHTTPRequestOperationManager.m in Sources */,
 				19747D391C87F65600C4CBBD /* DetailWebViewController.m in Sources */,
 				198BD1E61BBB842A00B21A07 /* SDWebImagePrefetcher.m in Sources */,
@@ -2091,7 +2103,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2125,7 +2137,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
