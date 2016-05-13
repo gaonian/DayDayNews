@@ -1,6 +1,23 @@
 # DayDayNews
 仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销
 
+##GIF
+![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
+![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
+
+##导航
+1. [Update Log](https://github.com/gaoyuhang/DayDayNews#update-log)
+2. [首页以及顶部新闻详情](https://github.com/gaoyuhang/DayDayNews#首页以及顶部新闻详情高仿网易) 
+3. [天气预报的功能](https://github.com/gaoyuhang/DayDayNews#https://github.com/gaoyuhang/DayDayNews#增加了天气预报的功能可以实现定位到当前城市动画效果也没有放过)
+4. [图片界面，采用瀑布流展示](https://github.com/gaoyuhang/DayDayNews#使用瀑布流实现图片可以选择分类)
+5. [视频界面](https://github.com/gaoyuhang/DayDayNews#视频)
+6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化下方数据暂时为假数据即将修改)
+ 1. [夜间模式和收藏功能](https://github.com/gaoyuhang/DayDayNews#夜间模式和收藏功能)
+ 2. [环信即时通讯](https://github.com/gaoyuhang/DayDayNews#帮助与反馈界面环信即时通讯)
+7. [小结](https://github.com/gaoyuhang/DayDayNews#小结)
+8. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
+
+
 ##Update Log
 - 适配了iOS9<br />
 - 增加了点击tabbar刷新当前页面的功能<br />
@@ -21,7 +38,7 @@
 - 2016-5-9  增加了本地通知
 - 2016-5-12 新增图片收藏，属性列表存储,实时刷新收藏数据
 
-##修改了视频显示方式
+###修改了视频显示方式
 - 点击当前cell播放视频在当前cell上，监听屏幕转动，当屏幕转动的时候，视频自动横屏全屏播放，当屏幕为正的时候，播放在当前cell上<br />
 - 增加了活动指示器，采取搜狐视频活动指示器
 
@@ -30,14 +47,14 @@
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/横屏.png)
 _<br />_<br />
 
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
 
 ##首页以及顶部新闻详情，高仿网易
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsfresh.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsdata.png)
+
 ##使用瀑布流实现图片，可以选择分类
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photo.png)
+
 ##增加了天气预报的功能，可以实现定位到当前城市。动画效果也没有放过。
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/detail.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/weather.PNG)
@@ -52,9 +69,8 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/me.png)
 
 
-##夜间模式和收藏功能图片
+##夜间模式和收藏功能
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/yejian.png)
-![新闻收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/collect.png)
 ![图片收藏](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/photocollect.png)
 
 ##帮助与反馈界面《环信即时通讯》
