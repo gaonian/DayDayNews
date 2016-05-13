@@ -123,7 +123,6 @@
         PhotoShowViewController *photoShow = [[PhotoShowViewController alloc]init];
         photoShow.currentIndex = (int)indexPath.row;
         photoShow.mutaArray = self.totalArr;
-        NSLog(@"%@",self.totalArr);
         [self.navigationController pushViewController:photoShow animated:YES];
     }else{
         
@@ -140,10 +139,15 @@
 //进入编辑模式，按下出现的编辑按钮后
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DataModel *dataModel = self.totalArr[indexPath.row];
-    [DataBase deletetable:dataModel.docid];
-    
-    self.totalArr = [DataBase display];
+    if(column == 0){
+        DataModel *dataModel = self.totalArr[indexPath.row];
+        [DataBase deletetable:dataModel.docid];
+        self.totalArr = [DataBase display];
+    }else if (column == 1){
+        PhotoCollectModel *photoModel = self.totalArr[indexPath.row];
+        [DataBase deletetableWithPhoto:photoModel.image_url];
+        self.totalArr = [DataBase basePhotoDisplay];
+    }
     [tableview reloadData];
     [tableview setEditing:NO animated:YES];
 }

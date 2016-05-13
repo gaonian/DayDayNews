@@ -53,6 +53,8 @@
 
 -(void)initUI
 {
+    self.index = _currentIndex;
+    
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap)];
     [self.view addGestureRecognizer:singleTapGestureRecognizer];
     
@@ -207,17 +209,9 @@
 - (void)collectClick:(UIButton *)btn
 {
     NSLog(@"%@",[self.mutaArray[self.index] title]);
-//    if ([[DataBase queryWithCollectPhoto:[self.mutaArray[self.index] image_url]] isEqualToString:@"1"]) {
-//        [MBProgressHUD showError:@"已经收藏了"];
-//    }else{
-        NSString *width = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_width]];
-        NSString *height = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_height]];
-//        [DataBase addPhotosWithTitle:[self.mutaArray[self.index] title] image_url:[self.mutaArray[self.index] image_url] image_width:width image_height:height];
-//        
-//        [MBProgressHUD showSuccess:@"收藏成功"];
-//    }
-    
-    
+
+    NSString *width = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_width]];
+    NSString *height = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_height]];
     
     btn.selected = !btn.selected;
     if(btn.selected){

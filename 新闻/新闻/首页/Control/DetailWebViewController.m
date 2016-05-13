@@ -171,10 +171,18 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:src]];
         NSData *imgData = [cache cachedResponseForRequest:request].data;
         UIImage *image = [UIImage imageWithData:imgData];
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }]];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    
+    if (error != NULL){
+        [MBProgressHUD showError:@"下载失败"];
+    }else{
+        [MBProgressHUD showSuccess:@"保存成功"];
+    }
 }
 
 

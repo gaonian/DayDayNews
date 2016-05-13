@@ -27,7 +27,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel *titlL = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-20, 20)];
+        UILabel *tagL = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 55, 20)];
+        tagL.text = @"【图】";
+        tagL.textColor = [UIColor redColor];
+        [self.contentView addSubview:tagL];
+        
+        UILabel *titlL = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(tagL.frame), 10, SCREEN_WIDTH-50, 20)];
         [self.contentView addSubview:titlL];
         titlL.font = [UIFont systemFontOfSize:16];
         _titleL = titlL;
@@ -44,7 +49,7 @@
 - (void)setPhotoModel:(PhotoCollectModel *)photoModel
 {
     _photoModel = photoModel;
-    _titleL.text = [NSString stringWithFormat:@"[图片] %@",photoModel.title];
+    _titleL.text = photoModel.title;
     _timeL.text = photoModel.time;
 }
 
