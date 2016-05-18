@@ -91,7 +91,6 @@
 
         self.backgroundColor = [UIColor whiteColor];
         
-        
     }
     return self;
 }
@@ -131,6 +130,7 @@
     
     self.playcountLabel.text = videodata.playCount;
     self.playcountLabel.frame = _videodataframe.playCountF;
+    
     
     //时间
     self.ptimeLabel.text = videodata.ptime;

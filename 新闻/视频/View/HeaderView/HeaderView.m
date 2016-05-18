@@ -29,7 +29,6 @@
 
 -(void)btnClick:(TabbarButton *)btn
 {
-   // NSLog(@"%@",btn.titleLabel.text);
     if ([self.delegate respondsToSelector:@selector(btntitle:url:)]) {
         [self.delegate btntitle:btn.titleLabel.text url:btn.titleLabel.text];
         NSLog(@"%@",btn.titleLabel.text);

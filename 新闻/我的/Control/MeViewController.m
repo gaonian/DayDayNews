@@ -59,16 +59,7 @@
     return _conversations;
 }
 
--(NSString *)clearCacheName
-{
-    if (!_clearCacheName) {
-        
-        float tmpSize = [[SDImageCache sharedImageCache]getSize];
-        NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",tmpSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",tmpSize * 1024];
-        _clearCacheName = clearCacheName;
-    }
-    return _clearCacheName;
-}
+
 
 
 - (void)viewDidLoad {
@@ -155,9 +146,15 @@
 {
     SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" subtitle:self.chatCount VcClass:[ChatViewController class]];
     SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:[ShareViewController class]];
-    SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存"];
+    SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存" subtitle:self.clearCacheName];
+    handShake.option = ^{
+        [self click];
+    };
     SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
-    
+    MoreAbout.option = ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"关于我们" message:@"此项目只供技术交流，不能作为商业用途。\n邮箱:yugao5971@gmail.com\nGitHub:github.com/gaoyuhang" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    };
     SettingGroup *group1 = [[SettingGroup alloc]init];
     group1.items = @[MoreHelp,MoreShare,handShake,MoreAbout];
     [self.arrays addObject:group1];
@@ -205,7 +202,9 @@
     SettingGroup *group = self.arrays[indexPath.section];
     SettingItem *item = group.items[indexPath.row];
     
-    if ([item isKindOfClass:[SettingArrowItem class]]) {
+    if (item.option) {
+        item.option();
+    }else if ([item isKindOfClass:[SettingArrowItem class]]) {
         SettingArrowItem *arrowItem = (SettingArrowItem *)item;
         if (arrowItem.VcClass == nil) return;
         
@@ -311,38 +310,35 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#pragma mark - 清除缓存
 - (void)click
 {
-    [[SDImageCache sharedImageCache]clearDisk];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+    [[[UIApplication sharedApplication].windows firstObject] addSubview:hud];
+    //加载条上显示文本
+    hud.labelText = @"急速清理中";
+    //置当前的view为灰度
+    hud.dimBackground = YES;
+    //设置对话框样式
+    hud.mode = MBProgressHUDModeDeterminate;
+    [hud showAnimated:YES whileExecutingBlock:^{
+        while (hud.progress < 1.0) {
+            hud.progress += 0.01;
+            [NSThread sleepForTimeInterval:0.02];
+        }
+        hud.labelText = @"清理完成";
+    } completionBlock:^{
+        [[SDImageCache sharedImageCache] clearDisk];
+        [[SDImageCache sharedImageCache] clearMemory];
+        self.clearCacheName = @"0.0KB";
+        self.arrays = nil;
+        [self setupGroup0];
+        [self setupGroup2];
+        [self.tableview reloadData];
+        [hud removeFromSuperview];
+    }];
     
 }
-
-
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -351,7 +347,18 @@
     self.tableview.delegate = self;
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    float tmpSize = [[SDImageCache sharedImageCache] getSize];
+    NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",tmpSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",tmpSize * 1024];
+    self.clearCacheName = clearCacheName;
+    
+    self.arrays = nil;
+    [self setupGroup0];
+    [self setupGroup2];
+    [self.tableview reloadData];
 }
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

@@ -118,7 +118,9 @@
                     NSString *citystr = [pm.locality substringToIndex:loc];
                     
                     self.city = self.province = citystr;
+                    
                 }else{
+                    
                     NSRange range = [pm.name rangeOfString:@"市"];
                     int loc = (int)range.location;
                     NSString *str = [pm.name substringToIndex:loc];
@@ -127,11 +129,16 @@
                     NSRange range1 = [str rangeOfString:@"省"];
                     int loc1 = (int)range1.location;
                     
-                    NSLog(@"%@",str);
-                    self.province = [str substringToIndex:loc1];
-                    self.city = [str substringFromIndex:loc1+1];
-                    
-                    NSLog(@"%@,%@",[str substringToIndex:loc1],[str substringFromIndex:loc1]);
+                    if (range1.location != NSNotFound) {
+                        NSLog(@"%@",str);
+                        self.province = [str substringToIndex:loc1];
+                        self.city = [str substringFromIndex:loc1+1];
+                        
+                        NSLog(@"%@,%@",[str substringToIndex:loc1],[str substringFromIndex:loc1]);
+                    }else if([str isEqualToString:@"广西壮族自治区桂林"]){
+                        self.province = @"广西";
+                        self.city = @"桂林";
+                    }
                 }
                 
             }else{

@@ -26,7 +26,6 @@
 
 -(void)initBackButton
 {
-
     self.player = [[GCPlayer alloc]initWithFrame:self.view.bounds];
     [self.player getPlayItem:_mp4url];
     [self.view addSubview:self.player];

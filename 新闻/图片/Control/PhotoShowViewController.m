@@ -213,6 +213,7 @@
     NSString *width = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_width]];
     NSString *height = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_height]];
     
+    
     btn.selected = !btn.selected;
     if(btn.selected){
         [btn setTitle:@"已收藏" forState:UIControlStateSelected];
