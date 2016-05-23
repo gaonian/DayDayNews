@@ -14,7 +14,7 @@
 6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化下方数据暂时为假数据即将修改)
  1. [夜间模式和收藏功能](https://github.com/gaoyuhang/DayDayNews#夜间模式和收藏功能)
  2. [环信即时通讯](https://github.com/gaoyuhang/DayDayNews#帮助与反馈界面环信即时通讯)
-7. [目录结构](https://github.com/gaoyuhang/DayDayNews#目录结构)
+7. [项目结构](https://github.com/gaoyuhang/DayDayNews#项目结构)
 8. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
@@ -83,7 +83,7 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/chat.png)
 
 
-##目录结构
+##项目结构
 
 
 ---
