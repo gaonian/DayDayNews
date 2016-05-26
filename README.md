@@ -1,6 +1,11 @@
 # DayDayNews
 仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销
 
+##Demo扫码安装
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)<br>
+ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完毕 <br>
+
+
 ##GIF
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
