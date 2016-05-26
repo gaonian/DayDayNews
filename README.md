@@ -21,7 +21,8 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
  1. [夜间模式和收藏功能](https://github.com/gaoyuhang/DayDayNews#夜间模式和收藏功能)
  2. [环信即时通讯](https://github.com/gaoyuhang/DayDayNews#帮助与反馈界面环信即时通讯)
 7. [项目结构](https://github.com/gaoyuhang/DayDayNews#项目结构)
-8. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
+8. [项目所用API](https://github.com/gaoyuhang/DayDayNews#项目所用API)
+9. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
 ##Update Log
@@ -91,6 +92,8 @@ _<br />_<br />
 
 ##项目结构
 
+##项目所用API
+- 新闻顶部轮播图数据
 
 ---
 
