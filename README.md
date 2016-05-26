@@ -7,8 +7,8 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 
 
 ##GIF
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/news.gif)
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
+<a lign = "center"> ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/news.gif) </a>
+
 
 ##导航
 1. [Update Log](https://github.com/gaoyuhang/DayDayNews#update-log)
