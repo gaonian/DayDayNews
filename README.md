@@ -4,6 +4,7 @@
 ##Demo扫码安装
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)<br>
 ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完毕 <br>
+安装完成之后第一次打开会出现未受信任的企业级开发者。 解决方法：在设置->通用->设备管理，点击信任即可
 
 
 ##GIF
