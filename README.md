@@ -7,7 +7,7 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 
 
 ##GIF
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
+![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/news.gif)
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
 
 ##导航
