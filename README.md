@@ -5,6 +5,9 @@
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
 
+##Demo扫码安装
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)
+
 ##导航
 1. [Update Log](https://github.com/gaoyuhang/DayDayNews#update-log)
 2. [首页以及顶部新闻详情](https://github.com/gaoyuhang/DayDayNews#首页以及顶部新闻详情高仿网易) 
