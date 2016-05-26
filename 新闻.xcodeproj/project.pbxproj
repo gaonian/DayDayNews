@@ -1749,7 +1749,7 @@
 				TargetAttributes = {
 					1945F0891BAFDD0200A38747 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 64294L2RRJ;
+						DevelopmentTeam = Q5K862Z765;
 					};
 					1945F0A21BAFDD0200A38747 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2126,8 +2126,9 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.news.gyh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cca6192a-439d-41b4-b4bd-c4972ec91129";
 			};
 			name = Debug;
 		};
@@ -2160,8 +2161,9 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.news.gyh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cca6192a-439d-41b4-b4bd-c4972ec91129";
 			};
 			name = Release;
 		};
