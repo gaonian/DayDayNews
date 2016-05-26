@@ -3,7 +3,6 @@
 
 ##Demo扫码安装
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)<br>
-安装到手机上面查看具体效果<br>
 ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完毕 <br>
 
 
