@@ -99,6 +99,7 @@ _<br />_<br />
 - 新闻顶部轮播图数据
 
 ##About
+本项目只供学习交流，严禁进行商业用途。
 
 ##Support
 - Email：yugao5971@qq.com / gyhbsdo@163.com
