@@ -1,4 +1,5 @@
 # DayDayNews
+![enter image description here](https://img.shields.io/badge/build-passing-red.svg)
 ![enter image description here](https://img.shields.io/badge/language-iOS-brightgreen.svg)
 ![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b4.svg)
 
