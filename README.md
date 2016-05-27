@@ -1,6 +1,7 @@
 # DayDayNews
 ![enter image description here](https://img.shields.io/badge/language-iOS-brightgreen.svg)
 ![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b4.svg)
+
 仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销，新闻数据以及图片的收藏与分享。
 
 ##Demo扫码安装
