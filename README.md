@@ -1,5 +1,5 @@
 # DayDayNews
-仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销
+仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销，新闻数据以及图片的收藏与分享。
 
 ##Demo扫码安装
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)<br>
@@ -17,7 +17,7 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 3. [天气预报的功能](https://github.com/gaoyuhang/DayDayNews#https://github.com/gaoyuhang/DayDayNews#增加了天气预报的功能可以实现定位到当前城市动画效果也没有放过)
 4. [图片界面，采用瀑布流展示](https://github.com/gaoyuhang/DayDayNews#使用瀑布流实现图片可以选择分类)
 5. [视频界面](https://github.com/gaoyuhang/DayDayNews#视频)
-6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化下方数据暂时为假数据即将修改)
+6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化)
  1. [夜间模式和收藏功能](https://github.com/gaoyuhang/DayDayNews#夜间模式和收藏功能)
  2. [环信即时通讯](https://github.com/gaoyuhang/DayDayNews#帮助与反馈界面环信即时通讯)
 7. [项目结构](https://github.com/gaoyuhang/DayDayNews#项目结构)
@@ -74,7 +74,7 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 
-##我的界面实现第三方登陆以及注销，界面优化。下方数据暂时为假数据，即将修改
+##我的界面实现第三方登陆以及注销，界面优化。
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/me.png)
 
