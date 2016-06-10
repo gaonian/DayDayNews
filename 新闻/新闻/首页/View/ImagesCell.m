@@ -31,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel *titleL = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-120, 20)];
+        UILabel *titleL = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-20, 20)];
         if (SCREEN_WIDTH == 320) {
             titleL.font = [UIFont systemFontOfSize:15];
         }else{
@@ -39,18 +39,6 @@
         }
         [self addSubview:titleL];
         self.titleL = titleL;
-        
-        CGFloat x = SCREEN_WIDTH-5-100;
-        CGFloat y = 15;
-        CGFloat w = 100;
-        CGFloat h = 15;
-        UILabel *replyL = [[UILabel alloc]init];
-        replyL.frame = CGRectMake(x, y, w, h);
-        replyL.textAlignment = NSTextAlignmentCenter;
-        replyL.font = [UIFont systemFontOfSize:10];
-        replyL.textColor = [UIColor darkGrayColor];
-        [self addSubview:replyL];
-        self.lblReply = replyL;
         
         CGFloat imageY = CGRectGetMaxY(titleL.frame)+10;
         CGFloat imageW = (SCREEN_WIDTH-40)/3;
@@ -70,6 +58,17 @@
         [self addSubview:image3];
         self.image3 = image3;
         
+        CGFloat x = 10;
+        CGFloat y = CGRectGetMaxY(self.image1.frame)+10;
+        CGFloat w = 100;
+        CGFloat h = 15;
+        UILabel *replyL = [[UILabel alloc]init];
+        replyL.frame = CGRectMake(x, y, w, h);
+        replyL.textAlignment = NSTextAlignmentCenter;
+        replyL.font = [UIFont systemFontOfSize:10];
+        replyL.textColor = [UIColor darkGrayColor];
+        [self addSubview:replyL];
+        self.lblReply = replyL;
     }
     return self;
 }

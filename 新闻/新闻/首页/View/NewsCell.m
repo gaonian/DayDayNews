@@ -37,7 +37,8 @@
         [self addSubview:imageV];
         self.imgIcon = imageV;
         
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageV.frame)+10, 10, SCREEN_WIDTH-CGRectGetMaxX(imageV.frame)-20, 20)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageV.frame)+10, 10, SCREEN_WIDTH-CGRectGetMaxX(imageV.frame)-20, 40)];
+        label.numberOfLines = 0;
         if (SCREEN_WIDTH == 320) {
             label.font = [UIFont systemFontOfSize:15];
         }else{
@@ -64,6 +65,17 @@
         replyL.textColor = [UIColor darkGrayColor];
         [self addSubview:replyL];
         self.lblReply = replyL;
+        
+        CGFloat resorceX = CGRectGetMaxX(imageV.frame)+10;
+        CGFloat resorceY = CGRectGetMaxY(imageV.frame) - 10;
+        CGFloat resorceW = 150;
+        CGFloat resorceH = 20;
+        UILabel *resorceL = [[UILabel alloc]init];
+        resorceL.font = [UIFont systemFontOfSize:10];
+        resorceL.textColor = [UIColor darkGrayColor];
+        resorceL.frame = CGRectMake(resorceX, resorceY, resorceW, resorceH);
+        [self addSubview:resorceL];
+        self.resorceL = resorceL;
     }
     
     return self;
@@ -75,7 +87,8 @@
     
     [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:self.dataModel.imgsrc] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.lblTitle.text = self.dataModel.title;
-    self.lblSubtitle.text = self.dataModel.digest;
+    self.resorceL.text = self.dataModel.source;
+//    self.lblSubtitle.text = self.dataModel.digest;
     
     // 如果回复太多就改成几点几万
     CGFloat count =  [self.dataModel.replyCount intValue];
@@ -129,9 +142,9 @@
         }
     }else if (NewsModel.imgextra){
         if (SCREEN_WIDTH == 320) {
-            return 115;
+            return 135;
         }else{
-            return 130;
+            return 150;
         }
     }else{
         return 80;

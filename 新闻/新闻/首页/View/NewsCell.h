@@ -37,7 +37,10 @@
  *  第三张图片（如果有的话）
  */
 @property (weak, nonatomic) UIImageView *imgOther2;
-
+/**
+ *  来源
+ */
+@property (nonatomic , weak) UILabel *resorceL;
 
 
 /**

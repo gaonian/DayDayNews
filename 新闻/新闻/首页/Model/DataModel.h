@@ -111,6 +111,10 @@
  */
 @property (nonatomic,copy) NSString *title;
 /**
+ *  来源
+ */
+@property (nonatomic , copy) NSString *source;
+/**
  *  多图数组
  */
 @property (nonatomic,strong)NSArray *imgextra;
@@ -157,7 +161,6 @@
 @property (nonatomic,copy) NSString *subtitle;
 @property (nonatomic,copy) NSString *adTitle;
 @property (nonatomic,copy) NSString *url;
-@property (nonatomic,copy) NSString *source;
 
 @property (nonatomic,copy) NSString *TAGS;
 @property (nonatomic,copy) NSString *TAG;
