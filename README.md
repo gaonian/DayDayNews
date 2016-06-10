@@ -1,14 +1,19 @@
 # DayDayNews
-仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销
+![enter image description here](https://img.shields.io/badge/build-passing-red.svg)
+![enter image description here](https://img.shields.io/badge/language-iOS-brightgreen.svg)
+![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b4.svg)
+
+仿网易新闻客户端，实现新闻浏览，视频播放，抓取百度图片，瀑布流显示,自定义视频播放，横屏竖屏切换自如,设置界面优化，第三方登录以及注销，新闻数据以及图片的收藏与分享。
 
 ##Demo扫码安装
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/wcnS.png)<br>
 ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完毕 <br>
+安装完成之后第一次打开会出现未受信任的企业级开发者。 解决方法：在设置->通用->设备管理，点击信任即可
 
 
 ##GIF
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/111.gif)
-![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/222.gif)
+![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/news.gif)
+
 
 ##导航
 1. [Update Log](https://github.com/gaoyuhang/DayDayNews#update-log)
@@ -16,11 +21,15 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 3. [天气预报的功能](https://github.com/gaoyuhang/DayDayNews#https://github.com/gaoyuhang/DayDayNews#增加了天气预报的功能可以实现定位到当前城市动画效果也没有放过)
 4. [图片界面，采用瀑布流展示](https://github.com/gaoyuhang/DayDayNews#使用瀑布流实现图片可以选择分类)
 5. [视频界面](https://github.com/gaoyuhang/DayDayNews#视频)
-6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化下方数据暂时为假数据即将修改)
+6. [我的界面，包括第三方登录，夜间模式，清除缓存，环信聊天](https://github.com/gaoyuhang/DayDayNews#我的界面实现第三方登陆以及注销界面优化)
  1. [夜间模式和收藏功能](https://github.com/gaoyuhang/DayDayNews#夜间模式和收藏功能)
  2. [环信即时通讯](https://github.com/gaoyuhang/DayDayNews#帮助与反馈界面环信即时通讯)
 7. [项目结构](https://github.com/gaoyuhang/DayDayNews#项目结构)
-8. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
+8. [项目所用API](https://github.com/gaoyuhang/DayDayNews#项目所用API)
+9. [About](https://github.com/gaoyuhang/DayDayNews#about)
+10. [Support](https://github.com/gaoyuhang/DayDayNews#support)
+ 1. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
+
 
 
 ##Update Log
@@ -69,7 +78,7 @@ _<br />_<br />
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 
-##我的界面实现第三方登陆以及注销，界面优化。下方数据暂时为假数据，即将修改
+##我的界面实现第三方登陆以及注销，界面优化。
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/login.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/me.png)
 
@@ -90,10 +99,35 @@ _<br />_<br />
 
 ##项目结构
 
+##项目所用API
+附上部分功能API，只做学习交流。具体使用请见`Demo`
+- 新闻顶部轮播图数据
+  ```
+  http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html
+  ```
+- 首页新闻数据
+ ```
+ http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html
+ ```
+- 天气预报接口
+ ```
+ http://c.3g.163.com/nc/weather/省份|城市.html
+ ```
+- 图片接口
+ ```
+ http://image.baidu.com/wisebrowse/data?tag1=一级分类&tag2=二级分类
+ ```
+- 视频接口
+ ```
+ http://c.m.163.com/nc/video/home/0-10.html
+ ```
 
----
+##About
+本项目只供学习交流，严禁进行商业用途。:joy:
 
-[简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
+##Support
+- Email：yugao5971@qq.com / gyhbsdo@163.com
+- [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
 
