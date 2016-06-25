@@ -21,6 +21,7 @@
 @interface PhotoShowViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic , weak) UIScrollView *scrollview;
+@property (nonatomic , weak) UIScrollView *frontScrollV;
 @property (nonatomic , weak) UILabel *countlabel;    //数目按钮
 @property (nonatomic , weak) UIImageView *imageV;
 @property (nonatomic , weak) UIButton *backbtn;      //返回按钮
@@ -132,11 +133,20 @@
 {
     NSUInteger count = self.mutaArray.count;
     for (int i = 0; i < count; i++) {
+        
+        UIScrollView * scrollView = [[UIScrollView alloc] init];
+        scrollView.userInteractionEnabled = YES;
+        scrollView.delegate = self;
+        scrollView.maximumZoomScale = 3.0;
+        scrollView.minimumZoomScale = 1.0;
+        scrollView.bouncesZoom = YES;
+        scrollView.showsVerticalScrollIndicator = NO;
+        scrollView.showsHorizontalScrollIndicator = NO;
+        self.frontScrollV = scrollView;
+        
         UIImageView *imaV = [[UIImageView alloc]init];
-        // 图片的显示格式为合适大小
-        imaV.contentMode= UIViewContentModeCenter;
-        imaV.contentMode= UIViewContentModeScaleAspectFit;
-        [self.scrollview addSubview:imaV];
+        [self.frontScrollV addSubview:imaV];
+        [self.scrollview addSubview:scrollView];
         self.imageV = imaV;
     }
     
@@ -153,14 +163,15 @@
 #pragma mark -- 根据i添加图片，设置每个图片的尺寸
 - (void)setImgWithIndex:(int)i
 {
+    [self restZoom];
     //图片
     NSURL *purl = [NSURL URLWithString:[self.mutaArray[i] image_url]];
     CGFloat imageW = SCREEN_WIDTH;
-    NSLog(@"%f",[self.mutaArray[i] image_width]);
     CGFloat imageH = [self.mutaArray[i] image_height] /[self.mutaArray[i] image_width] * imageW;
     CGFloat imageY = (SCREEN_HEIGHT-imageH)/2 - 20;
     CGFloat imageX = i * imageW;
-    self.imageV.frame = CGRectMake(imageX, imageY, imageW, imageH);
+    self.frontScrollV.frame = CGRectMake(imageX, imageY, imageW, imageH);
+    self.imageV.frame = CGRectMake(0, 0, imageW, imageH);
     [self.imageV sd_setImageWithURL:purl placeholderImage:nil];
     // 文字
     self.countlabel.text = [NSString stringWithFormat:@"%d/%d",i + 1,(int)self.mutaArray.count];
@@ -179,10 +190,43 @@
 #pragma mark -- 滚动完毕时调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    int index = self.scrollview.contentOffset.x / self.scrollview.frame.size.width;
+    int index = scrollView.contentOffset.x / SCREEN_WIDTH;
     self.index = index;
-    // 添加图片
-    [self setImgWithIndex:index];
+    if (scrollView == self.scrollview) {
+        [self setImgWithIndex:index];
+    }
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageV;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+    if (scrollView.zoomScale > 1.0 && scrollView.zoomScale < 3.0) {
+        self.frontScrollV.contentSize = CGSizeMake(self.imageV.width, self.imageV.height);
+        self.frontScrollV.y = SCREEN_WIDTH*self.index;
+        self.frontScrollV.width = SCREEN_WIDTH;
+        
+        if (self.imageV.height < SCREEN_HEIGHT) {
+            self.frontScrollV.height = self.imageV.height;
+            self.frontScrollV.y = (SCREEN_HEIGHT - self.imageV.height)/2;
+        }else{
+            self.frontScrollV.height = SCREEN_HEIGHT;
+            self.frontScrollV.y = 0;
+        }
+    }else if (scrollView.zoomScale <= 1.0) {
+        self.frontScrollV.frame = CGRectMake((SCREEN_WIDTH-self.imageV.width)/2 + SCREEN_WIDTH*self.index, (SCREEN_HEIGHT-self.imageV.height)/2, self.imageV.width, self.imageV.height);
+    }
+}
+
+- (void)restZoom
+{
+    [self.frontScrollV setZoomScale:self.frontScrollV.minimumZoomScale animated:NO];
+    [self.frontScrollV zoomToRect:CGRectMake(0, 0, self.frontScrollV.width, self.frontScrollV.height ) animated:NO];
+    self.frontScrollV.frame = CGRectMake(0, (SCREEN_HEIGHT - self.imageV.height)/2, SCREEN_WIDTH, self.imageV.height);
+    self.frontScrollV.contentSize = CGSizeMake(self.frontScrollV.width * self.frontScrollV.zoomScale, self.frontScrollV.height * self.frontScrollV.zoomScale );
 }
 
 #pragma mark 保存图片
