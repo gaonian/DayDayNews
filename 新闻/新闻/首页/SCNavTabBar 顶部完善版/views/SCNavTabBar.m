@@ -14,12 +14,8 @@
 {
     UIScrollView    *_navgationTabBar;
     UIView          *_line;                 // underscore show which item selected
-               // SCNavTabBar pressed item
     NSArray         *_itemsWidth;           // an array of items' width
-
 }
-@property (nonatomic , weak) UIButton *btn;
-
 @end
 
 @implementation SCNavTabBar
@@ -29,38 +25,27 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-      
         [self initConfig];
-       // self.backgroundColor = [UIColor clearColor];
-        
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pianyiClick:) name:@"偏移" object:nil];
     }
     return self;
 }
 
-
 - (void)initConfig
 {
     _items = [@[] mutableCopy];
-  
     [self viewConfig];
-
 }
 
 - (void)viewConfig
 {
-    
-    #pragma mark  scrollview
     _navgationTabBar = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, SCREENW - 40, 44)];
     _navgationTabBar.backgroundColor = [UIColor clearColor];
     _navgationTabBar.showsHorizontalScrollIndicator = NO;
     [self addSubview:_navgationTabBar];
-       
 }
 
 - (void)updateData
 {
-    
     _itemsWidth = [self getButtonsWidthWithTitles:_itemTitles];
     if (_itemsWidth.count)
     {
@@ -69,18 +54,12 @@
     }
 }
 
-
-
-
 - (CGFloat)contentWidthAndAddNavTabBarItemsWithButtonsWidth:(NSArray *)widths
 {
     CGFloat buttonX = 0;
     
     for (NSInteger index = 0; index < [_itemTitles count]; index++)
     {
-        
-        #pragma mark  设置字体
-
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:_itemTitles[index] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -97,20 +76,10 @@
         [_navgationTabBar addSubview:button];
         [_items addObject:button];
         buttonX += button.frame.size.width;
-        self.btn = button;
     }
     
     [self showLineWithButtonWidth:[widths[0] floatValue]];
     return buttonX;
-}
-
-
-- (void)pianyiClick:(NSNotification *)noti
-{
-    NSLog(@"%@",noti.object);
-    int index = [noti.object intValue];
-    UIButton *btn = _items[index];
-//    [self itemPressed:btn type:1];
 }
 
 #pragma mark  下划线
@@ -123,27 +92,13 @@
     
     UIButton *btn = _items[0];
     [self itemPressed:btn type:0];
-//    btn.selected = YES;
-//    [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    
 }
-
 
 - (void)itemPressed:(UIButton *)button type:(int)type
 {
-    button.selected = YES;
-    self.btn.selected = NO;
-    self.btn = button;
-    [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    
-//    if (type == 0) {
-        NSInteger index = [_items indexOfObject:button];
-        [_delegate itemDidSelectedWithIndex:index withCurrentIndex:_currentItemIndex];
-//    }
+    NSInteger index = [_items indexOfObject:button];
+    [_delegate itemDidSelectedWithIndex:index withCurrentIndex:_currentItemIndex];
 }
-
-
-
 
 //计算数组内字体的宽度
 - (NSArray *)getButtonsWidthWithTitles:(NSArray *)titles;
@@ -162,18 +117,12 @@
     return widths;
 }
 
-
-
-
-
-
 #pragma mark 偏移
 - (void)setCurrentItemIndex:(NSInteger)currentItemIndex
 {
     _currentItemIndex = currentItemIndex;
     UIButton *button = _items[currentItemIndex];
 
-    
     CGFloat flag = SCREENW - 40;
     
     if (button.frame.origin.x + button.frame.size.width + 50 >= flag)
@@ -194,14 +143,5 @@
     [UIView animateWithDuration:0.1f animations:^{
         _line.frame = CGRectMake(button.frame.origin.x + 15, _line.frame.origin.y, [_itemsWidth[currentItemIndex] floatValue], _line.frame.size.height);
     }];
-//    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//
-//    UIButton *btn1 = _items[currentItemIndex-1];
-//    [btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
-
-
-
-
-
 @end

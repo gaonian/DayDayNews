@@ -70,10 +70,8 @@
     tableview.dataSource = self;
     [self.view addSubview:tableview];
     self.tableview = tableview;
-    
+    self.tableview.tableFooterView = [[UIView alloc]init];    
 }
-
-
 
 //集成刷新控件
 -(void)setupRefreshView

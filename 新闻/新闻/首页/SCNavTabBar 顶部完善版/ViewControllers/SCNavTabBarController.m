@@ -71,8 +71,6 @@
     
     _subViewControllers = [NSArray array];
     _subViewControllers = viewArray;
-    
-
 }
 
 - (void)initConfig
@@ -101,9 +99,7 @@
 
 - (void)viewInit
 {
-    
     _navTabBar = [[SCNavTabBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , 64)];
-//    _navTabBar.backgroundColor = [UIColor colorWithRed:246/255.0f green:246/255.0f blue:247/255.0f alpha:1];
     _navTabBar.backgroundColor = [[ThemeManager sharedInstance] themeColor];
     _navTabBar.delegate = self;
     _navTabBar.lineColor = _navTabBarLineColor;
@@ -149,7 +145,6 @@
     viewController.view.frame = CGRectMake(_currentIndex * SCREEN_WIDTH, 0, SCREEN_WIDTH, _mainView.frame.size.height);
     [_mainView addSubview:viewController.view];
     [self addChildViewController:viewController];
-    
 }
 
 
@@ -158,16 +153,10 @@
 - (void)itemDidSelectedWithIndex:(NSInteger)index withCurrentIndex:(NSInteger)currentIndex
 {
     if (currentIndex-index>=2 || currentIndex-index<=-2) {
-       
         [_mainView setContentOffset:CGPointMake(index * SCREEN_WIDTH, 0) animated:NO];
-        
     }else{
-       
         [_mainView setContentOffset:CGPointMake(index * SCREEN_WIDTH, 0) animated:YES];
     }
-    
-//    NSString *str = [NSString stringWithFormat:@"%d",index];
-//    [[NSNotificationCenter defaultCenter]postNotificationName:@"偏移" object:str];
 }
 
 
