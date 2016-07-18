@@ -107,6 +107,7 @@
     tableview.dataSource = self;
     [self.view addSubview:tableview];
     self.tableview = tableview;
+    self.tableview.tableFooterView = [[UIView alloc]init];
     
     ThemeManager *manager = [ThemeManager sharedInstance];
     self.tableview.backgroundColor = [manager themeColor];
@@ -147,7 +148,6 @@
         // 网络加载 --- 创建不带标题的图片轮播器
         SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
         cycleScrollView.delegate = self;
-//        cycleScrollView.dotColor = [UIColor  ];
         cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
         cycleScrollView.titlesGroup = self.titleArray;
         cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;

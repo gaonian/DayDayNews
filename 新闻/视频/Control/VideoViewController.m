@@ -83,6 +83,7 @@
     tableview.frame = self.view.frame;
     [self.view addSubview:tableview];
     self.tableview = tableview;
+    self.tableview.tableFooterView = [[UIView alloc]init];
     
     UIView *view = [[UIView alloc]init];
     view.frame = CGRectMake(0, 0,SCREEN_WIDTH,SCREEN_WIDTH * 0.25);
