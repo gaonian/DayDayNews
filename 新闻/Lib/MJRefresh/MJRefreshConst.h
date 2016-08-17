@@ -5,7 +5,7 @@
 
 // 日志输出
 #ifdef DEBUG
-#define MJRefreshLog(...) NSLog(__VA_ARGS__)
+#define MJRefreshLog(...) DLog(__VA_ARGS__)
 #else
 #define MJRefreshLog(...)
 #endif

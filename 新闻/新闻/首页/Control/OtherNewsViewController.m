@@ -162,7 +162,6 @@
 {
     NewDataFrame *dataframe = self.totalArray[indexPath.row];
     NewData *data = dataframe.NewData;
-    NSLog(@"%@",data.url);
     testViewController *detail = [[testViewController alloc]init];
     detail.url = data.url;
     [self.navigationController pushViewController:detail animated:YES];

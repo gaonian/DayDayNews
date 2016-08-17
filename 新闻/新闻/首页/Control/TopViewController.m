@@ -195,7 +195,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     int index = self.scroll.contentOffset.x / self.scroll.frame.size.width;
-    NSLog(@"%d",index);
+    DLog(@"%d",index);
     // 添加图片
     [self setImgWithIndex:index];
     

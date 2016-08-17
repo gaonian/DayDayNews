@@ -81,7 +81,7 @@
 #pragma mark - 最终登录方式
 - (void)sureLogin:(NSNotification *)noti
 {
-    NSLog(@"%@",noti.object);
+    DLog(@"%@",noti.object);
     NSString *title = noti.object;
     if ([title isEqualToString:@"QQ"]) {
         
@@ -90,10 +90,10 @@
              {
                  if (state == SSDKResponseStateSuccess)
                  {
-                     NSLog(@"%@",user.rawData[@"figureurl_qq_2"]);
-                     NSLog(@"uid -- %@",user.uid);
-                     NSLog(@"token=%@",user.credential.token);
-                     NSLog(@"nickname=%@",user.nickname);
+                     DLog(@"%@",user.rawData[@"figureurl_qq_2"]);
+                     DLog(@"uid -- %@",user.uid);
+                     DLog(@"token=%@",user.credential.token);
+                     DLog(@"nickname=%@",user.nickname);
         
                      [self.photoimageV sd_setImageWithURL:[NSURL URLWithString:user.rawData[@"figureurl_qq_2"]]];
                      self.nameL.text = user.nickname;
@@ -104,31 +104,31 @@
                      
                      EMError *error = [[EMClient sharedClient] registerWithUsername:user.uid password:@"123"];
                      if (error==nil) {
-                         NSLog(@"注册成功");
+                         DLog(@"注册成功");
 //                         [MBProgressHUD showSuccess:@"注册成功"];
                          
                          EMError *error = [[EMClient sharedClient] loginWithUsername:user.uid password:@"123"];
                          if (error==nil) {
-                             NSLog(@"登录成功");
+                             DLog(@"登录成功");
 //                             [MBProgressHUD showSuccess:@"登录成功"];
                              [[EMClient sharedClient].options setIsAutoLogin:YES];
                              
                          }else{
-                             NSLog(@"登录失败,%@",error.errorDescription);
+                             DLog(@"登录失败,%@",error.errorDescription);
                          }
                          
                      }else{
-                         NSLog(@"注册失败,%@",error.errorDescription);
+                         DLog(@"注册失败,%@",error.errorDescription);
                          if (error.code == EMErrorUserAlreadyExist){
                              
                              EMError *error = [[EMClient sharedClient] loginWithUsername:user.uid password:@"123"];
                              if (error==nil) {
-                                 NSLog(@"登录成功");
+                                 DLog(@"登录成功");
                                  //                             [MBProgressHUD showSuccess:@"登录成功"];
                                  [[EMClient sharedClient].options setIsAutoLogin:YES];
                                  
                              }else{
-                                 NSLog(@"登录失败,%@",error.errorDescription);
+                                 DLog(@"登录失败,%@",error.errorDescription);
                              }
                          }
                      }
@@ -149,9 +149,9 @@
              {
                  if (state == SSDKResponseStateSuccess)
                  {
-                     NSLog(@"uid --- %@",user.uid);
-                     NSLog(@"%@",user.icon);
-                     NSLog(@"nickname=%@",user.nickname);
+                     DLog(@"uid --- %@",user.uid);
+                     DLog(@"%@",user.icon);
+                     DLog(@"nickname=%@",user.nickname);
         
                      [self.photoimageV sd_setImageWithURL:[NSURL URLWithString:user.icon]];
                      self.nameL.text = user.nickname;
@@ -174,9 +174,9 @@
 - (void)logoutBtnClick
 {
     if ([ShareSDK hasAuthorized:SSDKPlatformTypeSinaWeibo]) {
-        NSLog(@"qq");
+        DLog(@"qq");
     }else{
-        NSLog(@"不是");
+        DLog(@"不是");
     }
     
     if ([self.nameL.text isEqualToString:@"立即登录"]) {

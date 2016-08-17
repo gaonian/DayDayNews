@@ -121,7 +121,7 @@ static FMDatabaseQueue *_queue;
         FMResultSet *rs = [db executeQuery:@"select * from t_news where docid = ?;",docid];
         while (rs.next) {
             NSString *docid = [rs stringForColumn:@"docid"];
-            NSLog(@"%@",docid);
+            DLog(@"%@",docid);
             str = @"1";
         }
     }];
@@ -136,7 +136,7 @@ static FMDatabaseQueue *_queue;
         FMResultSet *rs = [db executeQuery:@"select * from t_photos where image_url = ?;",photourl];
         while (rs.next) {
             NSString *docid = [rs stringForColumn:@"image_url"];
-            NSLog(@"%@",docid);
+            DLog(@"%@",docid);
             str = @"1";
         }
     }];

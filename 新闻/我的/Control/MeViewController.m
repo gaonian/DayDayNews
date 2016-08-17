@@ -107,7 +107,7 @@
     for (EMConversation *conversation in self.conversations) {
         totalUnreadCount += [conversation unreadMessagesCount];
     }
-    NSLog(@"未读消息总数:%ld",(long)totalUnreadCount);
+    DLog(@"未读消息总数:%ld",(long)totalUnreadCount);
     self.chatCount = [NSString stringWithFormat:@"%ld",(long)totalUnreadCount];
 }
 
@@ -122,7 +122,7 @@
 #pragma mark - 接收到聊天消息数改变
 - (void)ChatCountChanged:(NSNotification *)noti
 {
-    NSLog(@"%@",noti.object);
+    DLog(@"%@",noti.object);
     self.chatCount = noti.object;
     self.arrays = nil;
     [self setupGroup0];

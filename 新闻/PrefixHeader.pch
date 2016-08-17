@@ -26,4 +26,10 @@
 
 #import "ThemeManager.h"
 
+#ifdef DEBUG
+#define DLog(...) NSLog(@"%s(第%d行) %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define DLog(...)
+#endif
+
 #endif /* PrefixHeader_pch */

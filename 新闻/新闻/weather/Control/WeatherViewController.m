@@ -78,7 +78,6 @@
 {
     INTULocationManager *mgr = [INTULocationManager sharedInstance];
     [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-        NSLog(@"----%ld",(long)status);
 
             self.lati = (int)currentLocation.coordinate.latitude;
             self.longi = (int)currentLocation.coordinate.longitude;
@@ -100,14 +99,9 @@
     
     [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
         
-        if (error) {
-            NSLog(@"%@",error);
-        } else {
-            
+        if (!error) {
+        
             CLPlacemark *pm = [placemarks firstObject];
-            
-            NSLog(@"%@",pm.name);
-            NSLog(@"%@ ,%@ ,%@",pm.locality,pm.country ,pm.subLocality);
             
             if ([pm.name rangeOfString:@"市"].location != NSNotFound) {
                 
@@ -130,11 +124,9 @@
                     int loc1 = (int)range1.location;
                     
                     if (range1.location != NSNotFound) {
-                        NSLog(@"%@",str);
                         self.province = [str substringToIndex:loc1];
                         self.city = [str substringFromIndex:loc1+1];
                         
-                        NSLog(@"%@,%@",[str substringToIndex:loc1],[str substringFromIndex:loc1]);
                     }else if([str isEqualToString:@"广西壮族自治区桂林"]){
                         self.province = @"广西";
                         self.city = @"桂林";
@@ -144,7 +136,6 @@
             }else{
                 
                 if ([pm.locality rangeOfString:@"市"].location != NSNotFound) {
-                    NSLog(@"－－－%@",pm.locality);
                     NSRange range = [pm.locality rangeOfString:@"市"];
                     int loc = (int)range.location;
                     NSString *citystr = [pm.locality substringToIndex:loc];

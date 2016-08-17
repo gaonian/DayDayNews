@@ -111,7 +111,7 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    NSLog(@"%@",_url);
+    DLog(@"%@",_url);
     NSString *getstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/video/list/%@/y/%d-10.html",_url,self.count];
     
     [mgr GET:getstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -154,7 +154,7 @@
 {
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
-    NSLog(@"%@",videodata.mp4_url);
+    DLog(@"%@",videodata.mp4_url);
 
         
     if (self.mpc) {
@@ -234,7 +234,7 @@
 
 - (void)l2click
 {
-    NSLog(@"l2Click");
+    DLog(@"l2Click");
 }
 
 
@@ -249,7 +249,7 @@
 #pragma mark - 监听播放完毕
 - (void)movieDidFinish
 {
-    NSLog(@"----播放完毕");
+    DLog(@"----播放完毕");
 
 //    if (self.mpc) {
 //        [self.mpc.view removeFromSuperview];
@@ -263,7 +263,7 @@
 #pragma mark - 监听播放状态
 - (void)movieStateDidChange
 {
-    NSLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
+    DLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
     if (self.mpc.playbackState == 1) {
         [self loadingViewIsShowing:NO];
     }
@@ -277,19 +277,19 @@
     UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
     switch (o) {
         case UIDeviceOrientationPortrait:            // 屏幕变正
-            NSLog(@"屏幕变正");
+            DLog(@"屏幕变正");
             [self up];
             break;
         case UIDeviceOrientationPortraitUpsideDown:
             break;
         case UIDeviceOrientationLandscapeLeft:       //屏幕左转
-            NSLog(@"屏幕变左");
+            DLog(@"屏幕变左");
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
             [self left];
             
             break;
         case UIDeviceOrientationLandscapeRight:   //屏幕右转
-            NSLog(@"屏幕变右");
+            DLog(@"屏幕变右");
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             
             
@@ -304,7 +304,7 @@
     if(self.mpc){
         
         if (self.smallmpc) {
-            NSLog(@"000");
+            DLog(@"000");
         }else{
             [[UIApplication sharedApplication] setStatusBarHidden:NO];
             [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
@@ -327,7 +327,7 @@
         if (self.mpc) {
             
             if (self.smallmpc) {
-                NSLog(@"小于");
+                DLog(@"小于");
             }else{
                 [[UIApplication sharedApplication] setStatusBarHidden:YES];
                 [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
@@ -381,7 +381,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.mpc) {
-        NSLog(@"销毁了");
+        DLog(@"销毁了");
         [self.mpc stop];
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;

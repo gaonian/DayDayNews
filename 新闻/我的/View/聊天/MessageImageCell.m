@@ -76,7 +76,7 @@
     CGFloat iconW = 40;
     CGFloat iconH = 40;
     CGFloat iconX;
-    NSLog(@"type----%d",type);
+    DLog(@"type----%d",type);
     if (type == 1) {// 别人发的
         iconX = 10;
     } else { // 自己的发的

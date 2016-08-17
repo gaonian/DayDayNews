@@ -157,7 +157,7 @@ static NSString *const ID = @"photo";
     
     NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",urlstr);
+    DLog(@"%@",urlstr);
     [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
         
             NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
@@ -243,7 +243,7 @@ static NSString *const ID = @"photo";
     PhotoShowViewController *photoShow = [[PhotoShowViewController alloc]init];
     photoShow.currentIndex = (int)indexPath.row;
     photoShow.mutaArray = self.photoArray;
-    NSLog(@"%@",self.photoArray);
+    DLog(@"%@",self.photoArray);
     [self.navigationController pushViewController:photoShow animated:YES];
 }
 
@@ -298,6 +298,13 @@ static NSString *const ID = @"photo";
     [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [self.collectionView reloadData];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+
 
 
 @end

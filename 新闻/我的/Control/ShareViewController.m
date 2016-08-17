@@ -65,9 +65,9 @@
 
 //    [ShareSDK showShareEditor:SSDKPlatformTypeSinaWeibo otherPlatformTypes:nil shareParams:shareParams onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
 //        
-//        NSLog(@"%lu",(unsigned long)state);
+//        DLog(@"%lu",(unsigned long)state);
 //        if(state == SSDKResponseStateSuccess){
-//            NSLog(@"分享成功");
+//            DLog(@"分享成功");
 //        }
 //        
 //    }];

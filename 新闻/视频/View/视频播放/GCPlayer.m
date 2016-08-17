@@ -212,7 +212,7 @@ SingleTonM(Player)
 //当前进度条方法
 - (void)videoSlierChangeValue:(id)sender {
     UISlider *slider = (UISlider *)sender;
-    NSLog(@"value change:%.1f",slider.value);
+    DLog(@"value change:%.1f",slider.value);
     
     if (slider.value == 0.000000) {
         __weak typeof(self) weakSelf = self;
@@ -225,7 +225,7 @@ SingleTonM(Player)
 //当前进度条方法
 - (void)videoSlierChangeValueEnd:(id)sender {
     UISlider *slider = (UISlider *)sender;
-    NSLog(@"value end:%.1f",slider.value);
+    DLog(@"value end:%.1f",slider.value);
     CMTime changedTime = CMTimeMakeWithSeconds(slider.value, 1);
     
     __weak typeof(self) weakSelf = self;
@@ -238,7 +238,7 @@ SingleTonM(Player)
 
 //添加监视者后，播放完毕执行方法
 - (void)moviePlayDidEnd:(NSNotification *)notification {
-    NSLog(@"Play end");
+    DLog(@"Play end");
     
     __weak typeof(self) weakSelf = self;
     [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
@@ -254,15 +254,15 @@ SingleTonM(Player)
     AVPlayerItem *playerItem = (AVPlayerItem *)object;
     if ([keyPath isEqualToString:@"status"]) {
         if ([playerItem status] == AVPlayerStatusReadyToPlay) {
-            NSLog(@"AVPlayerStatusReadyToPlay");
+            DLog(@"AVPlayerStatusReadyToPlay");
             self.playBtn.enabled = YES;
             CMTime duration = self.playItem.duration;// 获取视频总长度
             CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
           _totalTime = [self convertTime:totalSecond];// 转换成播放时间
             [self customVideoSlider:duration];// 自定义UISlider外观
-            NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
+            DLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
         } else if ([playerItem status] == AVPlayerStatusFailed) {
-            NSLog(@"AVPlayerStatusFailed");
+            DLog(@"AVPlayerStatusFailed");
         }
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
         NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
@@ -295,7 +295,7 @@ SingleTonM(Player)
     if (!hasAddOb) {
         _playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
             CGFloat currentSecond = playerItem.currentTime.value/playerItem.currentTime.timescale;// 计算当前在第几秒
-//            NSLog(@"%.2f  ==  %@",currentSecond,playerItem);
+//            DLog(@"%.2f  ==  %@",currentSecond,playerItem);
             
             
             [weakSelf.videoSlider setValue:currentSecond animated:YES];

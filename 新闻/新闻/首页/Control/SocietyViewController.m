@@ -302,7 +302,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DataModel *data = self.totalArray[indexPath.row];
-    NSLog(@"%@",data.title);
+    DLog(@"%@",data.title);
     
     NSString *ID = [NewsCell idForRow:data];
     
@@ -318,7 +318,7 @@
         NSString *url1 = [data.photosetID substringFromIndex:4];
         url1 = [url1 substringToIndex:4];
         NSString *url2 = [data.photosetID substringFromIndex:9];
-        NSLog(@"%@,%@",url1,url2);
+        DLog(@"%@,%@",url1,url2);
         
         url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
         TopViewController *topVC = [[TopViewController alloc]init];
@@ -326,7 +326,6 @@
         [self.navigationController pushViewController:topVC animated:YES];
         
     }else if ([ID isEqualToString:@"TopImageCell"]){
-        NSLog(@"");
     }else{
         
         DetailWebViewController *detailVC = [[DetailWebViewController alloc]init];
@@ -342,21 +341,17 @@
 #pragma mark 图片轮播 delegate
 -(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
-    //  http://c.3g.163.com/photo/api/set/0096/77789.json
     TopData *data = self.topArray[index];
     
     NSString *url1 = [data.url substringFromIndex:4];
     url1 = [url1 substringToIndex:4];
     NSString *url2 = [data.url substringFromIndex:9];
-    NSLog(@"%@,%@",url1,url2);
     
     url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
     TopViewController *topVC = [[TopViewController alloc]init];
     topVC.url = url2;
     [self.navigationController pushViewController:topVC animated:YES];
-    
 }
-
 
 -(void)handleThemeChanged
 {
@@ -364,6 +359,11 @@
     self.tableview.backgroundColor = [defaultManager themeColor];
     [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [self.tableview reloadData];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 @end

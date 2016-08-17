@@ -162,7 +162,7 @@
             });
         });
         [self removetimer];
-        NSLog(@"已成功录音");
+        DLog(@"已成功录音");
         self.recordBtn.hidden = YES;
         self.imageView.hidden = YES;
         self.recordLabel.hidden = NO;
@@ -204,7 +204,7 @@
 #pragma mark - 完成录制
 - (void)doneRecord
 {
-    NSLog(@"self.recordTool.recordFileUrl = %@",self.recordTool.recordFileUrl);
+    DLog(@"self.recordTool.recordFileUrl = %@",self.recordTool.recordFileUrl);
     if (self.delegate && [self.delegate respondsToSelector:@selector(LVRecordDoneRecord:)]) {
         [self.delegate LVRecordDoneRecord:self.recordTool.recordFileUrl];
     }

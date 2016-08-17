@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"---%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"UID"]);
+    DLog(@"---%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"UID"]);
     
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
     
@@ -132,7 +132,7 @@
 #pragma mark - 接收到消息
 - (void)didReceiveMessages:(NSArray *)aMessages
 {
-    NSLog(@"接收到消息了-----%@",aMessages);
+    DLog(@"接收到消息了-----%@",aMessages);
     for (EMMessage *msg in aMessages) {
         [self.conversation markMessageAsReadWithId:msg.messageId];
     }
@@ -206,14 +206,14 @@
     //    XMPPMessageArchiving_Message_CoreDataObject *msg = _resultsContr.fetchedObjects[indexPath.row];
     //    NSString *chatType = [msg.message attributeStringValueForName:@"bodyType"];
     //    if ([chatType isEqualToString:@"Video"]) {
-    //        NSLog(@"video---%@",msg.body);
+    //        DLog(@"video---%@",msg.body);
     //
     //        AVPlayer *player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:msg.body]];
     //        [player play];
     //        self.player = player;
     //
     //    }else{
-    //        NSLog(@"did---%@",msg.body);
+    //        DLog(@"did---%@",msg.body);
     //    }
 }
 
@@ -260,9 +260,9 @@
     [[EMClient sharedClient].chatManager asyncSendMessage:message progress:^(int progress) {
         
     } completion:^(EMMessage *message, EMError *error) {
-        NSLog(@"%@",[GYHTimeTool timeStr:[message timestamp]]);
+        DLog(@"%@",[GYHTimeTool timeStr:[message timestamp]]);
         if(error){
-            NSLog(@"error----%@",error);
+            DLog(@"error----%@",error);
         }
     }];
     [self.messageArr addObject:message];
@@ -315,14 +315,14 @@
 
 - (void)LVRecordTime:(double)time
 {
-    NSLog(@"%.0f",time);
+    DLog(@"%.0f",time);
     self.recordTime = [NSString stringWithFormat:@"%.0f''",time];
 }
 
 -(void)LVRecordDoneRecord:(NSURL *)recordURL
 {
     self.recordURL = recordURL;
-    NSLog(@"完成录制");
+    DLog(@"完成录制");
     [self.backrecordBtn removeFromSuperview];
     
     

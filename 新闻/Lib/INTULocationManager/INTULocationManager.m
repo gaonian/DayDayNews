@@ -37,7 +37,7 @@
 #endif /* INTU_ENABLE_LOGGING */
 
 #if INTU_ENABLE_LOGGING
-#   define INTULMLog(...)          NSLog(@"INTULocationManager: %@", [NSString stringWithFormat:__VA_ARGS__]);
+#   define INTULMLog(...)          DLog(@"INTULocationManager: %@", [NSString stringWithFormat:__VA_ARGS__]);
 #else
 #   define INTULMLog(...)
 #endif /* INTU_ENABLE_LOGGING */

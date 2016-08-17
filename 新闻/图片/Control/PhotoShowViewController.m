@@ -252,7 +252,7 @@
 #pragma mark - 收藏方法
 - (void)collectClick:(UIButton *)btn
 {
-    NSLog(@"%@",[self.mutaArray[self.index] title]);
+    DLog(@"%@",[self.mutaArray[self.index] title]);
 
     NSString *width = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_width]];
     NSString *height = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_height]];

@@ -32,7 +32,7 @@
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
     
     if(session == nil)
-        NSLog(@"Error creating session: %@", [sessionError description]);
+        DLog(@"Error creating session: %@", [sessionError description]);
     else
         [session setActive:YES error:nil];
     
@@ -51,7 +51,7 @@
     [self.recorder updateMeters];
     double lowPassResults = pow(10, (0.05 * [self.recorder peakPowerForChannel:0]));
     float result  = 10 * (float)lowPassResults;
-    NSLog(@"%f", result);
+    DLog(@"%f", result);
     int no = 0;
     if (result > 0 && result <= 1.3) {
         no = 1;
@@ -127,7 +127,7 @@ static id instance;
         NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *filePath = [path stringByAppendingPathComponent:LVRecordFielName];
         self.recordFileUrl = [NSURL fileURLWithPath:filePath];
-        NSLog(@"%@", filePath);
+        DLog(@"%@", filePath);
         
         // 3.设置录音的一些参数
         NSMutableDictionary *setting = [NSMutableDictionary dictionary];

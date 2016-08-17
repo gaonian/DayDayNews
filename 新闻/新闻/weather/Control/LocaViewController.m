@@ -144,7 +144,7 @@
     if(tableView == self.searchDisplayController.searchResultsTableView){
         cell.textLabel.text = self.resultsData[indexPath.row];
         if (self.resultsData[indexPath.row] == nil) {
-            NSLog(@"没结果");
+            DLog(@"没结果");
         }
     }else{
         CitiesGroup *group = self.groups[indexPath.section];
@@ -160,7 +160,7 @@
 {
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
-        NSLog(@" search   %@ ,%@",self.resultsData[indexPath.row],self.proviceResults[indexPath.row]);
+        DLog(@" search   %@ ,%@",self.resultsData[indexPath.row],self.proviceResults[indexPath.row]);
         if ([self.proviceResults[indexPath.row] isEqualToString:@"热门城市"]) {
             self.proviceResults[indexPath.row] = self.resultsData[indexPath.row];
         }

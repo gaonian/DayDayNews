@@ -149,7 +149,7 @@
 #pragma mark  上拉
 -(void)loadMoreData
 {
-    NSLog(@"%d",self.count);
+    DLog(@"%d",self.count);
     [self initNetWork];
     
     [self.tableview.footer endRefreshing];
@@ -210,7 +210,7 @@
 {
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
-    NSLog(@"%@",videodata.mp4_url);
+    DLog(@"%@",videodata.mp4_url);
     
     
     if (self.mpc) {
@@ -274,14 +274,14 @@
 
 - (void)l2click
 {
-    NSLog(@"l2Click");
+    DLog(@"l2Click");
 }
 
 
 #pragma mark - 监听播放完毕
 - (void)movieDidFinish
 {
-    NSLog(@"----播放完毕");
+    DLog(@"----播放完毕");
     
     //    if (self.mpc) {
     //        [self.mpc.view removeFromSuperview];
@@ -295,7 +295,7 @@
 #pragma mark - 监听播放状态
 - (void)movieStateDidChange
 {
-    NSLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
+    DLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
     if (self.mpc.playbackState == 1) {
         [self loadingViewIsShowing:NO];
     }
@@ -309,19 +309,19 @@
     UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
     switch (o) {
         case UIDeviceOrientationPortrait:            // 屏幕变正
-            NSLog(@"屏幕变正");
+            DLog(@"屏幕变正");
             [self up];
             break;
         case UIDeviceOrientationPortraitUpsideDown:
             break;
         case UIDeviceOrientationLandscapeLeft:       //屏幕左转
-            NSLog(@"屏幕变左");
+            DLog(@"屏幕变左");
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
             [self left];
             
             break;
         case UIDeviceOrientationLandscapeRight:   //屏幕右转
-            NSLog(@"屏幕变右");
+            DLog(@"屏幕变右");
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             
             
@@ -354,7 +354,7 @@
 
 - (void)left
 {
-    //    NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
+    //    DLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     //
     //    self.hpmpc = self.mpc;
     //    if (self.hpmpc) {
@@ -437,7 +437,7 @@
 //            [self setupSmallmpc];
             
         }else{
-//            NSLog(@"hahah");
+//            DLog(@"hahah");
 //                        self.smallmpc = NO;
 //                        VideoDataFrame *videoframe = self.videoArray[self.currtRow];
 //                        self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
@@ -457,7 +457,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     if (self.mpc) {
-        NSLog(@"销毁了");
+        DLog(@"销毁了");
         [self.mpc stop];
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;
