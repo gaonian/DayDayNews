@@ -243,7 +243,6 @@ static NSString *const ID = @"photo";
     PhotoShowViewController *photoShow = [[PhotoShowViewController alloc]init];
     photoShow.currentIndex = (int)indexPath.row;
     photoShow.mutaArray = self.photoArray;
-    DLog(@"%@",self.photoArray);
     [self.navigationController pushViewController:photoShow animated:YES];
 }
 
