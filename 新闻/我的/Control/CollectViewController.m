@@ -59,6 +59,7 @@
     tableview.delegate = self;
     tableview.dataSource = self;
     [self.view addSubview:tableview];
+    tableview.tableFooterView = [[UIView alloc]init];
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"新闻收藏",@"图片收藏",nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];

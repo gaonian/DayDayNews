@@ -174,7 +174,9 @@
     self.imageV.frame = CGRectMake(0, 0, imageW, imageH);
     [self.imageV sd_setImageWithURL:purl placeholderImage:nil];
     // 文字
-    self.countlabel.text = [NSString stringWithFormat:@"%d/%d",i + 1,(int)self.mutaArray.count];
+    if (self.mutaArray.count > 1) {
+        self.countlabel.text = [NSString stringWithFormat:@"%d/%d",i + 1,(int)self.mutaArray.count];
+    }
     
     if ([[DataBase queryWithCollectPhoto:[self.mutaArray[i] image_url]] isEqualToString:@"1"]) {
         self.collectbtn.selected = YES;

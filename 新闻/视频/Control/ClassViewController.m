@@ -73,6 +73,7 @@
     tableview.frame = self.view.frame;
     [self.view addSubview:tableview];
     self.tableview = tableview;
+    self.tableview.tableFooterView = [[UIView alloc]init];
     
 }
 

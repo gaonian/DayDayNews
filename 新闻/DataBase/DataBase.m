@@ -135,8 +135,8 @@ static FMDatabaseQueue *_queue;
     [_queue inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:@"select * from t_photos where image_url = ?;",photourl];
         while (rs.next) {
-            NSString *docid = [rs stringForColumn:@"image_url"];
-            DLog(@"%@",docid);
+//            NSString *docid = [rs stringForColumn:@"image_url"];
+//            DLog(@"%@",docid);
             str = @"1";
         }
     }];

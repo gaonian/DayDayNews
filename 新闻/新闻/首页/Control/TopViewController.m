@@ -144,8 +144,10 @@
     //标题
     self.titleLabel.text = self.setname;
     //数量
-    NSString *countNum = [NSString stringWithFormat:@"1/%d",self.count];
-    self.countLabel.text = countNum;
+    if (self.count > 1) {
+        NSString *countNum = [NSString stringWithFormat:@"1/%d",self.count];
+        self.countLabel.text = countNum;
+    }
     //内容
     [self setContentWithIndex:0];
     
@@ -195,7 +197,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     int index = self.scroll.contentOffset.x / self.scroll.frame.size.width;
-    DLog(@"%d",index);
     // 添加图片
     [self setImgWithIndex:index];
     
@@ -252,6 +253,11 @@
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)dealloc
+{
+    DLog(@"dealloc");
 }
 
 
