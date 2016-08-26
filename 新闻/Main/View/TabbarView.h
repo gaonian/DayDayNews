@@ -18,6 +18,7 @@
 
 @interface TabbarView : UIView
 
+- (void)selectIndex:(int)index;
 -(void)addTabBarButtonWithItem:(UITabBarItem *)item;
 @property(nonatomic,weak) id<TabbarViewDelegate> delegate;
 

@@ -14,6 +14,8 @@
 
 #define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
+#define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+
 
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD+MJ.h"
@@ -22,8 +24,6 @@
 #import "UIView+Frame.h"
 #import "NSString+Extension.h"
 #import "GYHHeadeRefreshController.h"
-
-
 #import "ThemeManager.h"
 
 #ifdef DEBUG

@@ -29,6 +29,7 @@
 @interface AppDelegate ()<EMChatManagerDelegate>
 
 @property (nonatomic , strong) NSArray *conversations;
+@property (nonatomic , strong) TabbarViewController *tabbarMain;
 
 @end
 
@@ -47,10 +48,10 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    TabbarViewController *main = [[TabbarViewController alloc]init];
-    self.window.rootViewController = main;
+    self.tabbarMain = [[TabbarViewController alloc]init];
+    self.window.rootViewController = self.tabbarMain;
     [self.window makeKeyAndVisible];
-    
+        
     //环信
     EMOptions *options = [EMOptions optionsWithAppkey:@"gaoyuhang#daydaynews"];
     options.apnsCertName = @"gaoyuhangDevelop";
@@ -66,6 +67,11 @@
     [self loadConversations];
     
     return YES;
+}
+
+- (void)selectTabbarIndex:(int)index
+{
+    [self.tabbarMain selectIndex:index];
 }
 
 

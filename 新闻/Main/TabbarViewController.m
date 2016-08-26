@@ -43,6 +43,10 @@
     }
 }
 
+- (void)selectIndex:(int)index
+{
+    [self.tabbar selectIndex:index];
+}
 
 -(void)initTabbar
 {
@@ -102,6 +106,5 @@
     
     [self.tabbar addTabBarButtonWithItem:childVc.tabBarItem];
 }
-
 
 @end

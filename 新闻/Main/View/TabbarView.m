@@ -17,8 +17,6 @@
 
 @implementation TabbarView
 
-static int i = 0;
-
 
 -(void)addTabBarButtonWithItem:(UITabBarItem *)item
 {
@@ -40,7 +38,14 @@ static int i = 0;
     }
 }
 
--(void)buttonClick:(TabbarButton *)btn
+- (void)selectIndex:(int)index
+{
+    TabbarButton *btn = self.subviews[index];
+    btn.tag = index;
+    [self buttonClick:btn];
+}
+
+- (void)buttonClick:(TabbarButton *)btn
 {
     if ([self.delegate respondsToSelector:@selector(tabbar:didselectedButtonFrom:to:)]) {
         [self.delegate tabbar:self didselectedButtonFrom:(int)self.selectedButton.tag to:(int)btn.tag];

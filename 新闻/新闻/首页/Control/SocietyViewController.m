@@ -145,14 +145,14 @@
 
 -(void)initScrollView
 {
-        // 网络加载 --- 创建不带标题的图片轮播器
-        SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
-        cycleScrollView.delegate = self;
-        cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-        cycleScrollView.titlesGroup = self.titleArray;
-        cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-        cycleScrollView.autoScrollTimeInterval = 6.0;
-        self.tableview.tableHeaderView = cycleScrollView;
+    // 网络加载 --- 创建不带标题的图片轮播器
+    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
+    cycleScrollView.delegate = self;
+    cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
+    cycleScrollView.titlesGroup = self.titleArray;
+    cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
+    cycleScrollView.autoScrollTimeInterval = 6.0;
+    self.tableview.tableHeaderView = cycleScrollView;
 }
 
 

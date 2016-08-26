@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface TabbarViewController : UITabBarController
-
+- (void)selectIndex:(int)index;
 @end

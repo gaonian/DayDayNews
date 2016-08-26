@@ -14,6 +14,7 @@
 #import "PhotoCollectModel.h"
 #import "DetailWebViewController.h"
 #import "PhotoShowViewController.h"
+#import "AppDelegate.h"
 
 @interface CollectViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
