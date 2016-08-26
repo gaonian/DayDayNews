@@ -22,7 +22,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "TabbarView.h"
 
-@interface OtherNewsViewController ()<UITableViewDelegate,UITableViewDataSource,TabbarViewDelegate>
+@interface OtherNewsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *totalArray;
 @property (nonatomic , strong) NSMutableArray *topArray;
 @property (nonatomic , strong) NSMutableArray *titleArray;
@@ -35,7 +35,7 @@
 
 @implementation OtherNewsViewController
 
--(NSMutableArray *)totalArray
+- (NSMutableArray *)totalArray
 {
     if (!_totalArray) {
         _totalArray = [NSMutableArray array];
@@ -48,21 +48,19 @@
     [super viewDidLoad];
     
     [self initTableView];
-    
-    [self setupRefreshView];
-    
+        
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:@"新闻" object:nil];
     
     //监听夜间模式的改变
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
 }
 
--(void)mynotification
+- (void)mynotification
 {
     [self.tableview.header beginRefreshing];
 }
 
--(void)initTableView
+- (void)initTableView
 {
     UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49 - 64)];
     tableview.backgroundColor = [[ThemeManager sharedInstance] themeColor];
@@ -70,36 +68,60 @@
     tableview.dataSource = self;
     [self.view addSubview:tableview];
     self.tableview = tableview;
-    self.tableview.tableFooterView = [[UIView alloc]init];    
-}
-
-//集成刷新控件
--(void)setupRefreshView
-{
-    //1.下拉刷新
-    self.tableview.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    [self.tableview.header beginRefreshing];
-    //2.上拉刷新
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.tableview.tableFooterView = [[UIView alloc]init];
     
-}
-#pragma mark  下拉
--(void)loadNewData
-{
-    self.page = 1;
-    [self requestNet];
+    IMP_BLOCK_SELF(OtherNewsViewController);
+    self.tableview.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        block_self.page = 1;
+        [block_self requestNet];
+    }];
+    [self.tableview.header beginRefreshing];
+    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [block_self requestNet];
+    }];
 }
 
-#pragma mark  上拉
--(void)loadMoreData
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self requestNet];
-    [self.tableview.footer endRefreshing];
+    return self.totalArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewTableViewCell *cell = [NewTableViewCell cellWithTableView:tableView];
+        ThemeManager *defaultManager = [ThemeManager sharedInstance];
+    if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
+        cell.backgroundColor = defaultManager.themeColor;
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    cell.dataFrame = self.totalArray[indexPath.row];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewDataFrame *dataframe = self.totalArray[indexPath.row];
+    
+    return dataframe.cellH;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewDataFrame *dataframe = self.totalArray[indexPath.row];
+    NewData *data = dataframe.NewData;
+    testViewController *detail = [[testViewController alloc]init];
+    detail.url = data.url;
+    [self.navigationController pushViewController:detail animated:YES];
+    
 }
 
 #pragma mark 网络请求
 -(void)requestNet
 {
+    IMP_BLOCK_SELF(OtherNewsViewController);
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     dic[@"page"] = [NSString stringWithFormat:@"%d",self.page];
@@ -115,59 +137,18 @@
             dataFrame.NewData = data;
             [statusFrameArray addObject:dataFrame];
         }
-        [self.totalArray addObjectsFromArray:statusFrameArray];
-        self.page++;
+        [block_self.totalArray addObjectsFromArray:statusFrameArray];
+        block_self.page++;
         // 刷新表格
-        [self.tableview reloadData];
+        [block_self.tableview reloadData];
         
-        [self.tableview.header endRefreshing];
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
     }];
 }
-
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.totalArray.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NewTableViewCell *cell = [NewTableViewCell cellWithTableView:tableView];
-        ThemeManager *defaultManager = [ThemeManager sharedInstance];
-    if ([defaultManager.themeName isEqualToString:@"高贵紫"]) {
-        cell.backgroundColor = defaultManager.themeColor;
-    }else{
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-    cell.dataFrame = self.totalArray[indexPath.row];
-    
-    return cell;
-    
-    
-}
-
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NewDataFrame *dataframe = self.totalArray[indexPath.row];
-    
-    return dataframe.cellH;
-}
-
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NewDataFrame *dataframe = self.totalArray[indexPath.row];
-    NewData *data = dataframe.NewData;
-    testViewController *detail = [[testViewController alloc]init];
-    detail.url = data.url;
-    [self.navigationController pushViewController:detail animated:YES];
-    
-}
-
 
 - (void)dealloc
 {

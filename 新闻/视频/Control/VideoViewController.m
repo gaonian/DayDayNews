@@ -40,7 +40,7 @@
 
 @implementation VideoViewController
 
--(NSMutableArray *)videoArray
+- (NSMutableArray *)videoArray
 {
     if (!_videoArray) {
         _videoArray = [NSMutableArray array];
@@ -57,8 +57,6 @@
     self.view.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
     
     [self initUI];
-
-    [self setupRefreshView];
     
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:self.title object:nil];
     
@@ -69,12 +67,12 @@
     [nc addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];
     
 }
--(void)mynotification
+- (void)mynotification
 {
     [self.tableview.header beginRefreshing];
 }
 
--(void)initUI
+- (void)initUI
 {
     UITableView *tableview = [[UITableView alloc]init];
     tableview.backgroundColor = [UIColor clearColor];
@@ -84,6 +82,20 @@
     [self.view addSubview:tableview];
     self.tableview = tableview;
     self.tableview.tableFooterView = [[UIView alloc]init];
+    
+    IMP_BLOCK_SELF(VideoViewController);
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingBlock:^{
+        block_self.count = 0;
+        [block_self initNetWork];
+    }];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableview.header = header;
+    [header beginRefreshing];
+    
+    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [block_self initNetWork];
+    }];
     
     UIView *view = [[UIView alloc]init];
     view.frame = CGRectMake(0, 0,SCREEN_WIDTH,SCREEN_WIDTH * 0.25);
@@ -124,69 +136,6 @@
     }
 }
 
-//集成刷新控件
--(void)setupRefreshView
-{
-    //1.下拉刷新
-    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    // 隐藏时间
-    header.lastUpdatedTimeLabel.hidden = YES;
-    // 隐藏状态
-    header.stateLabel.hidden = YES;
-    self.tableview.header = header;
-    [header beginRefreshing];
-    //2.上拉刷新
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-   
-}
-#pragma mark  下拉
--(void)loadNewData
-{
-    self.count = 0;
-    [self initNetWork];
-    [self.tableview.header endRefreshing];
-}
-#pragma mark  上拉
--(void)loadMoreData
-{
-    DLog(@"%d",self.count);
-    [self initNetWork];
-    
-    [self.tableview.footer endRefreshing];
-}
-
-
--(void)initNetWork
-{
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    
-    NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
-    
-    [mgr GET:getstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        NSArray *dataarray = [VideoData objectArrayWithKeyValuesArray:responseObject[@"videoList"]];
-        // 创建frame模型对象
-        NSMutableArray *statusFrameArray = [NSMutableArray array];
-        for (VideoData *videodata in dataarray) {
-            VideoDataFrame *videodataFrame = [[VideoDataFrame alloc] init];
-            // 传递微博模型数据
-            videodataFrame.videodata = videodata;
-            [statusFrameArray addObject:videodataFrame];
-        }
-        
-        [self.videoArray addObjectsFromArray:statusFrameArray];
-        
-        self.count += 10;
-        // 刷新表格
-        [self.tableview reloadData];
-
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.videoArray.count;
@@ -210,8 +159,6 @@
 {
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
-    DLog(@"%@",videodata.mp4_url);
-    
     
     if (self.mpc) {
         [self.mpc.view removeFromSuperview];
@@ -457,13 +404,48 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     if (self.mpc) {
-        DLog(@"销毁了");
         [self.mpc stop];
         [self.mpc.view removeFromSuperview];
         self.mpc = nil;
     }
 }
 
+- (void)initNetWork
+{
+    IMP_BLOCK_SELF(VideoViewController);
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    
+    NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
+    
+    [mgr GET:getstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSArray *dataarray = [VideoData objectArrayWithKeyValuesArray:responseObject[@"videoList"]];
+        // 创建frame模型对象
+        NSMutableArray *statusFrameArray = [NSMutableArray array];
+        for (VideoData *videodata in dataarray) {
+            VideoDataFrame *videodataFrame = [[VideoDataFrame alloc] init];
+            videodataFrame.videodata = videodata;
+            [statusFrameArray addObject:videodataFrame];
+        }
+        
+        if (block_self.videoArray.count == 0) {
+            block_self.videoArray = statusFrameArray;
+        }else{
+            [block_self.videoArray addObjectsFromArray:statusFrameArray];
+        }
+        
+        block_self.count += 10;
+        [block_self.tableview reloadData];
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
+        block_self.tableview.footer.hidden = block_self.videoArray.count < 10;
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
+    }];
+}
 
 -(void)handleThemeChanged
 {

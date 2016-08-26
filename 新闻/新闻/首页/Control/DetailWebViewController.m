@@ -75,13 +75,13 @@
 - (void)setupData
 {
     NSString *url = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/%@/full.html",self.dataModel.docid];
-    DLog(@"%@",url);
     self.url = url;
+    IMP_BLOCK_SELF(DetailWebViewController);
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     [mgr GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        self.detailModel = [DetailWebModel detailWithDict:responseObject[self.dataModel.docid]];
-        [self showInWebView];
+        block_self.detailModel = [DetailWebModel detailWithDict:responseObject[block_self.dataModel.docid]];
+        [block_self showInWebView];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         

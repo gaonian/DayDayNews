@@ -32,7 +32,6 @@
 		1945F09A1BAFDD0200A38747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1945F0991BAFDD0200A38747 /* Assets.xcassets */; };
 		1945F0A81BAFDD0200A38747 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945F0A71BAFDD0200A38747 /* __Tests.m */; };
 		1945F0B31BAFDD0200A38747 /* __UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945F0B21BAFDD0200A38747 /* __UITests.m */; };
-		194649D01BB983BC00B280A8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194649CF1BB983BC00B280A8 /* DetailViewController.m */; };
 		196585D91CCBB9B000A9B5C5 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585CF1CCBB9B000A9B5C5 /* FMDatabase.m */; };
 		196585DA1CCBB9B000A9B5C5 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585D11CCBB9B000A9B5C5 /* FMDatabaseAdditions.m */; };
 		196585DB1CCBB9B000A9B5C5 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585D31CCBB9B000A9B5C5 /* FMDatabasePool.m */; };
@@ -316,8 +315,6 @@
 		1945F0AE1BAFDD0200A38747 /* 新闻UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "新闻UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1945F0B21BAFDD0200A38747 /* __UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __UITests.m; sourceTree = "<group>"; };
 		1945F0B41BAFDD0200A38747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		194649CE1BB983BC00B280A8 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		194649CF1BB983BC00B280A8 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		196585CE1CCBB9B000A9B5C5 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		196585CF1CCBB9B000A9B5C5 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		196585D01CCBB9B000A9B5C5 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -1351,8 +1348,6 @@
 				19C33DEF1BB109A20059238A /* VideoViewController.m */,
 				1911F2141BBACD990096ADCB /* ClassViewController.h */,
 				1911F2151BBACD990096ADCB /* ClassViewController.m */,
-				194649CE1BB983BC00B280A8 /* DetailViewController.h */,
-				194649CF1BB983BC00B280A8 /* DetailViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -1901,7 +1896,6 @@
 				19C33E341BB109A20059238A /* AFHTTPRequestOperationManager.m in Sources */,
 				19747D391C87F65600C4CBBD /* DetailWebViewController.m in Sources */,
 				198BD1E61BBB842A00B21A07 /* SDWebImagePrefetcher.m in Sources */,
-				194649D01BB983BC00B280A8 /* DetailViewController.m in Sources */,
 				19D000121BB417D0009EA71C /* TAAbstractDotView.m in Sources */,
 				19D000171BB417D0009EA71C /* SDCycleScrollView.m in Sources */,
 				19ED1DA41C8729C900AD6E0A /* ImagesCell.m in Sources */,

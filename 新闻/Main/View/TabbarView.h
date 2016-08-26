@@ -7,19 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TabbarView;
-@protocol TabbarViewDelegate <NSObject>
-
-@optional
--(void)tabbar:(TabbarView *)tabbar didselectedButtonFrom:(int)from to:(int)to;
-
-@end
-
 
 @interface TabbarView : UIView
 
+@property (nonatomic , copy) void (^btnSelectBlock)(int to);
+
 - (void)selectIndex:(int)index;
--(void)addTabBarButtonWithItem:(UITabBarItem *)item;
-@property(nonatomic,weak) id<TabbarViewDelegate> delegate;
+- (void)addTabBarButtonWithItem:(UITabBarItem *)item;
 
 @end

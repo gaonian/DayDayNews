@@ -163,7 +163,6 @@
 #pragma mark -- 根据i添加图片，设置每个图片的尺寸
 - (void)setImgWithIndex:(int)i
 {
-    [self restZoom];
     //图片
     NSURL *purl = [NSURL URLWithString:[self.mutaArray[i] image_url]];
     CGFloat imageW = SCREEN_WIDTH;
@@ -197,38 +196,6 @@
     if (scrollView == self.scrollview) {
         [self setImgWithIndex:index];
     }
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return self.imageV;
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    
-    if (scrollView.zoomScale > 1.0 && scrollView.zoomScale < 3.0) {
-        self.frontScrollV.contentSize = CGSizeMake(self.imageV.width, self.imageV.height);
-        self.frontScrollV.y = SCREEN_WIDTH*self.index;
-        self.frontScrollV.width = SCREEN_WIDTH;
-        
-        if (self.imageV.height < SCREEN_HEIGHT) {
-            self.frontScrollV.height = self.imageV.height;
-            self.frontScrollV.y = (SCREEN_HEIGHT - self.imageV.height)/2;
-        }else{
-            self.frontScrollV.height = SCREEN_HEIGHT;
-            self.frontScrollV.y = 0;
-        }
-    }else if (scrollView.zoomScale <= 1.0) {
-        self.frontScrollV.frame = CGRectMake((SCREEN_WIDTH-self.imageV.width)/2 + SCREEN_WIDTH*self.index, (SCREEN_HEIGHT-self.imageV.height)/2, self.imageV.width, self.imageV.height);
-    }
-}
-
-- (void)restZoom
-{
-    [self.frontScrollV setZoomScale:self.frontScrollV.minimumZoomScale animated:NO];
-    [self.frontScrollV zoomToRect:CGRectMake(0, 0, self.frontScrollV.width, self.frontScrollV.height ) animated:NO];
-    self.frontScrollV.frame = CGRectMake(0, (SCREEN_HEIGHT - self.imageV.height)/2, SCREEN_WIDTH, self.imageV.height);
-    self.frontScrollV.contentSize = CGSizeMake(self.frontScrollV.width * self.frontScrollV.zoomScale, self.frontScrollV.height * self.frontScrollV.zoomScale );
 }
 
 #pragma mark 保存图片

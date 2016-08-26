@@ -54,7 +54,6 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
     [self initUI];
-    [self setupRefreshView];
     
     //监听屏幕改变
     UIDevice *device = [UIDevice currentDevice]; //Get the device object
@@ -75,44 +74,26 @@
     self.tableview = tableview;
     self.tableview.tableFooterView = [[UIView alloc]init];
     
-}
-
-//集成刷新控件
--(void)setupRefreshView
-{
-    //1.下拉刷新
-    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    // 隐藏时间
+    IMP_BLOCK_SELF(ClassViewController);
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingBlock:^{
+        block_self.count = 0;
+        [block_self initNetWork];
+    }];
     header.lastUpdatedTimeLabel.hidden = YES;
-    // 隐藏状态
     header.stateLabel.hidden = YES;
     self.tableview.header = header;
     [header beginRefreshing];
-    //2.上拉刷新
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
-}
-#pragma mark  下拉
--(void)loadNewData
-{
-    self.count = 0;
-    [self initNetWork];
-    [self.tableview.header endRefreshing];
-}
-#pragma mark  上拉
--(void)loadMoreData
-{
-    [self initNetWork];
-    
-    [self.tableview.footer endRefreshing];
+    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [block_self initNetWork];
+    }];
 }
 
-
--(void)initNetWork
+- (void)initNetWork
 {
+    IMP_BLOCK_SELF(ClassViewController);
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    DLog(@"%@",_url);
     NSString *getstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/video/list/%@/y/%d-10.html",_url,self.count];
     
     [mgr GET:getstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -122,28 +103,35 @@
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (VideoData *videodata in dataarray) {
             VideoDataFrame *videodataFrame = [[VideoDataFrame alloc] init];
-            // 传递微博模型数据
             videodataFrame.videodata = videodata;
             [statusFrameArray addObject:videodataFrame];
         }
         
-        [self.videoArray addObjectsFromArray:statusFrameArray];
+        if (block_self.videoArray.count == 0) {
+            block_self.videoArray = statusFrameArray;
+        }else{
+            [block_self.videoArray addObjectsFromArray:statusFrameArray];
+        }
         
-        self.count += 10;
-        // 刷新表格
-        [self.tableview reloadData];
+        block_self.count += 10;
+        [block_self.tableview reloadData];
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
+        block_self.tableview.footer.hidden = block_self.videoArray.count < 10;
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
     }];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.videoArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *cell = [VideoCell cellWithTableView:tableView];
     cell.videodataframe = self.videoArray[indexPath.row];
@@ -151,7 +139,7 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;

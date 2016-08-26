@@ -26,6 +26,12 @@
 #import "GYHHeadeRefreshController.h"
 #import "ThemeManager.h"
 
+#if __has_feature(objc_arc)
+#define IMP_BLOCK_SELF(type) __weak type *block_self=self;
+#else
+#define IMP_BLOCK_SELF(type) __block type *block_self=self;
+#endif
+
 #ifdef DEBUG
 #define DLog(...) NSLog(@"%s(第%d行) %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #else

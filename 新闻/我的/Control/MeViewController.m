@@ -25,6 +25,9 @@
 
 #import "EMSDK.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDKUI.h>
+
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate,EMChatManagerDelegate>
 
@@ -122,7 +125,6 @@
 #pragma mark - 接收到聊天消息数改变
 - (void)ChatCountChanged:(NSNotification *)noti
 {
-    DLog(@"%@",noti.object);
     self.chatCount = noti.object;
     self.arrays = nil;
     [self setupGroup0];
@@ -131,7 +133,7 @@
 }
 
 
--(void)setupGroup0
+- (void)setupGroup0
 {
     SettingItem *shoucang = [SettingArrowItem itemWithItem:@"MorePush" title:@"收藏" VcClass:[CollectViewController class]];
     SettingItem *handShake = [SettingSwitchItem itemWithItem:@"handShake" title:@"夜间模式"];
@@ -142,21 +144,25 @@
     [self.arrays addObject:group0];
 }
 
--(void)setupGroup2
+- (void)setupGroup2
 {
-    SettingItem *MoreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" subtitle:self.chatCount VcClass:[ChatViewController class]];
-    SettingItem *MoreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:[ShareViewController class]];
-    SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存" subtitle:self.clearCacheName];
-    handShake.option = ^{
-        [self click];
+    IMP_BLOCK_SELF(MeViewController);
+    SettingItem *moreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" subtitle:self.chatCount VcClass:[ChatViewController class]];
+    SettingItem *moreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:nil];
+    moreShare.optionHandler = ^{
+        [block_self shareAction];
     };
-    SettingItem *MoreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
-    MoreAbout.option = ^{
+    SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存" subtitle:self.clearCacheName];
+    handShake.optionHandler = ^{
+        [block_self click];
+    };
+    SettingItem *moreAbout = [SettingArrowItem itemWithItem:@"MoreAbout" title:@"关于" VcClass:nil];
+    moreAbout.optionHandler = ^{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"关于我们" message:@"此项目只供技术交流，不能作为商业用途。\n邮箱:yugao5971@gmail.com\nGitHub:github.com/gaoyuhang" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         [alert show];
     };
     SettingGroup *group1 = [[SettingGroup alloc]init];
-    group1.items = @[MoreHelp,MoreShare,handShake,MoreAbout];
+    group1.items = @[moreHelp,moreShare,handShake,moreAbout];
     [self.arrays addObject:group1];
 }
 
@@ -176,7 +182,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //创建cell
     SettingCell *cell = [SettingCell cellWithTableView:tableView];
     if ([[[ThemeManager sharedInstance] themeName] isEqualToString:@"系统默认"]) {
         cell.backgroundColor = [UIColor whiteColor];
@@ -194,16 +199,14 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //取消选中这行
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //模型数据
     SettingGroup *group = self.arrays[indexPath.section];
     SettingItem *item = group.items[indexPath.row];
     
-    if (item.option) {
-        item.option();
+    if (item.optionHandler) {
+        item.optionHandler();
     }else if ([item isKindOfClass:[SettingArrowItem class]]) {
         SettingArrowItem *arrowItem = (SettingArrowItem *)item;
         if (arrowItem.VcClass == nil) return;
@@ -229,8 +232,6 @@
 {
     return 1;
 }
-
-
 
 
 
@@ -313,6 +314,7 @@
 #pragma mark - 清除缓存
 - (void)click
 {
+    IMP_BLOCK_SELF(MeViewController);
     MBProgressHUD *hud = [[MBProgressHUD alloc] init];
     [[[UIApplication sharedApplication].windows firstObject] addSubview:hud];
     //加载条上显示文本
@@ -330,14 +332,13 @@
     } completionBlock:^{
         [[SDImageCache sharedImageCache] clearDisk];
         [[SDImageCache sharedImageCache] clearMemory];
-        self.clearCacheName = @"0.0KB";
-        self.arrays = nil;
-        [self setupGroup0];
-        [self setupGroup2];
-        [self.tableview reloadData];
+        block_self.clearCacheName = @"0.0KB";
+        block_self.arrays = nil;
+        [block_self setupGroup0];
+        [block_self setupGroup2];
+        [block_self.tableview reloadData];
         [hud removeFromSuperview];
     }];
-    
 }
 
 
@@ -365,6 +366,48 @@
     self.tableview.delegate = nil;
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+
+- (void)shareAction
+{
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKEnableUseClientShare];
+    [shareParams SSDKSetupShareParamsByText:@"快来使用我吧 Day Day News"
+                                     images:nil
+                                        url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
+                                      title:@"Day Day News"
+                                       type:SSDKContentTypeAuto];
+    
+    [ShareSDK share:SSDKPlatformTypeSinaWeibo parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+        switch (state) {
+            case SSDKResponseStateSuccess:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+                break;
+            case SSDKResponseStateFail:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
 }
 
 @end

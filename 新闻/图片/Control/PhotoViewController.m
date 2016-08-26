@@ -81,12 +81,10 @@ static NSString *const ID = @"photo";
     self.numberOfItemsInRow = 4;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem ItemWithIcon:@"categories" highIcon:nil target:self action:@selector(openMenu:)];
 
-    self.pn = 0;
     self.tag1 = @"美女";
     self.tag2 = @"小清新";
     
     [self initCollection];
-    [self setupRefreshView];
     
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:self.title object:nil];
     
@@ -95,12 +93,12 @@ static NSString *const ID = @"photo";
     
 }
 
--(void)mynotification
+- (void)mynotification
 {
     [self.collectionView.header beginRefreshing];
 }
 
--(void)initCollection
+- (void)initCollection
 {
   
     HMWaterflowLayout *layout = [[HMWaterflowLayout alloc]init];
@@ -116,103 +114,19 @@ static NSString *const ID = @"photo";
     
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
-   
-}
-
-
-
-//集成刷新控件
--(void)setupRefreshView
-{
-    //1.下拉刷新
-    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    // 隐藏时间
+    
+    IMP_BLOCK_SELF(PhotoViewController);
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingBlock:^{
+        block_self.pn = 0;
+        [block_self initNetWorking];
+    }];
     header.lastUpdatedTimeLabel.hidden = YES;
-    // 隐藏状态
     header.stateLabel.hidden = YES;
     self.collectionView.header = header;
     [header beginRefreshing];
-    //2.上拉刷新
-    self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
-}
-#pragma mark  下拉
--(void)loadNewData
-{
-    [self initNetWorking];
-}
-#pragma mark  上拉
--(void)loadMoreData
-{
-    [self NetWorking];
-}
-
-
--(void)initNetWorking
-{
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
-    dic[@"rn"] = @60;
-    
-    NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
-    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    DLog(@"%@",urlstr);
-    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
-        
-            NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
-            // 创建frame模型对象
-            NSMutableArray *statusFrameArray = [NSMutableArray array];
-            for (Photo *photo in dataarray) {
-                [statusFrameArray addObject:photo];
-            }
-        
-        if (dataarray.count) {
-            [self.photoArray removeAllObjects];
-        }
-            [self.photoArray addObjectsFromArray:statusFrameArray];
-            
-            self.pn += 60;
-        
-        // 刷新表格
-        [self.collectionView reloadData];
-        [self.collectionView.header endRefreshing];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-#pragma mark 加载更多数据
--(void)NetWorking
-{
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
-    dic[@"rn"] = @60;
-    
-    NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
-    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
-        
-        NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
-        // 创建frame模型对象
-        NSMutableArray *statusFrameArray = [NSMutableArray array];
-        for (Photo *photo in dataarray) {
-            [statusFrameArray addObject:photo];
-        }
-
-        [self.photoArray addObjectsFromArray:statusFrameArray];
-        
-        self.pn += 60;
-        
-        // 刷新表格
-        [self.collectionView reloadData];
-        
-        [self.collectionView.footer endRefreshing];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
+    self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [block_self initNetWorking];
     }];
 }
 
@@ -303,7 +217,41 @@ static NSString *const ID = @"photo";
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
+- (void)initNetWorking
+{
+    IMP_BLOCK_SELF(PhotoViewController);
+    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
+    dic[@"rn"] = @60;
+    
+    NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
+    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-
+    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
+        
+        NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
+        NSMutableArray *statusFrameArray = [NSMutableArray array];
+        for (Photo *photo in dataarray) {
+            [statusFrameArray addObject:photo];
+        }
+        
+        if (block_self.photoArray.count == 0) {
+            block_self.photoArray = statusFrameArray;
+        }else{
+            [block_self.photoArray addObjectsFromArray:statusFrameArray];
+        }
+        
+        block_self.pn += 60;
+        block_self.collectionView.footer.hidden = block_self.photoArray.count < 60;
+        [block_self.collectionView reloadData];
+        [block_self.collectionView.header endRefreshing];
+        [block_self.collectionView.footer endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [block_self.collectionView.header endRefreshing];
+        [block_self.collectionView.footer endRefreshing];
+    }];
+}
 
 @end

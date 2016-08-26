@@ -6,10 +6,6 @@
 //  Copyright © 2015年 apple. All rights reserved.
 //
 
-#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
-
-
 #import "SocietyViewController.h"
 #import "testViewController.h"
 #import "AFNetworking.h"
@@ -31,10 +27,10 @@
 #import "TopCell.h"
 
 #import "DetailWebViewController.h"
-#import "DataBase.h"    //数据库
+#import "DataBase.h"
 #import "NSDate+gyh.h"
 
-@interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,TabbarViewDelegate>
+@interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 @property (nonatomic , strong) NSMutableArray *totalArray;
 @property (nonatomic , strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic , strong) NSMutableArray *topArray;
@@ -48,28 +44,28 @@
 
 @implementation SocietyViewController
 
--(NSMutableArray *)totalArray
+- (NSMutableArray *)totalArray
 {
     if (!_totalArray) {
         _totalArray = [NSMutableArray array];
     }
     return _totalArray;
 }
--(NSMutableArray *)imagesArray
+- (NSMutableArray *)imagesArray
 {
     if (!_imagesArray) {
         _imagesArray = [NSMutableArray array];
     }
     return _imagesArray;
 }
--(NSMutableArray *)titleArray
+- (NSMutableArray *)titleArray
 {
     if (!_titleArray) {
         _titleArray = [NSMutableArray array];
     }
     return _titleArray;
 }
--(NSMutableArray *)topArray
+- (NSMutableArray *)topArray
 {
     if (!_topArray) {
         _topArray = [NSMutableArray array];
@@ -85,22 +81,18 @@
     //请求滚动数据
     [self initTopNet];
     
-    [self setupRefreshView];
-    
     //监听夜间模式的改变
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleThemeChanged) name:Notice_Theme_Changed object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mynotification) name:@"新闻" object:nil];
 }
 
-
-
--(void)mynotification
+- (void)mynotification
 {
     [self.tableview.header beginRefreshing];
 }
 
--(void)initTableView
+- (void)initTableView
 {
     UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64-49)];
     tableview.delegate = self;
@@ -109,41 +101,26 @@
     self.tableview = tableview;
     self.tableview.tableFooterView = [[UIView alloc]init];
     
+    IMP_BLOCK_SELF(SocietyViewController);
+    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingBlock:^{
+        block_self.page = 0;
+        [block_self requestNet:1];
+    }];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableview.header = header;
+    [header beginRefreshing];
+    
+    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [block_self requestNet:2];
+    }];
+    
     ThemeManager *manager = [ThemeManager sharedInstance];
     self.tableview.backgroundColor = [manager themeColor];
 }
 
 
--(void)initTopNet
-{
-    //网易顶部滚动
-    //   http://c.m.163.com/nc/article/headline/T1348647853363/0-1.html
-    
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    [mgr GET:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-
-        NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
-        // 创建frame模型对象
-        NSMutableArray *statusFrameArray = [NSMutableArray array];
-        NSMutableArray *titleArray = [NSMutableArray array];
-        NSMutableArray *topArray = [NSMutableArray array];
-        for (TopData *data in dataarray) {
-            [topArray addObject:data];
-            [statusFrameArray addObject:data.imgsrc];
-            [titleArray addObject:data.title];
-        }
-        [self.topArray addObjectsFromArray:topArray];
-        [self.imagesArray addObjectsFromArray:statusFrameArray];
-        [self.titleArray addObjectsFromArray:titleArray];
-        
-        [self initScrollView];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
--(void)initScrollView
+- (void)initScrollView
 {
     // 网络加载 --- 创建不带标题的图片轮播器
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
@@ -156,68 +133,7 @@
 }
 
 
-//集成刷新控件
--(void)setupRefreshView
-{
-    //1.下拉刷新
-    GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    // 隐藏时间
-    header.lastUpdatedTimeLabel.hidden = YES;
-    // 隐藏状态
-    header.stateLabel.hidden = YES;
-    self.tableview.header = header;
-    [header beginRefreshing];
-    
-    //2.上拉刷新
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-
-}
-#pragma mark  下拉
--(void)loadNewData
-{
-    self.page = 0;
-    [self requestNet:1];
-    [self.tableview.header endRefreshing];
-}
-
-#pragma mark  上拉
--(void)loadMoreData
-{
-    [self requestNet:2];
-    [self.tableview.footer endRefreshing];
-}
-
-#pragma mark 网络请求
--(void)requestNet:(int)type
-{
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSString *urlstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/headline/T1348647853363/%d-20.html",self.page];
-    [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-
-        NSArray *temArray = responseObject[@"T1348647853363"];
-        
-        NSArray *arrayM = [DataModel objectArrayWithKeyValuesArray:temArray];
-        NSMutableArray *statusArray = [NSMutableArray array];
-        for (DataModel *data in arrayM) {
-            [statusArray addObject:data];
-        }
-        
-        if (type == 1) {
-            self.totalArray = statusArray;
-        }else{
-            [self.totalArray addObjectsFromArray:statusArray];
-        }
-        [self.tableview reloadData];
-        self.page += 20;
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.totalArray.count;
 }
@@ -298,11 +214,10 @@
 
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DataModel *data = self.totalArray[indexPath.row];
-    DLog(@"%@",data.title);
     
     NSString *ID = [NewsCell idForRow:data];
     
@@ -353,13 +268,77 @@
     [self.navigationController pushViewController:topVC animated:YES];
 }
 
--(void)handleThemeChanged
+- (void)handleThemeChanged
 {
     ThemeManager *defaultManager = [ThemeManager sharedInstance];
     self.tableview.backgroundColor = [defaultManager themeColor];
     [self.navigationController.navigationBar setBackgroundImage:[defaultManager themedImageWithName:@"navigationBar"] forBarMetrics:UIBarMetricsDefault];
     [self.tableview reloadData];
 }
+
+
+#pragma mark 网络请求
+
+- (void)initTopNet
+{
+    IMP_BLOCK_SELF(SocietyViewController);
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    [mgr GET:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
+        NSMutableArray *statusFrameArray = [NSMutableArray array];
+        NSMutableArray *titleArray = [NSMutableArray array];
+        NSMutableArray *topArray = [NSMutableArray array];
+        for (TopData *data in dataarray) {
+            [topArray addObject:data];
+            [statusFrameArray addObject:data.imgsrc];
+            [titleArray addObject:data.title];
+        }
+        [block_self.topArray addObjectsFromArray:topArray];
+        [block_self.imagesArray addObjectsFromArray:statusFrameArray];
+        [block_self.titleArray addObjectsFromArray:titleArray];
+        
+        [block_self initScrollView];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+-(void)requestNet:(int)type
+{
+    IMP_BLOCK_SELF(SocietyViewController);
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSString *urlstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/headline/T1348647853363/%d-20.html",self.page];
+    [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSArray *temArray = responseObject[@"T1348647853363"];
+        
+        NSArray *arrayM = [DataModel objectArrayWithKeyValuesArray:temArray];
+        NSMutableArray *statusArray = [NSMutableArray array];
+        for (DataModel *data in arrayM) {
+            [statusArray addObject:data];
+        }
+        
+        if (type == 1) {
+            block_self.totalArray = statusArray;
+        }else{
+            [block_self.totalArray addObjectsFromArray:statusArray];
+        }
+        [block_self.tableview reloadData];
+        block_self.page += 20;
+        
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        DLog(@"%@",error);
+        [block_self.tableview.header endRefreshing];
+        [block_self.tableview.footer endRefreshing];
+    }];
+}
+
 
 - (void)dealloc
 {

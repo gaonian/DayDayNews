@@ -14,7 +14,7 @@
 #import "SCNavTabBarController.h"
 #import "TabbarView.h"
 
-@interface TabbarViewController ()<TabbarViewDelegate>
+@interface TabbarViewController ()
 @property (nonatomic , strong) TabbarView *tabbar;
 
 @end
@@ -50,18 +50,16 @@
 
 -(void)initTabbar
 {
+    IMP_BLOCK_SELF(TabbarViewController);
     TabbarView *tabbar = [[TabbarView alloc]init];
     tabbar.frame = self.tabBar.bounds;
-    tabbar.delegate = self;
+    tabbar.btnSelectBlock = ^(int to){
+        block_self.selectedIndex = to;
+    };
     [self.tabBar addSubview:tabbar];
     self.tabbar = tabbar;
     
     [self handleThemeChanged];
-}
-
--(void)tabbar:(TabbarView *)tabbar didselectedButtonFrom:(int)from to:(int)to
-{
-    self.selectedIndex = to;
 }
 
 -(void)handleThemeChanged
@@ -74,8 +72,7 @@
     }
 }
 
-
--(void)initControl
+- (void)initControl
 {
     SCNavTabBarController  *new = [[SCNavTabBarController alloc]init];
     [self setupChildViewController:new title:@"新闻" imageName:@"tabbar_news" selectedImage:@"tabbar_news_hl"];

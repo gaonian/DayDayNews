@@ -10,17 +10,16 @@
 #import "TabbarButton.h"
 
 @interface TabbarView()
-@property(nonatomic,weak)TabbarButton *selectedButton;
-@property (nonatomic , weak) TabbarButton *tabarbutton;
+@property(nonatomic,weak)TabbarButton *      selectedButton;
+@property (nonatomic , weak) TabbarButton *  tabarbutton;
 
 @end
 
 @implementation TabbarView
 
 
--(void)addTabBarButtonWithItem:(UITabBarItem *)item
+- (void)addTabBarButtonWithItem:(UITabBarItem *)item
 {
-    
     //创建按钮
     TabbarButton *button = [[TabbarButton alloc]init];
     [self addSubview:button];
@@ -47,8 +46,8 @@
 
 - (void)buttonClick:(TabbarButton *)btn
 {
-    if ([self.delegate respondsToSelector:@selector(tabbar:didselectedButtonFrom:to:)]) {
-        [self.delegate tabbar:self didselectedButtonFrom:(int)self.selectedButton.tag to:(int)btn.tag];
+    if (self.btnSelectBlock) {
+        self.btnSelectBlock((int)btn.tag);
     }
     
     if (btn.tag == self.selectedButton.tag) {
@@ -59,11 +58,9 @@
     self.selectedButton.selected = NO;
     btn.selected = YES;
     self.selectedButton = btn;
-    
 }
 
-
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     
