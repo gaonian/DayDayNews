@@ -130,7 +130,7 @@ _<br />_<br />
 本项目只供学习交流，严禁进行商业用途。:joy:
 
 ##Support
-- Email：yugao5971@qq.com / gyhbsdo@163.com
+- Email：yugao5971@gmail.com / gyhbsdo@163.com
 - [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
