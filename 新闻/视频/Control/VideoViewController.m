@@ -14,7 +14,6 @@
 #import "VideoDataFrame.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
-#import "GCPlayer.h"
 #import "DetailViewController.h"
 #import "TabbarButton.h"
 #import "ClassViewController.h"
@@ -22,19 +21,17 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "HYCircleLoadingView.h"
+#import "GYHCircleLoadingView.h"
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic , strong) NSMutableArray *videoArray;
-@property (nonatomic , weak) UITableView *tableview;
-@property (nonatomic , assign)int count;
-@property (nonatomic , strong) TabbarButton *btn;
+@property (nonatomic , strong) NSMutableArray *             videoArray;
+@property (nonatomic , weak) UITableView *                  tableview;
+@property (nonatomic , assign)int                           count;
+@property (nonatomic , strong) TabbarButton *               btn;
 
-@property (nonatomic , strong) MPMoviePlayerController *mpc;
-@property (nonatomic , assign) int currtRow;
-@property (nonatomic , strong) HYCircleLoadingView *loadingView;
-
-@property (nonatomic , assign) BOOL smallmpc;
+@property (nonatomic , strong) MPMoviePlayerController *    mpc;
+@property (nonatomic , assign) int                          currtRow;
+@property (nonatomic , strong) GYHCircleLoadingView *       circleLoadingV;
 
 @end
 
@@ -189,39 +186,17 @@
 #pragma mark - 设置加载指示器
 - (void)setupLoadingView
 {
-    HYCircleLoadingView *loadingView = [[HYCircleLoadingView alloc]initWithFrame:CGRectMake(self.mpc.view.frame.size.width/2-20, self.mpc.view.frame.size.height/2-20, 40, 40)];
-    loadingView.loadingType = 1;
-    [self.mpc.view addSubview:loadingView];
-    self.loadingView = loadingView;
-    [self loadingViewIsShowing:YES];
+    self.circleLoadingV = [[GYHCircleLoadingView alloc]initWithViewFrame:CGRectMake(self.mpc.view.frame.size.width/2-20, self.mpc.view.frame.size.height/2-20, 40, 40)];
+    self.circleLoadingV.isShowProgress = YES;   //设置中间label进度条
+    [self.mpc.view addSubview:self.circleLoadingV];
+    [self.circleLoadingV startAnimating];
 }
 
-- (void)loadingViewIsShowing:(BOOL)isShowing
-{
-    _loadingView.hidden = !isShowing;
-    if(isShowing){
-        [_loadingView startAnimation];
-    }
-    else{
-        [_loadingView stopAnimation];
-    }
-}
 
 #pragma mark - 设置控制面板
 - (void)setupStrolView
 {
-//    UIButton *l1 = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 50, 30)];
-//    l1.backgroundColor = [UIColor whiteColor];
-//    [self.controlView addSubview:l1];
-//    UIButton *l2 = [[UIButton alloc]initWithFrame:CGRectMake(self.controlView.frame.size.width-10-50, 10, 50, 30)];
-//    l2.backgroundColor = [UIColor whiteColor];
-//    [l2 addTarget:self action:@selector(l2click) forControlEvents:UIControlEventTouchUpInside];
-//    [self.controlView addSubview:l2];
-}
 
-- (void)l2click
-{
-    DLog(@"l2Click");
 }
 
 
@@ -229,24 +204,19 @@
 - (void)movieDidFinish
 {
     DLog(@"----播放完毕");
-    
-    //    if (self.mpc) {
-    //        [self.mpc.view removeFromSuperview];
-    //        self.mpc = nil;
-    //    }
-    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.mpc.view.frame.size.height)];
-    vc.backgroundColor = [UIColor yellowColor];
-    [self.mpc.view addSubview:vc];
-    
+    if (self.mpc) {
+        [self.mpc.view removeFromSuperview];
+        self.mpc = nil;
+    }
 }
+
 #pragma mark - 监听播放状态
 - (void)movieStateDidChange
 {
     DLog(@"----播放状态--%ld", (long)self.mpc.playbackState);
     if (self.mpc.playbackState == 1) {
-        [self loadingViewIsShowing:NO];
+        [self.circleLoadingV stopAnimating];
     }
-    
 }
 
 
@@ -301,49 +271,20 @@
 
 - (void)left
 {
-    //    DLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
-    //
-    //    self.hpmpc = self.mpc;
-    //    if (self.hpmpc) {
-    //
-    //         [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    //        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-    //
-    //            CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(M_PI / 2);
-    //            self.hpmpc.view.transform = landscapeTransform;
-    //            self.hpmpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    //            self.controlView.frame = CGRectMake(0, SCREEN_WIDTH-50, SCREEN_HEIGHT, 50);
-    //            [self setupStrolView];
-    //            UIWindow * window = [[UIApplication sharedApplication].delegate window];
-    //            [window addSubview:self.hpmpc.view];
-    //
-    //        } completion:^(BOOL finished) {
-    //
-    //        }];
-    //
-    //    }
-    
     if (self.mpc) {
         
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
         [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
             
             self.mpc.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            
             self.mpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            //                self.controlView.frame = CGRectMake(0, 0, SCREEN_HEIGHT, 50);
-            //                [self setupStrolView];
             
-            UIWindow * window = [[UIApplication sharedApplication].delegate window];
-            [window addSubview:self.mpc.view];
+            [theWindow addSubview:self.mpc.view];
             
         } completion:^(BOOL finished) {
             
         }];
-        
     }
-    
-    
 }
 
 
@@ -353,7 +294,7 @@
     return videoFrame.cellH;
 }
 
--(void)btnClick:(TabbarButton *)btn
+- (void)btnClick:(TabbarButton *)btn
 {
     NSArray *arr = @[@"VAP4BFE3U",
                      @"VAP4BFR16",
@@ -380,24 +321,8 @@
                 [self.mpc stop];
                 [self.mpc.view removeFromSuperview];
                 self.mpc = nil;
-            
-//            [self setupSmallmpc];
-            
-        }else{
-//            DLog(@"hahah");
-//                        self.smallmpc = NO;
-//                        VideoDataFrame *videoframe = self.videoArray[self.currtRow];
-//                        self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y, SCREEN_WIDTH, videoframe.coverF.size.height);
-//                        [self.tableview addSubview:self.mpc.view];
         }
     }
-}
-
-- (void)setupSmallmpc
-{
-    self.smallmpc = YES;
-    self.mpc.view.frame = CGRectMake(SCREEN_WIDTH-20-200, SCREEN_HEIGHT - 120, 200, 200*0.56);
-    [self.view addSubview:self.mpc.view];
 }
 
 
