@@ -15,6 +15,7 @@
 #define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 #define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define theWindow                       [[UIApplication sharedApplication] delegate].window
 
 
 #import "UIImageView+WebCache.h"

@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HMWaterflowLayout;
-
-@protocol HMWaterflowLayoutDelegate <NSObject>
-- (CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath;
-@end
+//@class HMWaterflowLayout;
+//
+//@protocol HMWaterflowLayoutDelegate <NSObject>
+//- (CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath;
+//@end
 
 @interface HMWaterflowLayout : UICollectionViewLayout
+
+@property (nonatomic , copy) CGFloat (^HeightBlock)(CGFloat sender, NSIndexPath *index);
+
 @property (nonatomic, assign) UIEdgeInsets sectionInset;
 /** 每一列之间的间距 */
 @property (nonatomic, assign) CGFloat columnMargin;
@@ -22,6 +25,6 @@
 /** 显示多少列 */
 @property (nonatomic, assign) int columnsCount;
 
-@property (nonatomic, weak) id<HMWaterflowLayoutDelegate> delegate;
+//@property (nonatomic, weak) id<HMWaterflowLayoutDelegate> delegate;
 
 @end

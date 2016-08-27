@@ -16,19 +16,18 @@
 #import "MBProgressHUD+MJ.h"
 #import "PhotoShowViewController.h"
 #import "UIBarButtonItem+gyh.h"
-#import "DOPNavbarMenu.h"
+#import "PullDownView.h"
 
+@interface PhotoViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
-@interface PhotoViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,HMWaterflowLayoutDelegate,DOPNavbarMenuDelegate>
+@property (nonatomic , weak) UICollectionView *      collectionView;
+@property (nonatomic , strong) NSMutableArray *      photoArray;
+@property (nonatomic , assign) int                   pn;
+@property (nonatomic , copy) NSString *              tag1;
+@property (nonatomic , copy) NSString *              tag2;
+@property (nonatomic , strong) NSArray *             classArray;
 
-@property (nonatomic , weak) UICollectionView *collectionView;
-@property (nonatomic , strong) NSMutableArray *photoArray;
-@property (nonatomic , assign) int pn;
-@property (nonatomic , copy) NSString *tag1;
-@property (nonatomic , copy) NSString *tag2;
-@property (nonatomic , assign) NSInteger numberOfItemsInRow;
-@property (nonatomic , strong) DOPNavbarMenu *menu;
-@property (nonatomic , strong) NSArray *classArray;
+@property (nonatomic , strong) PullDownView *  pullDownView;
 
 @end
 
@@ -40,33 +39,41 @@ static NSString *const ID = @"photo";
 {
     if (!_classArray) {
         _classArray = @[
-                        [DOPNavbarMenuItem ItemWithTitle:@"美女" icon:[UIImage imageNamed:@"meinvchannel"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"明星" icon:[UIImage imageNamed:@"mingxing"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"汽车" icon:[UIImage imageNamed:@"qiche"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"宠物" icon:[UIImage imageNamed:@"chongwu"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"动漫" icon:[UIImage imageNamed:@"dongman"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"设计" icon:[UIImage imageNamed:@"sheji"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"家居" icon:[UIImage imageNamed:@"jiaju"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"婚嫁" icon:[UIImage imageNamed:@"hunjia"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"摄影" icon:[UIImage imageNamed:@"sheying"]],
-                        [DOPNavbarMenuItem ItemWithTitle:@"美食" icon:[UIImage imageNamed:@"meishi"]]
+                        [PullDownItem itemWithTitle:@"美女" icon:[UIImage imageNamed:@"meinvchannel"]],
+                        [PullDownItem itemWithTitle:@"明星" icon:[UIImage imageNamed:@"mingxing"]],
+                        [PullDownItem itemWithTitle:@"汽车" icon:[UIImage imageNamed:@"qiche"]],
+                        [PullDownItem itemWithTitle:@"宠物" icon:[UIImage imageNamed:@"chongwu"]],
+                        [PullDownItem itemWithTitle:@"动漫" icon:[UIImage imageNamed:@"dongman"]],
+                        [PullDownItem itemWithTitle:@"设计" icon:[UIImage imageNamed:@"sheji"]],
+                        [PullDownItem itemWithTitle:@"家居" icon:[UIImage imageNamed:@"jiaju"]],
+                        [PullDownItem itemWithTitle:@"婚嫁" icon:[UIImage imageNamed:@"hunjia"]],
+                        [PullDownItem itemWithTitle:@"摄影" icon:[UIImage imageNamed:@"sheying"]],
+                        [PullDownItem itemWithTitle:@"美食" icon:[UIImage imageNamed:@"meishi"]]
                         ];
     }
     return _classArray;
 }
 
-- (DOPNavbarMenu *)menu {
-    if (_menu == nil) {
-        
-        _menu = [[DOPNavbarMenu alloc] initWithItems:self.classArray width:self.view.dop_width maximumNumberInRow:_numberOfItemsInRow];
-        _menu.backgroundColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:0.8];
-        _menu.separatarColor = [UIColor clearColor];
-        _menu.delegate = self;
+- (PullDownView *)pullDownView
+{
+    if (!_pullDownView) {
+        _pullDownView = [[PullDownView alloc]init];
+        [_pullDownView setDataWithItemAry:self.classArray];
     }
-    return _menu;
+    IMP_BLOCK_SELF(PhotoViewController);
+    _pullDownView.SelectBlock = ^(id sender){
+        [block_self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
+        block_self.pn = 0;
+        block_self.tag1 = sender;
+        block_self.tag2 = @"全部";
+        block_self.title = sender;
+        [block_self.collectionView.header beginRefreshing];
+    };
+    return _pullDownView;
 }
 
--(NSMutableArray *)photoArray
+
+- (NSMutableArray *)photoArray
 {
     if (!_photoArray) {
         _photoArray = [NSMutableArray array];
@@ -78,11 +85,11 @@ static NSString *const ID = @"photo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.numberOfItemsInRow = 4;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem ItemWithIcon:@"categories" highIcon:nil target:self action:@selector(openMenu:)];
+    self.title = @"美女";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem ItemWithIcon:@"categories" highIcon:nil target:self action:@selector(openMenu)];
 
     self.tag1 = @"美女";
-    self.tag2 = @"小清新";
+    self.tag2 = @"性感";
     
     [self initCollection];
     
@@ -100,10 +107,13 @@ static NSString *const ID = @"photo";
 
 - (void)initCollection
 {
-  
+    IMP_BLOCK_SELF(PhotoViewController);
     HMWaterflowLayout *layout = [[HMWaterflowLayout alloc]init];
+    layout.HeightBlock = ^CGFloat(CGFloat sender,NSIndexPath *index){
+        Photo *photo = block_self.photoArray[index.item];
+        return photo.small_height / photo.small_width * sender;
+    };
     layout.columnsCount = 2;
-    layout.delegate = self;
     
     // 2.创建UICollectionView
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
@@ -115,10 +125,9 @@ static NSString *const ID = @"photo";
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
-    IMP_BLOCK_SELF(PhotoViewController);
     GYHHeadeRefreshController *header = [GYHHeadeRefreshController headerWithRefreshingBlock:^{
         block_self.pn = 0;
-        [block_self initNetWorking];
+        [block_self loadData];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -131,11 +140,13 @@ static NSString *const ID = @"photo";
 }
 
 
-#pragma mark - <HMWaterflowLayoutDelegate>
-- (CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath
+- (void)openMenu
 {
-    Photo *photo = self.photoArray[indexPath.item];
-    return photo.small_height / photo.small_width * width;
+    if (self.pullDownView.isShow) {
+        [self.pullDownView removeView];
+    }else{
+        [self.pullDownView show];
+    }
 }
 
 
@@ -147,9 +158,12 @@ static NSString *const ID = @"photo";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
-    cell.photo = self.photoArray[indexPath.item];
-    return cell;
+    if (indexPath.row < self.photoArray.count) {
+        PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+        cell.photo = self.photoArray[indexPath.item];
+        return cell;
+    }
+    return nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -160,49 +174,10 @@ static NSString *const ID = @"photo";
     [self.navigationController pushViewController:photoShow animated:YES];
 }
 
-
-- (void)openMenu:(id)sender {
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    if (self.menu.isOpen) {
-        [self.menu dismissWithAnimation:YES];
-    } else {
-        [self.menu showInNavigationController:self.navigationController];
-    }
-}
-
-- (void)didShowMenu:(DOPNavbarMenu *)menu {
-    [self.navigationItem.rightBarButtonItem setTitle:@"dismiss"];
-    self.navigationItem.rightBarButtonItem.enabled = YES;
-}
-
-- (void)didDismissMenu:(DOPNavbarMenu *)menu {
-    [self.navigationItem.rightBarButtonItem setTitle:@"menu"];
-    self.navigationItem.rightBarButtonItem.enabled = YES;
-}
-
-- (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index {
-    
-    NSArray *array = @[@"美女",@"明星",@"汽车",@"宠物",@"动漫",@"设计",@"家居",@"婚嫁",@"摄影",@"美食"];
-    [self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
-
-        self.pn = 0;
-        self.tag1 = array[index];
-        self.tag2 = @"全部";
-        [self.collectionView.header beginRefreshing];
-}
-
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    self.menu = nil;
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (self.menu) {
-        [self.menu dismissWithAnimation:NO];
-    }
-}
 
+}
 
 -(void)handleThemeChanged
 {
@@ -215,6 +190,43 @@ static NSString *const ID = @"photo";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+
+- (void)loadData
+{
+    IMP_BLOCK_SELF(PhotoViewController);
+    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
+    dic[@"rn"] = @60;
+    
+    NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
+    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
+        
+        NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
+        NSMutableArray *statusFrameArray = [NSMutableArray array];
+        for (Photo *photo in dataarray) {
+            [statusFrameArray addObject:photo];
+        }
+        
+        if (block_self.photoArray.count > 0) {
+            [block_self.photoArray removeAllObjects];
+        }
+        block_self.photoArray  = statusFrameArray;
+        
+        block_self.pn += 60;
+        block_self.collectionView.footer.hidden = block_self.photoArray.count < 60;
+        [block_self.collectionView reloadData];
+        [block_self.collectionView.header endRefreshing];
+        [block_self.collectionView.footer endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [block_self.collectionView.header endRefreshing];
+        [block_self.collectionView.footer endRefreshing];
+    }];
 }
 
 - (void)initNetWorking

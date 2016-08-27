@@ -105,7 +105,7 @@
     
     // 计算尺寸
     CGFloat width = (self.collectionView.frame.size.width - self.sectionInset.left - self.sectionInset.right - (self.columnsCount - 1) * self.columnMargin)/self.columnsCount;
-    CGFloat height = [self.delegate waterflowLayout:self heightForWidth:width atIndexPath:indexPath];
+    CGFloat height = self.HeightBlock(width,indexPath);
     
     // 计算位置
     CGFloat x = self.sectionInset.left + (width + self.columnMargin) * [minColumn intValue];

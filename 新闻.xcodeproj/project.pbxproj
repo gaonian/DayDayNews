@@ -70,6 +70,9 @@
 		198339BD1C02E3BD00B8B8AD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339BC1C02E3BD00B8B8AD /* CoreTelephony.framework */; };
 		198339BF1C02E3C700B8B8AD /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339BE1C02E3C700B8B8AD /* libstdc++.tbd */; };
 		198339C11C02E3CF00B8B8AD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 198339C01C02E3CF00B8B8AD /* libz.tbd */; };
+		19881F711D7136E6000EC3E3 /* PullDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19881F701D7136E6000EC3E3 /* PullDownView.m */; };
+		19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19881F731D7140E7000EC3E3 /* PullDownCell.m */; };
+		19881F761D7140E7000EC3E3 /* PullDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19881F741D7140E7000EC3E3 /* PullDownCell.xib */; };
 		198A413B1C859F0E00A2FFE9 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 198A413A1C859F0E00A2FFE9 /* UIView+Frame.m */; };
 		198AF7A81C841C0300D941F4 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 198AF7A71C841C0300D941F4 /* SettingGroup.m */; };
 		198AF7B11C841C9400D941F4 /* SettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 198AF7AA1C841C9400D941F4 /* SettingArrowItem.m */; };
@@ -131,8 +134,6 @@
 		19918FE21CDDEF7500A89620 /* 开始录音05录音@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19918FD71CDDEF7500A89620 /* 开始录音05录音@2x.png */; };
 		19918FE31CDDEF7500A89620 /* 录音完成@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19918FD81CDDEF7500A89620 /* 录音完成@2x.png */; };
 		19918FE41CDDEF7500A89620 /* 音频效果@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19918FD91CDDEF7500A89620 /* 音频效果@2x.png */; };
-		199521FD1BC7669D001E7E3D /* DOPNavbarMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 199521FA1BC7669D001E7E3D /* DOPNavbarMenu.m */; };
-		199521FE1BC7669D001E7E3D /* UIView+DOPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 199521FC1BC7669D001E7E3D /* UIView+DOPExtension.m */; };
 		19970A6E1BCF95AD00F4CC0C /* CitiesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19970A6D1BCF95AD00F4CC0C /* CitiesGroup.m */; };
 		19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19970A701BCF95B800F4CC0C /* LocaHeaderView.m */; };
 		19970A731BCF95CD00F4CC0C /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19970A721BCF95CD00F4CC0C /* city.plist */; };
@@ -383,6 +384,11 @@
 		198339BC1C02E3BD00B8B8AD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		198339BE1C02E3C700B8B8AD /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		198339C01C02E3CF00B8B8AD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		19881F6F1D7136E6000EC3E3 /* PullDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownView.h; sourceTree = "<group>"; };
+		19881F701D7136E6000EC3E3 /* PullDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownView.m; sourceTree = "<group>"; };
+		19881F721D7140E7000EC3E3 /* PullDownCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownCell.h; sourceTree = "<group>"; };
+		19881F731D7140E7000EC3E3 /* PullDownCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownCell.m; sourceTree = "<group>"; };
+		19881F741D7140E7000EC3E3 /* PullDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PullDownCell.xib; sourceTree = "<group>"; };
 		198A41391C859F0E00A2FFE9 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		198A413A1C859F0E00A2FFE9 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		198AF7A41C83EEAC00D941F4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -495,10 +501,6 @@
 		19918FD71CDDEF7500A89620 /* 开始录音05录音@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开始录音05录音@2x.png"; sourceTree = "<group>"; };
 		19918FD81CDDEF7500A89620 /* 录音完成@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "录音完成@2x.png"; sourceTree = "<group>"; };
 		19918FD91CDDEF7500A89620 /* 音频效果@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音频效果@2x.png"; sourceTree = "<group>"; };
-		199521F91BC7669D001E7E3D /* DOPNavbarMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOPNavbarMenu.h; sourceTree = "<group>"; };
-		199521FA1BC7669D001E7E3D /* DOPNavbarMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOPNavbarMenu.m; sourceTree = "<group>"; };
-		199521FB1BC7669D001E7E3D /* UIView+DOPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DOPExtension.h"; sourceTree = "<group>"; };
-		199521FC1BC7669D001E7E3D /* UIView+DOPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DOPExtension.m"; sourceTree = "<group>"; };
 		19970A6C1BCF95AD00F4CC0C /* CitiesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesGroup.h; sourceTree = "<group>"; };
 		19970A6D1BCF95AD00F4CC0C /* CitiesGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesGroup.m; sourceTree = "<group>"; };
 		19970A6F1BCF95B800F4CC0C /* LocaHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaHeaderView.h; sourceTree = "<group>"; };
@@ -1275,17 +1277,6 @@
 			path = "录音图片";
 			sourceTree = "<group>";
 		};
-		199521F81BC7669D001E7E3D /* DOPNavbarMenu */ = {
-			isa = PBXGroup;
-			children = (
-				199521F91BC7669D001E7E3D /* DOPNavbarMenu.h */,
-				199521FA1BC7669D001E7E3D /* DOPNavbarMenu.m */,
-				199521FB1BC7669D001E7E3D /* UIView+DOPExtension.h */,
-				199521FC1BC7669D001E7E3D /* UIView+DOPExtension.m */,
-			);
-			path = DOPNavbarMenu;
-			sourceTree = "<group>";
-		};
 		19A67CC31C4E361A008DC05E /* INTULocationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,7 +1368,6 @@
 		19C33DF21BB109A20059238A /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
-				199521F81BC7669D001E7E3D /* DOPNavbarMenu */,
 				19C33EB71BB10D3E0059238A /* 瀑布流 */,
 				19C33DF31BB109A20059238A /* Control */,
 				19C33DF61BB109A20059238A /* Model */,
@@ -1412,6 +1402,11 @@
 				19C33E411BB109FB0059238A /* PhotoCell.h */,
 				19C33E421BB109FB0059238A /* PhotoCell.m */,
 				19C33E431BB109FB0059238A /* PhotoCell.xib */,
+				19881F6F1D7136E6000EC3E3 /* PullDownView.h */,
+				19881F701D7136E6000EC3E3 /* PullDownView.m */,
+				19881F721D7140E7000EC3E3 /* PullDownCell.h */,
+				19881F731D7140E7000EC3E3 /* PullDownCell.m */,
+				19881F741D7140E7000EC3E3 /* PullDownCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1793,6 +1788,7 @@
 				198AF7E11C844D3A00D941F4 /* WeiboSDK.bundle in Resources */,
 				19918FDE1CDDEF7500A89620 /* 开始录音01录音@2x.png in Resources */,
 				192FC1901CDDB447008E41CA /* Main.storyboard in Resources */,
+				19881F761D7140E7000EC3E3 /* PullDownCell.xib in Resources */,
 				196892711BC8BDCA009D4A99 /* MJRefresh.bundle in Resources */,
 				198AF7E31C844D3A00D941F4 /* read_me.txt in Resources */,
 				198AF7E51C844D3A00D941F4 /* ShareSDK.bundle in Resources */,
@@ -1834,6 +1830,7 @@
 				19D000181BB417D0009EA71C /* UIView+SDExtension.m in Sources */,
 				190450E41BCCAC7C00C47A50 /* WeatherViewController.m in Sources */,
 				19C33E961BB10B4C0059238A /* MJMethod.m in Sources */,
+				19881F711D7136E6000EC3E3 /* PullDownView.m in Sources */,
 				19C33E3B1BB109A20059238A /* AFURLSessionManager.m in Sources */,
 				19234A441CCE5EF100123348 /* CollectViewController.m in Sources */,
 				19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */,
@@ -1933,7 +1930,6 @@
 				190450D91BCCAC0A00C47A50 /* SCNavTabBar.m in Sources */,
 				19C33E401BB109A20059238A /* TabbarView.m in Sources */,
 				19C33E391BB109A20059238A /* AFURLRequestSerialization.m in Sources */,
-				199521FE1BC7669D001E7E3D /* UIView+DOPExtension.m in Sources */,
 				19D000131BB417D0009EA71C /* TAAnimatedDotView.m in Sources */,
 				19ED1DA11C8729BE00AD6E0A /* NewsCell.m in Sources */,
 				19C33E361BB109A20059238A /* AFNetworkReachabilityManager.m in Sources */,
@@ -1965,6 +1961,7 @@
 				190450E71BCCAE6400C47A50 /* WeatherData.m in Sources */,
 				196892641BC8BDCA009D4A99 /* MJRefreshBackFooter.m in Sources */,
 				19C33E3E1BB109A20059238A /* NavigationController.m in Sources */,
+				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
 				19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */,
 				1945F08F1BAFDD0200A38747 /* main.m in Sources */,
 				196892741BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1972,7 +1969,6 @@
 				19234A471CCE62A300123348 /* CollectTableViewCell.m in Sources */,
 				1968926A1BC8BDCA009D4A99 /* MJRefreshAutoStateFooter.m in Sources */,
 				19918FC11CDDE12900A89620 /* MessageVideoCell.m in Sources */,
-				199521FD1BC7669D001E7E3D /* DOPNavbarMenu.m in Sources */,
 				196892631BC8BDCA009D4A99 /* MJRefreshAutoFooter.m in Sources */,
 				19C33E3D1BB109A20059238A /* TabbarButton.m in Sources */,
 				190450D11BCCAC0A00C47A50 /* SocietyViewController.m in Sources */,
