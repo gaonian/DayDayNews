@@ -8,12 +8,9 @@
 
 
 #import "ClassViewController.h"
-#import "AFNetworking.h"
 #import "VideoCell.h"
 #import "VideoData.h"
 #import "VideoDataFrame.h"
-#import "MJExtension.h"
-#import "MJRefresh.h"
 #import "DetailViewController.h"
 
 #import <AVFoundation/AVFoundation.h>

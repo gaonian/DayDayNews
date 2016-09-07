@@ -6,22 +6,14 @@
 //  Copyright © 2015年 apple. All rights reserved.
 //  //http://c.3g.163.com/nc/weather/5YyX5LqsfOWMl%2BS6rA%3D%3D.html
 
-#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
-
 #import "WeatherViewController.h"
-#import "AFNetworking.h"
-#import "MJExtension.h"
 #import "WeatherData.h"
-#import "UIImageView+WebCache.h"
 #import "LocaViewController.h"
 #import <CoreLocation/CoreLocation.h>
-#import "MBProgressHUD+MJ.h"
-#import "NSString+Extension.h"
 
 #import "INTULocationManager.h"
 
-@interface WeatherViewController ()<CLLocationManagerDelegate,LocaViewControllerDelegate>
+@interface WeatherViewController ()<CLLocationManagerDelegate>
 @property (nonatomic , copy) NSString *province;
 @property (nonatomic , copy) NSString *city;
 @property (nonatomic , copy) NSString *dt;    //当前日期
@@ -49,7 +41,7 @@
 
 @implementation WeatherViewController
 
--(NSMutableArray *)weatherArray
+- (NSMutableArray *)weatherArray
 {
     if(!_weatherArray){
         _weatherArray = [NSMutableArray array];
@@ -72,6 +64,8 @@
     }else{
         [self setupLocation];
     }
+    
+    [self setupUI];
 }
 
 - (void)setupLocation
@@ -118,7 +112,7 @@
                     NSRange range = [pm.name rangeOfString:@"市"];
                     int loc = (int)range.location;
                     NSString *str = [pm.name substringToIndex:loc];
-                    str = [str substringFromIndex:2];   //河南省南阳
+                    str = [str substringFromIndex:2];
                     
                     NSRange range1 = [str rangeOfString:@"省"];
                     int loc1 = (int)range1.location;
@@ -166,8 +160,6 @@
     [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         [MBProgressHUD hideHUD];
-        [self.navigationController setNavigationBarHidden:YES];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         
             self.dt = responseObject[@"dt"];
             NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
@@ -191,7 +183,7 @@
 
 -(void)initAll
 {
-    [self setupUI];        //设置顶部UI
+//    [self setupUI];        //设置顶部UI
     [self setupData];      //设置顶部UI数据
     [self bottomView];     //加载底部数据
 }
@@ -214,8 +206,6 @@
     [self.view addSubview:backbtn];
     
     //城市名
-//    CGSize textMaxSize = CGSizeMake(SCREEN_WIDTH, MAXFLOAT);
-//    CGSize textRealSize = [self.city sizeWithFont:[UIFont systemFontOfSize:17] maxSize:textMaxSize];
     CGFloat cityLabelW = 50;
     CGFloat cityLabelH = 20;
     CGFloat cityLabelX = (SCREEN_WIDTH - cityLabelW)/2;
@@ -397,16 +387,22 @@
 }
 
 
--(void)locClick
+- (void)locClick
 {
     NSString *city = [[NSUserDefaults standardUserDefaults]objectForKey:@"城市"];
     
     LocaViewController *locaV = [[LocaViewController alloc]init];
     locaV.currentTitle = city;
-    locaV.delegate = self;
     locaV.view.backgroundColor = [UIColor whiteColor];
+    IMP_BLOCK_SELF(WeatherViewController);
+    locaV.CityBlock = ^(NSString *provice,NSString *city){
+        block_self.weatherArray = nil;
+        [MBProgressHUD showMessage:@"正在加载..."];
+        [block_self requestNet:provice city:city];
+        [[NSUserDefaults standardUserDefaults]setObject:provice forKey:@"省份"];
+        [[NSUserDefaults standardUserDefaults]setObject:city forKey:@"城市"];
+    };
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:locaV];
-    
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
@@ -421,20 +417,6 @@
     [view addSubview:label];
 }
 
-
--(void)locaviewwithview:(LocaViewController *)locaviewcontrol provice:(NSString *)provice city:(NSString *)city
-{
-    self.weatherArray = nil;
-//    self.province = provice;
-//    self.city = city;
-    [MBProgressHUD showMessage:@"正在加载..."];
-    [self requestNet:provice city:city];
-    
-    [[NSUserDefaults standardUserDefaults]setObject:provice forKey:@"省份"];
-    [[NSUserDefaults standardUserDefaults]setObject:city forKey:@"城市"];
-}
-
-
 #pragma mark 返回按钮
 -(void)backClick
 {
@@ -442,18 +424,18 @@
 }
 
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
 }

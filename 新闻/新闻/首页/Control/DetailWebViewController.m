@@ -65,7 +65,7 @@
     
     UIWebView *webView = [[UIWebView alloc]initWithFrame:self.view.frame];
     webView.backgroundColor = [UIColor whiteColor];
-    webView.y = 64;
+    webView.originY = 64;
     webView.height = SCREEN_HEIGHT - 64;
     webView.delegate = self;
     [self.view addSubview:webView];

@@ -7,13 +7,9 @@
 //
 
 #import "PhotoViewController.h"
-#import "MJExtension.h"
-#import "AFNetworking.h"
 #import "Photo.h"
 #import "PhotoCell.h"
 #import "HMWaterflowLayout.h"
-#import "MJRefresh.h"
-#import "MBProgressHUD+MJ.h"
 #import "PhotoShowViewController.h"
 #import "UIBarButtonItem+gyh.h"
 #import "PullDownView.h"

@@ -6,12 +6,9 @@
 //  Copyright © 2015年 apple. All rights reserved.
 //
 
-#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 
 #import "LocaViewController.h"
 #import "CitiesGroup.h"
-#import "MJExtension.h"
 #import "LocaHeaderView.h"
 #import "WeatherViewController.h"
 #import "UIBarButtonItem+gyh.h"
@@ -111,7 +108,7 @@
 
 #pragma mark  -- tableview Delegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if(tableView == self.searchDisplayController.searchResultsTableView){
         return 1;
@@ -120,7 +117,7 @@
     }
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(tableView == self.searchDisplayController.searchResultsTableView){
       
@@ -133,7 +130,7 @@
     }
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *ID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
@@ -160,12 +157,11 @@
 {
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
-        DLog(@" search   %@ ,%@",self.resultsData[indexPath.row],self.proviceResults[indexPath.row]);
         if ([self.proviceResults[indexPath.row] isEqualToString:@"热门城市"]) {
             self.proviceResults[indexPath.row] = self.resultsData[indexPath.row];
         }
-        if ([self.delegate respondsToSelector:@selector(locaviewwithview:provice:city:)]) {
-            [self.delegate locaviewwithview:self provice:self.proviceResults[indexPath.row] city:self.resultsData[indexPath.row]];
+        if (self.CityBlock) {
+            self.CityBlock(self.proviceResults[indexPath.row],self.resultsData[indexPath.row]);
         }
     }else{
         
@@ -173,9 +169,8 @@
         if (indexPath.section == 0) {
             group.state = group.cities[indexPath.row];
         }
-        
-        if ([self.delegate respondsToSelector:@selector(locaviewwithview:provice:city:)]) {
-            [self.delegate locaviewwithview:self provice:group.state city:group.cities[indexPath.row]];
+        if (self.CityBlock) {
+            self.CityBlock(group.state,group.cities[indexPath.row]);
         }
     }
     

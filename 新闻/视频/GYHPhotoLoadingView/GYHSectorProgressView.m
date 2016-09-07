@@ -5,8 +5,8 @@
 //  Created by 范英强 on 16/7/13.
 //  Copyright © 2016年 gyh. All rights reserved.
 //
-#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT   [UIScreen mainScreen].bounds.size.height
+//#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
+//#define SCREEN_HEIGHT   [UIScreen mainScreen].bounds.size.height
 
 
 #import "GYHSectorProgressView.h"

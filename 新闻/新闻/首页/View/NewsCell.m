@@ -102,7 +102,7 @@
     
     self.lblReply.width = [self.lblReply.text sizeWithFont:[UIFont systemFontOfSize:10] maxSize:CGSizeMake(200, MAXFLOAT)].width;
     self.lblReply.width += 10;
-    self.lblReply.x = SCREEN_WIDTH - 10 - self.lblReply.width;
+    self.lblReply.originX = SCREEN_WIDTH - 10 - self.lblReply.width;
     
     [self.lblReply.layer setBorderWidth:1];
     [self.lblReply.layer setBorderColor:[UIColor darkGrayColor].CGColor];

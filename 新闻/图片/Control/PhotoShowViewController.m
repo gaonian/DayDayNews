@@ -12,7 +12,6 @@
 #import "PhotoShowViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Photo.h"
-#import "MBProgressHUD+MJ.h"
 #import <ShareSDK/ShareSDK.h>
 #import "DataBase.h"
 #import "NSDate+gyh.h"
@@ -109,7 +108,7 @@
     //收藏按钮
     UIButton *collectbtn = [[UIButton alloc]init];
     collectbtn.hidden = NO;
-    collectbtn.frame = CGRectMake(sharebtn.x-10-70, sharebtn.y, 70, 40);
+    collectbtn.frame = CGRectMake(sharebtn.originX-10-70, sharebtn.originY, 70, 40);
     [collectbtn setTitle:@"收藏" forState:UIControlStateNormal];
     collectbtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [collectbtn addTarget:self action:@selector(collectClick:) forControlEvents:UIControlEventTouchUpInside];

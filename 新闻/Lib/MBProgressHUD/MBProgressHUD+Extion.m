@@ -1,13 +1,8 @@
-//
-//  MBProgressHUD+MJ.m
-//
-//  Created by mj on 13-4-18.
-//  Copyright (c) 2013年 itcast. All rights reserved.
-//
 
-#import "MBProgressHUD+MJ.h"
 
-@implementation MBProgressHUD (MJ)
+#import "MBProgressHUD+Extion.h"
+
+@implementation MBProgressHUD (Extion)
 #pragma mark 显示信息
 + (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
 {
@@ -47,6 +42,10 @@
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
     hud.dimBackground = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideHUD)];
+    [view addGestureRecognizer:tap];
+    
     return hud;
 }
 

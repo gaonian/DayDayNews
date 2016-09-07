@@ -11,15 +11,11 @@
 
 #import "OtherNewsViewController.h"
 #import "testViewController.h"
-#import "AFNetworking.h"
 #import "NewTableViewCell.h"
-#import "MJExtension.h"
 #import "NewData.h"
 #import "TopData.h"
 #import "NewDataFrame.h"
-#import "MJRefresh.h"
 #import "TopViewController.h"
-#import "MBProgressHUD+MJ.h"
 #import "TabbarView.h"
 
 @interface OtherNewsViewController ()<UITableViewDelegate,UITableViewDataSource>

@@ -10,12 +10,9 @@
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 
 #import "TopViewController.h"
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "TopData.h"
-#import "MJExtension.h"
-#import "MBProgressHUD+MJ.h"
-#import "UIImageView+WebCache.h"
+
 
 @interface TopViewController ()<UIScrollViewDelegate>
 

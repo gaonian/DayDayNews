@@ -8,16 +8,12 @@
 
 #import "VideoViewController.h"
 #import "testViewController.h"
-#import "AFNetworking.h"
 #import "VideoCell.h"
 #import "VideoData.h"
 #import "VideoDataFrame.h"
-#import "MJExtension.h"
-#import "MJRefresh.h"
 #import "DetailViewController.h"
 #import "TabbarButton.h"
 #import "ClassViewController.h"
-#import "MBProgressHUD+MJ.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>

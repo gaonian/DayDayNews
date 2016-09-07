@@ -1,35 +1,32 @@
 //
 //  UIView+Frame.h
-//  SXDownLoader
-//
-//  Created by 董尚先 on 15/1/2.
-//  Copyright (c) 2015年 shangxianDante. All rights reserved.
-//
+
 
 #import "UIView+Frame.h"
 
 @implementation UIView (Frame)
 
-- (void)setX:(CGFloat)x
+
+- (void)setOriginX:(CGFloat)originX
 {
     CGRect frame = self.frame;
-    frame.origin.x = x;
+    frame.origin.x = originX;
     self.frame = frame;
 }
 
-- (CGFloat)x
+- (CGFloat)originX
 {
     return self.frame.origin.x;
 }
 
-- (void)setY:(CGFloat)y
+- (void)setOriginY:(CGFloat)originY
 {
     CGRect frame = self.frame;
-    frame.origin.y = y;
+    frame.origin.y = originY;
     self.frame = frame;
 }
 
-- (CGFloat)y
+- (CGFloat)originY
 {
     return self.frame.origin.y;
 }

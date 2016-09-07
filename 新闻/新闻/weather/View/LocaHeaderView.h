@@ -7,17 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CitiesGroup,LocaHeaderView;
-
-@protocol LocaHeaderViewDelegate <NSObject>
-@optional
-- (void)headerViewDidClickedNameView:(LocaHeaderView *)locaheaderview;
-@end
-
+@class CitiesGroup;
 @interface LocaHeaderView : UITableViewHeaderFooterView
 + (instancetype)headerWithTableView:(UITableView *)tableview;
 @property (nonatomic , strong) CitiesGroup *groups;
-
-@property (nonatomic, weak) id<LocaHeaderViewDelegate> delegate;
 
 @end
