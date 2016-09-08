@@ -21,6 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "BaseEngine.h"
+#import "BaseViewController.h"
 
 
 #define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)

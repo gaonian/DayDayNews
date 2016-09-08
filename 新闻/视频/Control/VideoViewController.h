@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseSettingViewController.h"
 
-@interface VideoViewController : UIViewController
+@interface VideoViewController : BaseViewController
 
 @end

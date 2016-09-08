@@ -210,6 +210,7 @@
 		99C9A3191D81785900063D23 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3111D81785900063D23 /* AFURLRequestSerialization.m */; };
 		99C9A31A1D81785900063D23 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3131D81785900063D23 /* AFURLResponseSerialization.m */; };
 		99C9A31B1D81785900063D23 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3151D81785900063D23 /* AFURLSessionManager.m */; };
+		99C9A31E1D81834900063D23 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A31D1D81834900063D23 /* BaseViewController.m */; };
 		99EB82871D81155600A85C86 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EB82861D81155600A85C86 /* LoginView.m */; };
 /* End PBXBuildFile section */
 
@@ -645,6 +646,8 @@
 		99C9A3131D81785900063D23 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		99C9A3141D81785900063D23 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		99C9A3151D81785900063D23 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		99C9A31C1D81834900063D23 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		99C9A31D1D81834900063D23 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		99EB82851D81155600A85C86 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		99EB82861D81155600A85C86 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1466,6 +1469,8 @@
 				19C33E261BB109A20059238A /* NavigationController.m */,
 				19C33E271BB109A20059238A /* TabbarViewController.h */,
 				19C33E281BB109A20059238A /* TabbarViewController.m */,
+				99C9A31C1D81834900063D23 /* BaseViewController.h */,
+				99C9A31D1D81834900063D23 /* BaseViewController.m */,
 				19C33E221BB109A20059238A /* Model */,
 				19C33E291BB109A20059238A /* View */,
 			);
@@ -1989,6 +1994,7 @@
 				190450E71BCCAE6400C47A50 /* WeatherData.m in Sources */,
 				196892641BC8BDCA009D4A99 /* MJRefreshBackFooter.m in Sources */,
 				19C33E3E1BB109A20059238A /* NavigationController.m in Sources */,
+				99C9A31E1D81834900063D23 /* BaseViewController.m in Sources */,
 				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
 				99EB82871D81155600A85C86 /* LoginView.m in Sources */,
 				19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */,

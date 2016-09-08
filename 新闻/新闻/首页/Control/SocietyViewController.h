@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseSettingViewController.h"
 
-@interface SocietyViewController : UIViewController
+@interface SocietyViewController : BaseViewController
 
 @end

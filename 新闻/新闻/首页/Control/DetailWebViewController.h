@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DataModel.h"
 
-@interface DetailWebViewController : UIViewController
+@interface DetailWebViewController : BaseViewController
 @property (nonatomic , strong) DataModel *dataModel;
 
 @end

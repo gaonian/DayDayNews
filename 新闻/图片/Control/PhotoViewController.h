@@ -10,7 +10,7 @@
 #import "BaseSettingViewController.h"
 
 
-@interface PhotoViewController : UIViewController
+@interface PhotoViewController : BaseViewController
 
 
 @end

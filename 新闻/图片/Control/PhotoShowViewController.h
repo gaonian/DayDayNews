@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoShowViewController : UIViewController
+@interface PhotoShowViewController : BaseViewController
 
 @property (nonatomic , assign) int currentIndex;
 @property (nonatomic , strong) NSMutableArray *mutaArray;

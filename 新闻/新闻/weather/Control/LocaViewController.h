@@ -7,15 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//@class LocaViewController;
-//@protocol LocaViewControllerDelegate <NSObject>
-//
-//@optional
-//-(void)locaviewwithview:(LocaViewController *)locaviewcontrol  provice:(NSString *)provice city:(NSString *)city;
-//
-//@end
 
-@interface LocaViewController : UIViewController
+@interface LocaViewController : BaseViewController
 
 @property (nonatomic , copy) void(^CityBlock)(NSString *provice , NSString *city);
 @property (nonatomic , copy) NSString *currentTitle;

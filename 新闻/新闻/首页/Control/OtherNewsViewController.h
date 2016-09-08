@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OtherNewsViewController : UIViewController
+@interface OtherNewsViewController : BaseViewController
 @property (nonatomic , copy) NSString *content;
 @end

@@ -209,11 +209,11 @@
         
         if (arrowItem.VcClass == [ChatViewController class]) {
             
-            ChatViewController *chatVC = [[ChatViewController alloc]init];
-            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            chatVC = [story instantiateViewControllerWithIdentifier:@"ChatViewControl"];
-            chatVC.fromname = @"gaoyuhang";
-            [self.navigationController pushViewController:chatVC animated:YES];
+//            ChatViewController *chatVC = [[ChatViewController alloc]init];
+//            UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//            chatVC = [story instantiateViewControllerWithIdentifier:@"ChatViewControl"];
+//            chatVC.fromname = @"gaoyuhang";
+//            [self.navigationController pushViewController:chatVC animated:YES];
 
         }else{
             UIViewController *vc = [[arrowItem.VcClass alloc]init];

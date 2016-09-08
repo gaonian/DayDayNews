@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopViewController : UIViewController
+@interface TopViewController : BaseViewController
 @property (nonatomic , strong) NSString *url;
 @end

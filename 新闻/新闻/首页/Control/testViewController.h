@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface testViewController : UIViewController
+@interface testViewController : BaseViewController
 @property (nonatomic , copy) NSString *url;
 @end
