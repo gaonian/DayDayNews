@@ -70,8 +70,8 @@
 - (void)countLogin
 {
     if ([self.nameL.text isEqualToString:@"立即登录"]){
-        if (self.delegate && [self.delegate respondsToSelector:@selector(LoginBtnClck:)]) {
-            [self.delegate LoginBtnClck:@""];
+        if (self.loginBlock) {
+            self.loginBlock();
         }
     }else{
         

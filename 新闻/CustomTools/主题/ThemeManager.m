@@ -26,7 +26,6 @@ static ThemeManager * defaultManager;
 {
     self.themeName = [self currentTheme];
     self.themePath = [Bundle_Path_Of_ThemeResource stringByAppendingPathComponent:self.themeName];
-    DLog(@"%@,%@",self.themeName,self.themePath);
     self.themeColor = [UIColor colorWithPatternImage:[self themedImageWithName:@"navigationBar"]];
     self.oldColor = [UIColor whiteColor];
 }

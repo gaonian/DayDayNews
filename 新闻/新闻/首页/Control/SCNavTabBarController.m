@@ -6,7 +6,6 @@
 
 
 #import "SCNavTabBarController.h"
-//#import "CommonMacro.h"
 #import "SCNavTabBar.h"
 #import "WeatherViewController.h"
 #import "SocietyViewController.h"

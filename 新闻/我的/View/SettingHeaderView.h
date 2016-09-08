@@ -8,17 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol HeaderViewDelegate <NSObject>
-
-- (void)LoginBtnClck:(NSString *)str;
-
-@end
 
 @interface SettingHeaderView : UIView
 
 @property (nonatomic , weak) UIImageView *photoimageV;   //头像
 @property (nonatomic , weak) UILabel *nameL;         //昵称
 
-@property (nonatomic , weak) id<HeaderViewDelegate> delegate;
-
+@property (nonatomic , copy) void(^loginBlock)();
 @end

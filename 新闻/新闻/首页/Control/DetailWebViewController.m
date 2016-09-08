@@ -11,8 +11,7 @@
 #import "DetailImageWebModel.h"
 #import "DataBase.h"
 #import "NSDate+gyh.h"
-#import <ShareSDK/ShareSDK.h>
-
+#import "ShareManager.h"
 
 @interface DetailWebViewController ()<UIWebViewDelegate>
 @property (nonatomic , strong) DetailWebModel *detailModel;
@@ -204,41 +203,7 @@
 
 - (void)fenxiang
 {
-    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKEnableUseClientShare];
-    [shareParams SSDKSetupShareParamsByText:self.detailModel.title
-                                     images:nil
-                                        url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
-                                      title:@"Day Day News"
-                                       type:SSDKContentTypeAuto];
-    
-    [ShareSDK share:SSDKPlatformTypeSinaWeibo parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-        switch (state) {
-            case SSDKResponseStateSuccess:
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-            }
-                break;
-            case SSDKResponseStateFail:
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }];
+    [[ShareManager sharedInstance] shareWeiboWithTitle:self.detailModel.title images:nil dismissBlock:nil];
 }
 
 

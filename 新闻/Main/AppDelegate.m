@@ -78,8 +78,6 @@
 #pragma mark - 接收到消息
 - (void)didReceiveMessages:(NSArray *)aMessages
 {
-    DLog(@"接收到消息了-----%@",aMessages);
-    
     [self loadConversations];
     
     EMMessage *message = aMessages[0];
@@ -120,7 +118,6 @@
     for (EMConversation *conversation in self.conversations) {
         totalUnreadCount += [conversation unreadMessagesCount];
     }
-    DLog(@"未读消息总数:%ld",(long)totalUnreadCount);
     //发送未读消息数给setting界面，展示未读数
     [[NSNotificationCenter defaultCenter]postNotificationName:@"ChatCount" object:[NSString stringWithFormat:@"%ld",(long)totalUnreadCount]];
 }

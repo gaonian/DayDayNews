@@ -10,12 +10,6 @@
 #define PrefixHeader_pch
 
 
-#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
-#define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
-#define theWindow                       [[UIApplication sharedApplication] delegate].window
-
-
 #import "UIImageView+WebCache.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
@@ -28,6 +22,19 @@
 #import "MJRefresh.h"
 
 
+#define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
+#define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define theWindow                       [[UIApplication sharedApplication] delegate].window
+#define RGB(r,g,b,a)                    [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+
+///判断是否是ios7
+#define isIOS7 (DeviceSystemMajorVersion()< 7 ? NO:YES)
+///判断是否是ios8
+#define isIOS8 (DeviceSystemMajorVersion()< 8 ? NO:YES)
+
+#define isIOS9 (DeviceSystemMajorVersion()< 9 ? NO:YES)
+
 #if __has_feature(objc_arc)
 #define IMP_BLOCK_SELF(type) __weak type *block_self=self;
 #else
@@ -39,5 +46,7 @@
 #else
 #define DLog(...)
 #endif
+
+
 
 #endif /* PrefixHeader_pch */

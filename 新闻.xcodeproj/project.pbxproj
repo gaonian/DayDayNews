@@ -17,7 +17,6 @@
 		190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450CF1BCCAC0A00C47A50 /* NewTableViewCell.m */; };
 		190450E41BCCAC7C00C47A50 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450E31BCCAC7C00C47A50 /* WeatherViewController.m */; };
 		190450E71BCCAE6400C47A50 /* WeatherData.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450E61BCCAE6400C47A50 /* WeatherData.m */; };
-		1906E4001CB1030500FB93D5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1906E3FF1CB1030500FB93D5 /* ShareViewController.m */; };
 		1911F2161BBACD990096ADCB /* ClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911F2151BBACD990096ADCB /* ClassViewController.m */; };
 		19234A441CCE5EF100123348 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A431CCE5EF100123348 /* CollectViewController.m */; };
 		19234A471CCE62A300123348 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A461CCE62A300123348 /* CollectTableViewCell.m */; };
@@ -212,6 +211,8 @@
 		9922B98D1D803A0900E3E236 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98C1D803A0900E3E236 /* SCNavTabBarController.m */; };
 		9922B9901D803A6300E3E236 /* HMWaterflowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */; };
 		9922B9931D803A9800E3E236 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B9921D803A9800E3E236 /* HeaderView.m */; };
+		99C9A2F01D81386500063D23 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A2EF1D81386500063D23 /* ShareManager.m */; };
+		99EB82871D81155600A85C86 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EB82861D81155600A85C86 /* LoginView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,8 +253,6 @@
 		190450E31BCCAC7C00C47A50 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		190450E51BCCAE6400C47A50 /* WeatherData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherData.h; sourceTree = "<group>"; };
 		190450E61BCCAE6400C47A50 /* WeatherData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherData.m; sourceTree = "<group>"; };
-		1906E3FE1CB1030500FB93D5 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		1906E3FF1CB1030500FB93D5 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		1911F2141BBACD990096ADCB /* ClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassViewController.h; sourceTree = "<group>"; };
 		1911F2151BBACD990096ADCB /* ClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassViewController.m; sourceTree = "<group>"; };
 		19234A421CCE5EF100123348 /* CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectViewController.h; sourceTree = "<group>"; };
@@ -650,6 +649,10 @@
 		9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMWaterflowLayout.m; sourceTree = "<group>"; };
 		9922B9911D803A9800E3E236 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		9922B9921D803A9800E3E236 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		99C9A2EE1D81386500063D23 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = Category/ShareManager.h; sourceTree = "<group>"; };
+		99C9A2EF1D81386500063D23 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareManager.m; path = Category/ShareManager.m; sourceTree = "<group>"; };
+		99EB82851D81155600A85C86 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		99EB82861D81155600A85C86 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1387,8 +1390,6 @@
 				19234A431CCE5EF100123348 /* CollectViewController.m */,
 				1973098F1C8DA018009D4ACC /* HelpViewController.h */,
 				197309901C8DA018009D4ACC /* HelpViewController.m */,
-				1906E3FE1CB1030500FB93D5 /* ShareViewController.h */,
-				1906E3FF1CB1030500FB93D5 /* ShareViewController.m */,
 				192FC1621CDDA2FC008E41CA /* ChatViewController.h */,
 				192FC1631CDDA2FC008E41CA /* ChatViewController.m */,
 			);
@@ -1430,6 +1431,8 @@
 				19234A461CCE62A300123348 /* CollectTableViewCell.m */,
 				19BE4F0F1CE4E64C005E515D /* PhotoCollectTableViewCell.h */,
 				19BE4F101CE4E64C005E515D /* PhotoCollectTableViewCell.m */,
+				99EB82851D81155600A85C86 /* LoginView.h */,
+				99EB82861D81155600A85C86 /* LoginView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1581,6 +1584,8 @@
 		9922B9561D8029D300E3E236 /* CustomTools */ = {
 			isa = PBXGroup;
 			children = (
+				99C9A2EE1D81386500063D23 /* ShareManager.h */,
+				99C9A2EF1D81386500063D23 /* ShareManager.m */,
 				9922B96E1D80328100E3E236 /* 主题 */,
 				9922B9681D802C3900E3E236 /* DataBase */,
 				9922B9581D802AE400E3E236 /* Category */,
@@ -1881,6 +1886,7 @@
 				19C33E9A1BB10B4C0059238A /* NSObject+MJKeyValue.m in Sources */,
 				19ED1DAA1C8729E900AD6E0A /* TopCell.m in Sources */,
 				196892701BC8BDCA009D4A99 /* MJRefreshStateHeader.m in Sources */,
+				99C9A2F01D81386500063D23 /* ShareManager.m in Sources */,
 				19A67CCA1C4E361A008DC05E /* INTULocationManager.m in Sources */,
 				19747D461C88495B00C4CBBD /* GYHHeadeRefreshController.m in Sources */,
 				19C33E3C1BB109A20059238A /* AppDelegate.m in Sources */,
@@ -1972,7 +1978,6 @@
 				196585DD1CCBB9B000A9B5C5 /* FMResultSet.m in Sources */,
 				1968926E1BC8BDCA009D4A99 /* MJRefreshGifHeader.m in Sources */,
 				196585DA1CCBB9B000A9B5C5 /* FMDatabaseAdditions.m in Sources */,
-				1906E4001CB1030500FB93D5 /* ShareViewController.m in Sources */,
 				198BD1EC1BBB842A00B21A07 /* UIView+WebCacheOperation.m in Sources */,
 				9922B9811D80328100E3E236 /* ThemeManager.m in Sources */,
 				19918FBE1CDDE12900A89620 /* AddViewButton.m in Sources */,
@@ -1997,6 +2002,7 @@
 				196892641BC8BDCA009D4A99 /* MJRefreshBackFooter.m in Sources */,
 				19C33E3E1BB109A20059238A /* NavigationController.m in Sources */,
 				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
+				99EB82871D81155600A85C86 /* LoginView.m in Sources */,
 				19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */,
 				1945F08F1BAFDD0200A38747 /* main.m in Sources */,
 				196892741BC8BDCA009D4A99 /* UIScrollView+MJRefresh.m in Sources */,

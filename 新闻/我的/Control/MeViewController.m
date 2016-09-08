@@ -8,7 +8,6 @@
 
 #import "MeViewController.h"
 #import "SDImageCache.h"
-#import "UIImageView+WebCache.h"
 #import "SettingHeaderView.h"
 
 #import "SettingGroup.h"
@@ -17,19 +16,13 @@
 #import "SettingSwitchItem.h"
 #import "SettingLabelItem.h"
 
-#import "TabbarButton.h"
-
-#import "ShareViewController.h"     //分享
+#import "LoginView.h"
 #import "CollectViewController.h"   //收藏
 #import "ChatViewController.h"      //帮助与反馈
-
+#import "ShareManager.h"
 #import "EMSDK.h"
 
-#import <ShareSDK/ShareSDK.h>
-#import <ShareSDKUI/ShareSDKUI.h>
-
-
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,HeaderViewDelegate,UIScrollViewDelegate,EMChatManagerDelegate>
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EMChatManagerDelegate>
 
 @property (nonatomic , strong) NSString *clearCacheName;
 
@@ -63,8 +56,6 @@
 }
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -75,7 +66,10 @@
     
 
     SettingHeaderView *headerview = [[SettingHeaderView alloc]init];
-    headerview.delegate = self;
+    headerview.loginBlock = ^{
+        LoginView *lv = [[LoginView alloc]init];
+        [lv show];
+    };
     self.headerview = headerview;
 
     UITableView *tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
@@ -150,7 +144,9 @@
     SettingItem *moreHelp = [SettingArrowItem itemWithItem:@"MoreHelp" title:@"帮助与反馈" subtitle:self.chatCount VcClass:[ChatViewController class]];
     SettingItem *moreShare = [SettingArrowItem itemWithItem:@"MoreShare" title:@"分享给好友" VcClass:nil];
     moreShare.optionHandler = ^{
-        [block_self shareAction];
+        [[ShareManager sharedInstance] shareWeiboWithTitle:nil images:nil dismissBlock:^{
+            [block_self.navigationController popViewControllerAnimated:YES];
+        }];
     };
     SettingItem *handShake = [SettingArrowItem itemWithItem:@"handShake" title:@"清除缓存" subtitle:self.clearCacheName];
     handShake.optionHandler = ^{
@@ -234,68 +230,6 @@
 }
 
 
-
-#pragma mark - 登陆
-- (void)LoginBtnClck:(NSString *)str
-{
-        if (self.fenxiangview != nil) {
-            [self cancelClick];
-        }
-        CGFloat w = SCREEN_WIDTH - 80;
-        CGFloat h = 0.6 * w;
-        CGFloat x = SCREEN_WIDTH/2 - w/2;
-        CGFloat y = SCREEN_HEIGHT/2 - h/2;
-        UIView *fenxiangview = [[UIView alloc]initWithFrame:CGRectMake(x,y,w,h)];
-        fenxiangview.backgroundColor = [UIColor colorWithRed:246/255.0f green:246/255.0f blue:246/255.0f alpha:1];
-        [self.view addSubview:fenxiangview];
-        self.fenxiangview = fenxiangview;
-        [fenxiangview.layer setBorderWidth:2];
-        [fenxiangview.layer setBorderColor:[UIColor redColor].CGColor];
-        
-        UIButton *cancelB = [[UIButton alloc]init];
-        cancelB.frame = CGRectMake(fenxiangview.frame.size.width - 10 - 50, 10, 50, 10);
-        [cancelB setTitle:@"取消" forState:UIControlStateNormal];
-        [cancelB addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
-        [cancelB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        cancelB.titleLabel.font = [UIFont systemFontOfSize:14];
-        [fenxiangview addSubview:cancelB];
-        
-        UIView *lineV = [[UIView alloc]init];
-        lineV.backgroundColor = [UIColor grayColor];
-        lineV.frame = CGRectMake(0, CGRectGetMaxY(cancelB.frame)+10, fenxiangview.frame.size.width, 1);
-        [fenxiangview addSubview:lineV];
-        
-        NSArray *tarray = @[@"QQ",@"微信",@"微博"];
-        NSArray *imageArray = @[@"登录QQ",@"登录微信",@"登录微博"];
-        CGFloat hight = 80;
-        CGFloat Y = (fenxiangview.frame.size.height - CGRectGetMaxY(lineV.frame))/2-10;
-        for (int i = 0; i < 3; i++) {
-            TabbarButton *btn = [[TabbarButton alloc]init];
-            CGFloat w = (fenxiangview.frame.size.width - 40)/3;
-            CGFloat x = 20+i*w;
-            btn.frame = CGRectMake(x, Y, w, hight);
-            [btn setTitle:tarray[i] forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:15];
-            [btn setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
-            [fenxiangview addSubview:btn];
-            [btn addTarget:self action:@selector(loginClick:) forControlEvents:UIControlEventTouchUpInside];
-        }
-}
-
-- (void)loginClick:(UIButton *)btn
-{
-    NSString *title = btn.titleLabel.text;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"QQLogin" object:title];
-    [self cancelClick];
-}
-
-- (void)cancelClick
-{
-    [self.fenxiangview removeFromSuperview];
-    self.fenxiangview = nil;
-}
-
-
 #pragma mark - 计算偏移量控制状态栏的颜色
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -307,8 +241,6 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
 }
-
-
 
 
 #pragma mark - 清除缓存
@@ -366,48 +298,6 @@
     self.tableview.delegate = nil;
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-}
-
-
-- (void)shareAction
-{
-    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKEnableUseClientShare];
-    [shareParams SSDKSetupShareParamsByText:@"快来使用我吧 Day Day News"
-                                     images:nil
-                                        url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
-                                      title:@"Day Day News"
-                                       type:SSDKContentTypeAuto];
-    
-    [ShareSDK share:SSDKPlatformTypeSinaWeibo parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-        switch (state) {
-            case SSDKResponseStateSuccess:
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-                break;
-            case SSDKResponseStateFail:
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定"
-                                                          otherButtonTitles:nil];
-                [alertView show];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }];
 }
 
 @end
