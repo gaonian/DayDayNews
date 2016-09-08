@@ -192,7 +192,6 @@ static NSString *const ID = @"photo";
 - (void)loadData
 {
     IMP_BLOCK_SELF(PhotoViewController);
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
     dic[@"rn"] = @60;
@@ -200,7 +199,7 @@ static NSString *const ID = @"photo";
     NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
+    [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
         NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
@@ -218,8 +217,8 @@ static NSString *const ID = @"photo";
         [block_self.collectionView reloadData];
         [block_self.collectionView.header endRefreshing];
         [block_self.collectionView.footer endRefreshing];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+
+    } failure:^(id error) {
         [block_self.collectionView.header endRefreshing];
         [block_self.collectionView.footer endRefreshing];
     }];
@@ -228,15 +227,14 @@ static NSString *const ID = @"photo";
 - (void)initNetWorking
 {
     IMP_BLOCK_SELF(PhotoViewController);
-    AFHTTPRequestOperationManager *mgr = [[AFHTTPRequestOperationManager alloc]init];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     dic[@"pn"] = [NSString stringWithFormat:@"%d",self.pn];
     dic[@"rn"] = @60;
     
     NSString *urlstr = [NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject){
+    
+    [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
         NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
@@ -256,9 +254,11 @@ static NSString *const ID = @"photo";
         [block_self.collectionView.header endRefreshing];
         [block_self.collectionView.footer endRefreshing];
         
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(id error) {
+        
         [block_self.collectionView.header endRefreshing];
         [block_self.collectionView.footer endRefreshing];
+        
     }];
 }
 

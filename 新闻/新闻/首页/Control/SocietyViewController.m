@@ -250,7 +250,7 @@
 
 
 #pragma mark 图片轮播 delegate
--(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     TopData *data = self.topArray[index];
     
@@ -277,9 +277,8 @@
 
 - (void)initTopNet
 {
-    IMP_BLOCK_SELF(SocietyViewController);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    [mgr GET:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    IMP_BLOCK_SELF(SocietyViewController);    
+    [[BaseEngine shareEngine] runRequestWithPara:nil path:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" success:^(id responseObject) {
         
         NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
@@ -296,7 +295,7 @@
         
         [block_self initScrollView];
         
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(id error) {
         
     }];
 }
@@ -305,12 +304,11 @@
 -(void)requestNet:(int)type
 {
     IMP_BLOCK_SELF(SocietyViewController);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSString *urlstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/headline/T1348647853363/%d-20.html",self.page];
-    [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [[BaseEngine shareEngine] runRequestWithPara:nil path:urlstr success:^(id responseObject) {
         
         NSArray *temArray = responseObject[@"T1348647853363"];
-        
         NSArray *arrayM = [DataModel objectArrayWithKeyValuesArray:temArray];
         NSMutableArray *statusArray = [NSMutableArray array];
         for (DataModel *data in arrayM) {
@@ -327,12 +325,16 @@
         
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        DLog(@"%@",error);
+
+    } failure:^(id error) {
+        if (error) {
+            DLog(@"%@",error);
+        }
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
+
     }];
+    
 }
 
 

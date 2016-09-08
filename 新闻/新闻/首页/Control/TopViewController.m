@@ -112,14 +112,13 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(TopViewController);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    [mgr GET:_url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [[BaseEngine shareEngine] runRequestWithPara:nil path:_url success:^(id responseObject) {
         
-        //总数
         block_self.count = [responseObject[@"imgsum"]intValue];
         block_self.setname = responseObject[@"setname"];
         
-       NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"photos"]];
+        NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"photos"]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         
@@ -130,8 +129,8 @@
         
         [block_self setLabel];
         [block_self setImageView];
-  
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        
+    } failure:^(id error) {
         
     }];
 }

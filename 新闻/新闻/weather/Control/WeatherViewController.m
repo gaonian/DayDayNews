@@ -153,30 +153,29 @@
 #pragma mark  请求网络
 -(void)requestNet:(NSString *)pro city:(NSString *)city
 {
-    
+    IMP_BLOCK_SELF(WeatherViewController);
     NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",pro,city];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    [mgr GET:urlstr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [[BaseEngine shareEngine] runRequestWithPara:nil path:urlstr success:^(id responseObject) {
         
         [MBProgressHUD hideHUD];
         
-            self.dt = responseObject[@"dt"];
-            NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
-            NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
-            NSMutableArray *tempArray = [NSMutableArray array];
-            for (WeatherData *weather in dataArray) {
-                [tempArray addObject:weather];
-            }
-            self.weatherArray = tempArray;
+        block_self.dt = responseObject[@"dt"];
+        NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
+        NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        for (WeatherData *weather in dataArray) {
+            [tempArray addObject:weather];
+        }
+        block_self.weatherArray = tempArray;
         
-            //pm2d5
-            WeatherData *wd = [WeatherData objectWithKeyValues:responseObject[@"pm2d5"]];
-            self.wd = wd;
+        //pm2d5
+        WeatherData *wd = [WeatherData objectWithKeyValues:responseObject[@"pm2d5"]];
+        block_self.wd = wd;
         
-        [self initAll];
-       
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        [block_self initAll];
+        
+    } failure:^(id error) {
         
     }];
 }

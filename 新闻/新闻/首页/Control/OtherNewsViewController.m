@@ -118,30 +118,27 @@
 -(void)requestNet
 {
     IMP_BLOCK_SELF(OtherNewsViewController);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     dic[@"page"] = [NSString stringWithFormat:@"%d",self.page];
     NSString *urlstr = [NSString stringWithFormat:@"http://api.huceo.com/%@/other/?key=c32da470996b3fdd742fabe9a2948adb&num=20",self.content];
-    [mgr GET:urlstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
         NSArray *dataarray = [NewData objectArrayWithKeyValuesArray:responseObject[@"newslist"]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (NewData *data in dataarray) {
             NewDataFrame *dataFrame = [[NewDataFrame alloc] init];
-            // 传递微博模型数据
             dataFrame.NewData = data;
             [statusFrameArray addObject:dataFrame];
         }
         [block_self.totalArray addObjectsFromArray:statusFrameArray];
         block_self.page++;
-        // 刷新表格
         [block_self.tableview reloadData];
-        
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+
+    } failure:^(id error) {
         
     }];
 }

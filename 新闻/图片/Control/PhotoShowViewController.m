@@ -10,11 +10,10 @@
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 
 #import "PhotoShowViewController.h"
-#import "UIImageView+WebCache.h"
 #import "Photo.h"
-#import <ShareSDK/ShareSDK.h>
 #import "DataBase.h"
 #import "NSDate+gyh.h"
+#import "ShareManager.h"
 
 
 @interface PhotoShowViewController ()<UIScrollViewDelegate>
@@ -220,7 +219,6 @@
 #pragma mark - 收藏方法
 - (void)collectClick:(UIButton *)btn
 {
-    DLog(@"%@",[self.mutaArray[self.index] title]);
 
     NSString *width = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_width]];
     NSString *height = [NSString stringWithFormat:@"%f",[self.mutaArray[self.index] image_height]];
@@ -242,48 +240,7 @@
 #pragma mark - 分享方法
 - (void)shareClick
 {
-    //1、创建分享参数
-        NSArray* imageArray = @[self.imageV.image];
-    //（注意：图片必须要在Xcode左边目录里面，名称必须要传正确，如果要分享网络图片，可以这样传iamge参数 images:@[@"http://mob.com/Assets/images/logo.png?v=20150320"]）
-    if (imageArray) {
-        
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKEnableUseClientShare];
-        [shareParams SSDKSetupShareParamsByText:[self.mutaArray[_currentIndex] title]
-                                         images:imageArray
-                                            url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
-                                          title:@"Day Day News"
-                                           type:SSDKContentTypeAuto];
-        
-        [ShareSDK share:SSDKPlatformTypeSinaWeibo parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-            switch (state) {
-                case SSDKResponseStateSuccess:
-                {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                        message:nil
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"确定"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
-                }
-                    break;
-                case SSDKResponseStateFail:
-                {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                        message:nil
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"确定"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }];
-
-    }
+    [[ShareManager sharedInstance] shareWeiboWithTitle:@"性感不" images:self.imageV.image dismissBlock:nil];
 }
 
 

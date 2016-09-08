@@ -86,12 +86,9 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(ClassViewController);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     NSString *getstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/video/list/%@/y/%d-10.html",_url,self.count];
-    
-    [mgr GET:getstr parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+
+    [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {
         NSArray *dataarray = [VideoData objectArrayWithKeyValuesArray:responseObject[_url]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
@@ -112,8 +109,7 @@
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
         block_self.tableview.footer.hidden = block_self.videoArray.count < 10;
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(id error) {
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
     }];

@@ -43,7 +43,7 @@ static id _instance;
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
     [shareParams SSDKEnableUseClientShare];
     [shareParams SSDKSetupShareParamsByText:title?title:@"快来使用我吧 Day Day News"
-                                     images:nil
+                                     images:image
                                         url:[NSURL URLWithString:@"https://www.github.com/gaoyuhang"]
                                       title:@"Day Day News"
                                        type:SSDKContentTypeAuto];
