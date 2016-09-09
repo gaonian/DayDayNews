@@ -933,7 +933,6 @@
 				19C33DF81BB109A20059238A /* 我的 */,
 				19C33E1F1BB109A20059238A /* Main */,
 				9922B9561D8029D300E3E236 /* CustomTools */,
-				9922B9571D8029D300E3E236 /* CustomView */,
 				9922B96C1D8030E700E3E236 /* Supports */,
 				1945F0991BAFDD0200A38747 /* Assets.xcassets */,
 				1945F09E1BAFDD0200A38747 /* Info.plist */,
@@ -1574,13 +1573,6 @@
 				9922B9581D802AE400E3E236 /* Category */,
 			);
 			path = CustomTools;
-			sourceTree = "<group>";
-		};
-		9922B9571D8029D300E3E236 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
 			sourceTree = "<group>";
 		};
 		9922B9581D802AE400E3E236 /* Category */ = {

@@ -169,7 +169,9 @@
     CGFloat imageX = i * imageW;
     self.frontScrollV.frame = CGRectMake(imageX, imageY, imageW, imageH);
     self.imageV.frame = CGRectMake(0, 0, imageW, imageH);
-    [self.imageV sd_setImageWithURL:purl placeholderImage:nil];
+    if (self.imageV.image == nil) {
+        [self.imageV sd_setImageWithURL:purl placeholderImage:nil];
+    }
     // 文字
     if (self.mutaArray.count > 1) {
         self.countlabel.text = [NSString stringWithFormat:@"%d/%d",i + 1,(int)self.mutaArray.count];

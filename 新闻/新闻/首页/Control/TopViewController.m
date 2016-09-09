@@ -222,7 +222,6 @@
         [photoImgView sd_setImageWithURL:purl placeholderImage:nil];
         self.imageV = photoImgView;
     }
-    
 }
 
 -(void)downClick
@@ -251,12 +250,5 @@
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-
-- (void)dealloc
-{
-    DLog(@"dealloc");
-}
-
-
 
 @end

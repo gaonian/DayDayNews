@@ -111,9 +111,8 @@ static NSString *const ID = @"photo";
     };
     layout.columnsCount = 2;
     
-    // 2.创建UICollectionView
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    collectionView.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
+    collectionView.backgroundColor = RGB(239, 239, 244, 1);
     collectionView.dataSource = self;
     collectionView.delegate = self;
     [collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:nil] forCellWithReuseIdentifier:ID];
