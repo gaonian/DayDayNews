@@ -24,6 +24,11 @@
     return YES;
 }
 
+- (void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)dealloc
 {
     DLog(@"Controller dealloc = %@",NSStringFromClass([self class]));

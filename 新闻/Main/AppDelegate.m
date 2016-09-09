@@ -24,7 +24,7 @@
 #import "WeiboSDK.h"
 
 #import "EMSDK.h"
-
+#import "StartManager.h"
 
 @interface AppDelegate ()<EMChatManagerDelegate>
 
@@ -65,6 +65,9 @@
     
     //获取未读的消息数
     [self loadConversations];
+    
+    [StartManager sharedInstance];
+    [AppConfig sharedInstance];
     
     return YES;
 }

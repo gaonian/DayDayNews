@@ -1,5 +1,5 @@
 //
-//  BaseViewController.h
+//  WeatherBottomView.h
 //  新闻
 //
 //  Created by 范英强 on 16/9/8.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseViewController : UIViewController
-- (BOOL)canSwipBack;
-- (void)back;
+@interface WeatherBottomView : UIView
+
+- (void)setDataWithAry:(NSMutableArray *)ary;
+
 @end
