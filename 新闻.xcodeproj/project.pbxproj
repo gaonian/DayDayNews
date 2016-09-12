@@ -2073,7 +2073,7 @@
 					"$(PROJECT_DIR)/新闻/Lib/libraries",
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PREFIX_HEADER = "/Users/fanyingqiang/Desktop/项目/DayDayNews/新闻/Supports/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/新闻/Supports/PrefixHeader.pch";
 				INFOPLIST_FILE = "新闻/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2109,7 +2109,7 @@
 					"$(PROJECT_DIR)/新闻/Lib/libraries",
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PREFIX_HEADER = "/Users/fanyingqiang/Desktop/项目/DayDayNews/新闻/Supports/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/新闻/Supports/PrefixHeader.pch";
 				INFOPLIST_FILE = "新闻/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
