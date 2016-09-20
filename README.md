@@ -16,7 +16,7 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 
 
 ##导航
-1. [Update Log](https://github.com/gaoyuhang/DayDayNews#update-log)
+1. [Update Log](https://github.com/gaoyuhang/DayDayNews/wiki)
 2. [首页以及顶部新闻详情](https://github.com/gaoyuhang/DayDayNews#首页以及顶部新闻详情高仿网易) 
 3. [天气预报的功能](https://github.com/gaoyuhang/DayDayNews#https://github.com/gaoyuhang/DayDayNews#增加了天气预报的功能可以实现定位到当前城市动画效果也没有放过)
 4. [图片界面，采用瀑布流展示](https://github.com/gaoyuhang/DayDayNews#使用瀑布流实现图片可以选择分类)
