@@ -100,6 +100,11 @@
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return self.childViewControllers.count > 1;
+}
+
 - (void)back
 {
     [self popViewControllerAnimated:YES];

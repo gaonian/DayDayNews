@@ -198,6 +198,7 @@
 		9922B98D1D803A0900E3E236 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98C1D803A0900E3E236 /* SCNavTabBarController.m */; };
 		9922B9901D803A6300E3E236 /* HMWaterflowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */; };
 		9922B9931D803A9800E3E236 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B9921D803A9800E3E236 /* HeaderView.m */; };
+		9967E6E81D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		99C9A2F01D81386500063D23 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A2EF1D81386500063D23 /* ShareManager.m */; };
 		99C9A3071D81703B00063D23 /* BaseEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3061D81703B00063D23 /* BaseEngine.m */; };
 		99C9A3161D81785900063D23 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A30A1D81785900063D23 /* AFHTTPSessionManager.m */; };
@@ -210,6 +211,8 @@
 		99C9A3211D8195B800063D23 /* WeatherBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3201D8195B800063D23 /* WeatherBottomView.m */; };
 		99C9A3241D81A4AE00063D23 /* WeatherHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3231D81A4AE00063D23 /* WeatherHeaderView.m */; };
 		99EB82871D81155600A85C86 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EB82861D81155600A85C86 /* LoginView.m */; };
+		99FE386F1D87DE2F003A5F35 /* ChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE386D1D87DE2F003A5F35 /* ChatController.m */; };
+		99FE38701D87DE2F003A5F35 /* ChatController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99FE386E1D87DE2F003A5F35 /* ChatController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -625,6 +628,8 @@
 		9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMWaterflowLayout.m; sourceTree = "<group>"; };
 		9922B9911D803A9800E3E236 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		9922B9921D803A9800E3E236 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		9967E6E61D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		99C9A2EE1D81386500063D23 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = Category/ShareManager.h; sourceTree = "<group>"; };
 		99C9A2EF1D81386500063D23 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareManager.m; path = Category/ShareManager.m; sourceTree = "<group>"; };
 		99C9A3051D81703B00063D23 /* BaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEngine.h; sourceTree = "<group>"; };
@@ -650,6 +655,9 @@
 		99C9A3231D81A4AE00063D23 /* WeatherHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherHeaderView.m; sourceTree = "<group>"; };
 		99EB82851D81155600A85C86 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		99EB82861D81155600A85C86 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		99FE386C1D87DE2F003A5F35 /* ChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatController.h; sourceTree = "<group>"; };
+		99FE386D1D87DE2F003A5F35 /* ChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatController.m; sourceTree = "<group>"; };
+		99FE386E1D87DE2F003A5F35 /* ChatController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1392,6 +1400,9 @@
 				197309901C8DA018009D4ACC /* HelpViewController.m */,
 				192FC1621CDDA2FC008E41CA /* ChatViewController.h */,
 				192FC1631CDDA2FC008E41CA /* ChatViewController.m */,
+				99FE386C1D87DE2F003A5F35 /* ChatController.h */,
+				99FE386D1D87DE2F003A5F35 /* ChatController.m */,
+				99FE386E1D87DE2F003A5F35 /* ChatController.xib */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -1578,6 +1589,8 @@
 		9922B9581D802AE400E3E236 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				9967E6E61D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.h */,
+				9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */,
 				190450C41BCCAC0A00C47A50 /* NSString+Extension.h */,
 				190450C51BCCAC0A00C47A50 /* NSString+Extension.m */,
 				9922B9591D802AE400E3E236 /* GYHTimeTool.h */,
@@ -1746,6 +1759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				198AF7DF1C844D3A00D941F4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				99FE38701D87DE2F003A5F35 /* ChatController.xib in Resources */,
 				19C33E451BB109FB0059238A /* PhotoCell.xib in Resources */,
 				19918FDF1CDDEF7500A89620 /* 开始录音02录音@2x.png in Resources */,
 				198AF7E91C844D3A00D941F4 /* ShareSDKUI.bundle in Resources */,
@@ -1875,10 +1889,12 @@
 				197309911C8DA018009D4ACC /* HelpViewController.m in Sources */,
 				198E40951D71B0EE00ABDD5E /* GYHCircleLoadingView.m in Sources */,
 				19D000141BB417D0009EA71C /* TADotView.m in Sources */,
+				9967E6E81D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				9922B9631D802AE400E3E236 /* GYHTimeTool.m in Sources */,
 				99C9A31A1D81785900063D23 /* AFURLResponseSerialization.m in Sources */,
 				19747D3F1C87FC3900C4CBBD /* DetailImageWebModel.m in Sources */,
 				198AF7A81C841C0300D941F4 /* SettingGroup.m in Sources */,
+				99FE386F1D87DE2F003A5F35 /* ChatController.m in Sources */,
 				190450D41BCCAC0A00C47A50 /* NewData.m in Sources */,
 				196892671BC8BDCA009D4A99 /* MJRefreshHeader.m in Sources */,
 				19918FC41CDDE13100A89620 /* HyperlinksButton.m in Sources */,
