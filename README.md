@@ -31,47 +31,6 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
  1. [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
-##Update Log
-- 适配了iOS9<br />
-- 增加了点击tabbar刷新当前页面的功能<br />
-- 2016-1-2 修改了首页顶部滚动条的接口 <br />
-- 2016-1-14 处理天气预报加载时间长，没页面显示的问题。<br />
-- 2016-1-19 更换了corelocation定位，系统定位繁琐速度慢。更换为INTULocationManager第三方定位，block调用简单有效<br />
-- 2016-1-20 更改了首页顶部滚动条详情不显示的问题。<br />
-- 2016-2-10 优化天气预报城市缓存问题 <br>
-- 2016-3-2  完善”我的“界面，实现第三方登录以及注销功能<br>
-- 2016-3-3 修改了首页社会的显示数据，抓取网易的数据，并进行解析。 把下拉刷新改成动画效果，更美观<br>
-- 2016-3-7 修改了首页imagesCell有时数据不显示的问题<br>
-- 2016-4-16 完善了夜间模式的设置。<br>
-- 2016-4-25 增加了收藏<br>
-- 2016-4-26 初步完善了收藏，现在支持首页新闻模式的收藏。<br>
-- 2016-4-29 终结了收藏功能 <br>
-- 2016-5-7  在帮助与反馈界面初步增加了环信即时通讯
-- 2016-5-9  在设置界面显示当前未读的消息数，实时监听并改变
-- 2016-5-9  增加了本地通知
-- 2016-5-12 新增图片收藏，属性列表存储,实时刷新收藏数据
-- 2016-6-10 由于网易有小改动，修改了首页的显示模式 
-- 2016-6-25 修改了图片模块，大图展示图片可以拉伸和缩小
-- 2016-8-17 修改了log的输出
-- 2016-8-26 增加了tabbar的功能，可以在app内随意选择进入某一tabbar控制器
-- 2016-8-26 做了一些基础的优化
-- 2016-8-27 重写了图片页面的下拉菜单
-- 2016-9-7  调整了一些目录结构
-- 2016-9-8  简单提取了网络请求
-- 2016-9-9  调整了天气界面,抽取一些公共类
-- 2016-9-20 全屏滑动返回
-
-
-###修改了视频显示方式
-- 点击当前cell播放视频在当前cell上，监听屏幕转动，当屏幕转动的时候，视频自动横屏全屏播放，当屏幕为正的时候，播放在当前cell上<br />
-- 增加了活动指示器，采取搜狐视频活动指示器
-
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/加载.png)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/播放.png)
-![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/横屏.png)
-_<br />_<br />
-
-
 ##首页以及顶部新闻详情，高仿网易
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsfresh.png)
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/newsdata.png)
@@ -86,6 +45,11 @@ _<br />_<br />
 ##视频
 - 自定义视频界面（后续修改）<br>
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
+
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/加载.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/播放.png)
+![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/横屏.png)
+_<br />_<br />
 
 
 ##我的界面实现第三方登陆以及注销，界面优化。
