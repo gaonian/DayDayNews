@@ -25,7 +25,7 @@
 
 @implementation WeatherViewController
 
-
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -40,7 +40,22 @@
     }
 }
 
-#pragma mark  请求网络
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+#pragma mark - network
 - (void)requestNet:(NSString *)pro city:(NSString *)city
 {
     IMP_BLOCK_SELF(WeatherViewController);
@@ -70,23 +85,7 @@
     }];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
-
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-
-}
-
-
+#pragma mark - lazy
 - (NSMutableArray *)weatherArray
 {
     if(!_weatherArray){
