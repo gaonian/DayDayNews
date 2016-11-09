@@ -29,39 +29,7 @@
 
 @implementation LocaViewController
 
-
-- (NSMutableArray *)groups
-{
-    if (_groups == nil) {
-        NSArray *dictArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city.plist" ofType:nil]];
-        
-        NSMutableArray *groupArray = [NSMutableArray array];
-        for (NSDictionary *dict in dictArray) {
-            CitiesGroup *group = [CitiesGroup objectWithKeyValues:dict];
-            [groupArray addObject:group];
-        }
-        _groups = groupArray;
-       
-    }
-    return _groups;
-}
-
--(NSMutableArray *)resultsData
-{
-    if (!_resultsData) {
-        _resultsData = [NSMutableArray array];
-    }
-    return _resultsData;
-}
--(NSMutableArray *)proviceResults
-{
-    if (!_proviceResults) {
-        _proviceResults = [NSMutableArray array];
-    }
-    return _proviceResults;
-}
-
-
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -74,8 +42,6 @@
     [self initTableView];
     [self initSearchBar];
 }
-
-
 
 -(void)initTableView
 {
@@ -106,8 +72,7 @@
 
 }
 
-#pragma mark  -- tableview Delegate
-
+#pragma mark  - tableview Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if(tableView == self.searchDisplayController.searchResultsTableView){
@@ -152,7 +117,6 @@
     return cell;
 }
 
-#pragma mark  -- 点击事件，当监听到点击以后传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -178,8 +142,6 @@
     
 }
 
-
-#pragma mark  -- HeaderView
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     LocaHeaderView *header = [LocaHeaderView headerWithTableView:tableView];
@@ -187,8 +149,8 @@
     return header;
 }
 
-
-#pragma mark - 是否包含或等于要搜索的字符串内容
+#pragma mark - searchbar delegate
+//是否包含或等于要搜索的字符串内容
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSMutableArray *tempResults = [NSMutableArray array];
@@ -216,8 +178,7 @@
     
 }
 
-
-#pragma mark - searchBar开始编辑时改变取消按钮的文字
+//searchBar开始编辑时改变取消按钮的文字
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     self.mysearchBar.showsCancelButton = YES;
@@ -238,5 +199,38 @@
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - lazy
+- (NSMutableArray *)groups
+{
+    if (_groups == nil) {
+        NSArray *dictArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"city.plist" ofType:nil]];
+        
+        NSMutableArray *groupArray = [NSMutableArray array];
+        for (NSDictionary *dict in dictArray) {
+            CitiesGroup *group = [CitiesGroup objectWithKeyValues:dict];
+            [groupArray addObject:group];
+        }
+        _groups = groupArray;
+       
+    }
+    return _groups;
+}
+
+-(NSMutableArray *)resultsData
+{
+    if (!_resultsData) {
+        _resultsData = [NSMutableArray array];
+    }
+    return _resultsData;
+}
+-(NSMutableArray *)proviceResults
+{
+    if (!_proviceResults) {
+        _proviceResults = [NSMutableArray array];
+    }
+    return _proviceResults;
+}
+
 
 @end
