@@ -116,6 +116,9 @@ static NSString *ID = @"PullDownCell";
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
         self.isShow = NO;
+        if (self.removeBlock) {
+            self.removeBlock();
+        }
     }];
 }
 

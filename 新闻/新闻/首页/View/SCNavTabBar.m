@@ -64,7 +64,7 @@
         [button setTitle:_itemTitles[index] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:16];
         CGSize textMaxSize = CGSizeMake(SCREENW, MAXFLOAT);
-        CGSize textRealSize = [_itemTitles[index] sizeWithFont:[UIFont systemFontOfSize:16] maxSize:textMaxSize ];
+        CGSize textRealSize = [_itemTitles[index] sizeWithFont:[UIFont systemFontOfSize:16] maxSize:textMaxSize].size;
 
         textRealSize = CGSizeMake(textRealSize.width + 15*2, 44);
         button.frame = CGRectMake(buttonX, 0,textRealSize.width, 44);
@@ -108,7 +108,7 @@
     for (NSString *title in titles)
     {
         CGSize textMaxSize = CGSizeMake(SCREENW, MAXFLOAT);
-        CGSize textRealSize = [title sizeWithFont:[UIFont systemFontOfSize:16] maxSize:textMaxSize ];
+        CGSize textRealSize = [title sizeWithFont:[UIFont systemFontOfSize:16] maxSize:textMaxSize].size;
        
         NSNumber *width = [NSNumber numberWithFloat:textRealSize.width];
         [widths addObject:width];

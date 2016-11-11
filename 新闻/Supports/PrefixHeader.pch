@@ -23,6 +23,7 @@
 #import "BaseEngine.h"
 #import "BaseViewController.h"
 #import "AppConfig.h"
+#import "UIColor+Extension.h"
 
 
 #define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
@@ -30,6 +31,8 @@
 #define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define theWindow                       [[UIApplication sharedApplication] delegate].window
 #define RGB(r,g,b,a)                    [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define HEXColor(colorString)           [UIColor colorWithHexString:colorString]
+
 
 ///判断是否是ios7
 #define isIOS7 (DeviceSystemMajorVersion()< 7 ? NO:YES)
@@ -37,6 +40,15 @@
 #define isIOS8 (DeviceSystemMajorVersion()< 8 ? NO:YES)
 
 #define isIOS9 (DeviceSystemMajorVersion()< 9 ? NO:YES)
+
+#define isIOS10 (DeviceSystemMajorVersion()< 10 ? NO:YES)
+
+
+#define IS_IPHONE4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define IS_IPHONE5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define IS_IPHONE6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size)) : NO)
+#define IS_IPHONE6PLUS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)) : NO)
+
 
 #if __has_feature(objc_arc)
 #define IMP_BLOCK_SELF(type) __weak type *block_self=self;

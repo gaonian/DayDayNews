@@ -31,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel *titleL = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-20, 20)];
+        UILabel *titleL = [[UILabel alloc]initWithFrame:CGRectMake(8, 8, SCREEN_WIDTH-16, 20)];
         if (SCREEN_WIDTH == 320) {
             titleL.font = [UIFont systemFontOfSize:15];
         }else{
@@ -69,6 +69,10 @@
         replyL.textColor = [UIColor darkGrayColor];
         [self addSubview:replyL];
         self.lblReply = replyL;
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(replyL.frame) + 10, SCREEN_WIDTH - 20, 1)];
+        line.backgroundColor = HEXColor(@"eeeeee");
+        [self addSubview:line];
     }
     return self;
 }
@@ -90,7 +94,7 @@
     }
     self.lblReply.text = displayCount;
     
-    self.lblReply.width = [self.lblReply.text sizeWithFont:[UIFont systemFontOfSize:10] maxSize:CGSizeMake(200, MAXFLOAT)].width;
+    self.lblReply.width = [self.lblReply.text sizeWithFont:[UIFont systemFontOfSize:10] maxSize:CGSizeMake(200, MAXFLOAT)].size.width;
     self.lblReply.width += 10;
     self.lblReply.originX = SCREEN_WIDTH - 10 - self.lblReply.width;
     
@@ -106,21 +110,6 @@
         [self.image3 sd_setImageWithURL:[NSURL URLWithString:self.dataModel.imgextra[1][@"imgsrc"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     
-}
-
-
-
-#pragma mark 重画tableview的线
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-    CGContextFillRect(context, rect);
-    
-    //下分割线
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextStrokeRect(context, CGRectMake(0, rect.size.height, rect.size.width, 1));
 }
 
 @end

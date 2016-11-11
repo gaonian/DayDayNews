@@ -79,7 +79,7 @@
     self.timeLabel.text = data.ctime;
     
     CGSize textMaxSize = CGSizeMake(200, MAXFLOAT);
-    CGSize textRealSize = [self.timeLabel.text sizeWithFont:[UIFont systemFontOfSize:12] maxSize:textMaxSize];
+    CGSize textRealSize = [self.timeLabel.text sizeWithFont:[UIFont systemFontOfSize:12] maxSize:textMaxSize].size;
     CGFloat ctimeX = SCREEN_WIDTH - textRealSize.width - 10;
     CGFloat ctimeY = CGRectGetMaxY(_dataFrame.titleF) + 10;
     self.timeLabel.frame = (CGRect){{ctimeX,ctimeY},textRealSize};

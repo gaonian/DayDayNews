@@ -33,7 +33,7 @@
     if (self) {
         
         UIImageView *imageV = [[UIImageView alloc]init];
-        imageV.frame = CGRectMake(10, 10, 80, 60);
+        imageV.frame = CGRectMake(8, 8, 80, 60);
         [self addSubview:imageV];
         self.imgIcon = imageV;
         
@@ -76,6 +76,10 @@
         resorceL.frame = CGRectMake(resorceX, resorceY, resorceW, resorceH);
         [self addSubview:resorceL];
         self.resorceL = resorceL;
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 79, SCREEN_WIDTH - 20, 1)];
+        line.backgroundColor = HEXColor(@"eeeeee");
+        [self addSubview:line];
     }
     
     return self;
@@ -100,7 +104,7 @@
     }
     self.lblReply.text = displayCount;
     
-    self.lblReply.width = [self.lblReply.text sizeWithFont:[UIFont systemFontOfSize:10] maxSize:CGSizeMake(200, MAXFLOAT)].width;
+    self.lblReply.width = [self.lblReply.text sizeWithFont:[UIFont systemFontOfSize:10] maxSize:CGSizeMake(200, MAXFLOAT)].size.width;
     self.lblReply.width += 10;
     self.lblReply.originX = SCREEN_WIDTH - 10 - self.lblReply.width;
     
@@ -150,21 +154,5 @@
         return 80;
     }
 }
-
-
-
-#pragma mark 重画tableview的线
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-    CGContextFillRect(context, rect);
-    
-    //下分割线
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextStrokeRect(context, CGRectMake(0, rect.size.height, rect.size.width, 1));
-}
-
 
 @end

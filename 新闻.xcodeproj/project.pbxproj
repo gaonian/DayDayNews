@@ -198,6 +198,9 @@
 		9922B98D1D803A0900E3E236 /* SCNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98C1D803A0900E3E236 /* SCNavTabBarController.m */; };
 		9922B9901D803A6300E3E236 /* HMWaterflowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */; };
 		9922B9931D803A9800E3E236 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B9921D803A9800E3E236 /* HeaderView.m */; };
+		9947B2EF1DD5A215009F81BB /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947B2EE1DD5A215009F81BB /* UIColor+Extension.m */; };
+		9947B2F21DD5A5A4009F81BB /* UIView+Corner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947B2F11DD5A5A4009F81BB /* UIView+Corner.m */; };
+		9947B2F51DD5A5BD009F81BB /* UIView+GestureRecongnizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947B2F41DD5A5BD009F81BB /* UIView+GestureRecongnizer.m */; };
 		9967E6E81D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		99C9A2F01D81386500063D23 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A2EF1D81386500063D23 /* ShareManager.m */; };
 		99C9A3071D81703B00063D23 /* BaseEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9A3061D81703B00063D23 /* BaseEngine.m */; };
@@ -628,6 +631,12 @@
 		9922B98F1D803A6300E3E236 /* HMWaterflowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMWaterflowLayout.m; sourceTree = "<group>"; };
 		9922B9911D803A9800E3E236 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		9922B9921D803A9800E3E236 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		9947B2ED1DD5A215009F81BB /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		9947B2EE1DD5A215009F81BB /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		9947B2F01DD5A5A4009F81BB /* UIView+Corner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Corner.h"; sourceTree = "<group>"; };
+		9947B2F11DD5A5A4009F81BB /* UIView+Corner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Corner.m"; sourceTree = "<group>"; };
+		9947B2F31DD5A5BD009F81BB /* UIView+GestureRecongnizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GestureRecongnizer.h"; sourceTree = "<group>"; };
+		9947B2F41DD5A5BD009F81BB /* UIView+GestureRecongnizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GestureRecongnizer.m"; sourceTree = "<group>"; };
 		9967E6E61D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		99C9A2EE1D81386500063D23 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = Category/ShareManager.h; sourceTree = "<group>"; };
@@ -1603,6 +1612,12 @@
 				9922B9601D802AE400E3E236 /* UIImage+Extension.m */,
 				9922B9611D802AE400E3E236 /* UIView+Frame.h */,
 				9922B9621D802AE400E3E236 /* UIView+Frame.m */,
+				9947B2ED1DD5A215009F81BB /* UIColor+Extension.h */,
+				9947B2EE1DD5A215009F81BB /* UIColor+Extension.m */,
+				9947B2F01DD5A5A4009F81BB /* UIView+Corner.h */,
+				9947B2F11DD5A5A4009F81BB /* UIView+Corner.m */,
+				9947B2F31DD5A5BD009F81BB /* UIView+GestureRecongnizer.h */,
+				9947B2F41DD5A5BD009F81BB /* UIView+GestureRecongnizer.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1835,6 +1850,8 @@
 				198BD1E41BBB842A00B21A07 /* SDWebImageDownloaderOperation.m in Sources */,
 				196585DB1CCBB9B000A9B5C5 /* FMDatabasePool.m in Sources */,
 				1968926C1BC8BDCA009D4A99 /* MJRefreshBackNormalFooter.m in Sources */,
+				9947B2EF1DD5A215009F81BB /* UIColor+Extension.m in Sources */,
+				9947B2F21DD5A5A4009F81BB /* UIView+Corner.m in Sources */,
 				19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */,
 				9922B9931D803A9800E3E236 /* HeaderView.m in Sources */,
 				19B063FF1BBA2E1E00483A5D /* MBProgressHUD+Extion.m in Sources */,
@@ -1955,6 +1972,7 @@
 				19234A471CCE62A300123348 /* CollectTableViewCell.m in Sources */,
 				198E40971D71B0EE00ABDD5E /* GYHSectorProgressView.m in Sources */,
 				1968926A1BC8BDCA009D4A99 /* MJRefreshAutoStateFooter.m in Sources */,
+				9947B2F51DD5A5BD009F81BB /* UIView+GestureRecongnizer.m in Sources */,
 				19918FC11CDDE12900A89620 /* MessageVideoCell.m in Sources */,
 				196892631BC8BDCA009D4A99 /* MJRefreshAutoFooter.m in Sources */,
 				19C33E3D1BB109A20059238A /* TabbarButton.m in Sources */,

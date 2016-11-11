@@ -104,7 +104,7 @@
     //正文的尺寸
     CGSize textBtnSize;
     CGSize textMaxSize = CGSizeMake(200, MAXFLOAT);
-    CGSize textRealSize = [message sizeWithFont:[UIFont systemFontOfSize:15] maxSize:textMaxSize];
+    CGSize textRealSize = [message sizeWithFont:[UIFont systemFontOfSize:15] maxSize:textMaxSize].size;
     // 按钮最终的真实尺寸
     textBtnSize = CGSizeMake(textRealSize.width+TextPadding*2, textRealSize.height+TextPadding*2);
     CGFloat textY = iconY;

@@ -230,7 +230,7 @@
         NSString *str = textBody.text;
         CGSize textBtnSize;
         CGSize textMaxSize = CGSizeMake(200, MAXFLOAT);
-        CGSize textRealSize = [str sizeWithFont:[UIFont systemFontOfSize:15] maxSize:textMaxSize];
+        CGSize textRealSize = [str sizeWithFont:[UIFont systemFontOfSize:15] maxSize:textMaxSize].size;
         // 按钮最终的真实尺寸
         textBtnSize = CGSizeMake(textRealSize.width + 20, textRealSize.height + 20);
         //根据文本空间计算行高

@@ -20,6 +20,8 @@
 @interface PullDownView : UIView
 
 @property (nonatomic , copy) void(^SelectBlock)(id sender);
+@property (nonatomic , copy) void(^removeBlock)();
+
 @property (nonatomic , getter=isShow) BOOL isShow;
 
 

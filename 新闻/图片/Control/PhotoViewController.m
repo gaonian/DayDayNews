@@ -22,8 +22,8 @@
 @property (nonatomic , copy) NSString *              tag1;
 @property (nonatomic , copy) NSString *              tag2;
 @property (nonatomic , strong) NSArray *             classArray;
-
-@property (nonatomic , strong) PullDownView *  pullDownView;
+@property (nonatomic , strong) PullDownView *        pullDownView;
+@property (nonatomic , strong) NSString *            degreeName;
 
 @end
 
@@ -31,58 +31,16 @@
 
 static NSString *const ID = @"photo";
 
--(NSArray *)classArray
-{
-    if (!_classArray) {
-        _classArray = @[
-                        [PullDownItem itemWithTitle:@"美女" icon:[UIImage imageNamed:@"meinvchannel"]],
-                        [PullDownItem itemWithTitle:@"明星" icon:[UIImage imageNamed:@"mingxing"]],
-                        [PullDownItem itemWithTitle:@"汽车" icon:[UIImage imageNamed:@"qiche"]],
-                        [PullDownItem itemWithTitle:@"宠物" icon:[UIImage imageNamed:@"chongwu"]],
-                        [PullDownItem itemWithTitle:@"动漫" icon:[UIImage imageNamed:@"dongman"]],
-                        [PullDownItem itemWithTitle:@"设计" icon:[UIImage imageNamed:@"sheji"]],
-                        [PullDownItem itemWithTitle:@"家居" icon:[UIImage imageNamed:@"jiaju"]],
-                        [PullDownItem itemWithTitle:@"婚嫁" icon:[UIImage imageNamed:@"hunjia"]],
-                        [PullDownItem itemWithTitle:@"摄影" icon:[UIImage imageNamed:@"sheying"]],
-                        [PullDownItem itemWithTitle:@"美食" icon:[UIImage imageNamed:@"meishi"]]
-                        ];
-    }
-    return _classArray;
-}
-
-- (PullDownView *)pullDownView
-{
-    if (!_pullDownView) {
-        _pullDownView = [[PullDownView alloc]init];
-        [_pullDownView setDataWithItemAry:self.classArray];
-    }
-    IMP_BLOCK_SELF(PhotoViewController);
-    _pullDownView.SelectBlock = ^(id sender){
-        [block_self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
-        block_self.pn = 0;
-        block_self.tag1 = sender;
-        block_self.tag2 = @"全部";
-        block_self.title = sender;
-        [block_self.collectionView.header beginRefreshing];
-    };
-    return _pullDownView;
-}
-
-
-- (NSMutableArray *)photoArray
-{
-    if (!_photoArray) {
-        _photoArray = [NSMutableArray array];
-    }
-    return _photoArray;
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"美女";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem ItemWithIcon:@"categories" highIcon:nil target:self action:@selector(openMenu)];
+    self.title = @"";
+    self.degreeName = @"美女";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage: [UIImage imageNamed:@"arrow_down"]
+                                                Title:self.degreeName
+                                                Target:self
+                                                Selector:@selector(openMenu)
+                                                titleColor:HEXColor(@"333333")];
 
     self.tag1 = @"美女";
     self.tag2 = @"性感";
@@ -112,7 +70,7 @@ static NSString *const ID = @"photo";
     layout.columnsCount = 2;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    collectionView.backgroundColor = RGB(239, 239, 244, 1);
+    collectionView.backgroundColor = HEXColor(@"f5f8f9");
     collectionView.dataSource = self;
     collectionView.delegate = self;
     [collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:nil] forCellWithReuseIdentifier:ID];
@@ -140,6 +98,11 @@ static NSString *const ID = @"photo";
     if (self.pullDownView.isShow) {
         [self.pullDownView removeView];
     }else{
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage:[UIImage imageNamed:@"arrow_up"]
+                                                    Title:self.degreeName
+                                                    Target:self
+                                                    Selector:@selector(openMenu)
+                                                    titleColor:HEXColor(@"333333")];
         [self.pullDownView show];
     }
 }
@@ -259,6 +222,65 @@ static NSString *const ID = @"photo";
         [block_self.collectionView.footer endRefreshing];
         
     }];
+}
+
+#pragma mark - lazy
+-(NSArray *)classArray
+{
+    if (!_classArray) {
+        _classArray = @[
+                        [PullDownItem itemWithTitle:@"美女" icon:[UIImage imageNamed:@"meinvchannel"]],
+                        [PullDownItem itemWithTitle:@"明星" icon:[UIImage imageNamed:@"mingxing"]],
+                        [PullDownItem itemWithTitle:@"汽车" icon:[UIImage imageNamed:@"qiche"]],
+                        [PullDownItem itemWithTitle:@"宠物" icon:[UIImage imageNamed:@"chongwu"]],
+                        [PullDownItem itemWithTitle:@"动漫" icon:[UIImage imageNamed:@"dongman"]],
+                        [PullDownItem itemWithTitle:@"设计" icon:[UIImage imageNamed:@"sheji"]],
+                        [PullDownItem itemWithTitle:@"家居" icon:[UIImage imageNamed:@"jiaju"]],
+                        [PullDownItem itemWithTitle:@"婚嫁" icon:[UIImage imageNamed:@"hunjia"]],
+                        [PullDownItem itemWithTitle:@"摄影" icon:[UIImage imageNamed:@"sheying"]],
+                        [PullDownItem itemWithTitle:@"美食" icon:[UIImage imageNamed:@"meishi"]]
+                        ];
+    }
+    return _classArray;
+}
+
+- (PullDownView *)pullDownView
+{
+    if (!_pullDownView) {
+        _pullDownView = [[PullDownView alloc]init];
+        [_pullDownView setDataWithItemAry:self.classArray];
+    }
+    IMP_BLOCK_SELF(PhotoViewController);
+    _pullDownView.SelectBlock = ^(id sender){
+        block_self.degreeName = sender;
+        block_self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage:[UIImage imageNamed:@"arrow_down"]
+                                                                        Title:sender
+                                                                        Target:block_self
+                                                                        Selector:@selector(openMenu)
+                                                                        titleColor:HEXColor(@"333333")];
+        [block_self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
+        block_self.pn = 0;
+        block_self.tag1 = sender;
+        block_self.tag2 = @"全部";
+        [block_self.collectionView.header beginRefreshing];
+    };
+    _pullDownView.removeBlock = ^{
+        block_self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage:[UIImage imageNamed:@"arrow_down"]
+                                                                            Title:block_self.degreeName
+                                                                            Target:block_self
+                                                                            Selector:@selector(openMenu)
+                                                                            titleColor:HEXColor(@"333333")];
+    };
+    return _pullDownView;
+}
+
+
+- (NSMutableArray *)photoArray
+{
+    if (!_photoArray) {
+        _photoArray = [NSMutableArray array];
+    }
+    return _photoArray;
 }
 
 @end
