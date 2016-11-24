@@ -12,7 +12,7 @@
 #import "NewData.h"
 #import "TopData.h"
 #import "NewDataFrame.h"
-#import "SDCycleScrollView.h"
+#import "CycleBannerView.h"
 #import "TopViewController.h"
 #import "TabbarView.h"
 
@@ -26,9 +26,9 @@
 #import "DataBase.h"
 #import "NSDate+gyh.h"
 
-@interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+@interface SocietyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *totalArray;
-@property (nonatomic , strong) SDCycleScrollView *cycleScrollView;
+@property (nonatomic , strong) CycleBannerView *bannerView;
 @property (nonatomic , strong) NSMutableArray *topArray;
 @property (nonatomic , strong) NSMutableArray *titleArray;
 @property (nonatomic , strong) NSMutableArray *imagesArray;
@@ -74,6 +74,7 @@
     [super viewDidLoad];
     
     [self initTableView];
+    [self initBannerView];
     //请求滚动数据
     [self initTopNet];
     
@@ -116,16 +117,26 @@
 }
 
 
-- (void)initScrollView
+- (void)initBannerView
 {
-    // 网络加载 --- 创建不带标题的图片轮播器
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.55) imageURLStringsGroup:self.imagesArray];
-    cycleScrollView.delegate = self;
-    cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-    cycleScrollView.titlesGroup = self.titleArray;
-    cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-    cycleScrollView.autoScrollTimeInterval = 6.0;
-    self.tableview.tableHeaderView = cycleScrollView;
+    CycleBannerView *bannerView = [[CycleBannerView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_WIDTH * 0.55)];
+    bannerView.bgImg = [UIImage imageNamed:@"shadow.png"];
+    
+    IMP_BLOCK_SELF(SocietyViewController);
+    bannerView.clickItemBlock = ^(NSInteger index) {
+        
+        TopData *data = block_self.topArray[index];
+        NSString *url1 = [data.url substringFromIndex:4];
+        url1 = [url1 substringToIndex:4];
+        NSString *url2 = [data.url substringFromIndex:9];
+        
+        url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
+        TopViewController *topVC = [[TopViewController alloc]init];
+        topVC.url = url2;
+        [block_self.navigationController pushViewController:topVC animated:YES];
+    };
+    self.tableview.tableHeaderView = bannerView;
+    self.bannerView = bannerView;
 }
 
 
@@ -249,21 +260,6 @@
 }
 
 
-#pragma mark 图片轮播 delegate
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
-{
-    TopData *data = self.topArray[index];
-    
-    NSString *url1 = [data.url substringFromIndex:4];
-    url1 = [url1 substringToIndex:4];
-    NSString *url2 = [data.url substringFromIndex:9];
-    
-    url2 = [NSString stringWithFormat:@"http://c.3g.163.com/photo/api/set/%@/%@.json",url1,url2];
-    TopViewController *topVC = [[TopViewController alloc]init];
-    topVC.url = url2;
-    [self.navigationController pushViewController:topVC animated:YES];
-}
-
 - (void)handleThemeChanged
 {
     ThemeManager *defaultManager = [ThemeManager sharedInstance];
@@ -293,7 +289,8 @@
         [block_self.imagesArray addObjectsFromArray:statusFrameArray];
         [block_self.titleArray addObjectsFromArray:titleArray];
         
-        [block_self initScrollView];
+        block_self.bannerView.aryImg = [block_self.imagesArray copy];
+        block_self.bannerView.aryText = [block_self.titleArray copy];
         
     } failure:^(id error) {
         
