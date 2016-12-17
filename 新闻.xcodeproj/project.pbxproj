@@ -177,6 +177,8 @@
 		19F540031BB52D9200460EA3 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540021BB52D9200460EA3 /* VideoCell.m */; };
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
+		990DFE601E05294000879725 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE5F1E05294000879725 /* Foundation+Log.m */; };
+		990DFE631E053D0300879725 /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE621E053D0300879725 /* CategoryView.m */; };
 		9921EC871D82AF79009D422E /* StartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9921EC861D82AF79009D422E /* StartManager.m */; };
 		9921EC8A1D82B4CA009D422E /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 9921EC891D82B4CA009D422E /* AppConfig.m */; };
 		9922B9631D802AE400E3E236 /* GYHTimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B95A1D802AE400E3E236 /* GYHTimeTool.m */; };
@@ -583,6 +585,9 @@
 		19F540051BB52DAA00460EA3 /* VideoDataFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDataFrame.m; sourceTree = "<group>"; };
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
+		990DFE5F1E05294000879725 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		990DFE611E053D0300879725 /* CategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
+		990DFE621E053D0300879725 /* CategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
 		9921EC851D82AF79009D422E /* StartManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartManager.h; sourceTree = "<group>"; };
 		9921EC861D82AF79009D422E /* StartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartManager.m; sourceTree = "<group>"; };
 		9921EC881D82B4CA009D422E /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
@@ -1317,6 +1322,8 @@
 		19C33DF11BB109A20059238A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				990DFE611E053D0300879725 /* CategoryView.h */,
+				990DFE621E053D0300879725 /* CategoryView.m */,
 				9922B9911D803A9800E3E236 /* HeaderView.h */,
 				9922B9921D803A9800E3E236 /* HeaderView.m */,
 				19F540011BB52D9200460EA3 /* VideoCell.h */,
@@ -1591,6 +1598,7 @@
 			isa = PBXGroup;
 			children = (
 				9922B96D1D80310000E3E236 /* PrefixHeader.pch */,
+				990DFE5F1E05294000879725 /* Foundation+Log.m */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -1802,6 +1810,7 @@
 				19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */,
 				190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */,
 				19C33E911BB10B4C0059238A /* MJArgument.m in Sources */,
+				990DFE631E053D0300879725 /* CategoryView.m in Sources */,
 				198AF7B41C841C9400D941F4 /* SettingSwitchItem.m in Sources */,
 				198BD1E31BBB842A00B21A07 /* SDWebImageDownloader.m in Sources */,
 				19C33E9A1BB10B4C0059238A /* NSObject+MJKeyValue.m in Sources */,
@@ -1857,6 +1866,7 @@
 				19C33E931BB10B4C0059238A /* MJFoundation.m in Sources */,
 				9922B9641D802AE400E3E236 /* NSDate+gyh.m in Sources */,
 				19BE4F111CE4E64C005E515D /* PhotoCollectTableViewCell.m in Sources */,
+				990DFE601E05294000879725 /* Foundation+Log.m in Sources */,
 				19747D391C87F65600C4CBBD /* DetailWebViewController.m in Sources */,
 				198BD1E61BBB842A00B21A07 /* SDWebImagePrefetcher.m in Sources */,
 				9922B9801D80328100E3E236 /* BaseSettingViewController.m in Sources */,

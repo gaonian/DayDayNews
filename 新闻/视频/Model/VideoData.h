@@ -39,5 +39,13 @@
  *  视频地址
  */
 @property (nonatomic , copy) NSString * mp4_url;
+/**
+ *  播放来源title
+ */
+@property (nonatomic , copy) NSString * topicName;
+/**
+ *  播放来源图片
+ */
+@property (nonatomic , copy) NSString * topicImg;
 
 @end

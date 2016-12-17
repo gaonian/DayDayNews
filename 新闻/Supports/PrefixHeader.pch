@@ -30,7 +30,7 @@
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)
 #define theApp                          ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define theWindow                       [[UIApplication sharedApplication] delegate].window
-#define RGB(r,g,b,a)                    [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGBA(r,g,b,a)                   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define HEXColor(colorString)           [UIColor colorWithHexString:colorString]
 
 

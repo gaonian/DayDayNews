@@ -11,20 +11,14 @@
 @interface VideoCell : UITableViewCell
 @property (nonatomic , strong) VideoDataFrame *videodataframe;
 
-
-@property (nonatomic , weak) UILabel *titleLabel;
-@property (nonatomic , weak) UILabel *descLabel;
-@property (nonatomic , weak) UIImageView *imageview;
-@property (nonatomic , weak) UIImageView *playcoverImage;
-
-@property (nonatomic , weak) UIImageView *lengthImage;
-@property (nonatomic , weak) UILabel *lengthLabel;
-@property (nonatomic , weak) UIImageView *playImage;
-@property (nonatomic , weak) UILabel *playcountLabel;
-@property (nonatomic , weak) UILabel *ptimeLabel;
-@property (nonatomic , weak) UIView *lineV;
-
-
+@property (nonatomic , weak) UILabel *      titleLabel;
+@property (nonatomic , weak) UIImageView *  imageview;
+@property (nonatomic , weak) UIImageView *  playcoverImage;
+@property (nonatomic , weak) UILabel *      lengthLabel;
+@property (nonatomic , weak) UIImageView *  playImage;
+@property (nonatomic , weak) UILabel *      playcountLabel;
+@property (nonatomic , weak) UILabel *      ptimeLabel;
+@property (nonatomic , weak) UIView *       lineV;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

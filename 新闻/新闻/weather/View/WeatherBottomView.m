@@ -32,7 +32,7 @@
             UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(vcX, 0, vcW, vcH)];
             [self addSubview:vc];
             self.frame = CGRectMake(0, vcY, SCREEN_WIDTH, vcH);
-            self.backgroundColor = RGB(1, 1, 1, 0.2);
+            self.backgroundColor = RGBA(1, 1, 1, 0.2);
             
             //星期
             UILabel *weekLabel = [[UILabel alloc]init];

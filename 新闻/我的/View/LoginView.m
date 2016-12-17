@@ -18,7 +18,7 @@
         
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         UIButton *btn = [[UIButton alloc]initWithFrame:self.bounds];
-        btn.backgroundColor = RGB(0, 0, 0, 0.8);
+        btn.backgroundColor = RGBA(0, 0, 0, 0.8);
         [btn addTarget:self action:@selector(removeView) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
         
@@ -27,7 +27,7 @@
         CGFloat x = SCREEN_WIDTH/2 - w/2;
         CGFloat y = SCREEN_HEIGHT/2 - h/2;
         UIView *backV = [[UIView alloc]initWithFrame:CGRectMake(x, y, w, h)];
-        backV.backgroundColor = RGB(246, 246, 246, 1);
+        backV.backgroundColor = RGBA(246, 246, 246, 1);
         [self addSubview:backV];
      
         UIButton *cancelB = [[UIButton alloc]init];

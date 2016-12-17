@@ -18,6 +18,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "GYHCircleLoadingView.h"
+#import "CategoryView.h"
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *             videoArray;
@@ -32,14 +33,6 @@
 @end
 
 @implementation VideoViewController
-
-- (NSMutableArray *)videoArray
-{
-    if (!_videoArray) {
-        _videoArray = [NSMutableArray array];
-    }
-    return _videoArray;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,50 +83,26 @@
         [block_self initNetWork];
     }];
     
-    UIView *view = [[UIView alloc]init];
-    view.frame = CGRectMake(0, 0,SCREEN_WIDTH,SCREEN_WIDTH * 0.25);
+    CategoryView *view = [[CategoryView alloc]init];
+    view.SelectBlock = ^(NSString *tag, NSString *title) {
+        NSArray *arr = @[@"VAP4BFE3U",
+                         @"VAP4BFR16",
+                         @"VAP4BG6DL",
+                         @"VAP4BGTVD"];
+        
+        ClassViewController *classVC = [[ClassViewController alloc]init];
+        classVC.url = arr[[tag intValue]];
+        classVC.title = title;
+        [block_self.navigationController pushViewController:classVC animated:YES];
+    };
     self.tableview.tableHeaderView = view;
-    
-    NSArray *array = @[@"奇葩",@"萌物",@"美女",@"精品"];
-    NSArray *images = @[[UIImage imageNamed:@"qipa"],
-                        [UIImage imageNamed:@"mengchong"],
-                        [UIImage imageNamed:@"meinv"],
-                        [UIImage imageNamed:@"jingpin"]
-                        ];
-    
-    for (int index = 0; index < 4; index++) {
-        TabbarButton *btn = [[TabbarButton alloc]init];
-        btn.backgroundColor = [UIColor whiteColor];
-        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        CGFloat btnW = SCREEN_WIDTH/4;
-        CGFloat btnH = view.frame.size.height - 5;
-        CGFloat btnX = btnW * index - 1;
-        CGFloat btnY = 0;
-        btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-        [btn setImage:images[index] forState:UIControlStateNormal];
-        [btn setTitle:array[index] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:15];
-        btn.tag = index;
-        [view addSubview:btn];
-        self.btn = btn;
-    }
-    for (int i = 1; i < 4; i++) {
-        UIView *lineView = [[UIView alloc]init];
-        lineView.backgroundColor = [UIColor colorWithRed:244/255.0f green:244/255.0f blue:244/255.0f alpha:1];
-        CGFloat lineW = 1;
-        CGFloat lineH = self.btn.frame.size.height;
-        CGFloat lineX = self.btn.frame.size.width * i;
-        CGFloat lineY = self.btn.frame.origin.y;
-        lineView.frame = CGRectMake(lineX, lineY, lineW, lineH);
-        [view addSubview:lineView];
-    }
 }
 
+#pragma mark - tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.videoArray.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -290,24 +259,7 @@
     return videoFrame.cellH;
 }
 
-- (void)btnClick:(TabbarButton *)btn
-{
-    NSArray *arr = @[@"VAP4BFE3U",
-                     @"VAP4BFR16",
-                     @"VAP4BG6DL",
-                     @"VAP4BGTVD"];
-    for (int i = 0; i < 4; i++) {
-        if (btn.tag == i) {
-            ClassViewController *classVC = [[ClassViewController alloc]init];
-            classVC.url = arr[i];
-            classVC.title = btn.titleLabel.text;
-            [self.navigationController pushViewController:classVC animated:YES];
-        }
-    }
-}
-
-
-#pragma mark - 判断滚动事件，如何超出播放界面，停止播放
+//判断滚动事件，如何超出播放界面，停止播放
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.mpc) {
@@ -372,4 +324,12 @@
     [self.tableview reloadData];
 }
 
+#pragma mark - lazy
+- (NSMutableArray *)videoArray
+{
+    if (!_videoArray) {
+        _videoArray = [NSMutableArray array];
+    }
+    return _videoArray;
+}
 @end
