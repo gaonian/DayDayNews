@@ -179,6 +179,7 @@
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
 		990DFE601E05294000879725 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE5F1E05294000879725 /* Foundation+Log.m */; };
 		990DFE631E053D0300879725 /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE621E053D0300879725 /* CategoryView.m */; };
+		9911BE2D1E07D7050086570C /* GYPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911BE2C1E07D7050086570C /* GYPlayer.m */; };
 		9921EC871D82AF79009D422E /* StartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9921EC861D82AF79009D422E /* StartManager.m */; };
 		9921EC8A1D82B4CA009D422E /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 9921EC891D82B4CA009D422E /* AppConfig.m */; };
 		9922B9631D802AE400E3E236 /* GYHTimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9922B95A1D802AE400E3E236 /* GYHTimeTool.m */; };
@@ -588,6 +589,8 @@
 		990DFE5F1E05294000879725 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		990DFE611E053D0300879725 /* CategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
 		990DFE621E053D0300879725 /* CategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
+		9911BE2B1E07D7050086570C /* GYPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYPlayer.h; sourceTree = "<group>"; };
+		9911BE2C1E07D7050086570C /* GYPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYPlayer.m; sourceTree = "<group>"; };
 		9921EC851D82AF79009D422E /* StartManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartManager.h; sourceTree = "<group>"; };
 		9921EC861D82AF79009D422E /* StartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartManager.m; sourceTree = "<group>"; };
 		9921EC881D82B4CA009D422E /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
@@ -1322,6 +1325,8 @@
 		19C33DF11BB109A20059238A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9911BE2B1E07D7050086570C /* GYPlayer.h */,
+				9911BE2C1E07D7050086570C /* GYPlayer.m */,
 				990DFE611E053D0300879725 /* CategoryView.h */,
 				990DFE621E053D0300879725 /* CategoryView.m */,
 				9922B9911D803A9800E3E236 /* HeaderView.h */,
@@ -1840,6 +1845,7 @@
 				198AF7B21C841C9400D941F4 /* SettingItem.m in Sources */,
 				198AF7B31C841C9400D941F4 /* SettingLabelItem.m in Sources */,
 				99C9A3161D81785900063D23 /* AFHTTPSessionManager.m in Sources */,
+				9911BE2D1E07D7050086570C /* GYPlayer.m in Sources */,
 				198BD1E71BBB842A00B21A07 /* UIButton+WebCache.m in Sources */,
 				190450D51BCCAC0A00C47A50 /* NewDataFrame.m in Sources */,
 				19C33E921BB10B4C0059238A /* MJConst.m in Sources */,
