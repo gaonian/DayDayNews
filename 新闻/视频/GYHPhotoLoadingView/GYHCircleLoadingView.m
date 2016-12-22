@@ -104,6 +104,7 @@ static const CGFloat kLineWidth = 3.0f;
 - (void)stopAnimating {
     [self.layer removeAllAnimations];
     self.hidden = YES;
+    [self removeFromSuperview];
 }
 
 
