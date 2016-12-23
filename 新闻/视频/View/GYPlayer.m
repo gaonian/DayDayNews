@@ -42,6 +42,8 @@
 //    self.playerItem = [self getAVPlayItem];
 //    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
 //    [self addObserverAndNotification];
+    [self.player play];
+
 }
 
 #pragma mark - action
@@ -62,7 +64,7 @@
         if (status == AVPlayerStatusReadyToPlay){
             DLog(@"准备播放");
             
-            [self.player play];
+//            [self.player play];
 //            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
 //            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
         } else if (status == AVPlayerStatusFailed){
