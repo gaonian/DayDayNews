@@ -42,16 +42,8 @@
     _mp4_url = mp4_url;
     
     [self.layer addSublayer:self.playerLayer];
-<<<<<<< HEAD
-//    [self.player play];
-//    self.playerItem = [self getAVPlayItem];
-//    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-//    [self addObserverAndNotification];
-=======
     [self insertSubview:self.circleLoadingV aboveSubview:self];
     [self.circleLoadingV startAnimating];
-    
->>>>>>> a1cef1a8efcea6ed162fe444382ab53ff43df833
     [self.player play];
 
 }
@@ -73,12 +65,7 @@
         AVPlayerStatus status = [[change objectForKey:@"new"] intValue];
         if (status == AVPlayerStatusReadyToPlay){
             DLog(@"准备播放");
-<<<<<<< HEAD
-            
-//            [self.player play];
-=======
             [self.circleLoadingV stopAnimating];
->>>>>>> a1cef1a8efcea6ed162fe444382ab53ff43df833
 //            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
 //            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
         } else if (status == AVPlayerStatusFailed){
