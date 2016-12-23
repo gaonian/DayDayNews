@@ -29,7 +29,6 @@
 
 @property (nonatomic , strong) GYPlayer     *               player;
 @property (nonatomic , assign) int                          currtRow;
-@property (nonatomic , strong) GYHCircleLoadingView *       circleLoadingV;
 
 @end
 
@@ -50,6 +49,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    if (self.player) {
+        [self.player removePlayer];
+        self.player = nil;
+    }
 }
 
 - (void)initUI
@@ -116,33 +119,14 @@
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
     
+    //创建播放器
+    if (self.player) {
+        [self.player removePlayer];
+        self.player = nil;
+    }
     self.player = [[GYPlayer alloc] initWithFrame:CGRectMake(0, videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25, SCREEN_WIDTH, videoframe.coverF.size.height)];
     self.player.mp4_url = videodata.mp4_url;
     [self.tableview addSubview:self.player];
-    
-//    if (self.mpc) {
-//        [self.mpc.view removeFromSuperview];
-//    }
-//    self.currtRow = (int)indexPath.row;
-//    // 创建播放器对象
-//    self.mpc = [[MPMoviePlayerController alloc] init];
-//    self.mpc.contentURL = [NSURL URLWithString:videodata.mp4_url];
-//    // 添加播放器界面到控制器的view上面
-//    self.mpc.view.frame = CGRectMake(0, videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25, SCREEN_WIDTH, videoframe.coverF.size.height);
-//    //设置加载指示器
-//    [self setupLoadingView];
-//    
-//    [self.tableview addSubview:self.mpc.view];
-//    
-//    // 隐藏自动自带的控制面板
-//    self.mpc.controlStyle = MPMovieControlStyleNone;
-//    
-//    // 监听播放器
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDidFinish) name:MPMoviePlayerPlaybackDidFinishNotification object:self.mpc];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieStateDidChange) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.mpc];
-//    
-//    [self.mpc play];
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,7 +138,12 @@
 //判断滚动事件，如何超出播放界面，停止播放
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-
+    if (self.player) {
+        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.player.frame)) {
+            [self.player removePlayer];
+            self.player = nil;
+        }
+    }
 }
 
 #pragma mark - action
@@ -162,15 +151,6 @@
 - (void)mynotification
 {
     [self.tableview.header beginRefreshing];
-}
-
-//设置加载指示器
-- (void)setupLoadingView
-{
-//    self.circleLoadingV = [[GYHCircleLoadingView alloc]initWithViewFrame:CGRectMake(self.mpc.view.frame.size.width/2-20, self.mpc.view.frame.size.height/2-20, 40, 40)];
-//    self.circleLoadingV.isShowProgress = YES;   //设置中间label进度条
-//    [self.mpc.view addSubview:self.circleLoadingV];
-//    [self.circleLoadingV startAnimating];
 }
 
 - (void)handleThemeChanged
@@ -181,6 +161,12 @@
     [self.tableview reloadData];
 }
 
+- (void)dealloc {
+    if (self.player) {
+        [self.player removePlayer];
+        self.player = nil;
+    }
+}
 
 #pragma mark - load data
 - (void)initNetWork
@@ -198,7 +184,7 @@
             [statusFrameArray addObject:videodataFrame];
         }
         
-        if (block_self.videoArray.count == 0) {
+        if (block_self.count == 0) {
             block_self.videoArray = statusFrameArray;
         }else{
             [block_self.videoArray addObjectsFromArray:statusFrameArray];
@@ -208,7 +194,7 @@
         [block_self.tableview reloadData];
         [block_self.tableview.header endRefreshing];
         [block_self.tableview.footer endRefreshing];
-        block_self.tableview.footer.hidden = block_self.videoArray.count < 10;
+        block_self.tableview.footer.hidden = dataarray.count < 10;
 
     } failure:^(id error) {
         [block_self.tableview.header endRefreshing];

@@ -8,12 +8,14 @@
 
 #import "GYPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "GYHCircleLoadingView.h"
 
 @interface GYPlayer ()
 
-@property (nonatomic, strong) AVPlayerItem *        playerItem;
-@property (nonatomic, strong) AVPlayerLayer *       playerLayer;
-@property (nonatomic, strong) AVPlayer *            player;
+@property (nonatomic, strong) AVPlayerItem *            playerItem;
+@property (nonatomic, strong) AVPlayerLayer *           playerLayer;
+@property (nonatomic, strong) AVPlayer *                player;
+@property (nonatomic, strong) GYHCircleLoadingView *    circleLoadingV;
 
 @end
 
@@ -28,20 +30,28 @@
         UIDevice *device = [UIDevice currentDevice]; //Get the device object
         [device beginGeneratingDeviceOrientationNotifications]; //Tell it to start monitoring the accelerometer for orientation
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];
-
+        
+        self.circleLoadingV = [[GYHCircleLoadingView alloc]initWithViewFrame:CGRectMake(self.width/2-20, self.height/2-20, 40, 40)];
+        [self addSubview:self.circleLoadingV];
+        
     }
     return self;
 }
 
 - (void)setMp4_url:(NSString *)mp4_url {
     _mp4_url = mp4_url;
-//    DLog(@"%@",NSStringFromCGRect(self.playerLayer.frame));
-//    self.playerLayer.frame = self.bounds;
+    
     [self.layer addSublayer:self.playerLayer];
+<<<<<<< HEAD
 //    [self.player play];
 //    self.playerItem = [self getAVPlayItem];
 //    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
 //    [self addObserverAndNotification];
+=======
+    [self insertSubview:self.circleLoadingV aboveSubview:self];
+    [self.circleLoadingV startAnimating];
+    
+>>>>>>> a1cef1a8efcea6ed162fe444382ab53ff43df833
     [self.player play];
 
 }
@@ -63,8 +73,12 @@
         AVPlayerStatus status = [[change objectForKey:@"new"] intValue];
         if (status == AVPlayerStatusReadyToPlay){
             DLog(@"准备播放");
+<<<<<<< HEAD
             
 //            [self.player play];
+=======
+            [self.circleLoadingV stopAnimating];
+>>>>>>> a1cef1a8efcea6ed162fe444382ab53ff43df833
 //            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
 //            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
         } else if (status == AVPlayerStatusFailed){
@@ -163,14 +177,29 @@
 //    }
 }
 
+- (void)removePlayer {
+    if (self.superview) {
+        [self.player pause];
+        [self.player.currentItem cancelPendingSeeks];
+        [self.player.currentItem.asset cancelLoading];
+        [self.playerItem removeObserver:self forKeyPath:@"status"];
+        [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self removeFromSuperview];
+    }
+}
+
+- (void)dealloc {
+    [self removePlayer];
+}
+
 #pragma mark - lazy
 
 - (AVPlayer *)player {
     if (!_player) {
-//        _player = [[AVPlayer alloc] init];
         self.playerItem = [self getAVPlayItem];
-//        [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         _player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        [self addObserverAndNotification];
     }
     return _player;
 }
@@ -180,8 +209,8 @@
         
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         _playerLayer.frame = self.bounds;
-        _playerLayer.backgroundColor = [UIColor redColor].CGColor;
-//        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;//视频填充模式
+        _playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;//视频填充模式
         
     }
     return _playerLayer;

@@ -13,4 +13,5 @@
 ///url
 @property (nonatomic , strong) NSString *mp4_url;
 
+- (void)removePlayer;
 @end
