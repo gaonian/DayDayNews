@@ -10,7 +10,6 @@
 ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完毕 <br>
 安装完成之后第一次打开会出现未受信任的企业级开发者。 解决方法：在设置->通用->设备管理，点击信任即可
 
-
 ##GIF
 ![gif](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/news.gif)
 
@@ -43,7 +42,7 @@ ipa上传到蒲公英分发平台，扫码根据提示等待就可以按照完�
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/weather.PNG)
 
 ##视频
-- 自定义视频界面（后续修改）<br>
+- 自定义视频界面（正在修改中）<br>
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/video.png)
 
 ![image](https://raw.githubusercontent.com/gaoyuhang/DayDayNews/master/photo/加载.png)
