@@ -101,7 +101,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     if(tableView == self.searchDisplayController.searchResultsTableView){
         cell.textLabel.text = self.resultsData[indexPath.row];
@@ -117,7 +117,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
@@ -142,7 +142,7 @@
     
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     LocaHeaderView *header = [LocaHeaderView headerWithTableView:tableView];
     header.groups = self.groups[section];
@@ -151,7 +151,7 @@
 
 #pragma mark - searchbar delegate
 //是否包含或等于要搜索的字符串内容
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSMutableArray *tempResults = [NSMutableArray array];
     NSMutableArray *proviceResults = [NSMutableArray array];
@@ -195,7 +195,7 @@
     }
 }
 
--(void)dismissclick
+- (void)dismissclick
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -217,14 +217,14 @@
     return _groups;
 }
 
--(NSMutableArray *)resultsData
+- (NSMutableArray *)resultsData
 {
     if (!_resultsData) {
         _resultsData = [NSMutableArray array];
     }
     return _resultsData;
 }
--(NSMutableArray *)proviceResults
+- (NSMutableArray *)proviceResults
 {
     if (!_proviceResults) {
         _proviceResults = [NSMutableArray array];

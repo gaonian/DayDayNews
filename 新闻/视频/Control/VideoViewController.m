@@ -30,6 +30,8 @@
 @property (nonatomic , strong) GYPlayer     *               player;
 @property (nonatomic , assign) int                          currtRow;
 
+@property (nonatomic)          CGFloat                      currentOriginY;
+
 @end
 
 @implementation VideoViewController
@@ -124,8 +126,16 @@
         [self.player removePlayer];
         self.player = nil;
     }
-    self.player = [[GYPlayer alloc] initWithFrame:CGRectMake(0, videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25, SCREEN_WIDTH, videoframe.coverF.size.height)];
+    CGFloat originY = videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25;
+    self.currentOriginY = originY;
+    self.player = [[GYPlayer alloc] initWithFrame:CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56)];
     self.player.mp4_url = videodata.mp4_url;
+    self.player.title = videodata.title;
+    self.player.currentOriginY = originY;
+    IMP_BLOCK_SELF(VideoViewController);
+    self.player.currentRowBlock = ^(){
+        [block_self.tableview addSubview:block_self.player];
+    };
     [self.tableview addSubview:self.player];
 }
 
@@ -138,12 +148,12 @@
 //判断滚动事件，如何超出播放界面，停止播放
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.player) {
-        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.player.frame)) {
-            [self.player removePlayer];
-            self.player = nil;
-        }
-    }
+//    if (self.player) {
+//        if (fabs(scrollView.contentOffset.y)+64 > self.currentOriginY) {
+//            [self.player removePlayer];
+//            self.player = nil;
+//        }
+//    }
 }
 
 #pragma mark - action

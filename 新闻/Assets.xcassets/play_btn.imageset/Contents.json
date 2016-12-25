@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "20150618024803849_easyicon_net_64.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ZFPlayer_play_btn@2x.png",
       "scale" : "2x"
     },
     {

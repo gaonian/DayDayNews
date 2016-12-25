@@ -34,7 +34,7 @@ static NSString *const ID = @"photo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"";
+    self.title = @"图片";
     self.degreeName = @"美女";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage: [UIImage imageNamed:@"arrow_down"]
                                                 Title:self.degreeName

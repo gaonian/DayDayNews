@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "ZFPlayer_top_shadow.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "play120@2x.png",
       "scale" : "2x"
     },
     {

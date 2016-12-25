@@ -108,7 +108,7 @@
     self.titleLabel.text = str;
     self.titleLabel.frame = _videodataframe.titleF;
     
-    self.playcoverImage.image = [UIImage imageNamed:@"play120-1"];
+    self.playcoverImage.image = [UIImage imageNamed:@"play_btn"];
     self.playcoverImage.frame = _videodataframe.playF;
     
     self.lengthLabel.text = [self convertTime:videodata.length];

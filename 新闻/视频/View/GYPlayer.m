@@ -17,6 +17,12 @@
 @property (nonatomic, strong) AVPlayer *                player;
 @property (nonatomic, strong) GYHCircleLoadingView *    circleLoadingV;
 
+@property (nonatomic, strong) UIView *                  bottomView;     //整个view
+@property (nonatomic, strong) UILabel *                 lbTitle;        //视频标题
+
+@property (nonatomic, strong) UIView *                  bottomBar;      //底部工具栏
+@property (nonatomic, strong) UIButton *                btnPlayOrPause; //播放暂停
+
 @end
 
 @implementation GYPlayer
@@ -40,12 +46,17 @@
 
 - (void)setMp4_url:(NSString *)mp4_url {
     _mp4_url = mp4_url;
-    
     [self.layer addSublayer:self.playerLayer];
-    [self insertSubview:self.circleLoadingV aboveSubview:self];
+    [self insertSubview:self.bottomView aboveSubview:self];
+    [self insertSubview:self.circleLoadingV aboveSubview:self.bottomView];
     [self.circleLoadingV startAnimating];
     [self.player play];
 
+}
+
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.lbTitle.text = _title;
 }
 
 #pragma mark - action
@@ -127,41 +138,65 @@
 
 - (void)up
 {
-//    if(self.){
-//        
-//        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//        
-//        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-//            
+    if(self.superview){
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        
+        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+            
 //            VideoDataFrame *videoframe = self.videoArray[self.currtRow];
 //            self.mpc.view.transform = CGAffineTransformIdentity;
 //            self.mpc.view.frame = CGRectMake(0, videoframe.cellH*self.currtRow+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25, SCREEN_WIDTH, videoframe.coverF.size.height);
 //            //            self.controlView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
 //            [self.tableview addSubview:self.mpc.view];
-//            
-//            
-//        } completion:^(BOOL finished) {
-//            
-//        }];
-//    }
+            [self isFullScreen:NO];
+
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 - (void)left
 {
-//    if (self.mpc) {
-//        
-//        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-//        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-//            
-//            self.mpc.view.transform = CGAffineTransformMakeRotation(M_PI / 2);
-//            self.mpc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//            
-//            [theWindow addSubview:self.mpc.view];
-//            
-//        } completion:^(BOOL finished) {
-//            
-//        }];
-//    }
+    if (self.superview) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+            
+            [self isFullScreen:YES];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+- (void)isFullScreen:(BOOL)isFullScreen {
+    if (isFullScreen) {
+        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        self.playerLayer.frame = self.bounds;
+        //设置底部工具栏的frame
+        self.bottomView.frame = CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+        self.lbTitle.width = SCREEN_HEIGHT - 20;
+        self.bottomBar.originY = SCREEN_WIDTH - 37;
+        self.bottomBar.width = SCREEN_HEIGHT;
+        [theWindow addSubview:self];
+    } else {
+        self.transform = CGAffineTransformIdentity;
+        self.frame = CGRectMake(0, self.currentOriginY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
+        self.playerLayer.frame = self.bounds;
+        
+        self.bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
+        self.lbTitle.width = SCREEN_WIDTH - 20;
+        self.bottomBar.originY = self.height - 37;
+        self.bottomBar.width = SCREEN_WIDTH;
+
+        if (self.currentRowBlock) {
+            self.currentRowBlock();
+        }
+    }
 }
 
 - (void)removePlayer {
@@ -215,5 +250,59 @@
         return playerItem;
     }
 }
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor clearColor];
+        _bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
+        
+        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
+        self.lbTitle.font = [UIFont systemFontOfSize:16];
+        self.lbTitle.numberOfLines = 0;
+        self.lbTitle.textColor = HEXColor(@"ffffff");
+        [_bottomView addSubview:self.lbTitle];
+
+        
+        self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 37, SCREEN_WIDTH, 37)];
+        self.bottomBar.backgroundColor = RGBA(1, 1, 1, 0.5);
+        self.btnPlayOrPause = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 17, 17)];
+        [self.btnPlayOrPause setImage:[UIImage imageNamed:@"video_pause.png"] forState:UIControlStateNormal];
+        [self.bottomBar addSubview:self.btnPlayOrPause];
+        [_bottomView addSubview:self.bottomBar];
+        
+        [self addSubview:_bottomView];
+    }
+    return _bottomView;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

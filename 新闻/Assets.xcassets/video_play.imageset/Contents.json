@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "buddy_header_arrow.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "video_play@2x.png",
       "scale" : "2x"
     },
     {
