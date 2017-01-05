@@ -148,12 +148,12 @@
 //判断滚动事件，如何超出播放界面，停止播放
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if (self.player) {
-//        if (fabs(scrollView.contentOffset.y)+64 > self.currentOriginY) {
-//            [self.player removePlayer];
-//            self.player = nil;
-//        }
-//    }
+    if (self.player) {
+        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.player.frame)) {
+            [self.player removePlayer];
+            self.player = nil;
+        }
+    }
 }
 
 #pragma mark - action

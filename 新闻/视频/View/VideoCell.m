@@ -36,6 +36,11 @@
         [self.contentView addSubview:imageview];
         self.imageview = imageview;
         
+        //题目背景
+        UIImageView *imgBgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        imgBgTop.image = [UIImage imageNamed:@"top_shadow.png"];
+        [self.contentView addSubview:imgBgTop];
+        
         //题目
         UILabel *titleLabel = [[UILabel alloc]init];
         titleLabel.font = [UIFont systemFontOfSize:16];
@@ -100,7 +105,7 @@
     VideoData *videodata = _videodataframe.videodata;
     
     //图片
-    [self.imageview sd_setImageWithURL:[NSURL URLWithString:videodata.cover] placeholderImage:nil];
+    [self.imageview sd_setImageWithURL:[NSURL URLWithString:videodata.cover] placeholderImage:[UIImage imageNamed:@"sc_video_play_fs_loading_bg.png"]];
     self.imageview.frame = _videodataframe.coverF;
     
     //题目
