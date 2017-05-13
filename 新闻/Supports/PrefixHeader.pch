@@ -56,6 +56,68 @@
 #define IMP_BLOCK_SELF(type) __block type *block_self=self;
 #endif
 
+
+//weak strong 引用声明
+#ifndef    weakify_self
+#if __has_feature(objc_arc)
+#define weakify_self autoreleasepool{} __weak __typeof__(self) weakSelf = self;
+#else
+#define weakify_self autoreleasepool{} __block __typeof__(self) blockSelf = self;
+#endif
+#endif
+#ifndef    strongify_self
+#if __has_feature(objc_arc)
+#define strongify_self try{} @finally{} __typeof__(weakSelf) self = weakSelf;
+#else
+#define strongify_self try{} @finally{} __typeof__(blockSelf) self = blockSelf;
+#endif
+#endif
+
+
+//生成单例
+#define DISPATCH_SINGLETON_FOR_CLASS(classname) \
+\
+static id shareInstance = nil; \
+\
+\
++ (instancetype)shareInstance \
+{ \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shareInstance = [[[self class] alloc] init]; \
+}); \
+return shareInstance; \
+} \
+\
+\
+- (id)init \
+{ \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shareInstance = [super init]; \
+}); \
+return shareInstance; \
+} \
+\
+\
++ (id)allocWithZone:(struct _NSZone *)zone \
+{ \
+if (shareInstance == nil) { \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shareInstance = [super allocWithZone:zone]; \
+}); \
+} \
+return shareInstance; \
+} \
+\
+\
+- (id)copyWithZone:(NSZone *)zone \
+{ \
+return shareInstance; \
+}
+
+
 #ifdef DEBUG
 #define DLog(...) NSLog(@"%s(第%d行) %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
 #else
