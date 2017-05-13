@@ -143,17 +143,19 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (void)observePlayProgress {
     //监听播放进度
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
+    @weakify_self;
     // 更新当前播放条目的已播时间, CMTimeMake(3, 30) == (Float64)3/30 秒
     self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(30, 30) queue:nil usingBlock:^(CMTime time) {
+        @strongify_self;
         // 当前播放时间
-        NSString *curTime = [weakSelf timeStringWithCMTime:time];
+        NSString *curTime = [self timeStringWithCMTime:time];
         // 剩余时间
-        NSString *lastTime = [weakSelf timeStringWithCMTime:CMTimeSubtract(weakSelf.playerItem.duration, time)];
+        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
         NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
         
         // 更新进度
-        weakSelf.playProgressView.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(weakSelf.playerItem.duration);
+        self.playProgressView.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
     }];
 }
 
