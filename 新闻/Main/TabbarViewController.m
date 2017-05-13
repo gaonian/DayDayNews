@@ -75,13 +75,13 @@
 - (void)initControl
 {
     SCNavTabBarController  *new = [[SCNavTabBarController alloc]init];
-    [self setupChildViewController:new title:@"新闻" imageName:@"tabbar_news" selectedImage:@"tabbar_news_hl"];
+    [self setupChildViewController:new title:@"首页" imageName:@"tabbar_news" selectedImage:@"tabbar_news_hl"];
 
-    PhotoViewController *photo = [[PhotoViewController alloc]init];
-    [self setupChildViewController:photo title:@"图片" imageName:@"tabbar_picture" selectedImage:@"tabbar_picture_hl"];
+//    PhotoViewController *photo = [[PhotoViewController alloc]init];
+//    [self setupChildViewController:photo title:@"图片" imageName:@"tabbar_picture" selectedImage:@"tabbar_picture_hl"];
     
     VideoViewController *video = [[VideoViewController alloc]init];
-    [self setupChildViewController:video title:@"视频" imageName:@"tabbar_video" selectedImage:@"tabbar_video_hl"];
+    [self setupChildViewController:video title:@"问答" imageName:@"tabbar_video" selectedImage:@"tabbar_video_hl"];
 
     MeViewController *me = [[MeViewController alloc]init];
     [self setupChildViewController:me title:@"我的" imageName:@"tabbar_setting" selectedImage:@"tabbar_setting_hl"];
