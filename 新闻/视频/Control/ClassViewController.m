@@ -75,10 +75,10 @@
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    self.tableview.header = header;
+    self.tableview.mj_header = header;
     [header beginRefreshing];
     
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [block_self initNetWork];
     }];
 }
@@ -89,7 +89,7 @@
     NSString *getstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/video/list/%@/y/%d-10.html",_url,self.count];
 
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {
-        NSArray *dataarray = [VideoData objectArrayWithKeyValuesArray:responseObject[_url]];
+        NSArray *dataarray = [VideoData mj_objectArrayWithKeyValuesArray:responseObject[_url]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (VideoData *videodata in dataarray) {
@@ -106,12 +106,12 @@
         
         block_self.count += 10;
         [block_self.tableview reloadData];
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
-        block_self.tableview.footer.hidden = block_self.videoArray.count < 10;
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
+        block_self.tableview.mj_footer.hidden = block_self.videoArray.count < 10;
     } failure:^(id error) {
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
     }];
 }
 
@@ -149,7 +149,7 @@
     [self.tableview addSubview:self.mpc.view];
     
     // 隐藏自动自带的控制面板
-    self.mpc.controlStyle = MPMovieControlStyleNone;
+    self.mpc.controlStyle = 1;
     
     // 监听播放器
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDidFinish) name:MPMoviePlayerPlaybackDidFinishNotification object:self.mpc];
