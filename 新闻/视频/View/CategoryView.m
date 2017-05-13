@@ -55,11 +55,11 @@
     return self;
 }
 
-- (void)btnClick:(UIButton *)btn
+- (void)btnClick:(UIButton *)btn_
 {
-    NSString *title = btn.titleLabel.text;
+    NSString *title = btn_.titleLabel.text;
     if (self.SelectBlock) {
-        self.SelectBlock([NSString stringWithFormat:@"%ld",(long)btn.tag],title);
+        self.SelectBlock([NSString stringWithFormat:@"%ld",(long)btn_.tag],title);
     }
 }
 
