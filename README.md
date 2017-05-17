@@ -1,7 +1,6 @@
 
--本项目用于研究多媒体相关应用，
--期望实现：
-...
+本项目用于研究多媒体相关应用。
+期望实现：
 1、流媒体播放。
 2、播放进度和缓存进度监听显示（优化实现播放时间和剩余时间显示）。
 3、视频下载，支持文件断点下载。
@@ -14,7 +13,7 @@
 2、播放进度和缓存进度监听显示。
 
 ##项目所用API
-附上部分功能API，只做学习交流。具体使用请见`Demo`
+附上部分功能API，只做学习交流。
 - 新闻顶部轮播图数据
   ```
   http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html
@@ -40,7 +39,7 @@
 本项目只供学习交流，严禁进行商业用途。:joy:
 
 ##Support
-- Email：yugao5971@gmail.com / gyhbsdo@163.com
+- ForkFrom：https://github.com/gaoyuhang/DayDayNews
 - [简书地址](http://www.jianshu.com/users/85973c3d2045/latest_articles)
 
 
