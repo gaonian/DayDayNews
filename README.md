@@ -11,25 +11,32 @@
 
 ###### 项目所用API:
 附上部分功能API，只做学习交流。
+
 * 新闻顶部轮播图数据
+```
 http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html
 ```
+
 * 首页新闻数据
+```
 http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html
  ```
+
 * 天气预报接口
+```
 http://c.3g.163.com/nc/weather/省份|城市.html
- ```
+```
+
 * 图片接口
+```
  http://image.baidu.com/wisebrowse/data?tag1=一级分类&tag2=二级分类
- ``  
+ ```
  
 * 视频接口
-  ```
+```
  http://c.m.163.com/nc/video/home/0-10.html
  ```  
-
-    
+  
 ## About
 本项目只供学习交流，严禁进行商业用途。:joy:
 
