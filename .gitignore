@@ -1,0 +1,15 @@
+#CocoaPods
+
+*.DS_Store
+
+/Pods
+
+!Podfile
+
+Podfile.lock
+
+*.xcworkspace
+
+!.xcodeproj
+
+xcuserdata

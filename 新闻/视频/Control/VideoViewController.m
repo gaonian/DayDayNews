@@ -75,10 +75,10 @@
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    self.tableview.header = header;
+    self.tableview.mj_header = header;
     [header beginRefreshing];
     
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [block_self initNetWork];
     }];
     
@@ -160,7 +160,7 @@
 
 - (void)mynotification
 {
-    [self.tableview.header beginRefreshing];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 - (void)handleThemeChanged
@@ -186,7 +186,7 @@
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {
         
-        NSArray *dataarray = [VideoData objectArrayWithKeyValuesArray:responseObject[@"videoList"]];
+        NSArray *dataarray = [VideoData mj_objectArrayWithKeyValuesArray:responseObject[@"videoList"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (VideoData *videodata in dataarray) {
             VideoDataFrame *videodataFrame = [[VideoDataFrame alloc] init];
@@ -202,13 +202,13 @@
         
         block_self.count += 10;
         [block_self.tableview reloadData];
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
-        block_self.tableview.footer.hidden = dataarray.count < 10;
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
+        block_self.tableview.mj_footer.hidden = dataarray.count < 10;
 
     } failure:^(id error) {
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
     }];
 }
 
