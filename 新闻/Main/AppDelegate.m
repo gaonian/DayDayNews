@@ -35,6 +35,25 @@
 
 @implementation AppDelegate
 
+- (NSUInteger)getMovieSize {
+    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+    NSString *movePath =  [document stringByAppendingPathComponent:@"temp.mp4"];
+    
+    
+    NSUInteger size = 0;
+    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:movePath error:nil];
+    size += [attrs fileSize];
+    
+    NSString *clearCacheName = size >= 1 ? [NSString stringWithFormat:@"%.1luMB",size/(1024*1024)] : [NSString stringWithFormat:@"%.1luKB",size * 1024];
+    
+    NSLog(@"保存数据.mp4 size: %@",clearCacheName);
+    
+    //清理视频文件
+    //    [[NSFileManager defaultManager] removeItemAtPath:movePath error:nil];
+    
+    return size;
+}
+
 - (NSArray *)conversations
 {
     if (!_conversations) {
@@ -46,6 +65,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [self getMovieSize];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.tabbarMain = [[TabbarViewController alloc]init];

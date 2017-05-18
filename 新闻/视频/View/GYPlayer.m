@@ -10,17 +10,20 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GYHCircleLoadingView.h"
 
+#import "TBloaderURLConnection.h"
+#import "TBVideoRequestTask.h"
 
 static void * playerItemDurationContext = &playerItemDurationContext;
 static void * playerItemStatusContext = &playerItemStatusContext;
 static void * playerPlayingContext = &playerPlayingContext;
 
 
-@interface GYPlayer ()
+@interface GYPlayer ()<TBloaderURLConnectionDelegate>
 
 @property (nonatomic, strong) AVPlayerItem *            playerItem;
 @property (nonatomic, strong) AVPlayerLayer *           playerLayer;
 @property (nonatomic, strong) AVPlayer *                player;
+
 @property (nonatomic, strong) GYHCircleLoadingView *    circleLoadingV;
 
 @property (nonatomic, strong) UIView *                  bottomView;     //整个view
@@ -39,6 +42,11 @@ static void * playerPlayingContext = &playerPlayingContext;
 @property (nonatomic, strong) UIProgressView *playProgressView;//播放进度
 
 @property (nonatomic, strong) id timeObserver;
+
+@property (nonatomic, strong) AVURLAsset     *videoURLAsset;
+@property (nonatomic, strong) AVAsset        *videoAsset;
+@property (nonatomic, strong) TBloaderURLConnection *resouerLoader;
+
 
 
 @end
@@ -94,6 +102,36 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 //#pragma mark - lazy
 
+- (TBloaderURLConnection *)resouerLoader {
+    if (!_resouerLoader) {
+        _resouerLoader = [[TBloaderURLConnection alloc] init];
+        _resouerLoader.delegate = self;
+    }
+    return _resouerLoader;
+}
+
+//获取url是网络的还是本地的
+- (AVPlayerItem *)getAVPlayItem{
+    
+    if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
+        //        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[self.mp4_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        
+        NSURL *playUrl = [self.resouerLoader getSchemeVideoURL:[NSURL fileURLWithPath:_mp4_url]];
+        //缓存资源
+        self.videoURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
+        [self.videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:dispatch_get_main_queue()];
+        
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:self.videoURLAsset];
+        
+        
+        return playerItem;
+    }else{
+        AVURLAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:self.mp4_url] options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+        return playerItem;
+    }
+}
+
 - (AVPlayer *)player {
     if (!_player) {
         self.playerItem = [self getAVPlayItem];
@@ -122,7 +160,7 @@ static void * playerPlayingContext = &playerPlayingContext;
     [self insertSubview:self.bottomView aboveSubview:self];
     [self insertSubview:self.circleLoadingV aboveSubview:self.bottomView];
     [self.circleLoadingV startAnimating];
-    [self.player play];
+//    [self.player play];
     
 }
 
@@ -149,15 +187,17 @@ static void * playerPlayingContext = &playerPlayingContext;
     self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(30, 30) queue:nil usingBlock:^(CMTime time) {
         @strongify_self;
         // 当前播放时间
-        NSString *curTime = [self timeStringWithCMTime:time];
+//        NSString *curTime = [self timeStringWithCMTime:time];
         // 剩余时间
-        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
-        NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
+//        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
+//        NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
         
         // 更新进度
         self.playProgressView.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
     }];
 }
+
+
 
 #pragma mark 根据CMTime生成一个时间字符串
 - (NSString *)timeStringWithCMTime:(CMTime)time {
@@ -188,7 +228,7 @@ static void * playerPlayingContext = &playerPlayingContext;
                 [self.circleLoadingV stopAnimating];
                 //            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
                 //            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
-                
+                [self.player play];
                 //监听播放进度
                 [self observePlayProgress];
                 
@@ -357,19 +397,43 @@ static void * playerPlayingContext = &playerPlayingContext;
     [self removePlayer];
 }
 
+#pragma mark - TBloaderURLConnectionDelegate
 
-//获取url是网络的还是本地的
-- (AVPlayerItem *)getAVPlayItem{
-    
-    if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
-        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[self.mp4_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        return playerItem;
-    }else{
-        AVAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:self.mp4_url] options:nil];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
-        return playerItem;
-    }
+- (void)didFinishLoadingWithTask:(TBVideoRequestTask *)task
+{
+    NSLog(@"%s:下载完成",__func__);
 }
+
+//网络中断：-1005
+//无网络连接：-1009
+//请求超时：-1001
+//服务器内部错误：-1004
+//找不到服务器：-1003
+- (void)didFailLoadingWithTask:(TBVideoRequestTask *)task WithError:(NSInteger)errorCode
+{
+    NSString *str = nil;
+    switch (errorCode) {
+        case -1001:
+            str = @"请求超时";
+            break;
+        case -1003:
+        case -1004:
+            str = @"服务器错误";
+            break;
+        case -1005:
+            str = @"网络中断";
+            break;
+        case -1009:
+            str = @"无网络连接";
+            break;
+            
+        default:
+            str = [NSString stringWithFormat:@"%@", @"(_errorCode)"];
+            break;
+    }
+    NSLog(@"%s:%@",__func__,str);
+}
+
 
 - (UIView *)bottomView {
     if (!_bottomView) {

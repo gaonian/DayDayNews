@@ -20,6 +20,8 @@
 #import "GYHCircleLoadingView.h"
 #import "CategoryView.h"
 #import "GYPlayer.h"
+#import "MyPlayer.h"
+#import "TBPlayer.h"
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *             videoArray;
@@ -115,6 +117,13 @@
     return cell;
 }
 
+- (NSString *)localPlayURL {
+    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+    NSString *_tempPath =  [document stringByAppendingPathComponent:@"temp.mp4"];
+//    NSURL *localURL2 = [NSURL fileURLWithPath:_tempPath];
+    
+    return _tempPath;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,15 +137,22 @@
     }
     CGFloat originY = videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25;
     self.currentOriginY = originY;
-    self.player = [[GYPlayer alloc] initWithFrame:CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56)];
-    self.player.mp4_url = videodata.mp4_url;
+    CGRect rect = CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
+    
+    self.player = [[GYPlayer alloc] initWithFrame:rect];
+    self.player.mp4_url = [self localPlayURL];
     self.player.title = videodata.title;
     self.player.currentOriginY = originY;
-    IMP_BLOCK_SELF(VideoViewController);
-    self.player.currentRowBlock = ^(){
-        [block_self.tableview addSubview:block_self.player];
-    };
     [self.tableview addSubview:self.player];
+    
+    
+//    if (1) {
+//        
+//        VideoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        [[TBPlayer sharedInstance] playWithUrl:[NSURL URLWithString:videodata.mp4_url] showView:cell];
+//        
+//        return;
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,6 +198,7 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(VideoViewController);
+//    self.count = 10;
     NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {

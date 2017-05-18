@@ -118,7 +118,7 @@
         block_self.count = [responseObject[@"imgsum"]intValue];
         block_self.setname = responseObject[@"setname"];
         
-        NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"photos"]];
+        NSArray *dataarray = [TopData mj_objectArrayWithKeyValuesArray:responseObject[@"photos"]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         

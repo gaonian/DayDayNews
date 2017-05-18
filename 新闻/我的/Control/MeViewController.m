@@ -250,7 +250,7 @@
     MBProgressHUD *hud = [[MBProgressHUD alloc] init];
     [[[UIApplication sharedApplication].windows firstObject] addSubview:hud];
     //加载条上显示文本
-    hud.labelText = @"急速清理中";
+    hud.label.text = @"急速清理中";
     //置当前的view为灰度
     hud.dimBackground = YES;
     //设置对话框样式
@@ -260,7 +260,7 @@
             hud.progress += 0.01;
             [NSThread sleepForTimeInterval:0.02];
         }
-        hud.labelText = @"清理完成";
+        hud.label.text = @"清理完成";
     } completionBlock:^{
         [[SDImageCache sharedImageCache] clearDisk];
         [[SDImageCache sharedImageCache] clearMemory];

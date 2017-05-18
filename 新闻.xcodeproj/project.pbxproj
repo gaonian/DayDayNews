@@ -120,6 +120,10 @@
 		19F540031BB52D9200460EA3 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540021BB52D9200460EA3 /* VideoCell.m */; };
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
+		5AE0AE7E1ECD937500A523E0 /* MyPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE791ECD937500A523E0 /* MyPlayer.m */; };
+		5AE0AE7F1ECD937500A523E0 /* TBloaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */; };
+		5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */; };
+		5AE0AE831ECD950300A523E0 /* TBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE821ECD950300A523E0 /* TBPlayer.m */; };
 		5AF394BF1EC75C8700EABF41 /* GYHHeadeRefreshController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */; };
 		5AF394C21EC75CD000EABF41 /* MBProgressHUD+Extion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394C11EC75CD000EABF41 /* MBProgressHUD+Extion.m */; };
 		669EEF53F610A7BA130F6220 /* libPods-新闻.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3280843616FF8E5DD92EE04F /* libPods-新闻.a */; };
@@ -392,6 +396,14 @@
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
 		3280843616FF8E5DD92EE04F /* libPods-新闻.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-新闻.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE0AE781ECD937500A523E0 /* MyPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayer.h; sourceTree = "<group>"; };
+		5AE0AE791ECD937500A523E0 /* MyPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayer.m; sourceTree = "<group>"; };
+		5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBloaderURLConnection.h; sourceTree = "<group>"; };
+		5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBloaderURLConnection.m; sourceTree = "<group>"; };
+		5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVideoRequestTask.h; sourceTree = "<group>"; };
+		5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVideoRequestTask.m; sourceTree = "<group>"; };
+		5AE0AE811ECD950300A523E0 /* TBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlayer.h; sourceTree = "<group>"; };
+		5AE0AE821ECD950300A523E0 /* TBPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlayer.m; sourceTree = "<group>"; };
 		5AF394BD1EC75C8700EABF41 /* GYHHeadeRefreshController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHHeadeRefreshController.h; sourceTree = "<group>"; };
 		5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHHeadeRefreshController.m; sourceTree = "<group>"; };
 		5AF394C01EC75CD000EABF41 /* MBProgressHUD+Extion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Extion.h"; sourceTree = "<group>"; };
@@ -887,6 +899,7 @@
 		19C33DEC1BB109A20059238A /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
+				5AE0AE6B1ECD3F3500A523E0 /* libs */,
 				198E408E1D71B0EE00ABDD5E /* GYHPhotoLoadingView */,
 				19C33DED1BB109A20059238A /* Control */,
 				19C33DF01BB109A20059238A /* Model */,
@@ -1112,6 +1125,21 @@
 				3280843616FF8E5DD92EE04F /* libPods-新闻.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AE0AE6B1ECD3F3500A523E0 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5AE0AE811ECD950300A523E0 /* TBPlayer.h */,
+				5AE0AE821ECD950300A523E0 /* TBPlayer.m */,
+				5AE0AE781ECD937500A523E0 /* MyPlayer.h */,
+				5AE0AE791ECD937500A523E0 /* MyPlayer.m */,
+				5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */,
+				5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */,
+				5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */,
+				5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 		9922B9561D8029D300E3E236 /* CustomTools */ = {
@@ -1365,6 +1393,7 @@
 				990DFE631E053D0300879725 /* CategoryView.m in Sources */,
 				198AF7B41C841C9400D941F4 /* SettingSwitchItem.m in Sources */,
 				19ED1DAA1C8729E900AD6E0A /* TopCell.m in Sources */,
+				5AE0AE831ECD950300A523E0 /* TBPlayer.m in Sources */,
 				99C9A2F01D81386500063D23 /* ShareManager.m in Sources */,
 				19A67CCA1C4E361A008DC05E /* INTULocationManager.m in Sources */,
 				9921EC871D82AF79009D422E /* StartManager.m in Sources */,
@@ -1412,6 +1441,7 @@
 				99FE386F1D87DE2F003A5F35 /* ChatController.m in Sources */,
 				190450D41BCCAC0A00C47A50 /* NewData.m in Sources */,
 				19918FC41CDDE13100A89620 /* HyperlinksButton.m in Sources */,
+				5AE0AE7E1ECD937500A523E0 /* MyPlayer.m in Sources */,
 				1911F2161BBACD990096ADCB /* ClassViewController.m in Sources */,
 				19747D3C1C87FBE500C4CBBD /* DetailWebModel.m in Sources */,
 				9922B9901D803A6300E3E236 /* HMWaterflowLayout.m in Sources */,
@@ -1437,11 +1467,13 @@
 				19C33E3E1BB109A20059238A /* NavigationController.m in Sources */,
 				99C9A31E1D81834900063D23 /* BaseViewController.m in Sources */,
 				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
+				5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */,
 				99EB82871D81155600A85C86 /* LoginView.m in Sources */,
 				19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */,
 				1945F08F1BAFDD0200A38747 /* main.m in Sources */,
 				19E2159A1BD8BC7F000BA38C /* OtherNewsViewController.m in Sources */,
 				19234A471CCE62A300123348 /* CollectTableViewCell.m in Sources */,
+				5AE0AE7F1ECD937500A523E0 /* TBloaderURLConnection.m in Sources */,
 				198E40971D71B0EE00ABDD5E /* GYHSectorProgressView.m in Sources */,
 				9947B2F51DD5A5BD009F81BB /* UIView+GestureRecongnizer.m in Sources */,
 				19918FC11CDDE12900A89620 /* MessageVideoCell.m in Sources */,
