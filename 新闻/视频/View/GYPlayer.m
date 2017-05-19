@@ -400,7 +400,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (void)didFinishLoadingWithTask:(TBVideoRequestTask *)task
 {
-    NSLog(@"%s:下载完成",__func__);
+//    NSLog(@"%s:下载完成",__func__);
 }
 
 //网络中断：-1005

@@ -27,8 +27,11 @@
     if (self) {
         _pendingRequests = [NSMutableArray array];
         
-        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _videoPath = [document stringByAppendingPathComponent:@"temp.mp4"];
+//        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+//        _videoPath = [document stringByAppendingPathComponent:@"temp.mp4"];
+        NSString *tmp = NSTemporaryDirectory();
+        _videoPath = [tmp stringByAppendingPathComponent:@"temp.mp4"];
+
     }
     return self;
 }
@@ -126,7 +129,6 @@
             [loadingRequest finishLoading];
         }
     }
-    
     [self.pendingRequests removeObjectsInArray:requestsCompleted];   //在所有请求的数组中移除已经完成的
 }
 

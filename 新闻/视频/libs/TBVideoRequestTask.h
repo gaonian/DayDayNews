@@ -38,9 +38,5 @@
 
 - (void)cancel;
 
-- (void)continueLoading;
-
-- (void)clearData;
-
 @property (nonatomic, copy) NSString *filePath;
 @end

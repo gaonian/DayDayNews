@@ -36,16 +36,17 @@
     if (self) {
         _taskArr = [NSMutableArray array];
         
-        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _tempPath = [document stringByAppendingPathComponent:@"temp.mp4"];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:_tempPath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
-            [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
-            
+//        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+//        _tempPath = [document stringByAppendingPathComponent:@"temp.mp4"];
+        NSString *tmp = NSTemporaryDirectory();
+        _tempPath = [tmp stringByAppendingPathComponent:@"temp.mp4"];
+        NSFileManager *FM = [NSFileManager defaultManager];
+        if ([FM fileExistsAtPath:_tempPath]) {
+            [FM removeItemAtPath:_tempPath error:nil];
+            [FM createFileAtPath:_tempPath contents:nil attributes:nil];
         } else {
-            [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
+            [FM createFileAtPath:_tempPath contents:nil attributes:nil];
         }
-
     }
     return self;
 }
@@ -79,17 +80,12 @@
        
 }
 
-
-
 - (void)cancel
 {
     [self.connection cancel];
-    
 }
 
-
 #pragma mark -  NSURLConnection Delegate Methods
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -112,7 +108,6 @@
     
     self.videoLength = videoLength;
     self.mimeType = @"video/mp4";
-    
 
     if ([self.delegate respondsToSelector:@selector(task:didReceiveVideoLength:mimeType:)]) {
         [self.delegate task:self didReceiveVideoLength:self.videoLength mimeType:self.mimeType];
@@ -137,8 +132,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    
-    
     if (self.taskArr.count < 2) {
         _isFinishLoad = YES;
         
@@ -154,14 +147,12 @@
         }else{
             NSLog(@"copyItemAtPath fail");
         }
-        
         NSLog(@"视频下载成功: %@", self.filePath);
     }
     
     if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
         [self.delegate didFinishLoadingWithTask:self];
     }
-    
 }
 
 //网络中断：-1005
@@ -184,7 +175,6 @@
     }
 }
 
-
 - (void)continueLoading
 {
     _once = YES;
@@ -194,7 +184,6 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[actualURLComponents URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20.0];
     
     [request addValue:[NSString stringWithFormat:@"bytes=%ld-%ld",(unsigned long)_downLoadingOffset, (unsigned long)self.videoLength - 1] forHTTPHeaderField:@"Range"];
-    
     
     [self.connection cancel];
      self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
@@ -207,8 +196,5 @@
     [self.connection cancel];
     //移除文件
     [[NSFileManager defaultManager] removeItemAtPath:self.tempPath error:nil];
-    
-    
-    
 }
 @end

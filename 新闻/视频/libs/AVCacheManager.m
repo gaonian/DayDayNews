@@ -9,12 +9,12 @@
 #import "AVCacheManager.h"
 #import <CommonCrypto/CommonDigest.h>
 
-//const NSString *kComNewsAVCache = @"com.news.avcache";
-#define kComNewsAVCache "com.news.avcache"
+#define kComNewsAVCache "com.media.cache"
 
 @interface AVCacheManager ()
 @property (nonatomic, copy) NSString *diskCachePath;
 @property (nonatomic, strong) NSFileManager *FM;
+@property (nonatomic, copy) NSString *curType;
 @end
 
 @implementation AVCacheManager {
@@ -45,10 +45,15 @@
     return file;
 }
 
+/*
+ 此参数作用，视频下载完以后，移动到指定管理目录，为预防copy过程异常，设置中间对象，确认copy成功后，再次move更名为最终对象
+ */
 - (NSString *)tempPath {
-    if (!_tempPath) {
-        _tempPath = [[AVCacheManager sharedInstance] getPathByFileName:@"temp.mp4"];
-    }
+    //文件类型不唯一
+//    NSString *tmp = NSTemporaryDirectory();
+    NSString *tempName = [NSString stringWithFormat:@"temp.%@",self.curType];
+    _tempPath = [[AVCacheManager sharedInstance] getPathByFileName:tempName];
+    
     return _tempPath;
 }
 
@@ -58,10 +63,23 @@
     return filePath;
 }
 
+/*
+ 三个目录：
+ Documents
+ Library [Caches]
+ tmp
+ 
+ NSString *Documents = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+ 
+ NSString *Caches = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+ 
+ NSString *tmp = NSTemporaryDirectory();
+ */
 - (NSString *)diskCachePath {
+    //cache目录唯一
     if (!_diskCachePath) {
-        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _diskCachePath =  [document stringByAppendingPathComponent:@kComNewsAVCache];
+        NSString *Caches = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+        _diskCachePath =  [Caches stringByAppendingPathComponent:@kComNewsAVCache];
         if (![_fileManager fileExistsAtPath:_diskCachePath]) {
             [_fileManager createDirectoryAtPath:self.diskCachePath
                     withIntermediateDirectories:YES
@@ -110,6 +128,7 @@
 + (NSString *)getFileType:(NSString *)fileName {
     NSArray *textArray = [fileName componentsSeparatedByString:@"."];
     NSString *type = [textArray lastObject];
+    [AVCacheManager sharedInstance].curType = type;
     return type;
 }
 

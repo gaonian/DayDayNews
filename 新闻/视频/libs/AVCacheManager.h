@@ -23,3 +23,11 @@
 
 - (void)clearDisk;
 @end
+
+/*
+Xcode8出现AQDefaultDevice (173): skipping input stream 0 0 0x0
+ 1.选择 Product -->Scheme-->Edit Scheme
+ 2.选择 Arguments
+ 3.在Environment Variables添加一个环境变量 OS_ACTIVITY_MODE 设置值为"disable"
+
+ */
