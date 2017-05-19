@@ -15,6 +15,7 @@
 @interface TBloaderURLConnection ()<TBVideoRequestTaskDelegate>
 
 @property (nonatomic, strong) NSMutableArray *pendingRequests;
+@property (nonatomic, copy  ) NSString       *videoPath;
 
 @end
 
@@ -98,7 +99,7 @@
     
     if (!self.task) {
         self.task = [[TBVideoRequestTask alloc] init];
-        //        self.task.tempPath = self.videoPath;
+        self.task.filePath = self.filePath;
         self.task.delegate = self;
         [self.task setUrl:interceptedURL offset:0];
     } else {

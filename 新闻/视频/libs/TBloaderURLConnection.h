@@ -26,7 +26,6 @@
 @property (nonatomic, strong) TBVideoRequestTask *task;
 @property (nonatomic, weak  ) id<TBloaderURLConnectionDelegate> delegate;
 - (NSURL *)getSchemeVideoURL:(NSURL *)url;
-@property (nonatomic, copy  ) NSString       *videoPath;
-
+@property (nonatomic, copy) NSString *filePath;
 
 @end

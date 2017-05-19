@@ -264,6 +264,7 @@
     } completionBlock:^{
         [[SDImageCache sharedImageCache] clearDisk];
         [[SDImageCache sharedImageCache] clearMemory];
+        [[AVCacheManager sharedInstance] clearDisk];
         block_self.clearCacheName = @"0.0KB";
         block_self.arrays = nil;
         [block_self setupGroup0];
@@ -283,7 +284,11 @@
     
     float tmpSize = [[SDImageCache sharedImageCache] getSize];
     NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",tmpSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",tmpSize * 1024];
-    self.clearCacheName = clearCacheName;
+    
+    float movieSize = [[AVCacheManager sharedInstance] getSize];
+    NSString *movieSizeString = movieSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",movieSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",movieSize * 1024];
+
+    self.clearCacheName = [NSString stringWithFormat:@"【%@】【%@】",clearCacheName,movieSizeString];
     
     self.arrays = nil;
     [self setupGroup0];

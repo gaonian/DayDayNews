@@ -14,4 +14,12 @@
 
 - (NSString *)getPathByFileName:(NSString *)fileName;
 
+@property (nonatomic, copy) NSString *tempPath;
+
+
+- (NSString *)isExistLocalFile:(NSString *)file;
+
+- (NSUInteger)getSize;
+
+- (void)clearDisk;
 @end

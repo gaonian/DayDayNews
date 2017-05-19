@@ -114,9 +114,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 - (AVPlayerItem *)getAVPlayItem{
     
     if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
-        //        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[self.mp4_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        
-//        self.resouerLoader.videoPath = [[AVCacheManager sharedInstance] getPathByFileName:self.mp4_url];
+        self.resouerLoader.filePath = [[AVCacheManager sharedInstance] getPathByFileName:self.mp4_url];
         NSURL *playUrl = [self.resouerLoader getSchemeVideoURL:[NSURL fileURLWithPath:_mp4_url]];
         //缓存资源
         self.videoURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
@@ -153,23 +151,10 @@ static void * playerPlayingContext = &playerPlayingContext;
     return _playerLayer;
 }
 
-- (NSString *)localPlayURL {
-    /*
-     97485c3031352c449aeda06e5e835bfa.mp4
-     
-     */
-    NSString *fileName = @"ea7dbca409c0dfe76757e683e19d554c.mp4";
-    
-    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSString *_tempPath =  [document stringByAppendingPathComponent:@"com.news.avCache"];
-    //    NSURL *localURL2 = [NSURL fileURLWithPath:_tempPath];
-    NSString *localPath = [NSString stringWithFormat:@"%@/%@",_tempPath,fileName];
-    
-    return localPath;
-}
 - (void)setMp4_url:(NSString *)mp4_url {
-    _mp4_url = mp4_url;
-//    _mp4_url = [self localPlayURL];
+//    _mp4_url = mp4_url;
+    _mp4_url = [[AVCacheManager sharedInstance] isExistLocalFile:mp4_url];
+    NSLog(@"%@",_mp4_url);
     
     [self.layer addSublayer:self.playerLayer];
     [self insertSubview:self.bottomView aboveSubview:self];
@@ -258,8 +243,8 @@ static void * playerPlayingContext = &playerPlayingContext;
             float startSeconds = CMTimeGetSeconds(timeRange.start);
             float durationSeconds = CMTimeGetSeconds(timeRange.duration);
             NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
-            NSTimeInterval middleValue = totalBuffer / CMTimeGetSeconds(playerItem.duration);
-            NSLog(@"loadedTimeRanges:%f",middleValue);
+//            NSTimeInterval middleValue = totalBuffer / CMTimeGetSeconds(playerItem.duration);
+//            NSLog(@"loadedTimeRanges:%f",middleValue);
             self.slider.value = totalBuffer / CMTimeGetSeconds(playerItem.duration);
             self.progressView.progress = totalBuffer / CMTimeGetSeconds(playerItem.duration);
             

@@ -9,11 +9,17 @@
 #import "AVCacheManager.h"
 #import <CommonCrypto/CommonDigest.h>
 
+//const NSString *kComNewsAVCache = @"com.news.avcache";
+#define kComNewsAVCache "com.news.avcache"
+
 @interface AVCacheManager ()
 @property (nonatomic, copy) NSString *diskCachePath;
+@property (nonatomic, strong) NSFileManager *FM;
 @end
 
-@implementation AVCacheManager
+@implementation AVCacheManager {
+    NSFileManager *_fileManager;
+}
 
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
@@ -21,38 +27,75 @@
     dispatch_once(&onceToken, ^{
         _sInstance = [[self alloc] init];
     });
-    
     return _sInstance;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        _fileManager = [NSFileManager defaultManager];
+    }
+    return self;
+}
 
-/*
- 2017-05-19 13:28:28.728 新闻[13455:1536451] /Users/liu/Library/Developer/CoreSimulator/Devices/2FA46DEB-9C0D-4515-AA4E-4988B4C3BA28/data/Containers/Data/Application/61FA33C4-6B46-47ED-969C-332D4F3855FD/Documents/ComCacheMovie/c697b9b14e6d5ae3a1c2635cca1242bb.mp4
- 2017-05-19 13:28:30.711 新闻[13455:1536451] /Users/liu/Library/Developer/CoreSimulator/Devices/2FA46DEB-9C0D-4515-AA4E-4988B4C3BA28/data/Containers/Data/Application/61FA33C4-6B46-47ED-969C-332D4F3855FD/Documents/temp.mp4
- (lldb)
- */
+- (NSString *)isExistLocalFile:(NSString *)file {
+    NSString *localPath = [self getPathByFileName:file];
+    if ([_fileManager fileExistsAtPath:localPath]) {
+        return localPath;
+    }
+    return file;
+}
+
+- (NSString *)tempPath {
+    if (!_tempPath) {
+        _tempPath = [[AVCacheManager sharedInstance] getPathByFileName:@"temp.mp4"];
+    }
+    return _tempPath;
+}
+
 - (NSString *)getPathByFileName:(NSString *)fileName {
     NSString *md5Name = [AVCacheManager getMd5Name:fileName];
     NSString *filePath = [self.diskCachePath stringByAppendingPathComponent:md5Name];
-    NSLog(@"%@",filePath);
-    
-    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSString *videoPath = [document stringByAppendingPathComponent:@"temp.mp4"];
-    NSLog(@"%@",videoPath);
-    return videoPath;
+    return filePath;
 }
 
 - (NSString *)diskCachePath {
     if (!_diskCachePath) {
         NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _diskCachePath =  [document stringByAppendingPathComponent:@"ComCacheMovie"];
-//        _diskCachePath = document;
-        NSFileManager *FM = [NSFileManager defaultManager];
-        if (![FM fileExistsAtPath:_diskCachePath]) {
-            [FM createFileAtPath:_diskCachePath contents:nil attributes:nil];
+        _diskCachePath =  [document stringByAppendingPathComponent:@kComNewsAVCache];
+        if (![_fileManager fileExistsAtPath:_diskCachePath]) {
+            [_fileManager createDirectoryAtPath:self.diskCachePath
+                    withIntermediateDirectories:YES
+                                     attributes:nil
+                                          error:NULL];
         }
     }
     return _diskCachePath;
+}
+
+- (NSUInteger)getSize {
+    __block NSUInteger size = 0;
+    dispatch_queue_t queue = dispatch_queue_create(kComNewsAVCache, DISPATCH_QUEUE_SERIAL);
+    dispatch_sync(queue, ^{
+        NSDirectoryEnumerator *fileEnumerator = [_fileManager enumeratorAtPath:self.diskCachePath];
+        for (NSString *fileName in fileEnumerator) {
+            NSString *filePath = [self.diskCachePath stringByAppendingPathComponent:fileName];
+            NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+            size += [attrs fileSize];
+        }
+    });
+    return size;
+}
+
+- (void)clearDisk {
+    //串行队列，异步执行
+    dispatch_queue_t queue = dispatch_queue_create(kComNewsAVCache, DISPATCH_QUEUE_SERIAL);
+    dispatch_async(queue, ^{
+        [_fileManager removeItemAtPath:self.diskCachePath error:nil];
+        [_fileManager createDirectoryAtPath:self.diskCachePath
+      withIntermediateDirectories:YES
+                       attributes:nil
+                            error:NULL];
+    });
 }
 
 #pragma mark - tools
@@ -71,18 +114,13 @@
 }
 
 + (NSString *)md5:(NSString *)str{
-    
     const char *cStr = [str UTF8String];
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    
     CC_MD5(cStr, (CC_LONG)strlen(cStr), digest);
-    
     NSMutableString *result = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
         [result appendFormat:@"%02x", digest[i]];
     }
-    
     return [result copy];
 }
 

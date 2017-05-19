@@ -24,7 +24,7 @@
 @property (nonatomic, assign) BOOL            once;
 
 @property (nonatomic, strong) NSFileHandle    *fileHandle;
-
+@property (nonatomic, strong) NSString        *tempPath;
 
 @end
 
@@ -120,27 +120,19 @@
     
     [self.taskArr addObject:connection];
     
-    
     self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.tempPath];
-    
-   
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    
     [self.fileHandle seekToEndOfFile];
-    
     [self.fileHandle writeData:data];
 
     _downLoadingOffset += data.length;
     
-    
     if ([self.delegate respondsToSelector:@selector(didReceiveVideoDataWithTask:)]) {
         [self.delegate didReceiveVideoDataWithTask:self];
     }
-    
-    
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -150,17 +142,20 @@
     if (self.taskArr.count < 2) {
         _isFinishLoad = YES;
         
-//        //这里自己写需要保存数据的路径
+        //这里自己写需要保存数据的路径
 //        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
 //        NSString *movePath =  [document stringByAppendingPathComponent:@"保存数据.mp4"];
-//
-//        BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:_tempPath toPath:movePath error:nil];
-//        if (isSuccess) {
-//            NSLog(@"rename success");
-//        }else{
-//            NSLog(@"rename fail");
-//        }
-        NSLog(@"视频下载成功: %@", _tempPath);
+        
+        NSFileManager *FM = [NSFileManager defaultManager];
+        BOOL isSuccess = [FM copyItemAtPath:self.tempPath toPath:[[AVCacheManager sharedInstance] tempPath] error:nil];
+        if (isSuccess) {
+            NSLog(@"copyItemAtPath success");
+            [FM moveItemAtPath:[[AVCacheManager sharedInstance] tempPath] toPath:self.filePath error:nil];
+        }else{
+            NSLog(@"copyItemAtPath fail");
+        }
+        
+        NSLog(@"视频下载成功: %@", self.filePath);
     }
     
     if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
