@@ -20,8 +20,6 @@
 #import "GYHCircleLoadingView.h"
 #import "CategoryView.h"
 #import "GYPlayer.h"
-#import "MyPlayer.h"
-#import "TBPlayer.h"
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *             videoArray;
@@ -117,13 +115,6 @@
     return cell;
 }
 
-- (NSString *)localPlayURL {
-    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSString *_tempPath =  [document stringByAppendingPathComponent:@"temp.mp4"];
-//    NSURL *localURL2 = [NSURL fileURLWithPath:_tempPath];
-    
-    return _tempPath;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -140,7 +131,7 @@
     CGRect rect = CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
     
     self.player = [[GYPlayer alloc] initWithFrame:rect];
-    self.player.mp4_url = [self localPlayURL];
+    self.player.mp4_url = videodata.mp4_url;
     self.player.title = videodata.title;
     self.player.currentOriginY = originY;
     [self.tableview addSubview:self.player];

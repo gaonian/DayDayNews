@@ -24,7 +24,7 @@
 @property (nonatomic, assign) BOOL            once;
 
 @property (nonatomic, strong) NSFileHandle    *fileHandle;
-@property (nonatomic, strong) NSString        *tempPath;
+
 
 @end
 
@@ -35,8 +35,9 @@
     self = [super init];
     if (self) {
         _taskArr = [NSMutableArray array];
+        
         NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _tempPath =  [document stringByAppendingPathComponent:@"temp.mp4"];
+        _tempPath = [document stringByAppendingPathComponent:@"temp.mp4"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:_tempPath]) {
             [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
             [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
@@ -44,7 +45,7 @@
         } else {
             [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
         }
-        
+
     }
     return self;
 }
@@ -56,8 +57,8 @@
     
     //如果建立第二次请求，先移除原来文件，再创建新的
     if (self.taskArr.count >= 1) {
-        [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
-        [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:self.tempPath error:nil];
+        [[NSFileManager defaultManager] createFileAtPath:self.tempPath contents:nil attributes:nil];
     }
     
     _downLoadingOffset = 0;
@@ -120,7 +121,7 @@
     [self.taskArr addObject:connection];
     
     
-    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:_tempPath];
+    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.tempPath];
     
    
 }
@@ -210,7 +211,7 @@
 {
     [self.connection cancel];
     //移除文件
-    [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:self.tempPath error:nil];
     
     
     

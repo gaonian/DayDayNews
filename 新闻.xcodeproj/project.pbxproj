@@ -120,10 +120,10 @@
 		19F540031BB52D9200460EA3 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540021BB52D9200460EA3 /* VideoCell.m */; };
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
-		5AE0AE7E1ECD937500A523E0 /* MyPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE791ECD937500A523E0 /* MyPlayer.m */; };
 		5AE0AE7F1ECD937500A523E0 /* TBloaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */; };
 		5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */; };
-		5AE0AE831ECD950300A523E0 /* TBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE821ECD950300A523E0 /* TBPlayer.m */; };
+		5AE0AE8E1ECE88E900A523E0 /* AVPlayerCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */; };
+		5AE0AE911ECEB37100A523E0 /* AVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */; };
 		5AF394BF1EC75C8700EABF41 /* GYHHeadeRefreshController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */; };
 		5AF394C21EC75CD000EABF41 /* MBProgressHUD+Extion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394C11EC75CD000EABF41 /* MBProgressHUD+Extion.m */; };
 		669EEF53F610A7BA130F6220 /* libPods-新闻.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3280843616FF8E5DD92EE04F /* libPods-新闻.a */; };
@@ -396,14 +396,14 @@
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
 		3280843616FF8E5DD92EE04F /* libPods-新闻.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-新闻.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AE0AE781ECD937500A523E0 /* MyPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlayer.h; sourceTree = "<group>"; };
-		5AE0AE791ECD937500A523E0 /* MyPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlayer.m; sourceTree = "<group>"; };
 		5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBloaderURLConnection.h; sourceTree = "<group>"; };
 		5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBloaderURLConnection.m; sourceTree = "<group>"; };
 		5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVideoRequestTask.h; sourceTree = "<group>"; };
 		5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVideoRequestTask.m; sourceTree = "<group>"; };
-		5AE0AE811ECD950300A523E0 /* TBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlayer.h; sourceTree = "<group>"; };
-		5AE0AE821ECD950300A523E0 /* TBPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlayer.m; sourceTree = "<group>"; };
+		5AE0AE8C1ECE88E900A523E0 /* AVPlayerCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerCaching.h; sourceTree = "<group>"; };
+		5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerCaching.m; sourceTree = "<group>"; };
+		5AE0AE8F1ECEB37100A523E0 /* AVCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCacheManager.h; sourceTree = "<group>"; };
+		5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCacheManager.m; sourceTree = "<group>"; };
 		5AF394BD1EC75C8700EABF41 /* GYHHeadeRefreshController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHHeadeRefreshController.h; sourceTree = "<group>"; };
 		5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHHeadeRefreshController.m; sourceTree = "<group>"; };
 		5AF394C01EC75CD000EABF41 /* MBProgressHUD+Extion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Extion.h"; sourceTree = "<group>"; };
@@ -1130,14 +1130,14 @@
 		5AE0AE6B1ECD3F3500A523E0 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				5AE0AE811ECD950300A523E0 /* TBPlayer.h */,
-				5AE0AE821ECD950300A523E0 /* TBPlayer.m */,
-				5AE0AE781ECD937500A523E0 /* MyPlayer.h */,
-				5AE0AE791ECD937500A523E0 /* MyPlayer.m */,
+				5AE0AE8F1ECEB37100A523E0 /* AVCacheManager.h */,
+				5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */,
 				5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */,
 				5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */,
 				5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */,
 				5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */,
+				5AE0AE8C1ECE88E900A523E0 /* AVPlayerCaching.h */,
+				5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1393,7 +1393,6 @@
 				990DFE631E053D0300879725 /* CategoryView.m in Sources */,
 				198AF7B41C841C9400D941F4 /* SettingSwitchItem.m in Sources */,
 				19ED1DAA1C8729E900AD6E0A /* TopCell.m in Sources */,
-				5AE0AE831ECD950300A523E0 /* TBPlayer.m in Sources */,
 				99C9A2F01D81386500063D23 /* ShareManager.m in Sources */,
 				19A67CCA1C4E361A008DC05E /* INTULocationManager.m in Sources */,
 				9921EC871D82AF79009D422E /* StartManager.m in Sources */,
@@ -1424,6 +1423,7 @@
 				19918FDB1CDDEF7500A89620 /* LVRecordView.m in Sources */,
 				19ED1DA71C8729D700AD6E0A /* BigImageCell.m in Sources */,
 				9922B9641D802AE400E3E236 /* NSDate+gyh.m in Sources */,
+				5AE0AE911ECEB37100A523E0 /* AVCacheManager.m in Sources */,
 				19BE4F111CE4E64C005E515D /* PhotoCollectTableViewCell.m in Sources */,
 				990DFE601E05294000879725 /* Foundation+Log.m in Sources */,
 				19747D391C87F65600C4CBBD /* DetailWebViewController.m in Sources */,
@@ -1441,7 +1441,6 @@
 				99FE386F1D87DE2F003A5F35 /* ChatController.m in Sources */,
 				190450D41BCCAC0A00C47A50 /* NewData.m in Sources */,
 				19918FC41CDDE13100A89620 /* HyperlinksButton.m in Sources */,
-				5AE0AE7E1ECD937500A523E0 /* MyPlayer.m in Sources */,
 				1911F2161BBACD990096ADCB /* ClassViewController.m in Sources */,
 				19747D3C1C87FBE500C4CBBD /* DetailWebModel.m in Sources */,
 				9922B9901D803A6300E3E236 /* HMWaterflowLayout.m in Sources */,
@@ -1453,6 +1452,7 @@
 				19C33E401BB109A20059238A /* TabbarView.m in Sources */,
 				19ED1DA11C8729BE00AD6E0A /* NewsCell.m in Sources */,
 				9922B9811D80328100E3E236 /* ThemeManager.m in Sources */,
+				5AE0AE8E1ECE88E900A523E0 /* AVPlayerCaching.m in Sources */,
 				19918FBE1CDDE12900A89620 /* AddViewButton.m in Sources */,
 				9921EC8A1D82B4CA009D422E /* AppConfig.m in Sources */,
 				19C33E441BB109FB0059238A /* PhotoCell.m in Sources */,

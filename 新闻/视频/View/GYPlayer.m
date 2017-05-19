@@ -20,10 +20,16 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 @interface GYPlayer ()<TBloaderURLConnectionDelegate>
 
+//
+@property (nonatomic, strong) AVURLAsset     *videoURLAsset;
+@property (nonatomic, strong) AVAsset        *videoAsset;
+@property (nonatomic, strong) TBloaderURLConnection *resouerLoader;
+
 @property (nonatomic, strong) AVPlayerItem *            playerItem;
 @property (nonatomic, strong) AVPlayerLayer *           playerLayer;
 @property (nonatomic, strong) AVPlayer *                player;
 
+//
 @property (nonatomic, strong) GYHCircleLoadingView *    circleLoadingV;
 
 @property (nonatomic, strong) UIView *                  bottomView;     //整个view
@@ -42,12 +48,6 @@ static void * playerPlayingContext = &playerPlayingContext;
 @property (nonatomic, strong) UIProgressView *playProgressView;//播放进度
 
 @property (nonatomic, strong) id timeObserver;
-
-@property (nonatomic, strong) AVURLAsset     *videoURLAsset;
-@property (nonatomic, strong) AVAsset        *videoAsset;
-@property (nonatomic, strong) TBloaderURLConnection *resouerLoader;
-
-
 
 @end
 
@@ -116,13 +116,13 @@ static void * playerPlayingContext = &playerPlayingContext;
     if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
         //        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[self.mp4_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         
+//        self.resouerLoader.videoPath = [[AVCacheManager sharedInstance] getPathByFileName:self.mp4_url];
         NSURL *playUrl = [self.resouerLoader getSchemeVideoURL:[NSURL fileURLWithPath:_mp4_url]];
         //缓存资源
         self.videoURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
         [self.videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:dispatch_get_main_queue()];
         
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:self.videoURLAsset];
-        
         
         return playerItem;
     }else{
@@ -153,9 +153,24 @@ static void * playerPlayingContext = &playerPlayingContext;
     return _playerLayer;
 }
 
-
+- (NSString *)localPlayURL {
+    /*
+     97485c3031352c449aeda06e5e835bfa.mp4
+     
+     */
+    NSString *fileName = @"ea7dbca409c0dfe76757e683e19d554c.mp4";
+    
+    NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+    NSString *_tempPath =  [document stringByAppendingPathComponent:@"com.news.avCache"];
+    //    NSURL *localURL2 = [NSURL fileURLWithPath:_tempPath];
+    NSString *localPath = [NSString stringWithFormat:@"%@/%@",_tempPath,fileName];
+    
+    return localPath;
+}
 - (void)setMp4_url:(NSString *)mp4_url {
     _mp4_url = mp4_url;
+//    _mp4_url = [self localPlayURL];
+    
     [self.layer addSublayer:self.playerLayer];
     [self insertSubview:self.bottomView aboveSubview:self];
     [self insertSubview:self.circleLoadingV aboveSubview:self.bottomView];
@@ -196,7 +211,6 @@ static void * playerPlayingContext = &playerPlayingContext;
         self.playProgressView.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
     }];
 }
-
 
 
 #pragma mark 根据CMTime生成一个时间字符串

@@ -42,5 +42,5 @@
 
 - (void)clearData;
 
-
+@property (nonatomic, strong) NSString        *tempPath;
 @end

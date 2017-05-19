@@ -36,12 +36,15 @@
 @implementation AppDelegate
 
 - (NSUInteger)getMovieSize {
+  
     NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSString *movePath =  [document stringByAppendingPathComponent:@"temp.mp4"];
-    
+    NSString *_tempPath =  [document stringByAppendingPathComponent:@"com.news.avCache"];
+    //    NSURL *localURL2 = [NSURL fileURLWithPath:_tempPath];
+    NSString *localPath = [NSString stringWithFormat:@"%@/%@",_tempPath,@"97485c3031352c449aeda06e5e835bfa.mp4"];
+
     
     NSUInteger size = 0;
-    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:movePath error:nil];
+    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:localPath error:nil];
     size += [attrs fileSize];
     
     NSString *clearCacheName = size >= 1 ? [NSString stringWithFormat:@"%.1luMB",size/(1024*1024)] : [NSString stringWithFormat:@"%.1luKB",size * 1024];
