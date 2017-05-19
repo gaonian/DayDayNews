@@ -136,16 +136,13 @@
         _isFinishLoad = YES;
         
         //这里自己写需要保存数据的路径
-//        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-//        NSString *movePath =  [document stringByAppendingPathComponent:@"保存数据.mp4"];
-        
         NSFileManager *FM = [NSFileManager defaultManager];
         BOOL isSuccess = [FM copyItemAtPath:self.tempPath toPath:[[AVCacheManager sharedInstance] tempPath] error:nil];
         if (isSuccess) {
-            NSLog(@"copyItemAtPath success");
+            NSLog(@"copyItem success");
             [FM moveItemAtPath:[[AVCacheManager sharedInstance] tempPath] toPath:self.filePath error:nil];
         }else{
-            NSLog(@"copyItemAtPath fail");
+            NSLog(@"copyItem fail");
         }
         NSLog(@"视频下载成功: %@", self.filePath);
     }
