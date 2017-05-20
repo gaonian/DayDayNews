@@ -199,7 +199,7 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(VideoViewController);
-//    self.count = 10;
+//    self.count += 10;
     NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {

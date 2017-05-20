@@ -13,6 +13,10 @@
 #import "TBloaderURLConnection.h"
 #import "TBVideoRequestTask.h"
 
+//NSString *const MyPlayerStateChangedNotification    = @"MyPlayerStateChangedNotification";
+//NSString *const MyPlayerProgressChangedNotification = @"MyPlayerProgressChangedNotification";
+//NSString *const MyPlayerLoadProgressChangedNotification = @"MyPlayerLoadProgressChangedNotification";
+
 static void * playerItemDurationContext = &playerItemDurationContext;
 static void * playerItemStatusContext = &playerItemStatusContext;
 static void * playerPlayingContext = &playerPlayingContext;

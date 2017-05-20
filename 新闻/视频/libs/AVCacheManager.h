@@ -30,4 +30,8 @@ Xcode8出现AQDefaultDevice (173): skipping input stream 0 0 0x0
  2.选择 Arguments
  3.在Environment Variables添加一个环境变量 OS_ACTIVITY_MODE 设置值为"disable"
 
+ 
+ http://flv2.bn.netease.com/videolib3/1705/20/KcLSx8643/SD/KcLSx8643-mobile.mp4 (12:13)
+
+ 
  */

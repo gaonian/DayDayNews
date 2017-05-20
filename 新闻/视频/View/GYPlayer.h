@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 //播放器的几种状态
 typedef NS_ENUM(NSInteger, AVPlayerState) {
     AVPlayerStateBuffering = 1,
