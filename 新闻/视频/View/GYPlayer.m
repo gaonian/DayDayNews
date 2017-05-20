@@ -82,7 +82,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (UIProgressView *)cacheProgress {
     if (!_cacheProgress) {
-        _cacheProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 10, SCREEN_WIDTH-100, 1)];
+        _cacheProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 14, SCREEN_WIDTH-100, 1)];
         //        _cacheProgress.tintColor = [UIColor grayColor];
         _cacheProgress.backgroundColor = [UIColor clearColor];
         _cacheProgress.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
@@ -93,7 +93,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (UIProgressView *)playProgress {
     if (!_playProgress) {
-        _playProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 10, SCREEN_WIDTH-100, 1)];
+        _playProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 14, SCREEN_WIDTH-100, 1)];
         //        _progressView.tintColor = [UIColor grayColor];
         _playProgress.backgroundColor = [UIColor clearColor];
         _playProgress.trackTintColor =[UIColor clearColor];
@@ -104,7 +104,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (UILabel *)lab_curTime {
     if (!_lab_curTime) {
-        _lab_curTime = [[UILabel alloc] initWithFrame:CGRectMake(44, 15, 100, 10)];
+        _lab_curTime = [[UILabel alloc] initWithFrame:CGRectMake(44, 19, 100, 10)];
         _lab_curTime.font = [UIFont systemFontOfSize:10];
         _lab_curTime.textColor = [UIColor whiteColor];
         _lab_curTime.backgroundColor = [UIColor clearColor];
@@ -115,7 +115,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (UILabel *)lab_totalTime {
     if (!_lab_totalTime) {
-        _lab_totalTime = [[UILabel alloc] initWithFrame:CGRectMake(44 + SCREEN_WIDTH - 100 - 100, 15, 100, 10)];
+        _lab_totalTime = [[UILabel alloc] initWithFrame:CGRectMake(44 + SCREEN_WIDTH - 100 - 100, 19, 100, 10)];
         _lab_totalTime.font = [UIFont systemFontOfSize:10];
         _lab_totalTime.textColor = [UIColor whiteColor];
         _lab_totalTime.backgroundColor = [UIColor clearColor];
