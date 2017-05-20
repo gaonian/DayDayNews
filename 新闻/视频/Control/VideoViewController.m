@@ -135,15 +135,13 @@
     self.player.title = videodata.title;
     self.player.currentOriginY = originY;
     [self.tableview addSubview:self.player];
+    @weakify_self;
+    self.player.currentRowBlock = ^{
+        @strongify_self;
+        //当前block用于保证，横屏切换回竖屏后，播放器视图依然保持在self.tableview视图上
+        [self.tableview addSubview:self.player];
+    };
     
-    
-//    if (1) {
-//        
-//        VideoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        [[TBPlayer sharedInstance] playWithUrl:[NSURL URLWithString:videodata.mp4_url] showView:cell];
-//        
-//        return;
-//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -189,7 +187,7 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(VideoViewController);
-//    self.count = 10;
+    self.count = 20;
     NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {

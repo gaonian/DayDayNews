@@ -17,7 +17,6 @@ static void * playerItemDurationContext = &playerItemDurationContext;
 static void * playerItemStatusContext = &playerItemStatusContext;
 static void * playerPlayingContext = &playerPlayingContext;
 
-
 @interface GYPlayer ()<TBloaderURLConnectionDelegate>
 
 //
@@ -44,8 +43,11 @@ static void * playerPlayingContext = &playerPlayingContext;
 @property (nonatomic)         BOOL                      isFullScreen;
 
 @property (nonatomic, strong) UISlider *slider;
-@property (nonatomic, strong) UIProgressView *progressView;//缓冲进度
-@property (nonatomic, strong) UIProgressView *playProgressView;//播放进度
+
+@property (nonatomic, strong) UIProgressView *cacheProgress;//缓冲进度
+@property (nonatomic, strong) UIProgressView *playProgress;//播放进度
+@property (nonatomic, strong) UILabel *lab_curTime;//播放时间
+@property (nonatomic, strong) UILabel *lab_totalTime;//总时间
 
 @property (nonatomic, strong) id timeObserver;
 
@@ -78,26 +80,49 @@ static void * playerPlayingContext = &playerPlayingContext;
     return _slider;
 }
 
-- (UIProgressView *)progressView {
-    if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH-100, 1)];
-        //        _progressView.tintColor = [UIColor grayColor];
-        _progressView.backgroundColor = [UIColor clearColor];
-        _progressView.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
-        _progressView.progressTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+- (UIProgressView *)cacheProgress {
+    if (!_cacheProgress) {
+        _cacheProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 10, SCREEN_WIDTH-100, 1)];
+        //        _cacheProgress.tintColor = [UIColor grayColor];
+        _cacheProgress.backgroundColor = [UIColor clearColor];
+        _cacheProgress.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
+        _cacheProgress.progressTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     }
-    return _progressView;
+    return _cacheProgress;
 }
 
-- (UIProgressView *)playProgressView {
-    if (!_playProgressView) {
-        _playProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH-100, 1)];
+- (UIProgressView *)playProgress {
+    if (!_playProgress) {
+        _playProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 10, SCREEN_WIDTH-100, 1)];
         //        _progressView.tintColor = [UIColor grayColor];
-        _playProgressView.backgroundColor = [UIColor clearColor];
-        _playProgressView.trackTintColor =[UIColor clearColor];
-        _playProgressView.progressTintColor =[UIColor lightGrayColor];
+        _playProgress.backgroundColor = [UIColor clearColor];
+        _playProgress.trackTintColor =[UIColor clearColor];
+        _playProgress.progressTintColor =[UIColor lightGrayColor];
     }
-    return _playProgressView;
+    return _playProgress;
+}
+
+- (UILabel *)lab_curTime {
+    if (!_lab_curTime) {
+        _lab_curTime = [[UILabel alloc] initWithFrame:CGRectMake(44, 15, 100, 10)];
+        _lab_curTime.font = [UIFont systemFontOfSize:10];
+        _lab_curTime.textColor = [UIColor whiteColor];
+        _lab_curTime.backgroundColor = [UIColor clearColor];
+        _lab_curTime.text = @"00:00";
+    }
+    return _lab_curTime;
+}
+
+- (UILabel *)lab_totalTime {
+    if (!_lab_totalTime) {
+        _lab_totalTime = [[UILabel alloc] initWithFrame:CGRectMake(44 + SCREEN_WIDTH - 100 - 100, 15, 100, 10)];
+        _lab_totalTime.font = [UIFont systemFontOfSize:10];
+        _lab_totalTime.textColor = [UIColor whiteColor];
+        _lab_totalTime.backgroundColor = [UIColor clearColor];
+        _lab_totalTime.textAlignment = NSTextAlignmentRight;
+        _lab_totalTime.text = @"00:00";
+    }
+    return _lab_totalTime;
 }
 
 //#pragma mark - lazy
@@ -112,7 +137,6 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 //获取url是网络的还是本地的
 - (AVPlayerItem *)getAVPlayItem{
-    
     if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
         self.resouerLoader.filePath = [[AVCacheManager sharedInstance] getPathByFileName:self.mp4_url];
         NSURL *playUrl = [self.resouerLoader getSchemeVideoURL:[NSURL fileURLWithPath:_mp4_url]];
@@ -141,12 +165,10 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 - (AVPlayerLayer *)playerLayer {
     if (!_playerLayer) {
-        
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         _playerLayer.frame = self.bounds;
         _playerLayer.backgroundColor = [UIColor blackColor].CGColor;
         _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;//视频填充模式
-        
     }
     return _playerLayer;
 }
@@ -187,13 +209,17 @@ static void * playerPlayingContext = &playerPlayingContext;
     self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(30, 30) queue:nil usingBlock:^(CMTime time) {
         @strongify_self;
         // 当前播放时间
-//        NSString *curTime = [self timeStringWithCMTime:time];
+        NSString *curTime = [self timeStringWithCMTime:time];
+        self.lab_curTime.text = curTime;
+        
+        NSString *totalTime = [self timeStringWithCMTime:self.playerItem.duration];
+        self.lab_totalTime.text = totalTime;
         // 剩余时间
 //        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
 //        NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
         
         // 更新进度
-        self.playProgressView.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
+        self.playProgress.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
     }];
 }
 
@@ -246,7 +272,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 //            NSTimeInterval middleValue = totalBuffer / CMTimeGetSeconds(playerItem.duration);
 //            NSLog(@"loadedTimeRanges:%f",middleValue);
             self.slider.value = totalBuffer / CMTimeGetSeconds(playerItem.duration);
-            self.progressView.progress = totalBuffer / CMTimeGetSeconds(playerItem.duration);
+            self.cacheProgress.progress = totalBuffer / CMTimeGetSeconds(playerItem.duration);
             
             //        //        NSLog(@"totalBuffer：%.2f",totalBuffer);
             //
@@ -350,8 +376,9 @@ static void * playerPlayingContext = &playerPlayingContext;
         self.bottomBar.width = SCREEN_HEIGHT;
         self.imgBgBottom.width = SCREEN_HEIGHT;
         self.btnFullScreen.originX = SCREEN_HEIGHT - 10 - 37;
-        self.progressView.width = SCREEN_WIDTH - 100;
-        self.playProgressView.width = SCREEN_WIDTH - 100;
+        self.cacheProgress.width = SCREEN_HEIGHT - 100;
+        self.playProgress.width = SCREEN_HEIGHT - 100;
+        self.lab_totalTime.originX = 44 + SCREEN_HEIGHT - 100 - 100;
         [theWindow addSubview:self];
     } else {
         self.isFullScreen = NO;
@@ -367,9 +394,9 @@ static void * playerPlayingContext = &playerPlayingContext;
         self.bottomBar.width = SCREEN_WIDTH;
         self.imgBgBottom.width = SCREEN_WIDTH;
         self.btnFullScreen.originX = SCREEN_WIDTH - 10 - 37;
-        self.progressView.width = SCREEN_WIDTH - 100;
-        self.playProgressView.width = SCREEN_WIDTH - 100;
-        
+        self.cacheProgress.width = SCREEN_WIDTH - 100;
+        self.playProgress.width = SCREEN_WIDTH - 100;
+        self.lab_totalTime.originX = 44 + SCREEN_WIDTH - 100 - 100;
         if (self.currentRowBlock) {
             self.currentRowBlock();
         }
@@ -470,9 +497,12 @@ static void * playerPlayingContext = &playerPlayingContext;
         [self.btnFullScreen addTarget:self action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomBar addSubview:self.btnFullScreen];
         
-        [self.bottomBar addSubview:self.progressView];
+        [self.bottomBar addSubview:self.cacheProgress];
         //        [self.bottomBar addSubview:self.slider];
-        [self.bottomBar addSubview:self.playProgressView];
+        [self.bottomBar addSubview:self.playProgress];
+        
+        [self.bottomBar addSubview:self.lab_curTime];
+        [self.bottomBar addSubview:self.lab_totalTime];
         
         [self addSubview:_bottomView];
     }
