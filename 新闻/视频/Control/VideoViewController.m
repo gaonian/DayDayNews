@@ -154,7 +154,19 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.player) {
-        if (fabs(scrollView.contentOffset.y)+64 > CGRectGetMaxY(self.player.frame)) {
+        /*
+         向上👆向下👇滑动，当播放器视图消失，则清理播放器
+         */
+        //scrollview偏移量 由于navigattionBar的存在，scrollview默认初始化偏移量-64
+        CGFloat scrollviewOffSetY = scrollView.contentOffset.y;
+        //scrollview在屏幕上显示的尺寸高度
+        CGFloat scrollviewShowHeight = scrollviewOffSetY + CGRectGetMaxY(scrollView.frame) - 49;
+        //player最低点
+        CGFloat playerMinY = CGRectGetMinY(self.player.frame);
+        //player最高点
+        CGFloat playerMaxY = CGRectGetMaxY(self.player.frame);
+//        NSLog(@"%f:%f:%f:%f",playerMinY,scrollviewShowHeight,scrollviewOffSetY+64,playerMaxY);
+        if ((scrollviewOffSetY+64 > playerMaxY)||(scrollviewShowHeight < playerMinY)) {
             [self.player removePlayer];
             self.player = nil;
         }
@@ -187,7 +199,7 @@
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(VideoViewController);
-    self.count = 20;
+//    self.count = 10;
     NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {
