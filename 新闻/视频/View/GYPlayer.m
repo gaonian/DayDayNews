@@ -97,7 +97,7 @@ static void * playerPlayingContext = &playerPlayingContext;
         //        _progressView.tintColor = [UIColor grayColor];
         _playProgress.backgroundColor = [UIColor clearColor];
         _playProgress.trackTintColor =[UIColor clearColor];
-        _playProgress.progressTintColor = [UIColor whiteColor];
+        _playProgress.progressTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
     }
     return _playProgress;
 }
