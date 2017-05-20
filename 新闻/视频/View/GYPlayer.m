@@ -51,6 +51,8 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 @property (nonatomic, strong) id timeObserver;
 
+@property (nonatomic, strong) UIButton *btn_download;
+
 @end
 
 @implementation GYPlayer
@@ -125,6 +127,67 @@ static void * playerPlayingContext = &playerPlayingContext;
     return _lab_totalTime;
 }
 
+- (UIButton *)btn_download {
+    if (!_btn_download) {
+        _btn_download = [UIButton buttonWithType:0];
+        [_btn_download setTitle:@"下载" forState:0];
+        [_btn_download setTitleColor:[UIColor whiteColor] forState:0];
+        _btn_download.titleLabel.font = [UIFont systemFontOfSize:13];
+        _btn_download.frame = CGRectMake(SCREEN_WIDTH - 44, 44, 33, 33);
+        _btn_download.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
+    return _btn_download;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor clearColor];
+        _bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
+        
+        self.imgBgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        self.imgBgTop.image = [UIImage imageNamed:@"top_shadow.png"];
+        [_bottomView addSubview:self.imgBgTop];
+        
+        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
+        self.lbTitle.font = [UIFont systemFontOfSize:16];
+        self.lbTitle.numberOfLines = 0;
+        self.lbTitle.textColor = HEXColor(@"ffffff");
+        [_bottomView addSubview:self.lbTitle];
+        
+        
+        self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 37, SCREEN_WIDTH, 37)];
+        [_bottomView addSubview:self.bottomBar];
+        
+        self.imgBgBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 37)];
+        self.imgBgBottom.image = [UIImage imageNamed:@"bottom_shadow.png"];
+        [self.bottomBar addSubview:self.imgBgBottom];
+        
+        self.btnPlayOrPause = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 17, 17)];
+        [self.btnPlayOrPause setImage:[UIImage imageNamed:@"video_pause.png"] forState:UIControlStateNormal];
+        [self.btnPlayOrPause addTarget:self action:@selector(playOrPause:) forControlEvents:UIControlEventTouchUpInside];
+        self.btnPlayOrPause.selected = YES;
+        [self.bottomBar addSubview:self.btnPlayOrPause];
+        
+        self.btnFullScreen = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 - 37, 0, 37, 37)];
+        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
+        [self.btnFullScreen addTarget:self action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomBar addSubview:self.btnFullScreen];
+        
+        [self.bottomBar addSubview:self.cacheProgress];
+        //        [self.bottomBar addSubview:self.slider];
+        [self.bottomBar addSubview:self.playProgress];
+        
+        [self.bottomBar addSubview:self.lab_curTime];
+        [self.bottomBar addSubview:self.lab_totalTime];
+        
+        
+        [self addSubview:_bottomView];
+    }
+    return _bottomView;
+}
+
 //#pragma mark - lazy
 
 - (TBloaderURLConnection *)resouerLoader {
@@ -182,8 +245,9 @@ static void * playerPlayingContext = &playerPlayingContext;
     [self insertSubview:self.bottomView aboveSubview:self];
     [self insertSubview:self.circleLoadingV aboveSubview:self.bottomView];
     [self.circleLoadingV startAnimating];
-//    [self.player play];
     
+    [self addSubview:self.btn_download];
+
 }
 
 - (void)setTitle:(NSString *)title {
@@ -212,17 +276,16 @@ static void * playerPlayingContext = &playerPlayingContext;
         NSString *curTime = [self timeStringWithCMTime:time];
         self.lab_curTime.text = curTime;
         
-        NSString *totalTime = [self timeStringWithCMTime:self.playerItem.duration];
-        self.lab_totalTime.text = totalTime;
+        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
+        //        NSString *totalTime = [self timeStringWithCMTime:self.playerItem.duration];
+        self.lab_totalTime.text = lastTime;
         // 剩余时间
-//        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
 //        NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
         
         // 更新进度
         self.playProgress.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
     }];
 }
-
 
 #pragma mark 根据CMTime生成一个时间字符串
 - (NSString *)timeStringWithCMTime:(CMTime)time {
@@ -458,55 +521,6 @@ static void * playerPlayingContext = &playerPlayingContext;
             break;
     }
     NSLog(@"%s:%@",__func__,str);
-}
-
-
-- (UIView *)bottomView {
-    if (!_bottomView) {
-        
-        _bottomView = [[UIView alloc] init];
-        _bottomView.backgroundColor = [UIColor clearColor];
-        _bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
-        
-        self.imgBgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-        self.imgBgTop.image = [UIImage imageNamed:@"top_shadow.png"];
-        [_bottomView addSubview:self.imgBgTop];
-        
-        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
-        self.lbTitle.font = [UIFont systemFontOfSize:16];
-        self.lbTitle.numberOfLines = 0;
-        self.lbTitle.textColor = HEXColor(@"ffffff");
-        [_bottomView addSubview:self.lbTitle];
-        
-        
-        self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 37, SCREEN_WIDTH, 37)];
-        [_bottomView addSubview:self.bottomBar];
-        
-        self.imgBgBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 37)];
-        self.imgBgBottom.image = [UIImage imageNamed:@"bottom_shadow.png"];
-        [self.bottomBar addSubview:self.imgBgBottom];
-        
-        self.btnPlayOrPause = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 17, 17)];
-        [self.btnPlayOrPause setImage:[UIImage imageNamed:@"video_pause.png"] forState:UIControlStateNormal];
-        [self.btnPlayOrPause addTarget:self action:@selector(playOrPause:) forControlEvents:UIControlEventTouchUpInside];
-        self.btnPlayOrPause.selected = YES;
-        [self.bottomBar addSubview:self.btnPlayOrPause];
-        
-        self.btnFullScreen = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 - 37, 0, 37, 37)];
-        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
-        [self.btnFullScreen addTarget:self action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBar addSubview:self.btnFullScreen];
-        
-        [self.bottomBar addSubview:self.cacheProgress];
-        //        [self.bottomBar addSubview:self.slider];
-        [self.bottomBar addSubview:self.playProgress];
-        
-        [self.bottomBar addSubview:self.lab_curTime];
-        [self.bottomBar addSubview:self.lab_totalTime];
-        
-        [self addSubview:_bottomView];
-    }
-    return _bottomView;
 }
 
 @end
