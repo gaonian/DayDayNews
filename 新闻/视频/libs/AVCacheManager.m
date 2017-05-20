@@ -8,6 +8,8 @@
 
 #import "AVCacheManager.h"
 #import <CommonCrypto/CommonDigest.h>
+//#include <sys/param.h>
+#include <sys/mount.h>
 
 #define kComNewsAVCache "com.media.cache"
 
@@ -15,6 +17,7 @@
 @property (nonatomic, copy) NSString *diskCachePath;
 @property (nonatomic, strong) NSFileManager *FM;
 @property (nonatomic, copy) NSString *curType;
+@property (nonatomic, strong, nonnull) dispatch_queue_t ioQueue;
 @end
 
 @implementation AVCacheManager {
@@ -33,6 +36,8 @@
 - (id)init {
     if (self = [super init]) {
         _fileManager = [NSFileManager defaultManager];
+        //串行队列
+        _ioQueue = dispatch_queue_create(kComNewsAVCache, DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -91,9 +96,9 @@
 }
 
 - (NSUInteger)getSize {
+    NSLog(@"%@",self.diskCachePath);
     __block NSUInteger size = 0;
-    dispatch_queue_t queue = dispatch_queue_create(kComNewsAVCache, DISPATCH_QUEUE_SERIAL);
-    dispatch_sync(queue, ^{
+    dispatch_sync(self.ioQueue, ^{
         NSDirectoryEnumerator *fileEnumerator = [_fileManager enumeratorAtPath:self.diskCachePath];
         for (NSString *fileName in fileEnumerator) {
             NSString *filePath = [self.diskCachePath stringByAppendingPathComponent:fileName];
@@ -106,8 +111,7 @@
 
 - (void)clearDisk {
     //串行队列，异步执行
-    dispatch_queue_t queue = dispatch_queue_create(kComNewsAVCache, DISPATCH_QUEUE_SERIAL);
-    dispatch_async(queue, ^{
+    dispatch_async(self.ioQueue, ^{
         [_fileManager removeItemAtPath:self.diskCachePath error:nil];
         [_fileManager createDirectoryAtPath:self.diskCachePath
       withIntermediateDirectories:YES
@@ -141,6 +145,15 @@
         [result appendFormat:@"%02x", digest[i]];
     }
     return [result copy];
+}
+
+- (unsigned long long)getDiskFreeSize{
+    struct statfs buf;
+    unsigned long long freespace = -1;
+    if(statfs("/var", &buf) >= 0){
+        freespace = (long long)(buf.f_bsize * buf.f_bfree);
+    }
+    return freespace;
 }
 
 @end

@@ -124,6 +124,7 @@
 		5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */; };
 		5AE0AE8E1ECE88E900A523E0 /* AVPlayerCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */; };
 		5AE0AE911ECEB37100A523E0 /* AVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */; };
+		5AE0AE941ED0544100A523E0 /* AVMediaCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */; };
 		5AF394BF1EC75C8700EABF41 /* GYHHeadeRefreshController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */; };
 		5AF394C21EC75CD000EABF41 /* MBProgressHUD+Extion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394C11EC75CD000EABF41 /* MBProgressHUD+Extion.m */; };
 		669EEF53F610A7BA130F6220 /* libPods-新闻.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3280843616FF8E5DD92EE04F /* libPods-新闻.a */; };
@@ -404,6 +405,8 @@
 		5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerCaching.m; sourceTree = "<group>"; };
 		5AE0AE8F1ECEB37100A523E0 /* AVCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCacheManager.h; sourceTree = "<group>"; };
 		5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCacheManager.m; sourceTree = "<group>"; };
+		5AE0AE921ED0544100A523E0 /* AVMediaCacheModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVMediaCacheModel.h; sourceTree = "<group>"; };
+		5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVMediaCacheModel.m; sourceTree = "<group>"; };
 		5AF394BD1EC75C8700EABF41 /* GYHHeadeRefreshController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHHeadeRefreshController.h; sourceTree = "<group>"; };
 		5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHHeadeRefreshController.m; sourceTree = "<group>"; };
 		5AF394C01EC75CD000EABF41 /* MBProgressHUD+Extion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Extion.h"; sourceTree = "<group>"; };
@@ -1138,6 +1141,8 @@
 				5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */,
 				5AE0AE8C1ECE88E900A523E0 /* AVPlayerCaching.h */,
 				5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */,
+				5AE0AE921ED0544100A523E0 /* AVMediaCacheModel.h */,
+				5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1271,7 +1276,7 @@
 					1945F0891BAFDD0200A38747 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5P7X92RVXH;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1466,6 +1471,7 @@
 				190450E71BCCAE6400C47A50 /* WeatherData.m in Sources */,
 				19C33E3E1BB109A20059238A /* NavigationController.m in Sources */,
 				99C9A31E1D81834900063D23 /* BaseViewController.m in Sources */,
+				5AE0AE941ED0544100A523E0 /* AVMediaCacheModel.m in Sources */,
 				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
 				5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */,
 				99EB82871D81155600A85C86 /* LoginView.m in Sources */,
@@ -1577,7 +1583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5P7X92RVXH;
 				ENABLE_BITCODE = NO;
@@ -1606,8 +1612,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.aia.china.facetalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0ea73372-ff95-41a5-9bae-e3ac8dc57a01";
+				PROVISIONING_PROFILE_SPECIFIER = "MT Facetalk";
 			};
 			name = Debug;
 		};
@@ -1619,7 +1625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5P7X92RVXH;
 				ENABLE_BITCODE = NO;
@@ -1648,8 +1654,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.aia.china.facetalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0ea73372-ff95-41a5-9bae-e3ac8dc57a01";
+				PROVISIONING_PROFILE_SPECIFIER = "MT Facetalk";
 			};
 			name = Release;
 		};

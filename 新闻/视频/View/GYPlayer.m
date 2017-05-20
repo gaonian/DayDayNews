@@ -446,6 +446,7 @@ static void * playerPlayingContext = &playerPlayingContext;
         self.cacheProgress.width = SCREEN_HEIGHT - 100;
         self.playProgress.width = SCREEN_HEIGHT - 100;
         self.lab_totalTime.originX = 44 + SCREEN_HEIGHT - 100 - 100;
+        self.btn_download.originX = SCREEN_HEIGHT - 44;
         [theWindow addSubview:self];
     } else {
         self.isFullScreen = NO;
@@ -464,6 +465,7 @@ static void * playerPlayingContext = &playerPlayingContext;
         self.cacheProgress.width = SCREEN_WIDTH - 100;
         self.playProgress.width = SCREEN_WIDTH - 100;
         self.lab_totalTime.originX = 44 + SCREEN_WIDTH - 100 - 100;
+        self.btn_download.originX = SCREEN_WIDTH - 44;
         if (self.currentRowBlock) {
             self.currentRowBlock();
         }

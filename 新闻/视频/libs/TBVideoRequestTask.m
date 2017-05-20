@@ -141,10 +141,10 @@
         if (isSuccess) {
             NSLog(@"copyItem success");
             [FM moveItemAtPath:[[AVCacheManager sharedInstance] tempPath] toPath:self.filePath error:nil];
+            NSLog(@">>>>>>>>>>>>>>>\n视频下载保存成功: %@", self.filePath);
         }else{
             NSLog(@"copyItem fail");
         }
-        NSLog(@"视频下载成功: %@", self.filePath);
     }
     
     if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
