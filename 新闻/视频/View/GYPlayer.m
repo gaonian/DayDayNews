@@ -85,8 +85,8 @@ static void * playerPlayingContext = &playerPlayingContext;
         _cacheProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 14, SCREEN_WIDTH-100, 1)];
         //        _cacheProgress.tintColor = [UIColor grayColor];
         _cacheProgress.backgroundColor = [UIColor clearColor];
-        _cacheProgress.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
-        _cacheProgress.progressTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+        _cacheProgress.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _cacheProgress.progressTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.7];
     }
     return _cacheProgress;
 }
@@ -97,7 +97,7 @@ static void * playerPlayingContext = &playerPlayingContext;
         //        _progressView.tintColor = [UIColor grayColor];
         _playProgress.backgroundColor = [UIColor clearColor];
         _playProgress.trackTintColor =[UIColor clearColor];
-        _playProgress.progressTintColor =[UIColor lightGrayColor];
+        _playProgress.progressTintColor = [UIColor whiteColor];
     }
     return _playProgress;
 }
