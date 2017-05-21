@@ -1,25 +1,17 @@
-//
-//  TBloaderURLConnection.m
-//  avplayerSavebufferData
-//
-//  Created by qianjianeng on 15/9/15.
-//  Copyright (c) 2015年 qianjianeng. All rights reserved.
-//
-//// github地址：https://github.com/suifengqjn/TBPlayer
 
-#import "TBloaderURLConnection.h"
+#import "AVloaderURLConnection.h"
 #import <Foundation/Foundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "TBVideoRequestTask.h"
+#import "AVVideoRequestTask.h"
 
-@interface TBloaderURLConnection ()<TBVideoRequestTaskDelegate>
+@interface AVloaderURLConnection ()<AVVideoRequestTaskDelegate>
 
 @property (nonatomic, strong) NSMutableArray *pendingRequests;
 @property (nonatomic, copy  ) NSString       *videoPath;
 
 @end
 
-@implementation TBloaderURLConnection
+@implementation AVloaderURLConnection
 
 - (instancetype)init
 {
@@ -66,23 +58,23 @@
     return [components URL];
 }
 
-#pragma mark - TBVideoRequestTaskDelegate
-- (void)task:(TBVideoRequestTask *)task didReceiveVideoLength:(NSUInteger)ideoLength mimeType:(NSString *)mimeType
+#pragma mark - AVVideoRequestTaskDelegate
+- (void)task:(AVVideoRequestTask *)task didReceiveVideoLength:(NSUInteger)ideoLength mimeType:(NSString *)mimeType
 {
     NSLog(@"didReceiveVideoLength: %lu", (unsigned long)ideoLength);
 }
-- (void)didReceiveVideoDataWithTask:(TBVideoRequestTask *)task
+- (void)didReceiveVideoDataWithTask:(AVVideoRequestTask *)task
 {
     [self processPendingRequests];
     
 }
-- (void)didFinishLoadingWithTask:(TBVideoRequestTask *)task
+- (void)didFinishLoadingWithTask:(AVVideoRequestTask *)task
 {
     if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
         [self.delegate didFinishLoadingWithTask:task];
     }
 }
-- (void)didFailLoadingWithTask:(TBVideoRequestTask *)task WithError:(NSInteger)errorCode
+- (void)didFailLoadingWithTask:(AVVideoRequestTask *)task WithError:(NSInteger)errorCode
 {
     if ([self.delegate respondsToSelector:@selector(didFailLoadingWithTask:WithError:)]) {
         [self.delegate didFailLoadingWithTask:task WithError:errorCode];
@@ -101,7 +93,7 @@
     }
     
     if (!self.task) {
-        self.task = [[TBVideoRequestTask alloc] init];
+        self.task = [[AVVideoRequestTask alloc] init];
         self.task.filePath = self.filePath;
         self.task.delegate = self;
         [self.task setUrl:interceptedURL offset:0];

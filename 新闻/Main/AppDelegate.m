@@ -35,19 +35,21 @@
 
 @implementation AppDelegate
 
-- (NSUInteger)getMovieSize {
+- (void)getMovieSize {
   
     [[AVCacheManager sharedInstance] getSize];
+//    
+//    NSUInteger size = 0;
+//    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[[AVCacheManager sharedInstance]getPathByFileName:@""] error:nil];
+//    size += [attrs fileSize];
+//    
+//    NSString *clearCacheName = size >= 1 ? [NSString stringWithFormat:@"%.1luMB",size/(1024*1024)] : [NSString stringWithFormat:@"%.1luKB",size * 1024];
+//    
+//    NSLog(@"保存数据.mp4 size: %@",clearCacheName);
     
-    NSUInteger size = 0;
-    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[[AVCacheManager sharedInstance]getPathByFileName:@""] error:nil];
-    size += [attrs fileSize];
-    
-    NSString *clearCacheName = size >= 1 ? [NSString stringWithFormat:@"%.1luMB",size/(1024*1024)] : [NSString stringWithFormat:@"%.1luKB",size * 1024];
-    
-    NSLog(@"保存数据.mp4 size: %@",clearCacheName);
-        
-    return size;
+    [[AVCacheManager sharedInstance] deleteOldFilesWithCompletionBlock:^{
+        NSLog(@"启动检查视频文件是否超时存储或超过预定存储大小");
+    }];
 }
 
 - (NSArray *)conversations

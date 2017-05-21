@@ -22,6 +22,8 @@
 - (NSUInteger)getSize;
 
 - (void)clearDisk;
+
+- (void)deleteOldFilesWithCompletionBlock:(void(^)())completionBlock;
 @end
 
 /*

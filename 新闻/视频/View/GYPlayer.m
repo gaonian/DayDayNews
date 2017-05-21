@@ -10,8 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GYHCircleLoadingView.h"
 
-#import "TBloaderURLConnection.h"
-#import "TBVideoRequestTask.h"
+#import "AVloaderURLConnection.h"
+#import "AVVideoRequestTask.h"
 
 //NSString *const MyPlayerStateChangedNotification    = @"MyPlayerStateChangedNotification";
 //NSString *const MyPlayerProgressChangedNotification = @"MyPlayerProgressChangedNotification";
@@ -21,12 +21,12 @@ static void * playerItemDurationContext = &playerItemDurationContext;
 static void * playerItemStatusContext = &playerItemStatusContext;
 static void * playerPlayingContext = &playerPlayingContext;
 
-@interface GYPlayer ()<TBloaderURLConnectionDelegate>
+@interface GYPlayer ()<AVloaderURLConnectionDelegate>
 
 //
 @property (nonatomic, strong) AVURLAsset     *videoURLAsset;
 @property (nonatomic, strong) AVAsset        *videoAsset;
-@property (nonatomic, strong) TBloaderURLConnection *resouerLoader;
+@property (nonatomic, strong) AVloaderURLConnection *resouerLoader;
 
 @property (nonatomic, strong) AVPlayerItem *            playerItem;
 @property (nonatomic, strong) AVPlayerLayer *           playerLayer;
@@ -194,9 +194,9 @@ static void * playerPlayingContext = &playerPlayingContext;
 
 //#pragma mark - lazy
 
-- (TBloaderURLConnection *)resouerLoader {
+- (AVloaderURLConnection *)resouerLoader {
     if (!_resouerLoader) {
-        _resouerLoader = [[TBloaderURLConnection alloc] init];
+        _resouerLoader = [[AVloaderURLConnection alloc] init];
         _resouerLoader.delegate = self;
     }
     return _resouerLoader;
@@ -492,9 +492,9 @@ static void * playerPlayingContext = &playerPlayingContext;
     [self removePlayer];
 }
 
-#pragma mark - TBloaderURLConnectionDelegate
+#pragma mark - AVloaderURLConnectionDelegate
 
-- (void)didFinishLoadingWithTask:(TBVideoRequestTask *)task
+- (void)didFinishLoadingWithTask:(AVVideoRequestTask *)task
 {
 //    NSLog(@"%s:下载完成",__func__);
 }
@@ -504,7 +504,7 @@ static void * playerPlayingContext = &playerPlayingContext;
 //请求超时：-1001
 //服务器内部错误：-1004
 //找不到服务器：-1003
-- (void)didFailLoadingWithTask:(TBVideoRequestTask *)task WithError:(NSInteger)errorCode
+- (void)didFailLoadingWithTask:(AVVideoRequestTask *)task WithError:(NSInteger)errorCode
 {
     NSString *str = nil;
     switch (errorCode) {

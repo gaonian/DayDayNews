@@ -120,8 +120,8 @@
 		19F540031BB52D9200460EA3 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540021BB52D9200460EA3 /* VideoCell.m */; };
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
-		5AE0AE7F1ECD937500A523E0 /* TBloaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */; };
-		5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */; };
+		5AE0AE7F1ECD937500A523E0 /* AVloaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7B1ECD937500A523E0 /* AVloaderURLConnection.m */; };
+		5AE0AE801ECD937500A523E0 /* AVVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE7D1ECD937500A523E0 /* AVVideoRequestTask.m */; };
 		5AE0AE8E1ECE88E900A523E0 /* AVPlayerCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */; };
 		5AE0AE911ECEB37100A523E0 /* AVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */; };
 		5AE0AE941ED0544100A523E0 /* AVMediaCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */; };
@@ -397,10 +397,10 @@
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
 		3280843616FF8E5DD92EE04F /* libPods-新闻.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-新闻.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBloaderURLConnection.h; sourceTree = "<group>"; };
-		5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBloaderURLConnection.m; sourceTree = "<group>"; };
-		5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVideoRequestTask.h; sourceTree = "<group>"; };
-		5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVideoRequestTask.m; sourceTree = "<group>"; };
+		5AE0AE7A1ECD937500A523E0 /* AVloaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVloaderURLConnection.h; sourceTree = "<group>"; };
+		5AE0AE7B1ECD937500A523E0 /* AVloaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVloaderURLConnection.m; sourceTree = "<group>"; };
+		5AE0AE7C1ECD937500A523E0 /* AVVideoRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVVideoRequestTask.h; sourceTree = "<group>"; };
+		5AE0AE7D1ECD937500A523E0 /* AVVideoRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVVideoRequestTask.m; sourceTree = "<group>"; };
 		5AE0AE8C1ECE88E900A523E0 /* AVPlayerCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerCaching.h; sourceTree = "<group>"; };
 		5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerCaching.m; sourceTree = "<group>"; };
 		5AE0AE8F1ECEB37100A523E0 /* AVCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCacheManager.h; sourceTree = "<group>"; };
@@ -1135,10 +1135,10 @@
 			children = (
 				5AE0AE8F1ECEB37100A523E0 /* AVCacheManager.h */,
 				5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */,
-				5AE0AE7A1ECD937500A523E0 /* TBloaderURLConnection.h */,
-				5AE0AE7B1ECD937500A523E0 /* TBloaderURLConnection.m */,
-				5AE0AE7C1ECD937500A523E0 /* TBVideoRequestTask.h */,
-				5AE0AE7D1ECD937500A523E0 /* TBVideoRequestTask.m */,
+				5AE0AE7A1ECD937500A523E0 /* AVloaderURLConnection.h */,
+				5AE0AE7B1ECD937500A523E0 /* AVloaderURLConnection.m */,
+				5AE0AE7C1ECD937500A523E0 /* AVVideoRequestTask.h */,
+				5AE0AE7D1ECD937500A523E0 /* AVVideoRequestTask.m */,
 				5AE0AE8C1ECE88E900A523E0 /* AVPlayerCaching.h */,
 				5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */,
 				5AE0AE921ED0544100A523E0 /* AVMediaCacheModel.h */,
@@ -1275,8 +1275,7 @@
 				TargetAttributes = {
 					1945F0891BAFDD0200A38747 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 5P7X92RVXH;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1473,13 +1472,13 @@
 				99C9A31E1D81834900063D23 /* BaseViewController.m in Sources */,
 				5AE0AE941ED0544100A523E0 /* AVMediaCacheModel.m in Sources */,
 				19881F751D7140E7000EC3E3 /* PullDownCell.m in Sources */,
-				5AE0AE801ECD937500A523E0 /* TBVideoRequestTask.m in Sources */,
+				5AE0AE801ECD937500A523E0 /* AVVideoRequestTask.m in Sources */,
 				99EB82871D81155600A85C86 /* LoginView.m in Sources */,
 				19970A711BCF95B800F4CC0C /* LocaHeaderView.m in Sources */,
 				1945F08F1BAFDD0200A38747 /* main.m in Sources */,
 				19E2159A1BD8BC7F000BA38C /* OtherNewsViewController.m in Sources */,
 				19234A471CCE62A300123348 /* CollectTableViewCell.m in Sources */,
-				5AE0AE7F1ECD937500A523E0 /* TBloaderURLConnection.m in Sources */,
+				5AE0AE7F1ECD937500A523E0 /* AVloaderURLConnection.m in Sources */,
 				198E40971D71B0EE00ABDD5E /* GYHSectorProgressView.m in Sources */,
 				9947B2F51DD5A5BD009F81BB /* UIView+GestureRecongnizer.m in Sources */,
 				19918FC11CDDE12900A89620 /* MessageVideoCell.m in Sources */,
@@ -1583,9 +1582,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5P7X92RVXH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1612,8 +1611,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.aia.china.facetalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ea73372-ff95-41a5-9bae-e3ac8dc57a01";
-				PROVISIONING_PROFILE_SPECIFIER = "MT Facetalk";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1625,9 +1624,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5P7X92RVXH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1654,8 +1653,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.aia.china.facetalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ea73372-ff95-41a5-9bae-e3ac8dc57a01";
-				PROVISIONING_PROFILE_SPECIFIER = "MT Facetalk";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

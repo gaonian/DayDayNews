@@ -1,15 +1,6 @@
-//
-//  TBVideoRequestTask.m
-//  avplayerSavebufferData
-//
-//  Created by qianjianeng on 15/9/18.
-//  Copyright (c) 2015年 qianjianeng. All rights reserved.
-//
-//// github地址：https://github.com/suifengqjn/TBPlayer
+#import "AVVideoRequestTask.h"
 
-#import "TBVideoRequestTask.h"
-
-@interface TBVideoRequestTask () <NSURLConnectionDataDelegate, AVAssetResourceLoaderDelegate>
+@interface AVVideoRequestTask () <NSURLConnectionDataDelegate, AVAssetResourceLoaderDelegate>
 
 @property (nonatomic, strong) NSURL           *url;
 @property (nonatomic        ) NSUInteger      offset;
@@ -28,7 +19,7 @@
 
 @end
 
-@implementation TBVideoRequestTask
+@implementation AVVideoRequestTask
 
 - (instancetype)init
 {
