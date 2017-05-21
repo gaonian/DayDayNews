@@ -12,7 +12,6 @@
 #include <sys/mount.h>
 
 #define kComNewsAVCache "com.media.cache"
-
 static const NSInteger kDefaultCacheMaxCacheAge = 60*60*24;//60*60*24*7; // 1 week
 static const NSInteger kDefaultCacheMaxSize = 1024*1024*1024;//1000*1000*1000; // 1 GB
 
