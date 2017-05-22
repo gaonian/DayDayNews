@@ -1293,8 +1293,6 @@ typedef enum : NSUInteger {
         [self.showView removeFromSuperview];
         [self.playerSuperView addSubview:self.showView];
         
-//        HcdLightView *lightView = [HcdLightView sharedInstance];
-//        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:lightView];
         __weak HcdCacheVideoPlayer * weakSelf = self;
         [self.showView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(CGRectGetMinY(weakSelf.showViewRect));
@@ -1302,33 +1300,17 @@ typedef enum : NSUInteger {
             make.width.mas_equalTo(CGRectGetWidth(weakSelf.showViewRect));
             make.height.mas_equalTo(CGRectGetHeight(weakSelf.showViewRect));
         }];
-        
-//        [lightView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.equalTo([UIApplication sharedApplication].keyWindow);
-//            make.centerY.equalTo([UIApplication sharedApplication].keyWindow).offset(-5);
-//            make.width.mas_equalTo(155);
-//            make.height.mas_equalTo(155);
-//        }];
+
     } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
         [self.showView removeFromSuperview];
         [[UIApplication sharedApplication].keyWindow addSubview:self.showView];
-        
-        // 亮度view加到window最上层
-//        HcdLightView *lightView = [HcdLightView sharedInstance];
-//        [[UIApplication sharedApplication].keyWindow insertSubview:self.showView belowSubview:lightView];
         
         [self.showView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(kScreenHeight));
             make.height.equalTo(@(kScreenWidth));
             make.center.equalTo([[UIApplication sharedApplication].delegate window]);
         }];
-        
-//        [lightView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.equalTo([UIApplication sharedApplication].keyWindow);
-//            make.centerY.equalTo([UIApplication sharedApplication].keyWindow);
-//            make.width.mas_equalTo(155);
-//            make.height.mas_equalTo(155);
-//        }];
+
     }
     
     _currentOrientation = orientation;
