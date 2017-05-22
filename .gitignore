@@ -3,7 +3,7 @@
 *.DS_Store
 
 /Pods
-
+Pods
 !Podfile
 
 Podfile.lock

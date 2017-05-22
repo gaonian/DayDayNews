@@ -26,6 +26,8 @@
 #import "UIColor+Extension.h"
 
 #import "AVCacheManager.h"
+#import "HcdCachePlayer.h"
+
 
 #define SCREEN_WIDTH                    ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT                   ([UIScreen mainScreen].bounds.size.height)

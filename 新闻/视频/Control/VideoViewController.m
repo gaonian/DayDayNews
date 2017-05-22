@@ -28,6 +28,7 @@
 @property (nonatomic , strong) TabbarButton *               btn;
 
 @property (nonatomic , strong) GYPlayer     *               player;
+@property (nonatomic, strong) HcdCacheVideoPlayer *playerII;
 @property (nonatomic , assign) int                          currtRow;
 
 @property (nonatomic)          CGFloat                      currentOriginY;
@@ -121,27 +122,36 @@
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
     
-    //创建播放器
-    if (self.player) {
-        [self.player removePlayer];
-        self.player = nil;
-    }
+//    //创建播放器
+//    if (self.player) {
+//        [self.player removePlayer];
+//        self.player = nil;
+//    }
     CGFloat originY = videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25;
     self.currentOriginY = originY;
     CGRect rect = CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
     
-    self.player = [[GYPlayer alloc] initWithFrame:rect];
-    self.player.mp4_url = videodata.mp4_url;
-    self.player.title = videodata.title;
-    self.player.currentOriginY = originY;
-    [self.tableview addSubview:self.player];
-    @weakify_self;
-    self.player.currentRowBlock = ^{
-        @strongify_self;
-        //当前block用于保证，横屏切换回竖屏后，播放器视图依然保持在self.tableview视图上
-        [self.tableview addSubview:self.player];
-    };
+//    self.player = [[GYPlayer alloc] initWithFrame:rect];
+//    self.player.mp4_url = videodata.mp4_url;
+//    self.player.title = videodata.title;
+//    self.player.currentOriginY = originY;
+//    [self.tableview addSubview:self.player];
+//    @weakify_self;
+//    self.player.currentRowBlock = ^{
+//        @strongify_self;
+//        //当前block用于保证，横屏切换回竖屏后，播放器视图依然保持在self.tableview视图上
+//        [self.tableview addSubview:self.player];
+//    };
     
+    if (self.playerII) {
+        [self.playerII releasePlayer];
+        self.playerII = nil;
+    }
+    self.playerII = [[HcdCacheVideoPlayer alloc] init];
+    [self.playerII playWithUrl:[NSURL URLWithString:videodata.mp4_url]
+             showView:rect
+         andSuperView:self.tableview
+            withCache:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
