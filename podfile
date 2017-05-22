@@ -16,5 +16,5 @@ pod 'MJExtension'
 pod 'MJRefresh'
 pod 'FMDB'
 pod 'MBProgressHUD'
-pod 'HcdCachePlayer'
+
 end

@@ -125,6 +125,12 @@
 		5AE0AE8E1ECE88E900A523E0 /* AVPlayerCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE8D1ECE88E900A523E0 /* AVPlayerCaching.m */; };
 		5AE0AE911ECEB37100A523E0 /* AVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */; };
 		5AE0AE941ED0544100A523E0 /* AVMediaCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */; };
+		5AE0AED81ED2EA9F00A523E0 /* HcdAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AECD1ED2EA9F00A523E0 /* HcdAudioPlayer.m */; };
+		5AE0AED91ED2EA9F00A523E0 /* hcdCachePlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5AE0AECE1ED2EA9F00A523E0 /* hcdCachePlayer.bundle */; };
+		5AE0AEDA1ED2EA9F00A523E0 /* HcdCacheVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AED11ED2EA9F00A523E0 /* HcdCacheVideoPlayer.m */; };
+		5AE0AEDB1ED2EA9F00A523E0 /* HcdLoaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AED31ED2EA9F00A523E0 /* HcdLoaderURLConnection.m */; };
+		5AE0AEDC1ED2EA9F00A523E0 /* HcdTimeSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AED51ED2EA9F00A523E0 /* HcdTimeSheetView.m */; };
+		5AE0AEDD1ED2EA9F00A523E0 /* HcdVideoRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE0AED71ED2EA9F00A523E0 /* HcdVideoRequestTask.m */; };
 		5AF394BF1EC75C8700EABF41 /* GYHHeadeRefreshController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */; };
 		5AF394C21EC75CD000EABF41 /* MBProgressHUD+Extion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF394C11EC75CD000EABF41 /* MBProgressHUD+Extion.m */; };
 		669EEF53F610A7BA130F6220 /* libPods-新闻.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3280843616FF8E5DD92EE04F /* libPods-新闻.a */; };
@@ -407,6 +413,18 @@
 		5AE0AE901ECEB37100A523E0 /* AVCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCacheManager.m; sourceTree = "<group>"; };
 		5AE0AE921ED0544100A523E0 /* AVMediaCacheModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVMediaCacheModel.h; sourceTree = "<group>"; };
 		5AE0AE931ED0544100A523E0 /* AVMediaCacheModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVMediaCacheModel.m; sourceTree = "<group>"; };
+		5AE0AECC1ED2EA9F00A523E0 /* HcdAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdAudioPlayer.h; sourceTree = "<group>"; };
+		5AE0AECD1ED2EA9F00A523E0 /* HcdAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HcdAudioPlayer.m; sourceTree = "<group>"; };
+		5AE0AECE1ED2EA9F00A523E0 /* hcdCachePlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = hcdCachePlayer.bundle; sourceTree = "<group>"; };
+		5AE0AECF1ED2EA9F00A523E0 /* HcdCachePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdCachePlayer.h; sourceTree = "<group>"; };
+		5AE0AED01ED2EA9F00A523E0 /* HcdCacheVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdCacheVideoPlayer.h; sourceTree = "<group>"; };
+		5AE0AED11ED2EA9F00A523E0 /* HcdCacheVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HcdCacheVideoPlayer.m; sourceTree = "<group>"; };
+		5AE0AED21ED2EA9F00A523E0 /* HcdLoaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdLoaderURLConnection.h; sourceTree = "<group>"; };
+		5AE0AED31ED2EA9F00A523E0 /* HcdLoaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HcdLoaderURLConnection.m; sourceTree = "<group>"; };
+		5AE0AED41ED2EA9F00A523E0 /* HcdTimeSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdTimeSheetView.h; sourceTree = "<group>"; };
+		5AE0AED51ED2EA9F00A523E0 /* HcdTimeSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HcdTimeSheetView.m; sourceTree = "<group>"; };
+		5AE0AED61ED2EA9F00A523E0 /* HcdVideoRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdVideoRequestTask.h; sourceTree = "<group>"; };
+		5AE0AED71ED2EA9F00A523E0 /* HcdVideoRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HcdVideoRequestTask.m; sourceTree = "<group>"; };
 		5AF394BD1EC75C8700EABF41 /* GYHHeadeRefreshController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYHHeadeRefreshController.h; sourceTree = "<group>"; };
 		5AF394BE1EC75C8700EABF41 /* GYHHeadeRefreshController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYHHeadeRefreshController.m; sourceTree = "<group>"; };
 		5AF394C01EC75CD000EABF41 /* MBProgressHUD+Extion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Extion.h"; sourceTree = "<group>"; };
@@ -902,6 +920,7 @@
 		19C33DEC1BB109A20059238A /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
+				5AE0AECB1ED2EA6100A523E0 /* hcdLibs */,
 				5AE0AE6B1ECD3F3500A523E0 /* libs */,
 				198E408E1D71B0EE00ABDD5E /* GYHPhotoLoadingView */,
 				19C33DED1BB109A20059238A /* Control */,
@@ -1147,6 +1166,25 @@
 			path = libs;
 			sourceTree = "<group>";
 		};
+		5AE0AECB1ED2EA6100A523E0 /* hcdLibs */ = {
+			isa = PBXGroup;
+			children = (
+				5AE0AECC1ED2EA9F00A523E0 /* HcdAudioPlayer.h */,
+				5AE0AECD1ED2EA9F00A523E0 /* HcdAudioPlayer.m */,
+				5AE0AECE1ED2EA9F00A523E0 /* hcdCachePlayer.bundle */,
+				5AE0AECF1ED2EA9F00A523E0 /* HcdCachePlayer.h */,
+				5AE0AED01ED2EA9F00A523E0 /* HcdCacheVideoPlayer.h */,
+				5AE0AED11ED2EA9F00A523E0 /* HcdCacheVideoPlayer.m */,
+				5AE0AED21ED2EA9F00A523E0 /* HcdLoaderURLConnection.h */,
+				5AE0AED31ED2EA9F00A523E0 /* HcdLoaderURLConnection.m */,
+				5AE0AED41ED2EA9F00A523E0 /* HcdTimeSheetView.h */,
+				5AE0AED51ED2EA9F00A523E0 /* HcdTimeSheetView.m */,
+				5AE0AED61ED2EA9F00A523E0 /* HcdVideoRequestTask.h */,
+				5AE0AED71ED2EA9F00A523E0 /* HcdVideoRequestTask.m */,
+			);
+			path = hcdLibs;
+			sourceTree = "<group>";
+		};
 		9922B9561D8029D300E3E236 /* CustomTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1320,6 +1358,7 @@
 				19918FE01CDDEF7500A89620 /* 开始录音03录音@2x.png in Resources */,
 				19918FE21CDDEF7500A89620 /* 开始录音05录音@2x.png in Resources */,
 				19918FE41CDDEF7500A89620 /* 音频效果@2x.png in Resources */,
+				5AE0AED91ED2EA9F00A523E0 /* hcdCachePlayer.bundle in Resources */,
 				19918FDD1CDDEF7500A89620 /* 开始录音00录音@2x.png in Resources */,
 				19747D411C88068900C4CBBD /* Detail.css in Resources */,
 			);
@@ -1391,10 +1430,12 @@
 				19234A441CCE5EF100123348 /* CollectViewController.m in Sources */,
 				9986D4981DE6F4DC004225C0 /* CycleBannerView.m in Sources */,
 				9922B9661D802AE400E3E236 /* UIImage+Extension.m in Sources */,
+				5AE0AEDC1ED2EA9F00A523E0 /* HcdTimeSheetView.m in Sources */,
 				99C9A3241D81A4AE00063D23 /* WeatherHeaderView.m in Sources */,
 				19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */,
 				190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */,
 				990DFE631E053D0300879725 /* CategoryView.m in Sources */,
+				5AE0AEDA1ED2EA9F00A523E0 /* HcdCacheVideoPlayer.m in Sources */,
 				198AF7B41C841C9400D941F4 /* SettingSwitchItem.m in Sources */,
 				19ED1DAA1C8729E900AD6E0A /* TopCell.m in Sources */,
 				99C9A2F01D81386500063D23 /* ShareManager.m in Sources */,
@@ -1409,6 +1450,7 @@
 				19F540001BB52D6A00460EA3 /* VideoData.m in Sources */,
 				9922B98A1D803A0300E3E236 /* SCNavTabBar.m in Sources */,
 				19F540031BB52D9200460EA3 /* VideoCell.m in Sources */,
+				5AE0AEDD1ED2EA9F00A523E0 /* HcdVideoRequestTask.m in Sources */,
 				19918FBF1CDDE12900A89620 /* MessageCell.m in Sources */,
 				198AF7B21C841C9400D941F4 /* SettingItem.m in Sources */,
 				198AF7B31C841C9400D941F4 /* SettingLabelItem.m in Sources */,
@@ -1441,6 +1483,7 @@
 				9967E6E81D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				9922B9631D802AE400E3E236 /* GYHTimeTool.m in Sources */,
 				19747D3F1C87FC3900C4CBBD /* DetailImageWebModel.m in Sources */,
+				5AE0AED81ED2EA9F00A523E0 /* HcdAudioPlayer.m in Sources */,
 				198AF7A81C841C0300D941F4 /* SettingGroup.m in Sources */,
 				99FE386F1D87DE2F003A5F35 /* ChatController.m in Sources */,
 				190450D41BCCAC0A00C47A50 /* NewData.m in Sources */,
@@ -1452,6 +1495,7 @@
 				198AF7B71C841CFB00D941F4 /* SettingCell.m in Sources */,
 				19970A6E1BCF95AD00F4CC0C /* CitiesGroup.m in Sources */,
 				19C33E3F1BB109A20059238A /* TabbarViewController.m in Sources */,
+				5AE0AEDB1ED2EA9F00A523E0 /* HcdLoaderURLConnection.m in Sources */,
 				19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */,
 				19C33E401BB109A20059238A /* TabbarView.m in Sources */,
 				19ED1DA11C8729BE00AD6E0A /* NewsCell.m in Sources */,

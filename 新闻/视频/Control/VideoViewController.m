@@ -20,6 +20,7 @@
 #import "GYHCircleLoadingView.h"
 #import "CategoryView.h"
 #import "GYPlayer.h"
+#import "HcdCacheVideoPlayer.h"
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *             videoArray;
@@ -55,6 +56,10 @@
     if (self.player) {
         [self.player removePlayer];
         self.player = nil;
+    }
+    if (self.playerII) {
+        [self.playerII releasePlayer];
+        self.playerII = nil;
     }
 }
 
@@ -119,18 +124,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    VideoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+
     VideoDataFrame *videoframe = self.videoArray[indexPath.row];
     VideoData *videodata = videoframe.videodata;
     
-//    //创建播放器
+    //创建播放器
 //    if (self.player) {
 //        [self.player removePlayer];
 //        self.player = nil;
 //    }
-    CGFloat originY = videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25;
-    self.currentOriginY = originY;
-    CGRect rect = CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
-    
+//    CGFloat originY = videoframe.cellH*indexPath.row+videoframe.coverF.origin.y+SCREEN_WIDTH * 0.25;
+//    self.currentOriginY = originY;
+//    CGRect rect = CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_WIDTH * 0.56);
+//
 //    self.player = [[GYPlayer alloc] initWithFrame:rect];
 //    self.player.mp4_url = videodata.mp4_url;
 //    self.player.title = videodata.title;
@@ -148,10 +156,10 @@
         self.playerII = nil;
     }
     self.playerII = [[HcdCacheVideoPlayer alloc] init];
-    [self.playerII playWithUrl:[NSURL URLWithString:videodata.mp4_url]
-             showView:rect
-         andSuperView:self.tableview
-            withCache:YES];
+    self.playerII.cellRect = cell.frame;
+    [self.playerII playWithVideoUrl:videodata.mp4_url
+                           showView:[[UIView alloc] initWithFrame:videoframe.coverF]
+                       andSuperView:cell.contentView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,7 +171,7 @@
 //判断滚动事件，如何超出播放界面，停止播放
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.player) {
+    if (self.player || self.playerII) {
         /*
          向上👆向下👇滑动，当播放器视图消失，则清理播放器
          */
@@ -172,13 +180,18 @@
         //scrollview在屏幕上显示的尺寸高度
         CGFloat scrollviewShowHeight = scrollviewOffSetY + CGRectGetMaxY(scrollView.frame) - 49;
         //player最低点
-        CGFloat playerMinY = CGRectGetMinY(self.player.frame);
+//        CGFloat playerMinY = CGRectGetMinY(self.player.frame);
+        CGFloat playerMinY = CGRectGetMinY(self.playerII.cellRect);
         //player最高点
-        CGFloat playerMaxY = CGRectGetMaxY(self.player.frame);
+//        CGFloat playerMaxY = CGRectGetMaxY(self.player.frame);
+        CGFloat playerMaxY = CGRectGetMaxY(self.playerII.cellRect);
 //        NSLog(@"%f:%f:%f:%f",playerMinY,scrollviewShowHeight,scrollviewOffSetY+64,playerMaxY);
         if ((scrollviewOffSetY+64 > playerMaxY)||(scrollviewShowHeight < playerMinY)) {
             [self.player removePlayer];
             self.player = nil;
+            
+            [self.playerII releasePlayer];
+            self.playerII = nil;
         }
     }
 }
@@ -203,13 +216,17 @@
         [self.player removePlayer];
         self.player = nil;
     }
+    if (self.playerII) {
+        [self.playerII releasePlayer];
+        self.playerII = nil;
+    }
 }
 
 #pragma mark - load data
 - (void)initNetWork
 {
     IMP_BLOCK_SELF(VideoViewController);
-//    self.count += 10;
+    self.count = 10;
     NSString *getstr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     
     [[BaseEngine shareEngine] runRequestWithPara:nil path:getstr success:^(id responseObject) {
