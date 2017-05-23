@@ -134,24 +134,20 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    
+    // 指定数据的写入位置 -- 文件内容的最后面
     [self.fileHandle seekToEndOfFile];
-    
+    // 向沙盒写入数据
     [self.fileHandle writeData:data];
-    
+    // 拼接文件总长度
     _downLoadingOffset += data.length;
-    
     
     if ([self.delegate respondsToSelector:@selector(didReciveVideoDataWithTask:)]) {
         [self.delegate didReciveVideoDataWithTask:self];
     }
-    
-    
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    
     NSLog(@"connectionDidFinishLoading: %@", self.taskArr);
     
     if (self.taskArr.count < 2) {

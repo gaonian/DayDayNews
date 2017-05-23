@@ -689,15 +689,15 @@ typedef enum : NSUInteger {
         make.height.mas_equalTo(20);
     }];
     
-    self.toolView.frame = CGRectMake(0, CGRectGetHeight(_showView.frame) - 44, CGRectGetWidth(_showView.frame), 44);
-    [self.toolView removeFromSuperview];
-    [_showView addSubview:self.toolView];
-    [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.bottom.equalTo(weakSelf.showView);
-        make.right.mas_equalTo(0);
-        make.height.mas_equalTo(44);
-    }];
+//    self.toolView.frame = CGRectMake(0, CGRectGetHeight(_showView.frame) - 44, CGRectGetWidth(_showView.frame), 44);
+//    [self.toolView removeFromSuperview];
+//    [_showView addSubview:self.toolView];
+//    [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(0);
+//        make.bottom.equalTo(weakSelf.showView);
+//        make.right.mas_equalTo(0);
+//        make.height.mas_equalTo(44);
+//    }];
     
     self.stopButton.frame = CGRectMake(0, 0, 44, 44);
     [self.stopButton removeFromSuperview];
@@ -771,15 +771,26 @@ typedef enum : NSUInteger {
         make.height.mas_equalTo(44);
     }];
     
-    self.touchView.frame = CGRectMake(0, 0, CGRectGetWidth(_showView.frame), CGRectGetHeight(_showView.frame) - 44);
+    self.touchView.frame = CGRectMake(0, 0, CGRectGetWidth(_showView.frame), CGRectGetHeight(_showView.frame));
     [self.touchView removeFromSuperview];
     [_showView addSubview:self.touchView];
     [self.touchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.playerLayerView);
         make.left.equalTo(weakSelf.playerLayerView);
         make.right.equalTo(weakSelf.playerLayerView);
-        make.bottom.equalTo(weakSelf.playerLayerView).offset(-44);
+        make.bottom.equalTo(weakSelf.playerLayerView).offset(0);
     }];
+    //toolView图层放置于touchView上面用于拦截cell点击事件
+    self.toolView.frame = CGRectMake(0, CGRectGetHeight(_showView.frame) - 44, CGRectGetWidth(_showView.frame), 44);
+    [self.toolView removeFromSuperview];
+    [_showView addSubview:self.toolView];
+    [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.bottom.equalTo(weakSelf.showView);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(44);
+    }];
+    
     
     [self.volumeView removeFromSuperview];
     [_showView addSubview:self.volumeView];
@@ -798,23 +809,31 @@ typedef enum : NSUInteger {
         make.center.equalTo(_showView);
     }];
     
+    //用于控制工具栏的显示
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 1;
     tap.numberOfTouchesRequired = 1;
     tap.delegate = self;
     [self.touchView addGestureRecognizer:tap];
-    
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [panRecognizer setMinimumNumberOfTouches:1];
-    [panRecognizer setMaximumNumberOfTouches:1];
-    [panRecognizer setDelegate:self];
-    [self.touchView addGestureRecognizer:panRecognizer];
-    
+    //用于控制播放进度的快放快退
+//    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    [panRecognizer setMinimumNumberOfTouches:1];
+//    [panRecognizer setMaximumNumberOfTouches:1];
+//    [panRecognizer setDelegate:self];
+//    [self.touchView addGestureRecognizer:panRecognizer];
+    //控制播放进度条的点击事件，跳转到点击进度点
     UITapGestureRecognizer *sliderTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(sliderTapAction:)];
     sliderTap.numberOfTapsRequired = 1;
     sliderTap.numberOfTouchesRequired = 1;
     sliderTap.delegate = self;
     [self.playSlider addGestureRecognizer:sliderTap];
+    
+    //此点击事件用于拦截cell的点击事件
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap1Action:)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    tap.delegate = self;
+    [self.toolView addGestureRecognizer:tap1];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -826,7 +845,7 @@ typedef enum : NSUInteger {
         return YES;
     }
 }
-
+- (void)tap1Action:(UITapGestureRecognizer *)tap{}
 - (void)tapAction:(UITapGestureRecognizer *)tap{
     //点击一次
     if (tap.numberOfTapsRequired == 1) {
