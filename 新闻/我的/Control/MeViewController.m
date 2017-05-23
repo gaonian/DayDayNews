@@ -246,31 +246,31 @@
 #pragma mark - 清除缓存
 - (void)click
 {
-    IMP_BLOCK_SELF(MeViewController);
-    MBProgressHUD *hud = [[MBProgressHUD alloc] init];
-    [[[UIApplication sharedApplication].windows firstObject] addSubview:hud];
-    //加载条上显示文本
-    hud.labelText = @"急速清理中";
-    //置当前的view为灰度
-    hud.dimBackground = YES;
-    //设置对话框样式
-    hud.mode = MBProgressHUDModeDeterminate;
-    [hud showAnimated:YES whileExecutingBlock:^{
-        while (hud.progress < 1.0) {
-            hud.progress += 0.01;
-            [NSThread sleepForTimeInterval:0.02];
-        }
-        hud.labelText = @"清理完成";
-    } completionBlock:^{
+//    IMP_BLOCK_SELF(MeViewController);
+    @weakify_self;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].windows firstObject] animated:YES];
+//    hud.mode = MBProgressHUDModeAnnularDeterminate;
+//    hud.backgroundView.backgroundColor = [UIColor colorWithWhite:0.f alpha:.2f];
+    hud.label.text = @"急速清理中";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        @strongify_self;
+        // Do something...
         [[SDImageCache sharedImageCache] clearDisk];
         [[SDImageCache sharedImageCache] clearMemory];
-        block_self.clearCacheName = @"0.0KB";
-        block_self.arrays = nil;
-        [block_self setupGroup0];
-        [block_self setupGroup2];
-        [block_self.tableview reloadData];
-        [hud removeFromSuperview];
-    }];
+        [[AVCacheManager sharedInstance] clearDisk];
+        self.clearCacheName = @"0.0KB";
+        self.arrays = nil;
+        
+        [NSThread sleepForTimeInterval:1.0];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupGroup0];
+            [self setupGroup2];
+            [self.tableview reloadData];
+
+            [MBProgressHUD hideHUDForView:[[UIApplication sharedApplication].windows firstObject] animated:YES];
+        });
+    });
 }
 
 
@@ -283,7 +283,11 @@
     
     float tmpSize = [[SDImageCache sharedImageCache] getSize];
     NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",tmpSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",tmpSize * 1024];
-    self.clearCacheName = clearCacheName;
+    
+    float movieSize = [[AVCacheManager sharedInstance] getSize];
+    NSString *movieSizeString = movieSize >= 1 ? [NSString stringWithFormat:@"%.1fMB",movieSize/(1024*1024)] : [NSString stringWithFormat:@"%.1fKB",movieSize * 1024];
+
+    self.clearCacheName = [NSString stringWithFormat:@"【%@】【%@】",clearCacheName,movieSizeString];
     
     self.arrays = nil;
     [self setupGroup0];

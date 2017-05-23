@@ -66,7 +66,7 @@
         [MBProgressHUD hideHUD];
         
         NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
-        NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
+        NSArray *dataArray = [WeatherData mj_objectArrayWithKeyValuesArray:responseObject[str]];
         NSMutableArray *tempArray = [NSMutableArray array];
         for (WeatherData *weather in dataArray) {
             [tempArray addObject:weather];
@@ -74,7 +74,7 @@
         block_self.weatherArray = tempArray;
         
         //pm2d5
-        WeatherData *wd = [WeatherData objectWithKeyValues:responseObject[@"pm2d5"]];
+        WeatherData *wd = [WeatherData mj_objectWithKeyValues:responseObject[@"pm2d5"]];
         
         [block_self.headerView setHeaderDataWithAry:block_self.weatherArray dt:responseObject[@"dt"] weatherData:wd];
         //底部未来三天数据

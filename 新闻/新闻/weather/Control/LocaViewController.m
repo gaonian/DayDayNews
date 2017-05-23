@@ -208,7 +208,7 @@
         
         NSMutableArray *groupArray = [NSMutableArray array];
         for (NSDictionary *dict in dictArray) {
-            CitiesGroup *group = [CitiesGroup objectWithKeyValues:dict];
+            CitiesGroup *group = [CitiesGroup mj_objectWithKeyValues:dict];
             [groupArray addObject:group];
         }
         _groups = groupArray;

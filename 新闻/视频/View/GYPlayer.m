@@ -10,11 +10,29 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GYHCircleLoadingView.h"
 
-@interface GYPlayer ()
+#import "AVloaderURLConnection.h"
+#import "AVVideoRequestTask.h"
+
+//NSString *const MyPlayerStateChangedNotification    = @"MyPlayerStateChangedNotification";
+//NSString *const MyPlayerProgressChangedNotification = @"MyPlayerProgressChangedNotification";
+//NSString *const MyPlayerLoadProgressChangedNotification = @"MyPlayerLoadProgressChangedNotification";
+
+static void * playerItemDurationContext = &playerItemDurationContext;
+static void * playerItemStatusContext = &playerItemStatusContext;
+static void * playerPlayingContext = &playerPlayingContext;
+
+@interface GYPlayer ()<AVloaderURLConnectionDelegate>
+
+//
+@property (nonatomic, strong) AVURLAsset     *videoURLAsset;
+@property (nonatomic, strong) AVAsset        *videoAsset;
+@property (nonatomic, strong) AVloaderURLConnection *resouerLoader;
 
 @property (nonatomic, strong) AVPlayerItem *            playerItem;
 @property (nonatomic, strong) AVPlayerLayer *           playerLayer;
 @property (nonatomic, strong) AVPlayer *                player;
+
+//
 @property (nonatomic, strong) GYHCircleLoadingView *    circleLoadingV;
 
 @property (nonatomic, strong) UIView *                  bottomView;     //整个view
@@ -27,6 +45,17 @@
 @property (nonatomic, strong) UIButton *                btnFullScreen;  //全屏按钮
 
 @property (nonatomic)         BOOL                      isFullScreen;
+
+@property (nonatomic, strong) UISlider *slider;
+
+@property (nonatomic, strong) UIProgressView *cacheProgress;//缓冲进度
+@property (nonatomic, strong) UIProgressView *playProgress;//播放进度
+@property (nonatomic, strong) UILabel *lab_curTime;//播放时间
+@property (nonatomic, strong) UILabel *lab_totalTime;//总时间
+
+@property (nonatomic, strong) id timeObserver;
+
+@property (nonatomic, strong) UIButton *btn_download;
 
 @end
 
@@ -49,13 +78,179 @@
     return self;
 }
 
+#pragma mark - Custom Accessors
+- (UISlider *)slider {
+    if (!_slider) {
+        _slider = [[UISlider alloc] initWithFrame:CGRectMake(44, 10, SCREEN_WIDTH-100, 5)];
+    }
+    return _slider;
+}
+
+- (UIProgressView *)cacheProgress {
+    if (!_cacheProgress) {
+        _cacheProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 14, SCREEN_WIDTH-100, 1)];
+        //        _cacheProgress.tintColor = [UIColor grayColor];
+        _cacheProgress.backgroundColor = [UIColor clearColor];
+        _cacheProgress.trackTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _cacheProgress.progressTintColor =[[UIColor lightGrayColor] colorWithAlphaComponent:0.7];
+    }
+    return _cacheProgress;
+}
+
+- (UIProgressView *)playProgress {
+    if (!_playProgress) {
+        _playProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(44, 14, SCREEN_WIDTH-100, 1)];
+        //        _progressView.tintColor = [UIColor grayColor];
+        _playProgress.backgroundColor = [UIColor clearColor];
+        _playProgress.trackTintColor =[UIColor clearColor];
+        _playProgress.progressTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
+    }
+    return _playProgress;
+}
+
+- (UILabel *)lab_curTime {
+    if (!_lab_curTime) {
+        _lab_curTime = [[UILabel alloc] initWithFrame:CGRectMake(44, 19, 100, 10)];
+        _lab_curTime.font = [UIFont systemFontOfSize:10];
+        _lab_curTime.textColor = [UIColor whiteColor];
+        _lab_curTime.backgroundColor = [UIColor clearColor];
+        _lab_curTime.text = @"00:00";
+    }
+    return _lab_curTime;
+}
+
+- (UILabel *)lab_totalTime {
+    if (!_lab_totalTime) {
+        _lab_totalTime = [[UILabel alloc] initWithFrame:CGRectMake(44 + SCREEN_WIDTH - 100 - 100, 19, 100, 10)];
+        _lab_totalTime.font = [UIFont systemFontOfSize:10];
+        _lab_totalTime.textColor = [UIColor whiteColor];
+        _lab_totalTime.backgroundColor = [UIColor clearColor];
+        _lab_totalTime.textAlignment = NSTextAlignmentRight;
+        _lab_totalTime.text = @"00:00";
+    }
+    return _lab_totalTime;
+}
+
+- (UIButton *)btn_download {
+    if (!_btn_download) {
+        _btn_download = [UIButton buttonWithType:0];
+        [_btn_download setTitle:@"下载" forState:0];
+        [_btn_download setTitleColor:[UIColor whiteColor] forState:0];
+        _btn_download.titleLabel.font = [UIFont systemFontOfSize:13];
+        _btn_download.frame = CGRectMake(SCREEN_WIDTH - 44, 44, 33, 33);
+        _btn_download.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
+    return _btn_download;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor clearColor];
+        _bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
+        
+        self.imgBgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        self.imgBgTop.image = [UIImage imageNamed:@"top_shadow.png"];
+        [_bottomView addSubview:self.imgBgTop];
+        
+        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
+        self.lbTitle.font = [UIFont systemFontOfSize:16];
+        self.lbTitle.numberOfLines = 0;
+        self.lbTitle.textColor = HEXColor(@"ffffff");
+        [_bottomView addSubview:self.lbTitle];
+        
+        
+        self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 37, SCREEN_WIDTH, 37)];
+        [_bottomView addSubview:self.bottomBar];
+        
+        self.imgBgBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 37)];
+        self.imgBgBottom.image = [UIImage imageNamed:@"bottom_shadow.png"];
+        [self.bottomBar addSubview:self.imgBgBottom];
+        
+        self.btnPlayOrPause = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 17, 17)];
+        [self.btnPlayOrPause setImage:[UIImage imageNamed:@"video_pause.png"] forState:UIControlStateNormal];
+        [self.btnPlayOrPause addTarget:self action:@selector(playOrPause:) forControlEvents:UIControlEventTouchUpInside];
+        self.btnPlayOrPause.selected = YES;
+        [self.bottomBar addSubview:self.btnPlayOrPause];
+        
+        self.btnFullScreen = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 - 37, 0, 37, 37)];
+        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
+        [self.btnFullScreen addTarget:self action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomBar addSubview:self.btnFullScreen];
+        
+        [self.bottomBar addSubview:self.cacheProgress];
+        //        [self.bottomBar addSubview:self.slider];
+        [self.bottomBar addSubview:self.playProgress];
+        
+        [self.bottomBar addSubview:self.lab_curTime];
+        [self.bottomBar addSubview:self.lab_totalTime];
+        
+        
+        [self addSubview:_bottomView];
+    }
+    return _bottomView;
+}
+
+//#pragma mark - lazy
+
+- (AVloaderURLConnection *)resouerLoader {
+    if (!_resouerLoader) {
+        _resouerLoader = [[AVloaderURLConnection alloc] init];
+        _resouerLoader.delegate = self;
+    }
+    return _resouerLoader;
+}
+
+//获取url是网络的还是本地的
+- (AVPlayerItem *)getAVPlayItem{
+    if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
+        self.resouerLoader.filePath = [[AVCacheManager sharedInstance] getPathByFileName:self.mp4_url];
+        NSURL *playUrl = [self.resouerLoader getSchemeVideoURL:[NSURL fileURLWithPath:_mp4_url]];
+        //缓存资源
+        self.videoURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
+        [self.videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:dispatch_get_main_queue()];
+        
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:self.videoURLAsset];
+        
+        return playerItem;
+    }else{
+        AVURLAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:self.mp4_url] options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+        return playerItem;
+    }
+}
+
+- (AVPlayer *)player {
+    if (!_player) {
+        self.playerItem = [self getAVPlayItem];
+        _player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        [self addObserverAndNotification];
+    }
+    return _player;
+}
+
+- (AVPlayerLayer *)playerLayer {
+    if (!_playerLayer) {
+        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        _playerLayer.frame = self.bounds;
+        _playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;//视频填充模式
+    }
+    return _playerLayer;
+}
+
 - (void)setMp4_url:(NSString *)mp4_url {
-    _mp4_url = mp4_url;
+//    _mp4_url = mp4_url;
+    _mp4_url = [[AVCacheManager sharedInstance] isExistLocalFile:mp4_url];
+    NSLog(@"%@",_mp4_url);
+    
     [self.layer addSublayer:self.playerLayer];
     [self insertSubview:self.bottomView aboveSubview:self];
     [self insertSubview:self.circleLoadingV aboveSubview:self.bottomView];
     [self.circleLoadingV startAnimating];
-    [self.player play];
+    
+    [self addSubview:self.btn_download];
 
 }
 
@@ -68,49 +263,99 @@
 //添加kvo noti
 - (void)addObserverAndNotification {
     //监控状态属性 AVPlayerStatusUnknown,AVPlayerStatusReadyToPlay,AVPlayerStatusFailed
-    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:playerItemStatusContext];
     //加载进度
     [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    
+}
+
+- (void)observePlayProgress {
+    //监听播放进度
+//    __weak typeof(self) weakSelf = self;
+    @weakify_self;
+    // 更新当前播放条目的已播时间, CMTimeMake(3, 30) == (Float64)3/30 秒
+    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(30, 30) queue:nil usingBlock:^(CMTime time) {
+        @strongify_self;
+        // 当前播放时间
+        NSString *curTime = [self timeStringWithCMTime:time];
+        self.lab_curTime.text = curTime;
+        
+        NSString *lastTime = [self timeStringWithCMTime:CMTimeSubtract(self.playerItem.duration, time)];
+        //        NSString *totalTime = [self timeStringWithCMTime:self.playerItem.duration];
+        self.lab_totalTime.text = lastTime;
+        // 剩余时间
+//        NSLog(@"当前播放时间:%@  剩余时间%@",curTime,lastTime);
+        
+        // 更新进度
+        self.playProgress.progress = CMTimeGetSeconds(time) / CMTimeGetSeconds(self.playerItem.duration);
+    }];
+}
+
+#pragma mark 根据CMTime生成一个时间字符串
+- (NSString *)timeStringWithCMTime:(CMTime)time {
+    Float64 seconds = time.value / time.timescale;
+    // 把seconds当作时间戳得到一个date
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
+    
+    // 格林威治标准时间
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    // 设置时间显示格式
+    [formatter setDateFormat:(seconds / 3600 >= 1) ? @"h:mm:ss" : @"mm:ss"];
+    
+    // 返回这个date的字符串形式
+    return [formatter stringFromDate:date];
 }
 
 //kvo监听播放器状态
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    AVPlayerItem *playerItem = object;
-    if ([keyPath isEqualToString:@"status"]) {
-        AVPlayerStatus status = [[change objectForKey:@"new"] intValue];
-        if (status == AVPlayerStatusReadyToPlay){
-            DLog(@"准备播放");
-            [self.circleLoadingV stopAnimating];
-//            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
-//            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
-        } else if (status == AVPlayerStatusFailed){
-            DLog(@"播放失败");
-        } else if (status == AVPlayerStatusUnknown){
-            DLog(@"unknown");
+    if ([object isKindOfClass:[AVPlayerItem class]]) {
+        AVPlayerItem *playerItem = object;
+        if ([keyPath isEqualToString:@"status"]) {
+            AVPlayerStatus status = [[change objectForKey:@"new"] intValue];
+            if (status == AVPlayerStatusReadyToPlay){
+                DLog(@"准备播放");
+                [self.circleLoadingV stopAnimating];
+                //            self.totalDuration = CMTimeGetSeconds(playerItem.duration);
+                //            self.totalDurationLabel.text = [self timeFormatted:self.totalDuration];
+                [self.player play];
+                //监听播放进度
+                [self observePlayProgress];
+                
+            } else if (status == AVPlayerStatusFailed){
+                DLog(@"播放失败");
+            } else if (status == AVPlayerStatusUnknown){
+                DLog(@"unknown");
+            }
         }
-    }
-    else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
-//        NSArray *array = playerItem.loadedTimeRanges;
-//        CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];//本次缓冲时间范围
-//        float startSeconds = CMTimeGetSeconds(timeRange.start);
-//        float durationSeconds = CMTimeGetSeconds(timeRange.duration);
-//        NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
-////        self.slider.middleValue = totalBuffer / CMTimeGetSeconds(playerItem.duration);
-//        //        NSLog(@"totalBuffer：%.2f",totalBuffer);
-//        
-//        //loading animation
-//        if (self.slider.middleValue  <= self.slider.value || (totalBuffer - 1.0) < self.current) {
-//            DLog(@"正在缓冲...");
-//            self.activityIndicatorView.hidden = NO;
-//            //            self.activityIndicatorView.center = self.center;
-//            [self.activityIndicatorView startAnimating];
-//        }else {
-//            self.activityIndicatorView.hidden = YES;
-//            if (self.playOrPauseBtn.selected) {
-//                [self.player play];
-//            }
-//        }
+        else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+            NSArray *array = playerItem.loadedTimeRanges;
+            CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];//本次缓冲时间范围
+            float startSeconds = CMTimeGetSeconds(timeRange.start);
+            float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+            NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
+//            NSTimeInterval middleValue = totalBuffer / CMTimeGetSeconds(playerItem.duration);
+//            NSLog(@"loadedTimeRanges:%f",middleValue);
+            self.slider.value = totalBuffer / CMTimeGetSeconds(playerItem.duration);
+            self.cacheProgress.progress = totalBuffer / CMTimeGetSeconds(playerItem.duration);
+            
+            //        //        NSLog(@"totalBuffer：%.2f",totalBuffer);
+            //
+            //        //loading animation
+            //        if (self.slider.middleValue  <= self.slider.value || (totalBuffer - 1.0) < self.current) {
+            //            DLog(@"正在缓冲...");
+            //            self.activityIndicatorView.hidden = NO;
+            //            //            self.activityIndicatorView.center = self.center;
+            //            [self.activityIndicatorView startAnimating];
+            //        }else {
+            //            self.activityIndicatorView.hidden = YES;
+            //            if (self.playOrPauseBtn.selected) {
+            //                [self.player play];
+            //            }
+            //        }
+        }
     }
 }
 
@@ -173,8 +418,10 @@
 
 //全屏不全屏
 - (void)fullScreen:(UIButton *)btn {
+    //设置与当前状态相反的状态
+    [self isFullScreen:!self.isFullScreen];
     if (self.isFullScreen) {
-        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
+        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_fs_enter_ns_btn.png"] forState:UIControlStateNormal];
     } else {
         [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
     }
@@ -196,6 +443,10 @@
         self.bottomBar.width = SCREEN_HEIGHT;
         self.imgBgBottom.width = SCREEN_HEIGHT;
         self.btnFullScreen.originX = SCREEN_HEIGHT - 10 - 37;
+        self.cacheProgress.width = SCREEN_HEIGHT - 100;
+        self.playProgress.width = SCREEN_HEIGHT - 100;
+        self.lab_totalTime.originX = 44 + SCREEN_HEIGHT - 100 - 100;
+        self.btn_download.originX = SCREEN_HEIGHT - 44;
         [theWindow addSubview:self];
     } else {
         self.isFullScreen = NO;
@@ -211,7 +462,10 @@
         self.bottomBar.width = SCREEN_WIDTH;
         self.imgBgBottom.width = SCREEN_WIDTH;
         self.btnFullScreen.originX = SCREEN_WIDTH - 10 - 37;
-
+        self.cacheProgress.width = SCREEN_WIDTH - 100;
+        self.playProgress.width = SCREEN_WIDTH - 100;
+        self.lab_totalTime.originX = 44 + SCREEN_WIDTH - 100 - 100;
+        self.btn_download.originX = SCREEN_WIDTH - 44;
         if (self.currentRowBlock) {
             self.currentRowBlock();
         }
@@ -225,6 +479,10 @@
         [self.player.currentItem.asset cancelLoading];
         [self.playerItem removeObserver:self forKeyPath:@"status"];
         [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        
+        [self.player removeTimeObserver:self.timeObserver];
+        self.timeObserver = nil;
+        
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self removeFromSuperview];
     }
@@ -234,109 +492,41 @@
     [self removePlayer];
 }
 
-#pragma mark - lazy
+#pragma mark - AVloaderURLConnectionDelegate
 
-- (AVPlayer *)player {
-    if (!_player) {
-        self.playerItem = [self getAVPlayItem];
-        _player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        [self addObserverAndNotification];
-    }
-    return _player;
+- (void)didFinishLoadingWithTask:(AVVideoRequestTask *)task
+{
+//    NSLog(@"%s:下载完成",__func__);
 }
 
-- (AVPlayerLayer *)playerLayer {
-    if (!_playerLayer) {
-        
-        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        _playerLayer.frame = self.bounds;
-        _playerLayer.backgroundColor = [UIColor blackColor].CGColor;
-        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;//视频填充模式
-        
+//网络中断：-1005
+//无网络连接：-1009
+//请求超时：-1001
+//服务器内部错误：-1004
+//找不到服务器：-1003
+- (void)didFailLoadingWithTask:(AVVideoRequestTask *)task WithError:(NSInteger)errorCode
+{
+    NSString *str = nil;
+    switch (errorCode) {
+        case -1001:
+            str = @"请求超时";
+            break;
+        case -1003:
+        case -1004:
+            str = @"服务器错误";
+            break;
+        case -1005:
+            str = @"网络中断";
+            break;
+        case -1009:
+            str = @"无网络连接";
+            break;
+            
+        default:
+            str = [NSString stringWithFormat:@"%@", @"(_errorCode)"];
+            break;
     }
-    return _playerLayer;
+    NSLog(@"%s:%@",__func__,str);
 }
-
-//获取url是网络的还是本地的
-- (AVPlayerItem *)getAVPlayItem{
-    
-    if ([self.mp4_url rangeOfString:@"http"].location != NSNotFound) {
-        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[self.mp4_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        return playerItem;
-    }else{
-        AVAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:self.mp4_url] options:nil];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
-        return playerItem;
-    }
-}
-
-- (UIView *)bottomView {
-    if (!_bottomView) {
-        
-        _bottomView = [[UIView alloc] init];
-        _bottomView.backgroundColor = [UIColor clearColor];
-        _bottomView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
-        
-        self.imgBgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-        self.imgBgTop.image = [UIImage imageNamed:@"top_shadow.png"];
-        [_bottomView addSubview:self.imgBgTop];
-        
-        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
-        self.lbTitle.font = [UIFont systemFontOfSize:16];
-        self.lbTitle.numberOfLines = 0;
-        self.lbTitle.textColor = HEXColor(@"ffffff");
-        [_bottomView addSubview:self.lbTitle];
-
-        
-        self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 37, SCREEN_WIDTH, 37)];
-        [_bottomView addSubview:self.bottomBar];
-
-        self.imgBgBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 37)];
-        self.imgBgBottom.image = [UIImage imageNamed:@"bottom_shadow.png"];
-        [self.bottomBar addSubview:self.imgBgBottom];
-        
-        self.btnPlayOrPause = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 17, 17)];
-        [self.btnPlayOrPause setImage:[UIImage imageNamed:@"video_pause.png"] forState:UIControlStateNormal];
-        [self.btnPlayOrPause addTarget:self action:@selector(playOrPause:) forControlEvents:UIControlEventTouchUpInside];
-        self.btnPlayOrPause.selected = YES;
-        [self.bottomBar addSubview:self.btnPlayOrPause];
-        
-        self.btnFullScreen = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 - 37, 0, 37, 37)];
-        [self.btnFullScreen setImage:[UIImage imageNamed:@"sc_video_play_ns_enter_fs_btn.png"] forState:UIControlStateNormal];
-        [self.btnFullScreen addTarget:self action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBar addSubview:self.btnFullScreen];
-        
-        [self addSubview:_bottomView];
-    }
-    return _bottomView;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end

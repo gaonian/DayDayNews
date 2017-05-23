@@ -86,7 +86,7 @@
 
 - (void)mynotification
 {
-    [self.tableview.header beginRefreshing];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 - (void)initTableView
@@ -105,10 +105,10 @@
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    self.tableview.header = header;
+    self.tableview.mj_header = header;
     [header beginRefreshing];
     
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [block_self requestNet:2];
     }];
     
@@ -276,7 +276,7 @@
     IMP_BLOCK_SELF(SocietyViewController);    
     [[BaseEngine shareEngine] runRequestWithPara:nil path:@"http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html" success:^(id responseObject) {
         
-        NSArray *dataarray = [TopData objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
+        NSArray *dataarray = [TopData mj_objectArrayWithKeyValuesArray:responseObject[@"T1348647853363"][0][@"ads"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         NSMutableArray *titleArray = [NSMutableArray array];
         NSMutableArray *topArray = [NSMutableArray array];
@@ -306,7 +306,7 @@
     [[BaseEngine shareEngine] runRequestWithPara:nil path:urlstr success:^(id responseObject) {
         
         NSArray *temArray = responseObject[@"T1348647853363"];
-        NSArray *arrayM = [DataModel objectArrayWithKeyValuesArray:temArray];
+        NSArray *arrayM = [DataModel mj_objectArrayWithKeyValuesArray:temArray];
         NSMutableArray *statusArray = [NSMutableArray array];
         for (DataModel *data in arrayM) {
             [statusArray addObject:data];
@@ -320,15 +320,15 @@
         [block_self.tableview reloadData];
         block_self.page += 20;
         
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
 
     } failure:^(id error) {
         if (error) {
             DLog(@"%@",error);
         }
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
 
     }];
     

@@ -15,5 +15,5 @@
 + (void)saveProAndCityInfoWithPro:(NSString *)pro city:(NSString *)city;
 + (NSString *)getProInfo;
 + (NSString *)getCityInfo;
-
++ (NSString *) md5:(NSString *)str;
 @end

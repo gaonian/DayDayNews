@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+//播放器的几种状态
+typedef NS_ENUM(NSInteger, AVPlayerState) {
+    AVPlayerStateBuffering = 1,
+    AVPlayerStatePlaying   = 2,
+    AVPlayerStateStopped   = 3,
+    AVPlayerStatePause     = 4
+};
+
 @interface GYPlayer : UIView
 
 @property (nonatomic , copy) void(^currentRowBlock)();
@@ -19,5 +29,8 @@
 ///当前在cell上的播放器的y值
 @property (nonatomic)          CGFloat   currentOriginY;
 
+@property (nonatomic, readonly) AVPlayerState state;
+
 - (void)removePlayer;
+
 @end

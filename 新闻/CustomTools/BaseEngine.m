@@ -45,7 +45,7 @@ static id _instance;
     [mgr GET:path parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        DLog(@" --%@ %@",path,responseObject);
+//        DLog(@" --%@ %@",path,responseObject);
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@" --%@ %@",path,error);

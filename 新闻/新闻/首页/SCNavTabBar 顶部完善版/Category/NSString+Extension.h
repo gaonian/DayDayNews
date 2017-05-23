@@ -16,4 +16,7 @@
  *  @param maxSize 最大尺寸
  */
 - (CGRect)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
+
+- (NSString *)stringToMD5;
++ (NSString *)calculateTimeWithTimeFormatter:(long long)timeSecond;
 @end

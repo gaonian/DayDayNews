@@ -56,7 +56,7 @@ static NSString *const ID = @"photo";
 
 - (void)mynotification
 {
-    [self.collectionView.header beginRefreshing];
+    [self.collectionView.mj_header beginRefreshing];
 }
 
 - (void)initCollection
@@ -84,10 +84,10 @@ static NSString *const ID = @"photo";
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-    self.collectionView.header = header;
+    self.collectionView.mj_header = header;
     [header beginRefreshing];
     
-    self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [block_self initNetWorking];
     }];
 }
@@ -163,7 +163,7 @@ static NSString *const ID = @"photo";
     
     [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
-        NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
+        NSArray *dataarray = [Photo mj_objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (Photo *photo in dataarray) {
             [statusFrameArray addObject:photo];
@@ -175,14 +175,14 @@ static NSString *const ID = @"photo";
         block_self.photoArray  = statusFrameArray;
         
         block_self.pn += 60;
-        block_self.collectionView.footer.hidden = block_self.photoArray.count < 60;
+        block_self.collectionView.mj_footer.hidden = block_self.photoArray.count < 60;
         [block_self.collectionView reloadData];
-        [block_self.collectionView.header endRefreshing];
-        [block_self.collectionView.footer endRefreshing];
+        [block_self.collectionView.mj_header endRefreshing];
+        [block_self.collectionView.mj_footer endRefreshing];
 
     } failure:^(id error) {
-        [block_self.collectionView.header endRefreshing];
-        [block_self.collectionView.footer endRefreshing];
+        [block_self.collectionView.mj_header endRefreshing];
+        [block_self.collectionView.mj_footer endRefreshing];
     }];
 }
 
@@ -198,7 +198,7 @@ static NSString *const ID = @"photo";
     
     [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
-        NSArray *dataarray = [Photo objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
+        NSArray *dataarray = [Photo mj_objectArrayWithKeyValuesArray:responseObject[@"imgs"]];
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (Photo *photo in dataarray) {
             [statusFrameArray addObject:photo];
@@ -211,15 +211,15 @@ static NSString *const ID = @"photo";
         }
         
         block_self.pn += 60;
-        block_self.collectionView.footer.hidden = block_self.photoArray.count < 60;
+        block_self.collectionView.mj_footer.hidden = block_self.photoArray.count < 60;
         [block_self.collectionView reloadData];
-        [block_self.collectionView.header endRefreshing];
-        [block_self.collectionView.footer endRefreshing];
+        [block_self.collectionView.mj_header endRefreshing];
+        [block_self.collectionView.mj_footer endRefreshing];
         
     } failure:^(id error) {
         
-        [block_self.collectionView.header endRefreshing];
-        [block_self.collectionView.footer endRefreshing];
+        [block_self.collectionView.mj_header endRefreshing];
+        [block_self.collectionView.mj_footer endRefreshing];
         
     }];
 }
@@ -262,7 +262,7 @@ static NSString *const ID = @"photo";
         block_self.pn = 0;
         block_self.tag1 = sender;
         block_self.tag2 = @"全部";
-        [block_self.collectionView.header beginRefreshing];
+        [block_self.collectionView.mj_header beginRefreshing];
     };
     _pullDownView.removeBlock = ^{
         block_self.navigationItem.rightBarButtonItem = [UIBarButtonItem navigationBarRightButtonItemWithTitleAndImage:[UIImage imageNamed:@"arrow_down"]

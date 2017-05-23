@@ -53,7 +53,7 @@
 
 - (void)mynotification
 {
-    [self.tableview.header beginRefreshing];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 - (void)initTableView
@@ -67,12 +67,12 @@
     self.tableview.tableFooterView = [[UIView alloc]init];
     
     IMP_BLOCK_SELF(OtherNewsViewController);
-    self.tableview.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         block_self.page = 1;
         [block_self requestNet];
     }];
-    [self.tableview.header beginRefreshing];
-    self.tableview.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    [self.tableview.mj_header beginRefreshing];
+    self.tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [block_self requestNet];
     }];
 }
@@ -124,7 +124,7 @@
     
     [[BaseEngine shareEngine] runRequestWithPara:dic path:urlstr success:^(id responseObject) {
         
-        NSArray *dataarray = [NewData objectArrayWithKeyValuesArray:responseObject[@"newslist"]];
+        NSArray *dataarray = [NewData mj_objectArrayWithKeyValuesArray:responseObject[@"newslist"]];
         // 创建frame模型对象
         NSMutableArray *statusFrameArray = [NSMutableArray array];
         for (NewData *data in dataarray) {
@@ -135,8 +135,8 @@
         [block_self.totalArray addObjectsFromArray:statusFrameArray];
         block_self.page++;
         [block_self.tableview reloadData];
-        [block_self.tableview.header endRefreshing];
-        [block_self.tableview.footer endRefreshing];
+        [block_self.tableview.mj_header endRefreshing];
+        [block_self.tableview.mj_footer endRefreshing];
 
     } failure:^(id error) {
         
