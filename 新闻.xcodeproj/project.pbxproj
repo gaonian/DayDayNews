@@ -137,7 +137,6 @@
 		19A67CCB1C4E361A008DC05E /* INTULocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A67CC81C4E361A008DC05E /* INTULocationRequest.m */; };
 		19A68D711C8DCC1800B8544A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A68D701C8DCC1800B8544A /* MobileCoreServices.framework */; };
 		19A68D731C8DCC2500B8544A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A68D721C8DCC2500B8544A /* CFNetwork.framework */; };
-		19A68D751C8DCC5500B8544A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A68D741C8DCC5500B8544A /* libstdc++.6.0.9.tbd */; };
 		19A68D771C8DCC7C00B8544A /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A68D761C8DCC7C00B8544A /* libresolv.tbd */; };
 		19A68D791C8DCC8900B8544A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A68D781C8DCC8900B8544A /* libxml2.tbd */; };
 		19B063FF1BBA2E1E00483A5D /* MBProgressHUD+Extion.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B063FB1BBA2E1E00483A5D /* MBProgressHUD+Extion.m */; };
@@ -177,6 +176,7 @@
 		19F540031BB52D9200460EA3 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540021BB52D9200460EA3 /* VideoCell.m */; };
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
+		19FD3BEB2392C78B00A09722 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FD3BEA2392C78B00A09722 /* libc++.tbd */; };
 		990DFE601E05294000879725 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE5F1E05294000879725 /* Foundation+Log.m */; };
 		990DFE631E053D0300879725 /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE621E053D0300879725 /* CategoryView.m */; };
 		9911BE2D1E07D7050086570C /* GYPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911BE2C1E07D7050086570C /* GYPlayer.m */; };
@@ -586,6 +586,7 @@
 		19F540051BB52DAA00460EA3 /* VideoDataFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDataFrame.m; sourceTree = "<group>"; };
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
+		19FD3BEA2392C78B00A09722 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		990DFE5F1E05294000879725 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		990DFE611E053D0300879725 /* CategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
 		990DFE621E053D0300879725 /* CategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
@@ -667,10 +668,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FD3BEB2392C78B00A09722 /* libc++.tbd in Frameworks */,
 				19A68D791C8DCC8900B8544A /* libxml2.tbd in Frameworks */,
 				19A68D771C8DCC7C00B8544A /* libresolv.tbd in Frameworks */,
 				198339B51C02E39400B8B8AD /* libiconv.tbd in Frameworks */,
-				19A68D751C8DCC5500B8544A /* libstdc++.6.0.9.tbd in Frameworks */,
 				19A68D731C8DCC2500B8544A /* CFNetwork.framework in Frameworks */,
 				19A68D711C8DCC1800B8544A /* MobileCoreServices.framework in Frameworks */,
 				198AF7F21C84539C00D941F4 /* AdSupport.framework in Frameworks */,
@@ -920,6 +921,7 @@
 				1945F0A61BAFDD0200A38747 /* 新闻Tests */,
 				1945F0B11BAFDD0200A38747 /* 新闻UITests */,
 				1945F08B1BAFDD0200A38747 /* Products */,
+				19FD3BE92392C78B00A09722 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1545,6 +1547,14 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		19FD3BE92392C78B00A09722 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19FD3BEA2392C78B00A09722 /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9922B9561D8029D300E3E236 /* CustomTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1733,6 +1743,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
