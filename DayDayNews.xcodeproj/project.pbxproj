@@ -13,7 +13,6 @@
 		190450D41BCCAC0A00C47A50 /* NewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450BD1BCCAC0A00C47A50 /* NewData.m */; };
 		190450D51BCCAC0A00C47A50 /* NewDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450BF1BCCAC0A00C47A50 /* NewDataFrame.m */; };
 		190450D61BCCAC0A00C47A50 /* TopData.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450C11BCCAC0A00C47A50 /* TopData.m */; };
-		190450D71BCCAC0A00C47A50 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450C51BCCAC0A00C47A50 /* NSString+Extension.m */; };
 		190450DA1BCCAC0A00C47A50 /* NewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450CF1BCCAC0A00C47A50 /* NewTableViewCell.m */; };
 		190450E41BCCAC7C00C47A50 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450E31BCCAC7C00C47A50 /* WeatherViewController.m */; };
 		190450E71BCCAE6400C47A50 /* WeatherData.m in Sources */ = {isa = PBXBuildFile; fileRef = 190450E61BCCAE6400C47A50 /* WeatherData.m */; };
@@ -25,8 +24,6 @@
 		192FC18E1CDDADB7008E41CA /* libHyphenateSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 192FC18D1CDDADB7008E41CA /* libHyphenateSDK.a */; };
 		1945F08F1BAFDD0200A38747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945F08E1BAFDD0200A38747 /* main.m */; };
 		1945F09A1BAFDD0200A38747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1945F0991BAFDD0200A38747 /* Assets.xcassets */; };
-		1945F0A81BAFDD0200A38747 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945F0A71BAFDD0200A38747 /* __Tests.m */; };
-		1945F0B31BAFDD0200A38747 /* __UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945F0B21BAFDD0200A38747 /* __UITests.m */; };
 		196585D91CCBB9B000A9B5C5 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585CF1CCBB9B000A9B5C5 /* FMDatabase.m */; };
 		196585DA1CCBB9B000A9B5C5 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585D11CCBB9B000A9B5C5 /* FMDatabaseAdditions.m */; };
 		196585DB1CCBB9B000A9B5C5 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 196585D31CCBB9B000A9B5C5 /* FMDatabasePool.m */; };
@@ -177,6 +174,8 @@
 		19F540061BB52DAA00460EA3 /* VideoDataFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F540051BB52DAA00460EA3 /* VideoDataFrame.m */; };
 		19F8D84E1BCF4BFF001F4669 /* LocaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */; };
 		19FD3BEB2392C78B00A09722 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FD3BEA2392C78B00A09722 /* libc++.tbd */; };
+		19FD3BEE2392CC1E00A09722 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FD3BED2392CC1E00A09722 /* NSString+Extension.m */; };
+		23D902F4FBE5F12DFD1301EC /* libPods-DayDayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D7C88676B2C6209391F524 /* libPods-DayDayNews.a */; };
 		990DFE601E05294000879725 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE5F1E05294000879725 /* Foundation+Log.m */; };
 		990DFE631E053D0300879725 /* CategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990DFE621E053D0300879725 /* CategoryView.m */; };
 		9911BE2D1E07D7050086570C /* GYPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911BE2C1E07D7050086570C /* GYPlayer.m */; };
@@ -216,24 +215,9 @@
 		99FE38701D87DE2F003A5F35 /* ChatController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99FE386E1D87DE2F003A5F35 /* ChatController.xib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1945F0A41BAFDD0200A38747 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1945F0821BAFDD0200A38747 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1945F0891BAFDD0200A38747;
-			remoteInfo = "新闻";
-		};
-		1945F0AF1BAFDD0200A38747 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1945F0821BAFDD0200A38747 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1945F0891BAFDD0200A38747;
-			remoteInfo = "新闻";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0D1F589A09BFD9F6DC55567D /* Pods-DayDayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayDayNews.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayDayNews/Pods-DayDayNews.release.xcconfig"; sourceTree = "<group>"; };
+		17934C44388EDBE8392E479D /* Pods-DayDayNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayDayNews.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayDayNews/Pods-DayDayNews.debug.xcconfig"; sourceTree = "<group>"; };
 		190450B51BCCAC0A00C47A50 /* SocietyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocietyViewController.h; sourceTree = "<group>"; };
 		190450B61BCCAC0A00C47A50 /* SocietyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocietyViewController.m; sourceTree = "<group>"; };
 		190450B71BCCAC0A00C47A50 /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
@@ -246,8 +230,6 @@
 		190450BF1BCCAC0A00C47A50 /* NewDataFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewDataFrame.m; sourceTree = "<group>"; };
 		190450C01BCCAC0A00C47A50 /* TopData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopData.h; sourceTree = "<group>"; };
 		190450C11BCCAC0A00C47A50 /* TopData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopData.m; sourceTree = "<group>"; };
-		190450C41BCCAC0A00C47A50 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extension.h"; path = "../../新闻/首页/SCNavTabBar 顶部完善版/Category/NSString+Extension.h"; sourceTree = "<group>"; };
-		190450C51BCCAC0A00C47A50 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extension.m"; path = "../../新闻/首页/SCNavTabBar 顶部完善版/Category/NSString+Extension.m"; sourceTree = "<group>"; };
 		190450CE1BCCAC0A00C47A50 /* NewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTableViewCell.h; sourceTree = "<group>"; };
 		190450CF1BCCAC0A00C47A50 /* NewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTableViewCell.m; sourceTree = "<group>"; };
 		190450E21BCCAC7C00C47A50 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
@@ -302,16 +284,10 @@
 		192FC18A1CDDADB7008E41CA /* IEMContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMContactManager.h; sourceTree = "<group>"; };
 		192FC18B1CDDADB7008E41CA /* IEMGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMGroupManager.h; sourceTree = "<group>"; };
 		192FC18D1CDDADB7008E41CA /* libHyphenateSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHyphenateSDK.a; sourceTree = "<group>"; };
-		1945F08A1BAFDD0200A38747 /* 新闻.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "新闻.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1945F08A1BAFDD0200A38747 /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1945F08E1BAFDD0200A38747 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1945F0991BAFDD0200A38747 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1945F09E1BAFDD0200A38747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1945F0A31BAFDD0200A38747 /* 新闻Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "新闻Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1945F0A71BAFDD0200A38747 /* __Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __Tests.m; sourceTree = "<group>"; };
-		1945F0A91BAFDD0200A38747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1945F0AE1BAFDD0200A38747 /* 新闻UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "新闻UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1945F0B21BAFDD0200A38747 /* __UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __UITests.m; sourceTree = "<group>"; };
-		1945F0B41BAFDD0200A38747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		196585CE1CCBB9B000A9B5C5 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		196585CF1CCBB9B000A9B5C5 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		196585D01CCBB9B000A9B5C5 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -459,8 +435,8 @@
 		198BD1D81BBB842A00B21A07 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		198BD1D91BBB842A00B21A07 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		198BD1DA1BBB842A00B21A07 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		198BD2041BBB85BD00B21A07 /* SDWebImageManager+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SDWebImageManager+MJ.h"; path = "新闻/Lib/SDWebImageManager+MJ.h"; sourceTree = SOURCE_ROOT; };
-		198BD2051BBB85BD00B21A07 /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SDWebImageManager+MJ.m"; path = "新闻/Lib/SDWebImageManager+MJ.m"; sourceTree = SOURCE_ROOT; };
+		198BD2041BBB85BD00B21A07 /* SDWebImageManager+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SDWebImageManager+MJ.h"; path = "DayDayNews/Lib/SDWebImageManager+MJ.h"; sourceTree = SOURCE_ROOT; };
+		198BD2051BBB85BD00B21A07 /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SDWebImageManager+MJ.m"; path = "DayDayNews/Lib/SDWebImageManager+MJ.m"; sourceTree = SOURCE_ROOT; };
 		198BD2061BBB85BD00B21A07 /* UIImageView+MJWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+MJWebCache.h"; path = "../UIImageView+MJWebCache.h"; sourceTree = "<group>"; };
 		198BD2071BBB85BD00B21A07 /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+MJWebCache.m"; path = "../UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
 		198BD2101BBBB34600B21A07 /* PhotoShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoShowViewController.h; sourceTree = "<group>"; };
@@ -587,6 +563,8 @@
 		19F8D84C1BCF4BFF001F4669 /* LocaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaViewController.h; sourceTree = "<group>"; };
 		19F8D84D1BCF4BFF001F4669 /* LocaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaViewController.m; sourceTree = "<group>"; };
 		19FD3BEA2392C78B00A09722 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		19FD3BEC2392CC1D00A09722 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		19FD3BED2392CC1E00A09722 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		990DFE5F1E05294000879725 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		990DFE611E053D0300879725 /* CategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryView.h; sourceTree = "<group>"; };
 		990DFE621E053D0300879725 /* CategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryView.m; sourceTree = "<group>"; };
@@ -661,6 +639,7 @@
 		99FE386C1D87DE2F003A5F35 /* ChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatController.h; sourceTree = "<group>"; };
 		99FE386D1D87DE2F003A5F35 /* ChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatController.m; sourceTree = "<group>"; };
 		99FE386E1D87DE2F003A5F35 /* ChatController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatController.xib; sourceTree = "<group>"; };
+		B0D7C88676B2C6209391F524 /* libPods-DayDayNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayDayNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -695,20 +674,7 @@
 				198339B71C02E39E00B8B8AD /* SystemConfiguration.framework in Frameworks */,
 				198339B31C02E38600B8B8AD /* Security.framework in Frameworks */,
 				19970A801BCF9D9C00F4CC0C /* CoreLocation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1945F0A01BAFDD0200A38747 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1945F0AB1BAFDD0200A38747 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				23D902F4FBE5F12DFD1301EC /* libPods-DayDayNews.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,25 +883,22 @@
 		1945F0811BAFDD0200A38747 = {
 			isa = PBXGroup;
 			children = (
-				1945F08C1BAFDD0200A38747 /* 新闻 */,
-				1945F0A61BAFDD0200A38747 /* 新闻Tests */,
-				1945F0B11BAFDD0200A38747 /* 新闻UITests */,
+				1945F08C1BAFDD0200A38747 /* DayDayNews */,
 				1945F08B1BAFDD0200A38747 /* Products */,
 				19FD3BE92392C78B00A09722 /* Frameworks */,
+				5094E69437B388EA3C84B511 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		1945F08B1BAFDD0200A38747 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1945F08A1BAFDD0200A38747 /* 新闻.app */,
-				1945F0A31BAFDD0200A38747 /* 新闻Tests.xctest */,
-				1945F0AE1BAFDD0200A38747 /* 新闻UITests.xctest */,
+				1945F08A1BAFDD0200A38747 /* DayDayNews.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1945F08C1BAFDD0200A38747 /* 新闻 */ = {
+		1945F08C1BAFDD0200A38747 /* DayDayNews */ = {
 			isa = PBXGroup;
 			children = (
 				19C33E0A1BB109A20059238A /* Lib */,
@@ -951,7 +914,7 @@
 				19747D401C88068800C4CBBD /* Detail.css */,
 				1945F08D1BAFDD0200A38747 /* Supporting Files */,
 			);
-			path = "新闻";
+			path = DayDayNews;
 			sourceTree = "<group>";
 		};
 		1945F08D1BAFDD0200A38747 /* Supporting Files */ = {
@@ -961,24 +924,6 @@
 				1945F08E1BAFDD0200A38747 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1945F0A61BAFDD0200A38747 /* 新闻Tests */ = {
-			isa = PBXGroup;
-			children = (
-				1945F0A71BAFDD0200A38747 /* __Tests.m */,
-				1945F0A91BAFDD0200A38747 /* Info.plist */,
-			);
-			path = "新闻Tests";
-			sourceTree = "<group>";
-		};
-		1945F0B11BAFDD0200A38747 /* 新闻UITests */ = {
-			isa = PBXGroup;
-			children = (
-				1945F0B21BAFDD0200A38747 /* __UITests.m */,
-				1945F0B41BAFDD0200A38747 /* Info.plist */,
-			);
-			path = "新闻UITests";
 			sourceTree = "<group>";
 		};
 		196585CD1CCBB9B000A9B5C5 /* fmdb */ = {
@@ -1551,8 +1496,18 @@
 			isa = PBXGroup;
 			children = (
 				19FD3BEA2392C78B00A09722 /* libc++.tbd */,
+				B0D7C88676B2C6209391F524 /* libPods-DayDayNews.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5094E69437B388EA3C84B511 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17934C44388EDBE8392E479D /* Pods-DayDayNews.debug.xcconfig */,
+				0D1F589A09BFD9F6DC55567D /* Pods-DayDayNews.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9922B9561D8029D300E3E236 /* CustomTools */ = {
@@ -1576,10 +1531,10 @@
 		9922B9581D802AE400E3E236 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				19FD3BEC2392CC1D00A09722 /* NSString+Extension.h */,
+				19FD3BED2392CC1E00A09722 /* NSString+Extension.m */,
 				9967E6E61D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.h */,
 				9967E6E71D910D3F00EFCE38 /* UINavigationController+FDFullscreenPopGesture.m */,
-				190450C41BCCAC0A00C47A50 /* NSString+Extension.h */,
-				190450C51BCCAC0A00C47A50 /* NSString+Extension.m */,
 				9922B9591D802AE400E3E236 /* GYHTimeTool.h */,
 				9922B95A1D802AE400E3E236 /* GYHTimeTool.m */,
 				9922B95B1D802AE400E3E236 /* NSDate+gyh.h */,
@@ -1663,10 +1618,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1945F0891BAFDD0200A38747 /* 新闻 */ = {
+		1945F0891BAFDD0200A38747 /* DayDayNews */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1945F0B71BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻" */;
+			buildConfigurationList = 1945F0B71BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "DayDayNews" */;
 			buildPhases = (
+				88F6EC5222D0CE62641CF6D0 /* [CP] Check Pods Manifest.lock */,
 				1945F0861BAFDD0200A38747 /* Sources */,
 				1945F0871BAFDD0200A38747 /* Frameworks */,
 				1945F0881BAFDD0200A38747 /* Resources */,
@@ -1675,46 +1631,10 @@
 			);
 			dependencies = (
 			);
-			name = "新闻";
-			productName = "新闻";
-			productReference = 1945F08A1BAFDD0200A38747 /* 新闻.app */;
+			name = DayDayNews;
+			productName = DayDayNews;
+			productReference = 1945F08A1BAFDD0200A38747 /* DayDayNews.app */;
 			productType = "com.apple.product-type.application";
-		};
-		1945F0A21BAFDD0200A38747 /* 新闻Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1945F0BA1BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻Tests" */;
-			buildPhases = (
-				1945F09F1BAFDD0200A38747 /* Sources */,
-				1945F0A01BAFDD0200A38747 /* Frameworks */,
-				1945F0A11BAFDD0200A38747 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1945F0A51BAFDD0200A38747 /* PBXTargetDependency */,
-			);
-			name = "新闻Tests";
-			productName = "新闻Tests";
-			productReference = 1945F0A31BAFDD0200A38747 /* 新闻Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1945F0AD1BAFDD0200A38747 /* 新闻UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1945F0BD1BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻UITests" */;
-			buildPhases = (
-				1945F0AA1BAFDD0200A38747 /* Sources */,
-				1945F0AB1BAFDD0200A38747 /* Frameworks */,
-				1945F0AC1BAFDD0200A38747 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1945F0B01BAFDD0200A38747 /* PBXTargetDependency */,
-			);
-			name = "新闻UITests";
-			productName = "新闻UITests";
-			productReference = 1945F0AE1BAFDD0200A38747 /* 新闻UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -1728,17 +1648,9 @@
 					1945F0891BAFDD0200A38747 = {
 						CreatedOnToolsVersion = 7.0;
 					};
-					1945F0A21BAFDD0200A38747 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 1945F0891BAFDD0200A38747;
-					};
-					1945F0AD1BAFDD0200A38747 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 1945F0891BAFDD0200A38747;
-					};
 				};
 			};
-			buildConfigurationList = 1945F0851BAFDD0200A38747 /* Build configuration list for PBXProject "新闻" */;
+			buildConfigurationList = 1945F0851BAFDD0200A38747 /* Build configuration list for PBXProject "DayDayNews" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1752,9 +1664,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1945F0891BAFDD0200A38747 /* 新闻 */,
-				1945F0A21BAFDD0200A38747 /* 新闻Tests */,
-				1945F0AD1BAFDD0200A38747 /* 新闻UITests */,
+				1945F0891BAFDD0200A38747 /* DayDayNews */,
 			);
 		};
 /* End PBXProject section */
@@ -1789,21 +1699,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1945F0A11BAFDD0200A38747 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1945F0AC1BAFDD0200A38747 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		88F6EC5222D0CE62641CF6D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DayDayNews-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1945F0861BAFDD0200A38747 /* Sources */ = {
@@ -1829,6 +1746,7 @@
 				990DFE631E053D0300879725 /* CategoryView.m in Sources */,
 				198AF7B41C841C9400D941F4 /* SettingSwitchItem.m in Sources */,
 				198BD1E31BBB842A00B21A07 /* SDWebImageDownloader.m in Sources */,
+				19FD3BEE2392CC1E00A09722 /* NSString+Extension.m in Sources */,
 				19C33E9A1BB10B4C0059238A /* NSObject+MJKeyValue.m in Sources */,
 				19ED1DAA1C8729E900AD6E0A /* TopCell.m in Sources */,
 				196892701BC8BDCA009D4A99 /* MJRefreshStateHeader.m in Sources */,
@@ -1861,7 +1779,6 @@
 				190450D51BCCAC0A00C47A50 /* NewDataFrame.m in Sources */,
 				19C33E921BB10B4C0059238A /* MJConst.m in Sources */,
 				19918FC01CDDE12900A89620 /* MessageImageCell.m in Sources */,
-				190450D71BCCAC0A00C47A50 /* NSString+Extension.m in Sources */,
 				99C9A31B1D81785900063D23 /* AFURLSessionManager.m in Sources */,
 				190450D21BCCAC0A00C47A50 /* testViewController.m in Sources */,
 				19C33E9B1BB10B4C0059238A /* NSObject+MJMember.m in Sources */,
@@ -1969,36 +1886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1945F09F1BAFDD0200A38747 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1945F0A81BAFDD0200A38747 /* __Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1945F0AA1BAFDD0200A38747 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1945F0B31BAFDD0200A38747 /* __UITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1945F0A51BAFDD0200A38747 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1945F0891BAFDD0200A38747 /* 新闻 */;
-			targetProxy = 1945F0A41BAFDD0200A38747 /* PBXContainerItemProxy */;
-		};
-		1945F0B01BAFDD0200A38747 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1945F0891BAFDD0200A38747 /* 新闻 */;
-			targetProxy = 1945F0AF1BAFDD0200A38747 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1945F0B51BAFDD0200A38747 /* Debug */ = {
@@ -2087,6 +1975,7 @@
 		};
 		1945F0B81BAFDD0200A38747 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17934C44388EDBE8392E479D /* Pods-DayDayNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2096,20 +1985,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/QQSDK",
-					"$(PROJECT_DIR)/新闻/Lib/libraries",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/QQSDK",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries",
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/新闻/Supports/PrefixHeader.pch";
-				INFOPLIST_FILE = "新闻/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DayDayNews/Supports/PrefixHeader.pch";
+				INFOPLIST_FILE = DayDayNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/SinaWeiboSDK",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/WeChatSDK",
-					"$(PROJECT_DIR)/新闻/EaseMobSDK/lib",
-					"$(PROJECT_DIR)/新闻/Lib/HyphenateSDK/lib",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/SinaWeiboSDK",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/WeChatSDK",
+					"$(PROJECT_DIR)/DayDayNews/EaseMobSDK/lib",
+					"$(PROJECT_DIR)/DayDayNews/Lib/HyphenateSDK/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2123,6 +2012,7 @@
 		};
 		1945F0B91BAFDD0200A38747 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D1F589A09BFD9F6DC55567D /* Pods-DayDayNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2132,20 +2022,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/QQSDK",
-					"$(PROJECT_DIR)/新闻/Lib/libraries",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/QQSDK",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries",
 					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/新闻/Supports/PrefixHeader.pch";
-				INFOPLIST_FILE = "新闻/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DayDayNews/Supports/PrefixHeader.pch";
+				INFOPLIST_FILE = DayDayNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/SinaWeiboSDK",
-					"$(PROJECT_DIR)/新闻/Lib/libraries/extends/WeChatSDK",
-					"$(PROJECT_DIR)/新闻/EaseMobSDK/lib",
-					"$(PROJECT_DIR)/新闻/Lib/HyphenateSDK/lib",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/SinaWeiboSDK",
+					"$(PROJECT_DIR)/DayDayNews/Lib/libraries/extends/WeChatSDK",
+					"$(PROJECT_DIR)/DayDayNews/EaseMobSDK/lib",
+					"$(PROJECT_DIR)/DayDayNews/Lib/HyphenateSDK/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2157,60 +2047,10 @@
 			};
 			name = Release;
 		};
-		1945F0BB1BAFDD0200A38747 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "新闻Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/新闻.app/新闻";
-			};
-			name = Debug;
-		};
-		1945F0BC1BAFDD0200A38747 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "新闻Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/新闻.app/新闻";
-			};
-			name = Release;
-		};
-		1945F0BE1BAFDD0200A38747 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "新闻UITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_TARGET_NAME = "新闻";
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		1945F0BF1BAFDD0200A38747 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "新闻UITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "apple.--UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_TARGET_NAME = "新闻";
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1945F0851BAFDD0200A38747 /* Build configuration list for PBXProject "新闻" */ = {
+		1945F0851BAFDD0200A38747 /* Build configuration list for PBXProject "DayDayNews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1945F0B51BAFDD0200A38747 /* Debug */,
@@ -2219,29 +2059,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1945F0B71BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻" */ = {
+		1945F0B71BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "DayDayNews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1945F0B81BAFDD0200A38747 /* Debug */,
 				1945F0B91BAFDD0200A38747 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1945F0BA1BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1945F0BB1BAFDD0200A38747 /* Debug */,
-				1945F0BC1BAFDD0200A38747 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1945F0BD1BAFDD0200A38747 /* Build configuration list for PBXNativeTarget "新闻UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1945F0BE1BAFDD0200A38747 /* Debug */,
-				1945F0BF1BAFDD0200A38747 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
